@@ -20,7 +20,6 @@ brew install tree
 brew install wget
 brew install zsh
 brew install python3
-brew install openssh
 brew install sshfs
 brew install make
 brew install gdb
