@@ -208,6 +208,10 @@ set updatetime=250 " Can cause glitches"
 " Singular
 au BufRead,BufNewFile *.lib set filetype=singular | set syntax=singular | set indentexpr=
 
+if !has('clientserver')
+  let g:vimtex_compiler_latexmk = {'callback' : 0}
+endif
+
 if has('termguicolors')
         let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
         let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
