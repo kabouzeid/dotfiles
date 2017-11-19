@@ -36,6 +36,7 @@ Plug 'davidhalter/jedi-vim' " python support
 Plug 'lervag/vimtex' " contains latex completions
 Plug 'octol/vim-cpp-enhanced-highlight'
 Plug 'majutsushi/tagbar', { 'on': 'Tagbar' } " ctags
+Plug 'petRUShka/vim-gap' " gap support
 
 " Lint
 Plug 'w0rp/ale'
