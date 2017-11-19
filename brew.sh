@@ -9,7 +9,7 @@ brew update
 
 echo "Installing Homebrew packages"
 
-brew install macvim --with-override-system-vim --with-lua --with-python3
+brew install vim --with-override-system-vi --with-lua --with-python3
 brew install fzf
 brew install git
 brew install grep
@@ -19,6 +19,7 @@ brew install tmux
 brew install tree
 brew install wget
 brew install zsh
+brew install zsh-autosuggestions
 brew install python3
 brew install sshfs
 brew install make
