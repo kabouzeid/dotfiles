@@ -39,3 +39,4 @@ brew cask install pycharm
 brew cask install clion
 brew cask install adobe-digital-editions
 brew cask install google-backup-and-sync
+brew cask install mactex
