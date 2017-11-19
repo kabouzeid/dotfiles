@@ -32,3 +32,10 @@ brew cask install vlc
 brew cask install whatsapp
 brew cask install wireshark
 brew cask install xquartz
+brew cask install disk-arbitrator
+brew cask install android-studio
+brew cask install intellij
+brew cask install pycharm
+brew cask install clion
+brew cask install adobe-digital-editions
+brew cask install google-backup-and-sync
