@@ -34,7 +34,7 @@ brew cask install wireshark
 brew cask install xquartz
 brew cask install disk-arbitrator
 brew cask install android-studio
-brew cask install intellij
+brew cask install intellij-idea
 brew cask install pycharm
 brew cask install clion
 brew cask install adobe-digital-editions
