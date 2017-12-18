@@ -6,8 +6,11 @@ export PATH="/usr/local/bin:$PATH"
 export PATH="/usr/local/sbin:$PATH"
 export PATH="~/bin:$PATH"
 
+export PATH=$PATH:~/bin
+export PATH=$PATH:~/.linuxbrew/bin
+
 # Path to your oh-my-zsh installation.
-export ZSH=~/.oh-my-zsh
+export ZSH=/users/abouzeid/.oh-my-zsh
 
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
@@ -92,12 +95,12 @@ fi
 alias e="vim"
 alias sudoedit="sudo -e"
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 export LSCOLORS="Gxfxcxdxbxegedabagacad"
 export LS_COLORS="di=1;36:ln=35:so=32:pi=33:ex=31:bd=34;46:cd=34;43:su=30;41:sg=30;46:tw=30;42:ow=30;43"
 zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
 
-source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-
 unalias gap
+
+export PATH="/users/abouzeid/.linuxbrew/bin:$PATH"
+export PATH="/users/abouzeid/.linuxbrew/sbin:$PATH"
