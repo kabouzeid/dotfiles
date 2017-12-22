@@ -2,6 +2,9 @@ set nocompatible              " be iMproved
 
 call plug#begin('~/.vim/plugged')
 
+" General
+Plug 'wincent/terminus'
+
 " Color
 Plug 'dracula/vim'
 
@@ -90,8 +93,6 @@ set hlsearch
 set incsearch
 " Always show status line
 set laststatus=2
-" Enable mouse in all modes
-set mouse=a
 " Don’t reset cursor to start of line when moving around.
 set nostartofline
 " Show the cursor position
@@ -235,16 +236,3 @@ let g:fzf_colors =
 set clipboard=unnamed
 
 nnoremap <silent> <C-L> :nohlsearch<C-R>=has('diff')?'<Bar>diffupdate':''<CR><CR><C-L>
-
-
-if exists('$TMUX')
-  " tmux cursor
-  let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
-  let &t_SR = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=2\x7\<Esc>\\"
-  let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
-else
-  " iTerm2 cursor
-  let &t_SI = "\<Esc>]50;CursorShape=1\x7"
-  let &t_SR = "\<Esc>]50;CursorShape=2\x7"
-  let &t_EI = "\<Esc>]50;CursorShape=0\x7"
-endif
