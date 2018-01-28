@@ -2,6 +2,9 @@ set nocompatible              " be iMproved
 
 call plug#begin('~/.vim/plugged')
 
+" General
+Plug 'wincent/terminus'
+
 " Color
 Plug 'dracula/vim'
 
@@ -17,6 +20,7 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'mbbill/undotree', { 'on': 'UndotreeToggle' }
 Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim' " fuzzy finder
+Plug 'majutsushi/tagbar' " ctags bar
 
 " Git
 Plug 'tpope/vim-fugitive'
@@ -50,6 +54,7 @@ Plug 'lervag/vimtex' " contains latex completions
 Plug 'octol/vim-cpp-enhanced-highlight'
 Plug 'majutsushi/tagbar', { 'on': 'Tagbar' } " ctags
 Plug 'petRUShka/vim-gap' " gap support
+Plug 'ludovicchabant/vim-gutentags' " ctags
 
 " Lint
 Plug 'w0rp/ale'
@@ -103,8 +108,6 @@ set hlsearch
 set incsearch
 " Always show status line
 set laststatus=2
-" Enable mouse in all modes
-set mouse=a
 " Don’t reset cursor to start of line when moving around.
 set nostartofline
 " Show the cursor position
@@ -122,17 +125,7 @@ set autoread
 
 set ttimeoutlen=10
 
-" Syntastic
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 0
-let g:syntastic_check_on_wq = 0
-let g:syntastic_enable_balloons = 1
-let g:syntastic_mode_map = { 'mode': 'passive' }
+set statusline+=%{gutentags#statusline()}
 
 let delimitMate_expand_cr=1
 
