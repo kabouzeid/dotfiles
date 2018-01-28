@@ -89,8 +89,10 @@ fi
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+alias vim="nvim"
 alias e="vim"
 alias sudoedit="sudo -e"
+alias htop="sudo htop"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 

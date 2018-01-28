@@ -27,9 +27,22 @@ Plug 'justinmk/vim-sneak' " sneak to locations
 Plug 'tpope/vim-sleuth' " auto indentation detection
 
 " Completion
-Plug 'Shougo/neocomplete'
 Plug 'Shougo/neosnippet'
 Plug 'Shougo/neosnippet-snippets'
+
+if has('nvim')
+  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+else
+  Plug 'Shougo/deoplete.nvim'
+  Plug 'roxma/nvim-yarp'
+  Plug 'roxma/vim-hug-neovim-rpc'
+endif
+
+" Deoplete completions
+Plug 'Shougo/neco-syntax'
+Plug 'zchee/deoplete-clang'
+Plug 'Shougo/neco-vim'
+Plug 'zchee/deoplete-jedi'
 
 " Lang
 Plug 'davidhalter/jedi-vim' " python support
@@ -50,7 +63,7 @@ colorscheme dracula
 " Enhance command-line completion
 set wildmenu
 " Allow cursor keys in insert mode
-set esckeys
+" set esckeys
 " Allow backspace in insert mode
 set backspace=indent,eol,start
 " Optimize for fast terminal connections
@@ -123,24 +136,12 @@ let g:syntastic_mode_map = { 'mode': 'passive' }
 
 let delimitMate_expand_cr=1
 
-let g:neocomplete#enable_at_startup = 1
-if !exists('g:neocomplete#sources#omni#input_patterns')
-        let g:neocomplete#sources#omni#input_patterns = {}
+" Deoplete
+let g:deoplete#enable_at_startup = 1
+if !exists('g:deoplete#omni#input_patterns')
+  let g:deoplete#omni#input_patterns = {}
 endif
-let g:neocomplete#sources#omni#input_patterns.tex =
-                        \ '\v\\%('
-                        \ . '\a*cite\a*%(\s*\[[^]]*\]){0,2}\s*\{[^}]*'
-                        \ . '|\a*ref%(\s*\{[^}]*|range\s*\{[^,}]*%(}\{)?)'
-                        \ . '|hyperref\s*\[[^]]*'
-                        \ . '|includegraphics\*?%(\s*\[[^]]*\]){0,2}\s*\{[^}]*'
-                        \ . '|%(include%(only)?|input)\s*\{[^}]*'
-                        \ . '|\a*(gls|Gls|GLS)(pl)?\a*%(\s*\[[^]]*\]){0,2}\s*\{[^}]*'
-                        \ . '|includepdf%(\s*\[[^]]*\])?\s*\{[^}]*'
-                        \ . '|includestandalone%(\s*\[[^]]*\])?\s*\{[^}]*'
-                        \ . '|usepackage%(\s*\[[^]]*\])?\s*\{[^}]*'
-                        \ . '|documentclass%(\s*\[[^]]*\])?\s*\{[^}]*'
-                        \ . '|\a*'
-                        \ . ')'
+let g:deoplete#omni#input_patterns.tex = g:vimtex#re#deoplete
 
 " <TAB>: completion.
 inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
@@ -236,15 +237,16 @@ set clipboard=unnamed
 
 nnoremap <silent> <C-L> :nohlsearch<C-R>=has('diff')?'<Bar>diffupdate':''<CR><CR><C-L>
 
-
-if exists('$TMUX')
-  " tmux cursor
-  let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
-  let &t_SR = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=2\x7\<Esc>\\"
-  let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
-else
-  " iTerm2 cursor
-  let &t_SI = "\<Esc>]50;CursorShape=1\x7"
-  let &t_SR = "\<Esc>]50;CursorShape=2\x7"
-  let &t_EI = "\<Esc>]50;CursorShape=0\x7"
+if !has('nvim')
+  if exists('$TMUX')
+    " tmux cursor
+    let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
+    let &t_SR = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=2\x7\<Esc>\\"
+    let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
+  else
+    " iTerm2 cursor
+    let &t_SI = "\<Esc>]50;CursorShape=1\x7"
+    let &t_SR = "\<Esc>]50;CursorShape=2\x7"
+    let &t_EI = "\<Esc>]50;CursorShape=0\x7"
+  endif
 endif
