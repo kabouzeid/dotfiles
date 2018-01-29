@@ -44,7 +44,6 @@ endif
 
 " Deoplete completions
 Plug 'Shougo/neco-syntax'
-Plug 'zchee/deoplete-clang'
 Plug 'Shougo/neco-vim'
 Plug 'zchee/deoplete-jedi'
 
