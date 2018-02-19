@@ -91,7 +91,6 @@ fi
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias e="vim"
 alias sudoedit="sudo -e"
-alias htop="sudo htop"
 
 
 export LSCOLORS="Gxfxcxdxbxegedabagacad"
