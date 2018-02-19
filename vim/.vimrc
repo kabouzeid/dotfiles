@@ -48,7 +48,6 @@ Plug 'Shougo/neco-vim'
 Plug 'zchee/deoplete-jedi'
 
 " Lang
-Plug 'davidhalter/jedi-vim' " python support
 Plug 'lervag/vimtex' " contains latex completions
 Plug 'octol/vim-cpp-enhanced-highlight'
 Plug 'majutsushi/tagbar', { 'on': 'Tagbar' } " ctags
