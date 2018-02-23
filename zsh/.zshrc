@@ -92,7 +92,7 @@ fi
 alias vim="nvim"
 alias e="vim"
 alias sudoedit="sudo -e"
-alias htop="sudo htop"
+# alias htop="sudo htop"
 alias diff="colordiff"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
