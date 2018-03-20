@@ -1,7 +1,6 @@
 # My environment variables
 export JAVA_HOME="$(/usr/libexec/java_home -v 1.8)"
 export ANDROID_SDK_ROOT="/usr/local/share/android-sdk"
-export ANDROID_NDK_HOME="/usr/local/share/android-ndk"
 export PATH="/usr/local/bin:$PATH"
 export PATH="/usr/local/sbin:$PATH"
 export PATH="~/bin:$PATH"
