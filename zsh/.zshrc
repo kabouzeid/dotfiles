@@ -3,7 +3,11 @@ export JAVA_HOME="$(/usr/libexec/java_home -v 1.8)"
 export ANDROID_SDK_ROOT="/usr/local/share/android-sdk"
 export PATH="/usr/local/bin:$PATH"
 export PATH="/usr/local/sbin:$PATH"
-export PATH="~/bin:$PATH"
+export PATH="$HOME/bin:$PATH"
+
+eval "$(rbenv init - zsh)"
+
+. /usr/local/etc/profile.d/z.sh
 
 # Path to your oh-my-zsh installation.
 export ZSH=~/.oh-my-zsh
@@ -70,8 +74,7 @@ source $ZSH/oh-my-zsh.sh
 if [[ -n $SSH_CONNECTION ]]; then
   export EDITOR='vim'
 else
-  #export EDITOR='mvim'
-  export EDITOR='vim'
+  export EDITOR='nvim'
 fi
 
 # Compilation flags
@@ -88,8 +91,7 @@ fi
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-alias vim="nvim"
-alias e="vim"
+alias e=$EDITOR
 alias sudoedit="sudo -e"
 # alias htop="sudo htop"
 alias diff="colordiff"

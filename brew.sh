@@ -9,7 +9,6 @@ brew update
 
 echo "Installing Homebrew packages"
 
-brew install vim --with-override-system-vi --with-lua --with-python3
 brew install neovim
 brew install fzf
 brew install git
@@ -24,4 +23,4 @@ brew install zsh-autosuggestions
 brew install python3
 brew install sshfs
 brew install make
-brew install gdb
+brew install z
