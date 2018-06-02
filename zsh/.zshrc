@@ -8,6 +8,7 @@ export PATH="$HOME/bin:$PATH"
 eval "$(rbenv init - zsh)"
 
 . /usr/local/etc/profile.d/z.sh
+. ~/.fastlane/completions/completion.sh
 
 # Path to your oh-my-zsh installation.
 export ZSH=~/.oh-my-zsh
@@ -92,6 +93,7 @@ fi
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias e=$EDITOR
+alias vim=nvim
 alias sudoedit="sudo -e"
 # alias htop="sudo htop"
 alias diff="colordiff"
