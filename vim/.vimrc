@@ -134,6 +134,9 @@ if !exists('g:deoplete#omni#input_patterns')
 endif
 let g:deoplete#omni#input_patterns.tex = g:vimtex#re#deoplete
 
+" Ale
+let g:ale_lint_delay = 1000 " Better performance
+
 " <TAB>: completion.
 inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 inoremap <expr><S-TAB>  pumvisible() ? "\<C-p>" : "\<S-TAB>"
@@ -197,7 +200,25 @@ set completeopt-=preview
 set updatetime=250 " Can cause glitches"
 
 " Singular
-au BufRead,BufNewFile *.lib set filetype=singular | set syntax=singular | set indentexpr=
+au BufRead,BufNewFile *.lib silent set filetype=singular | set syntax=singular | set indentexpr=
+au BufNewFile,BufRead * silent call CheckSetupAleForSingular()
+
+function! CheckSetupAleForSingular()
+  let project_root = ale#c#FindProjectRoot(bufnr(''))
+  " let git_project_root = substitute(system('cd '.expand('%:p:h',1).' && git rev-parse --show-toplevel'), '\n', '', '') " Get the git project dir and remove linebreaks
+  if !empty(glob(project_root.'/Singular')) && !empty(glob(project_root.'/kernel')) " We are in the root dir of Singular
+    let singular_compiler_flags = '-std=c++14 -Wall '
+    let dirs = split(glob(project_root."/*"), '\n') " get the dirs in the root dir
+    call filter(dirs, 'isdirectory(v:val)')
+    call map(dirs, '"-I" . v:val') " format them
+    let singular_compiler_flags = singular_compiler_flags . join(dirs)
+    let b:ale_cpp_clang_options = singular_compiler_flags
+    let b:ale_cpp_gcc_options = singular_compiler_flags
+    let b:ale_c_clang_options = singular_compiler_flags
+    let b:ale_c_gcc_options = singular_compiler_flags
+  endif
+endfunction
+
 
 if !has('clientserver')
   let g:vimtex_compiler_latexmk = {'callback' : 0}
