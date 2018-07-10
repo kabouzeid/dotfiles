@@ -5,6 +5,10 @@ export PATH="/usr/local/bin:$PATH"
 export PATH="/usr/local/sbin:$PATH"
 export PATH="$HOME/bin:$PATH"
 
+# for fastlane set UTF-8
+export LC_ALL=en_US.UTF-8
+export LANG=en_US.UTF-8
+
 eval "$(rbenv init - zsh)"
 
 . /usr/local/etc/profile.d/z.sh
