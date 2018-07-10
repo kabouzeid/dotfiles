@@ -4,6 +4,7 @@ call plug#begin('~/.vim/plugged')
 
 " General
 Plug 'wincent/terminus'
+Plug 'mileszs/ack.vim'
 
 " Color
 Plug 'dracula/vim'
@@ -43,16 +44,16 @@ else
 endif
 
 " Deoplete completions
-Plug 'Shougo/neco-syntax'
-Plug 'Shougo/neco-vim'
-Plug 'zchee/deoplete-jedi'
+Plug 'Shougo/neco-syntax' " keywords from language syntax file
+Plug 'Shougo/neco-vim' " VimL
+Plug 'zchee/deoplete-jedi' " Python completions using jedi
 
 " Lang
-Plug 'lervag/vimtex' " contains latex completions
+Plug 'lervag/vimtex' " latex completions and more
 Plug 'octol/vim-cpp-enhanced-highlight'
 Plug 'majutsushi/tagbar', { 'on': 'Tagbar' } " ctags
-Plug 'petRUShka/vim-gap' " gap support
 Plug 'ludovicchabant/vim-gutentags' " ctags
+Plug 'petRUShka/vim-gap' " gap support
 
 " Lint
 Plug 'w0rp/ale'
@@ -124,6 +125,10 @@ set autoread
 set ttimeoutlen=10
 
 set statusline+=%{gutentags#statusline()}
+
+if executable('ag')
+  let g:ackprg = 'ag --vimgrep'
+endif
 
 let delimitMate_expand_cr=1
 
