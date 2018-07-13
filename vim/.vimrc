@@ -5,6 +5,7 @@ call plug#begin('~/.vim/plugged')
 " General
 Plug 'wincent/terminus'
 Plug 'mileszs/ack.vim'
+Plug 'vim-scripts/a.vim' " switch between source and headers (for C/C++)
 
 " Color
 Plug 'dracula/vim'
@@ -47,6 +48,9 @@ endif
 Plug 'Shougo/neco-syntax' " keywords from language syntax file
 Plug 'Shougo/neco-vim' " VimL
 Plug 'zchee/deoplete-jedi' " Python completions using jedi
+Plug 'wellle/tmux-complete.vim' " words from tmux panes
+Plug 'Shougo/neoinclude.vim' " C/C++ header files
+Plug 'Shougo/deoplete-clangx' " C/C++ completions via clang
 
 " Lang
 Plug 'lervag/vimtex' " latex completions and more
@@ -54,6 +58,7 @@ Plug 'octol/vim-cpp-enhanced-highlight'
 Plug 'majutsushi/tagbar', { 'on': 'Tagbar' } " ctags
 Plug 'ludovicchabant/vim-gutentags' " ctags
 Plug 'petRUShka/vim-gap' " gap support
+Plug 'bumaociyuan/vim-swift' " clone of official apple swift plugin
 
 " Lint
 Plug 'w0rp/ale'
@@ -121,6 +126,8 @@ set lazyredraw
 set ignorecase
 set smartcase
 set autoread
+" Allows jumping between tags without saving
+set hidden
 
 set ttimeoutlen=10
 
@@ -221,6 +228,9 @@ function! CheckSetupAleForSingular()
     let b:ale_cpp_gcc_options = singular_compiler_flags
     let b:ale_c_clang_options = singular_compiler_flags
     let b:ale_c_gcc_options = singular_compiler_flags
+    " note: the below doesn't really seem to help
+    call deoplete#custom#var('clangx', 'default_c_options', singular_compiler_flags)
+    call deoplete#custom#var('clangx', 'default_cpp_options', singular_compiler_flags)
   endif
 endfunction
 
