@@ -5,7 +5,6 @@ call plug#begin('~/.vim/plugged')
 " General
 Plug 'wincent/terminus'
 Plug 'mileszs/ack.vim'
-Plug 'vim-scripts/a.vim' " switch between source and headers (for C/C++)
 
 " Color
 Plug 'dracula/vim'
