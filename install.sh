@@ -19,5 +19,4 @@ source link.sh "$@"
 echo "Installing vim plugins"
 vim -c "execute \"PlugInstall!\" | qa"
 
-# Insall nvim python3
 pip3 install neovim

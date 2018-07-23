@@ -1,7 +1,16 @@
 # My environment variables
 export PATH="/usr/local/bin:$PATH"
 export PATH="/usr/local/sbin:$PATH"
-export PATH="~/bin:$PATH"
+export PATH="$HOME/bin:$PATH"
+
+# for fastlane set UTF-8
+export LC_ALL=en_US.UTF-8
+export LANG=en_US.UTF-8
+
+eval "$(rbenv init - zsh)"
+
+. /usr/local/etc/profile.d/z.sh
+. ~/.fastlane/completions/completion.sh
 
 export PATH=$PATH:~/bin
 export PATH=$PATH:~/.linuxbrew/bin
@@ -71,8 +80,7 @@ source $ZSH/oh-my-zsh.sh
 if [[ -n $SSH_CONNECTION ]]; then
   export EDITOR='vim'
 else
-  #export EDITOR='mvim'
-  export EDITOR='vim'
+  export EDITOR='nvim'
 fi
 
 # Compilation flags
@@ -89,9 +97,10 @@ fi
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-alias e="vim"
-alias vim="nvim"
+alias e=$EDITOR
+alias vim=nvim
 alias sudoedit="sudo -e"
+# alias htop="sudo htop"
 alias diff="colordiff"
 
 export LSCOLORS="Gxfxcxdxbxegedabagacad"

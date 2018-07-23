@@ -4,6 +4,7 @@ call plug#begin('~/.vim/plugged')
 
 " General
 Plug 'wincent/terminus'
+Plug 'mileszs/ack.vim'
 
 " Color
 Plug 'dracula/vim'
@@ -43,16 +44,20 @@ else
 endif
 
 " Deoplete completions
-Plug 'Shougo/neco-syntax'
-Plug 'Shougo/neco-vim'
-Plug 'zchee/deoplete-jedi'
+Plug 'Shougo/neco-syntax' " keywords from language syntax file
+Plug 'Shougo/neco-vim' " VimL
+Plug 'zchee/deoplete-jedi' " Python completions using jedi
+Plug 'wellle/tmux-complete.vim' " words from tmux panes
+Plug 'Shougo/neoinclude.vim' " C/C++ header files
+Plug 'Shougo/deoplete-clangx' " C/C++ completions via clang
 
 " Lang
-Plug 'lervag/vimtex' " contains latex completions
+Plug 'lervag/vimtex' " latex completions and more
 Plug 'octol/vim-cpp-enhanced-highlight'
 Plug 'majutsushi/tagbar', { 'on': 'Tagbar' } " ctags
-Plug 'petRUShka/vim-gap' " gap support
 Plug 'ludovicchabant/vim-gutentags' " ctags
+Plug 'petRUShka/vim-gap' " gap support
+Plug 'bumaociyuan/vim-swift' " clone of official apple swift plugin
 
 " Lint
 Plug 'w0rp/ale'
@@ -120,10 +125,16 @@ set lazyredraw
 set ignorecase
 set smartcase
 set autoread
+" Allows jumping between tags without saving
+set hidden
 
 set ttimeoutlen=10
 
 set statusline+=%{gutentags#statusline()}
+
+if executable('ag')
+  let g:ackprg = 'ag --vimgrep'
+endif
 
 let delimitMate_expand_cr=1
 
@@ -133,6 +144,9 @@ if !exists('g:deoplete#omni#input_patterns')
   let g:deoplete#omni#input_patterns = {}
 endif
 let g:deoplete#omni#input_patterns.tex = g:vimtex#re#deoplete
+
+" Ale
+let g:ale_lint_delay = 1000 " Better performance
 
 " <TAB>: completion.
 inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
@@ -197,7 +211,28 @@ set completeopt-=preview
 set updatetime=250 " Can cause glitches"
 
 " Singular
-au BufRead,BufNewFile *.lib set filetype=singular | set syntax=singular | set indentexpr=
+au BufRead,BufNewFile *.lib silent set filetype=singular | set syntax=singular | set indentexpr=
+au BufNewFile,BufRead * silent call CheckSetupAleForSingular()
+
+function! CheckSetupAleForSingular()
+  let project_root = ale#c#FindProjectRoot(bufnr(''))
+  " let git_project_root = substitute(system('cd '.expand('%:p:h',1).' && git rev-parse --show-toplevel'), '\n', '', '') " Get the git project dir and remove linebreaks
+  if !empty(glob(project_root.'/Singular')) && !empty(glob(project_root.'/kernel')) " We are in the root dir of Singular
+    let singular_compiler_flags = '-std=c++14 -Wall '
+    let dirs = split(glob(project_root."/*"), '\n') " get the dirs in the root dir
+    call filter(dirs, 'isdirectory(v:val)')
+    call map(dirs, '"-I" . v:val') " format them
+    let singular_compiler_flags = singular_compiler_flags . join(dirs)
+    let b:ale_cpp_clang_options = singular_compiler_flags
+    let b:ale_cpp_gcc_options = singular_compiler_flags
+    let b:ale_c_clang_options = singular_compiler_flags
+    let b:ale_c_gcc_options = singular_compiler_flags
+    " note: the below doesn't really seem to help
+    call deoplete#custom#var('clangx', 'default_c_options', singular_compiler_flags)
+    call deoplete#custom#var('clangx', 'default_cpp_options', singular_compiler_flags)
+  endif
+endfunction
+
 
 if !has('clientserver')
   let g:vimtex_compiler_latexmk = {'callback' : 0}
