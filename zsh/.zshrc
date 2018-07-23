@@ -7,10 +7,7 @@ export PATH="$HOME/bin:$PATH"
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
 
-eval "$(rbenv init - zsh)"
-
-. /usr/local/etc/profile.d/z.sh
-. ~/.fastlane/completions/completion.sh
+. /users/abouzeid/.linuxbrew/etc/profile.d/z.sh
 
 export PATH=$PATH:~/bin
 export PATH=$PATH:~/.linuxbrew/bin
