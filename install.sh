@@ -20,3 +20,4 @@ echo "Installing vim plugins"
 vim -c "execute \"PlugInstall!\" | qa"
 
 pip3 install neovim
+git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
