@@ -8,6 +8,7 @@ Plug 'mileszs/ack.vim'
 
 " Color
 Plug 'dracula/vim'
+Plug 'junegunn/rainbow_parentheses.vim'
 
 " Edit
 Plug 'tpope/vim-surround' " vim objects for brackets etc
@@ -210,6 +211,9 @@ set completeopt-=preview
 
 set updatetime=250 " Can cause glitches"
 
+" Cocoapods
+au BufRead,BufNewFile Podfile set filetype=ruby
+
 " Singular
 au BufRead,BufNewFile *.lib silent set filetype=singular | set syntax=singular | set indentexpr=
 au BufNewFile,BufRead * silent call CheckSetupAleForSingular()
@@ -276,3 +280,5 @@ if !has('nvim')
     let &t_EI = "\<Esc>]50;CursorShape=0\x7"
   endif
 endif
+
+command Cdev NERDTree | Tagbar

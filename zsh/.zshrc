@@ -111,3 +111,6 @@ zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
 source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 unalias gap
+
+test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+
