@@ -17,7 +17,11 @@ source link.sh "$@"
 
 # Install vim plugins
 echo "Installing vim plugins"
+echo "You can ignore this vim error:"
 vim -c "execute \"PlugInstall!\" | qa"
 
 pip3 install neovim
+
+echo "Installing TPM (for tmux)"
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+echo "Open tmux and type <prefix>I"
