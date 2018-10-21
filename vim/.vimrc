@@ -215,25 +215,25 @@ set updatetime=250 " Can cause glitches"
 au BufRead,BufNewFile Podfile set filetype=ruby
 
 " Singular
-au BufRead,BufNewFile *.lib silent set filetype=singular | set syntax=singular | set indentexpr=
-au BufNewFile,BufRead * silent call CheckSetupAleForSingular()
+au BufNewFile,BufRead *.lib silent set filetype=singular | set syntax=singular | set indentexpr=
 
-function! CheckSetupAleForSingular()
-  let project_root = ale#c#FindProjectRoot(bufnr(''))
-  " let git_project_root = substitute(system('cd '.expand('%:p:h',1).' && git rev-parse --show-toplevel'), '\n', '', '') " Get the git project dir and remove linebreaks
-  if !empty(glob(project_root.'/Singular')) && !empty(glob(project_root.'/kernel')) " We are in the root dir of Singular
-    let singular_compiler_flags = '-std=c++14 -Wall '
+" C
+au BufNewFile,BufRead * call CheckSetupForC()
+function! CheckSetupForC() " includes all dirs at the project root
+  if (&filetype == 'cpp' || &filetype == 'c')
+    let project_root = ale#c#FindProjectRoot(bufnr(''))
+    " let git_project_root = substitute(system('cd '.expand('%:p:h',1).' && git rev-parse --show-toplevel'), '\n', '', '') " Get the git project dir and remove linebreaks
     let dirs = split(glob(project_root."/*"), '\n') " get the dirs in the root dir
     call filter(dirs, 'isdirectory(v:val)')
     call map(dirs, '"-I" . v:val') " format them
-    let singular_compiler_flags = singular_compiler_flags . join(dirs)
-    let b:ale_cpp_clang_options = singular_compiler_flags
-    let b:ale_cpp_gcc_options = singular_compiler_flags
-    let b:ale_c_clang_options = singular_compiler_flags
-    let b:ale_c_gcc_options = singular_compiler_flags
+    let compiler_flags = join(dirs)
+    let b:ale_cpp_clang_options = compiler_flags
+    let b:ale_cpp_gcc_options = compiler_flags
+    let b:ale_c_clang_options = compiler_flags
+    let b:ale_c_gcc_options = compiler_flags
     " note: the below doesn't really seem to help
-    call deoplete#custom#var('clangx', 'default_c_options', singular_compiler_flags)
-    call deoplete#custom#var('clangx', 'default_cpp_options', singular_compiler_flags)
+    call deoplete#custom#var('clangx', 'default_c_options', compiler_flags)
+    call deoplete#custom#var('clangx', 'default_cpp_options', compiler_flags)
   endif
 endfunction
 
