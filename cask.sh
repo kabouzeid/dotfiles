@@ -26,4 +26,4 @@ brew cask install jdownloader
 brew cask install tunnelblick
 brew cask install presentation
 brew cask install timing
-
+brew cask install java
