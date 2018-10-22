@@ -7,10 +7,6 @@ if [ "$(uname)" == "Darwin" ]; then
     source osx.sh
 fi
 
-# Oh My ZSH
-echo "Installing Oh My ZSH"
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
-
 # Link the dotfiles
 echo "Linking dotfiles"
 source link.sh "$@"
@@ -25,3 +21,8 @@ pip3 install neovim
 echo "Installing TPM (for tmux)"
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 echo "Open tmux and type <prefix>I"
+
+# Oh My ZSH
+echo "Installing Oh My ZSH"
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+
