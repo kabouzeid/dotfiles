@@ -50,7 +50,7 @@ Plug 'Shougo/neco-vim' " VimL
 Plug 'zchee/deoplete-jedi' " Python completions using jedi
 Plug 'wellle/tmux-complete.vim' " words from tmux panes
 Plug 'Shougo/neoinclude.vim' " C/C++ header files
-Plug 'Shougo/deoplete-clangx' " C/C++ completions via clang
+" Plug 'Shougo/deoplete-clangx' " Replaced by ccls LSP
 
 " Lang
 Plug 'lervag/vimtex' " latex completions and more
@@ -62,6 +62,12 @@ Plug 'bumaociyuan/vim-swift' " clone of official apple swift plugin
 
 " Lint
 Plug 'w0rp/ale'
+
+" LSP
+Plug 'autozimu/LanguageClient-neovim', {
+    \ 'branch': 'next',
+    \ 'do': 'bash install.sh',
+    \ }
 
 call plug#end()
 
@@ -148,6 +154,10 @@ let g:deoplete#omni#input_patterns.tex = g:vimtex#re#deoplete
 
 " Ale
 let g:ale_lint_delay = 1000 " Better performance
+" ALL c/cpp ['ccls', 'clang', 'clangcheck', 'clangd', 'clangtidy', 'clazy', 'cppcheck', 'cpplint', 'cquery', 'flawfinder', 'gcc'],
+let g:ale_linters = {
+      \   'cpp': ['clang', 'clangcheck', 'clangtidy', 'clazy', 'cppcheck', 'flawfinder'],
+      \}
 
 " <TAB>: completion.
 inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
@@ -223,7 +233,7 @@ function! CheckSetupForC() " includes all dirs at the project root
   if (&filetype == 'cpp' || &filetype == 'c')
     let project_root = ale#c#FindProjectRoot(bufnr(''))
     " let git_project_root = substitute(system('cd '.expand('%:p:h',1).' && git rev-parse --show-toplevel'), '\n', '', '') " Get the git project dir and remove linebreaks
-    let dirs = split(glob(project_root."/*"), '\n') " get the dirs in the root dir
+    let dirs = split(glob(project_root.'/*'), '\n') + [project_root] " get the dirs in the root dir
     call filter(dirs, 'isdirectory(v:val)')
     call map(dirs, '"-I" . v:val') " format them
     let compiler_flags = join(dirs)
@@ -231,12 +241,18 @@ function! CheckSetupForC() " includes all dirs at the project root
     let b:ale_cpp_gcc_options = compiler_flags
     let b:ale_c_clang_options = compiler_flags
     let b:ale_c_gcc_options = compiler_flags
-    " note: the below doesn't really seem to help
-    call deoplete#custom#var('clangx', 'default_c_options', compiler_flags)
-    call deoplete#custom#var('clangx', 'default_cpp_options', compiler_flags)
+    " call deoplete#custom#var('clangx', 'default_c_options', compiler_flags)
+    " call deoplete#custom#var('clangx', 'default_cpp_options', compiler_flags)
+    call writefile(dirs, project_root.'/.ccls')
   endif
 endfunction
 
+" LSP
+let g:LanguageClient_serverCommands = {
+      \ 'c': ['ccls', '--log-file=/tmp/cc.log'],
+      \ 'cpp': ['ccls', '--log-file=/tmp/cc.log'],
+      \ }
+let g:LanguageClient_hasSnippetSupport = 0
 
 " vimtex
 if !has('clientserver') && !has('nvim')
