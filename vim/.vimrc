@@ -238,9 +238,17 @@ function! CheckSetupForC() " includes all dirs at the project root
 endfunction
 
 
-if !has('clientserver')
+" vimtex
+if !has('clientserver') && !has('nvim')
   let g:vimtex_compiler_latexmk = {'callback' : 0}
 endif
+if has('nvim')
+  let g:vimtex_compiler_progname = 'nvr'
+endif
+if has('macunix') " macOS only
+  let g:vimtex_view_method = 'skim'
+endif
+let g:vimtex_quickfix_open_on_warning = 0
 
 if has('termguicolors')
         let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
