@@ -16,6 +16,7 @@ echo "Installing vim plugins"
 echo "You can ignore this vim error:"
 vim -c "execute \"PlugInstall!\" | qa"
 
+pip install neovim
 pip3 install neovim
 
 echo "Installing TPM (for tmux)"
