@@ -103,3 +103,6 @@ unalias gap
 
 export PATH="/users/abouzeid/.linuxbrew/bin:$PATH"
 export PATH="/users/abouzeid/.linuxbrew/sbin:$PATH"
+
+test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+
