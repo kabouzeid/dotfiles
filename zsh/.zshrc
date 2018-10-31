@@ -2,15 +2,14 @@
 export PATH="/usr/local/bin:$PATH"
 export PATH="/usr/local/sbin:$PATH"
 export PATH="$HOME/bin:$PATH"
+export PATH="$HOME/.linuxbrew/bin:$PATH"
+export PATH="$HOME/.linuxbrew/sbin:$PATH"
 
 # for fastlane set UTF-8
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
 
 . /users/abouzeid/.linuxbrew/etc/profile.d/z.sh
-
-export PATH=$PATH:~/bin
-export PATH=$PATH:~/.linuxbrew/bin
 
 # Path to your oh-my-zsh installation.
 export ZSH=/users/abouzeid/.oh-my-zsh
@@ -100,9 +99,6 @@ export LS_COLORS="di=1;36:ln=35:so=32:pi=33:ex=31:bd=34;46:cd=34;43:su=30;41:sg=
 zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
 
 unalias gap
-
-export PATH="/users/abouzeid/.linuxbrew/bin:$PATH"
-export PATH="/users/abouzeid/.linuxbrew/sbin:$PATH"
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 

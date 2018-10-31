@@ -16,11 +16,11 @@ brew install grep
 brew install reattach-to-user-namespace
 brew install the_silver_searcher
 brew install tmux
-brew install tree
 brew install wget
+brew install curl
 brew install zsh
 brew install zsh-autosuggestions
+brew install python2
 brew install python3
-brew install sshfs
 brew install make
 brew install z
