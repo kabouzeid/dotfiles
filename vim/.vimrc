@@ -47,10 +47,10 @@ endif
 " Deoplete completions
 Plug 'Shougo/neco-syntax' " keywords from language syntax file
 Plug 'Shougo/neco-vim' " VimL
-Plug 'zchee/deoplete-jedi' " Python completions using jedi
+" Plug 'zchee/deoplete-jedi' " Replaced by pyls
 Plug 'wellle/tmux-complete.vim' " words from tmux panes
 Plug 'Shougo/neoinclude.vim' " C/C++ header files
-" Plug 'Shougo/deoplete-clangx' " Replaced by ccls LSP
+" Plug 'Shougo/deoplete-clangx' " Replaced by ccls
 
 " Lang
 Plug 'lervag/vimtex' " latex completions and more
@@ -251,6 +251,8 @@ endfunction
 let g:LanguageClient_serverCommands = {
       \ 'c': ['ccls', '--log-file=/tmp/cc.log'],
       \ 'cpp': ['ccls', '--log-file=/tmp/cc.log'],
+      \ 'sh': ['bash-language-server', 'start'],
+      \ 'python': ['pyls'],
       \ }
 let g:LanguageClient_hasSnippetSupport = 0
 
