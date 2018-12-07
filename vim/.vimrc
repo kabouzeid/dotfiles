@@ -224,6 +224,9 @@ set updatetime=250 " Can cause glitches"
 " Cocoapods
 au BufRead,BufNewFile Podfile set filetype=ruby
 
+" Latex Classes
+au BufRead,BufNewFile *.cls set filetype=tex
+
 " Singular
 au BufNewFile,BufRead *.lib silent set filetype=singular | set syntax=singular | set indentexpr=
 
@@ -255,6 +258,7 @@ let g:LanguageClient_serverCommands = {
       \ 'python': ['pyls'],
       \ }
 let g:LanguageClient_hasSnippetSupport = 0
+let g:gutentags_ctags_exclude = ['.ccls-cache']
 
 " vimtex
 if !has('clientserver') && !has('nvim')

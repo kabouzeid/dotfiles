@@ -32,7 +32,7 @@ syn region      Comment        start="/\*" end="\*/"
 " Strings
 syn region      String         start=+"+ end=+"+ contains=infostring
 " infostring are special keywords in the library
-syn keyword     infostring     AUTHORS OVERVIEW REFERENCES KEYWORDS SEE\ ALSO PROCEDURES USAGE RETURN NOTE ASSUME EXAMPLE LIBRARY contained=String
+syn keyword     infostring     AUTHORS OVERVIEW REFERENCES KEYWORDS SEE\ ALSO PROCEDURES USAGE RETURN NOTE ASSUME EXAMPLE LIBRARY PURPOSE contained=String
 "contained=String
 hi  link        infostring     SpecialComment
 " Highlight infostring as if it is a special comment
