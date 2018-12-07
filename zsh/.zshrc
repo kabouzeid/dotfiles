@@ -102,6 +102,8 @@ alias sudoedit="sudo -e"
 # alias htop="sudo htop"
 alias diff="colordiff"
 
+alias nproc="sysctl -n hw.ncpu"
+
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 export LSCOLORS="Gxfxcxdxbxegedabagacad"
