@@ -13,7 +13,7 @@ Plug 'junegunn/rainbow_parentheses.vim'
 " Edit
 Plug 'tpope/vim-surround' " vim objects for brackets etc
 Plug 'Raimondi/delimitMate' " auto close brackets
-Plug 'vim-scripts/ReplaceWithRegister'
+" Plug 'vim-scripts/ReplaceWithRegister' " we already use nmap gr for coc
 Plug 'tpope/vim-commentary'
 
 " UI
@@ -32,42 +32,33 @@ Plug 'airblade/vim-gitgutter'
 Plug 'justinmk/vim-sneak' " sneak to locations
 Plug 'tpope/vim-sleuth' " auto indentation detection
 
+" Snippets
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
+
 " Completion
-Plug 'Shougo/neosnippet'
-Plug 'Shougo/neosnippet-snippets'
-
-if has('nvim')
-  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-else
-  Plug 'Shougo/deoplete.nvim'
-  Plug 'roxma/nvim-yarp'
-  Plug 'roxma/vim-hug-neovim-rpc'
-endif
-
-" Deoplete completions
-Plug 'Shougo/neco-syntax' " keywords from language syntax file
-Plug 'Shougo/neco-vim' " VimL
-" Plug 'zchee/deoplete-jedi' " Replaced by pyls
-Plug 'wellle/tmux-complete.vim' " words from tmux panes
-Plug 'Shougo/neoinclude.vim' " C/C++ header files
-" Plug 'Shougo/deoplete-clangx' " Replaced by ccls
+Plug 'Shougo/neco-vim' " VimL support (supported by coc.nvim)
+Plug 'Shougo/neoinclude.vim' " C/C++ header files (supported by coc.nvim)
 
 " Lang
-Plug 'lervag/vimtex' " latex completions and more
-Plug 'octol/vim-cpp-enhanced-highlight'
-Plug 'majutsushi/tagbar', { 'on': 'Tagbar' } " ctags
-Plug 'ludovicchabant/vim-gutentags' " ctags
-Plug 'petRUShka/vim-gap' " gap support
-Plug 'bumaociyuan/vim-swift' " clone of official apple swift plugin
+Plug 'lervag/vimtex' " provides omnicompletion, text objects and more for LaTeX
+Plug 'octol/vim-cpp-enhanced-highlight' " better syntax highlighting for cpp
+Plug 'petRUShka/vim-gap' " GAP (computer algebra system) lang support
+Plug 'bumaociyuan/vim-swift' " clone of official apple swift syntax plugin
+Plug 'leafgarland/typescript-vim' " typescript syntax
+
+" Tags
+Plug 'majutsushi/tagbar', { 'on': 'Tagbar' } " displays ctags in sidebar
+Plug 'ludovicchabant/vim-gutentags' " automatically generates ctags
 
 " Lint
-Plug 'w0rp/ale'
+Plug 'w0rp/ale' " linter for many languages
 
 " LSP
-Plug 'autozimu/LanguageClient-neovim', {
-    \ 'branch': 'next',
-    \ 'do': 'bash install.sh',
-    \ }
+" if yarn not available, use 'do': { -> coc#util#install()} to download a binary
+Plug 'neoclide/coc.nvim', {'tag': '*', 'do': 'yarn install'} " LSP and completion framework
+Plug 'neoclide/coc-neco' " support neco-vim in coc.nvim
+Plug 'jsfaint/coc-neoinclude' " support neoinclude in coc.nvim
 
 call plug#end()
 
@@ -123,7 +114,7 @@ set nostartofline
 " Show the cursor position
 set ruler
 " Don’t show the intro message when starting Vim
-set shortmess=atI
+set shortmess+=atIc
 " Show the (partial) command as it’s being typed
 set showcmd
 " Hide the mode, it's already shown by the airline plugin
@@ -145,29 +136,12 @@ endif
 
 let delimitMate_expand_cr=1
 
-" Deoplete
-let g:deoplete#enable_at_startup = 1
-if !exists('g:deoplete#omni#input_patterns')
-  let g:deoplete#omni#input_patterns = {}
-endif
-let g:deoplete#omni#input_patterns.tex = g:vimtex#re#deoplete
-
 " Ale
 let g:ale_lint_delay = 1000 " Better performance
 " ALL c/cpp ['ccls', 'clang', 'clangcheck', 'clangd', 'clangtidy', 'clazy', 'cppcheck', 'cpplint', 'cquery', 'flawfinder', 'gcc'],
 let g:ale_linters = {
       \   'cpp': ['clang', 'clangcheck', 'clangtidy', 'clazy', 'cppcheck', 'flawfinder'],
       \}
-
-" <TAB>: completion.
-inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
-inoremap <expr><S-TAB>  pumvisible() ? "\<C-p>" : "\<S-TAB>"
-
-" Plugin key-mappings.
-" Note: It must be "imap" and "smap".  It uses <Plug> mappings.
-imap <C-k>     <Plug>(neosnippet_expand_or_jump)
-smap <C-k>     <Plug>(neosnippet_expand_or_jump)
-xmap <C-k>     <Plug>(neosnippet_expand_target)
 
 nnoremap j gj
 nnoremap gj j
@@ -251,13 +225,6 @@ function! CheckSetupForC() " includes all dirs at the project root
 endfunction
 
 " LSP
-let g:LanguageClient_serverCommands = {
-      \ 'c': ['ccls', '--log-file=/tmp/cc.log'],
-      \ 'cpp': ['ccls', '--log-file=/tmp/cc.log'],
-      \ 'sh': ['bash-language-server', 'start'],
-      \ 'python': ['pyls'],
-      \ }
-let g:LanguageClient_hasSnippetSupport = 0
 let g:gutentags_ctags_exclude = ['.ccls-cache']
 
 " vimtex
@@ -312,3 +279,67 @@ if !has('nvim')
 endif
 
 command Cdev NERDTree | Tagbar
+
+let g:airline_section_error = '%{airline#util#wrap(airline#extensions#coc#get_error(),0)}'
+let g:airline_section_warning = '%{airline#util#wrap(airline#extensions#coc#get_warning(),0)}'
+
+" Use tab for trigger completion with characters ahead and navigate.
+" Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+" Use <cr> (enter) for confirm completion, `<C-g>u` means break undo chain at current position.
+" Coc only does snippet and additional edit on confirm.
+inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+
+" Remap keys for gotos
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+
+" Use gK for show documentation in preview window (because K is default in vim)
+nnoremap <silent> gK :call CocAction('doHover')<CR>
+
+" Highlight symbol under cursor on CursorHold
+autocmd CursorHold * silent call CocActionAsync('highlight')
+
+" Remap for rename current word
+nmap <leader>rn <Plug>(coc-rename)
+
+" Remap for format selected region
+vmap <leader>f  <Plug>(coc-format-selected)
+nmap <leader>f  <Plug>(coc-format-selected)
+
+" Remap for do codeAction of selected region, ex: `<leader>aap` for current paragraph
+vmap <leader>a  <Plug>(coc-codeaction-selected)
+nmap <leader>a  <Plug>(coc-codeaction-selected)
+
+" Fix autofix problem of current line
+nmap <leader>qf  <Plug>(coc-fix-current)
+
+" Use `:Format` for format current buffer
+command! -nargs=0 Format :call CocAction('format')
+
+augroup autococ
+  autocmd!
+  " Update signature help on jump placeholder
+  autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+augroup end
+
+" Use <C-l> to trigger snippet expand.
+imap <C-l> <Plug>(coc-snippets-expand)
+" " Use <C-j> to select text for visual text of snippet.
+vmap <C-j> <Plug>(coc-snippets-select)
+
+let g:UltiSnipsExpandTrigger="<C-l>"
+let g:UltiSnipsJumpForwardTrigger="<C-j>"
+let g:UltiSnipsJumpBackwardTrigger="<C-k>"
