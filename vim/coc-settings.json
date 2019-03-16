@@ -1,0 +1,25 @@
+{
+    "languageserver": {
+        "ccls": {
+            "command": "ccls",
+            "filetypes": ["c", "cpp", "objc", "objcpp"],
+            "rootPatterns": [".ccls", ".ccls-root", "compile_commands.json", ".vim/", ".git/", ".hg/"],
+            "initializationOptions": {
+                "cacheDirectory": "/tmp/ccls"
+            }
+        },
+        "bash": {
+            "command": "bash-language-server",
+            "args": ["start"],
+            "filetypes": ["sh"],
+            "ignoredRootPaths": ["~"]
+        },
+        "swift": {
+            "command": "/Users/karim/Code/sourcekit-lsp/.build/debug/sourcekit-lsp",
+            "filetypes": ["swift"],
+            "rootPatterns": [".git/", ".hg/", "Podfile"]
+        }
+    },
+    "snippets.ultisnips.enable": false,
+    "diagnostic.virtualText": true
+}
