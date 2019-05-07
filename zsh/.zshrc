@@ -1,6 +1,8 @@
 # My environment variables
-export JAVA_HOME="$(/usr/libexec/java_home -v 1.8)"
+export JAVA_HOME="$(/usr/libexec/java_home)"
 export ANDROID_SDK_ROOT="/usr/local/share/android-sdk"
+export GOPATH="$HOME/Code/go"
+export PATH="$GOPATH/bin:$PATH"
 export PATH="/usr/local/bin:$PATH"
 export PATH="/usr/local/sbin:$PATH"
 export PATH="$HOME/bin:$PATH"
@@ -116,3 +118,14 @@ unalias gap
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
+swift-sh-editor() {
+  if [ $# -ne 1 ] ; then
+    echo "Usage: $0 script" >&2
+    return 1
+  fi
+  if ! [ -e "$1" ] ; then
+    touch "$1"
+  fi
+  swift sh editor "$1"
+}
+alias se=swift-sh-editor

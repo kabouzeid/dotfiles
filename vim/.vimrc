@@ -7,7 +7,7 @@ Plug 'wincent/terminus'
 Plug 'mileszs/ack.vim'
 
 " Color
-Plug 'dracula/vim'
+Plug 'dracula/vim', { 'as': 'dracula'}
 Plug 'junegunn/rainbow_parentheses.vim'
 
 " Edit
@@ -17,8 +17,9 @@ Plug 'Raimondi/delimitMate' " auto close brackets
 Plug 'tpope/vim-commentary'
 
 " UI
-Plug 'vim-airline/vim-airline' " bottom bar
-Plug 'vim-airline/vim-airline-themes'
+" Plug 'vim-airline/vim-airline' " bottom bar
+" Plug 'vim-airline/vim-airline-themes'
+Plug 'itchyny/lightline.vim'
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'mbbill/undotree', { 'on': 'UndotreeToggle' }
 Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim' " fuzzy finder
@@ -46,6 +47,7 @@ Plug 'octol/vim-cpp-enhanced-highlight' " better syntax highlighting for cpp
 Plug 'petRUShka/vim-gap' " GAP (computer algebra system) lang support
 Plug 'bumaociyuan/vim-swift' " clone of official apple swift syntax plugin
 Plug 'leafgarland/typescript-vim' " typescript syntax
+Plug 'JuliaEditorSupport/julia-vim'
 
 " Tags
 Plug 'majutsushi/tagbar', { 'on': 'Tagbar' } " displays ctags in sidebar
@@ -55,10 +57,10 @@ Plug 'ludovicchabant/vim-gutentags' " automatically generates ctags
 Plug 'w0rp/ale' " linter for many languages
 
 " LSP
-" if yarn not available, use 'do': { -> coc#util#install()} to download a binary
-Plug 'neoclide/coc.nvim', {'tag': '*', 'do': 'yarn install'} " LSP and completion framework
+Plug 'neoclide/coc.nvim', {'tag': '*', 'do': './install.sh'} " LSP and completion framework
 Plug 'neoclide/coc-neco' " support neco-vim in coc.nvim
 Plug 'jsfaint/coc-neoinclude' " support neoinclude in coc.nvim
+Plug 'wellle/tmux-complete.vim'
 
 call plug#end()
 
@@ -139,6 +141,7 @@ let delimitMate_expand_cr=1
 " Ale
 let g:ale_lint_delay = 1000 " Better performance
 " ALL c/cpp ['ccls', 'clang', 'clangcheck', 'clangd', 'clangtidy', 'clazy', 'cppcheck', 'cpplint', 'cquery', 'flawfinder', 'gcc'],
+" do not use ccls, since it's already used in coc
 let g:ale_linters = {
       \   'cpp': ['clang', 'clangcheck', 'clangtidy', 'clazy', 'cppcheck', 'flawfinder'],
       \}
@@ -195,17 +198,20 @@ set completeopt-=preview
 
 set updatetime=250 " Can cause glitches"
 
-" Cocoapods
-au BufRead,BufNewFile Podfile set filetype=ruby
+augroup auto_filetypes
+  autocmd!
+  " Latex
+  autocmd BufRead,BufNewFile *.cls set filetype=tex
+  autocmd Filetype tex set conceallevel=1
+  " autocmd Filetype tex setlocal spell
+  " Cocoapods
+  autocmd BufRead,BufNewFile Podfile set filetype=ruby
+  " Singular
+  autocmd BufNewFile,BufRead *.lib silent set filetype=singular | set syntax=singular | set indentexpr=
+  " C
+  autocmd BufNewFile,BufRead * call CheckSetupForC()
+augroup END
 
-" Latex Classes
-au BufRead,BufNewFile *.cls set filetype=tex
-
-" Singular
-au BufNewFile,BufRead *.lib silent set filetype=singular | set syntax=singular | set indentexpr=
-
-" C
-au BufNewFile,BufRead * call CheckSetupForC()
 function! CheckSetupForC() " includes all dirs at the project root
   if (&filetype == 'cpp' || &filetype == 'c')
     let project_root = ale#c#FindProjectRoot(bufnr(''))
@@ -220,7 +226,12 @@ function! CheckSetupForC() " includes all dirs at the project root
     let b:ale_c_gcc_options = compiler_flags
     " call deoplete#custom#var('clangx', 'default_c_options', compiler_flags)
     " call deoplete#custom#var('clangx', 'default_cpp_options', compiler_flags)
-    call writefile(dirs, project_root.'/.ccls')
+    let ccls_options = dirs
+    if has('macunix')
+      " needed for std completion on macOS
+      let ccls_options = ['%clang', '%c -std=gnu11', '%cpp -std=c++17', '-isystem', '/Library/Developer/CommandLineTools/usr/include/c++/v1'] + ccls_options
+    endif
+    call writefile(ccls_options, project_root.'/.ccls')
   endif
 endfunction
 
@@ -262,7 +273,8 @@ let g:fzf_colors =
 
 set clipboard=unnamed
 
-nnoremap <silent> <C-L> :nohlsearch<C-R>=has('diff')?'<Bar>diffupdate':''<CR><CR><C-L>
+" now handled by vim-slash
+" nnoremap <silent> <C-L> :nohlsearch<C-R>=has('diff')?'<Bar>diffupdate':''<CR><CR><C-L>
 
 if !has('nvim')
   if exists('$TMUX')
@@ -309,9 +321,6 @@ nmap <silent> gr <Plug>(coc-references)
 " Use gK for show documentation in preview window (because K is default in vim)
 nnoremap <silent> gK :call CocAction('doHover')<CR>
 
-" Highlight symbol under cursor on CursorHold
-autocmd CursorHold * silent call CocActionAsync('highlight')
-
 " Remap for rename current word
 nmap <leader>rn <Plug>(coc-rename)
 
@@ -333,6 +342,11 @@ augroup autococ
   autocmd!
   " Update signature help on jump placeholder
   autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+  " Highlight symbol under cursor on CursorHold
+  autocmd CursorHold * silent call CocActionAsync('highlight')
+  " Update status line after diagnostics change
+  autocmd User CocDiagnosticChange call lightline#update()
+  autocmd User CocNvimInit call lightline#update()
 augroup end
 
 " Use <C-l> to trigger snippet expand.
@@ -343,3 +357,57 @@ vmap <C-j> <Plug>(coc-snippets-select)
 let g:UltiSnipsExpandTrigger="<C-l>"
 let g:UltiSnipsJumpForwardTrigger="<C-j>"
 let g:UltiSnipsJumpBackwardTrigger="<C-k>"
+
+let g:tex_flavor='latex'
+let g:tex_conceal='abdmg'
+let spelllang='en,de'
+
+" for dracula, display conceal as normal text (dracula sets some weird colors otherwise)
+highlight Conceal guifg=NONE ctermfg=NONE guibg=NONE ctermbg=NONE gui=NONE cterm=NONE guisp=NONE
+
+function! CocWarnings() abort
+  let info = get(b:, 'coc_diagnostic_info', {})
+  if get(info, 'warning', 0) == 0 | return '' | endif
+  return 'W:' . info['warning']
+endfunction
+
+function! CocErrors() abort
+  let info = get(b:, 'coc_diagnostic_info', {})
+  if get(info, 'error', 0) == 0 | return '' | endif
+  return 'E:' . info['error']
+endfunction
+
+function! CocStatus() abort
+  return get(g:, 'coc_status', '')
+endfunction
+
+function! GitBranch() abort
+  let branch = FugitiveHead(9) " if head is detached, return 9 chars of commit hash
+  return empty(branch) ? '' : ('ᚠ ' . branch)
+endfunction
+
+let g:lightline = {
+      \ 'colorscheme': 'dracula',
+      \ 'active': {
+      \     'left': [ [ 'mode', 'paste' ],
+      \             [ 'readonly', 'gitbranch', 'filename', 'modified'] ],
+      \     'right': [ [ 'coc_errors', 'coc_warnings', 'coc_status', 'lineinfo' ],
+      \              [ 'percent' ],
+      \              [ 'fileformat', 'fileencoding', 'filetype' ] ]
+      \ },
+      \ 'component_function': {
+      \     'gitbranch': 'GitBranch',
+      \ },
+      \ 'component_expand': {
+      \     'coc_warnings': 'CocWarnings',
+      \     'coc_errors': 'CocErrors',
+      \     'coc_status': 'CocStatus',
+      \ },
+      \ 'component_type': {
+      \     'coc_warnings': 'warning',
+      \     'coc_errors': 'error',
+      \     'coc_status': 'left',
+      \ }
+      \ }
+
+nnoremap <C-L> :nohlsearch<CR><C-L>

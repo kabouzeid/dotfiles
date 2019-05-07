@@ -5,7 +5,9 @@
             "filetypes": ["c", "cpp", "objc", "objcpp"],
             "rootPatterns": [".ccls", ".ccls-root", "compile_commands.json", ".vim/", ".git/", ".hg/"],
             "initializationOptions": {
-                "cacheDirectory": "/tmp/ccls"
+                "cache": {
+                    "directory": "/tmp/ccls"
+                }
             }
         },
         "bash": {
@@ -18,6 +20,18 @@
             "command": "/Users/karim/Code/sourcekit-lsp/.build/debug/sourcekit-lsp",
             "filetypes": ["swift"],
             "rootPatterns": [".git/", ".hg/", "Podfile"]
+        },
+        "golang": {
+            "command": "bingo",
+            "filetypes": ["go"],
+            "rootPatterns": ["go.mod", ".vim/", ".git/", ".hg/"],
+            "args": ["--diagnostics-style=instant"]
+        },
+        "julia": {
+            "command": "julia",
+            "filetypes": ["julia"],
+            "rootPatterns": [".git/", ".hg/"],
+            "args": ["--startup-file=no", "--history-file=no", "-e","using LanguageServer; using Pkg; import StaticLint; import SymbolServer; env_path = dirname(Pkg.Types.Context().env.project_file); debug = true; server = LanguageServer.LanguageServerInstance(stdin, stdout, debug, env_path, \"\", Dict()); server.runlinter = true; run(server);"]
         }
     },
     "snippets.ultisnips.enable": false,
