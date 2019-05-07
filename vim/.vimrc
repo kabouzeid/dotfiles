@@ -232,6 +232,7 @@ function! CheckSetupForC() " includes all dirs at the project root
       let ccls_options = ['%clang', '%c -std=gnu11', '%cpp -std=c++17', '-isystem', '/Library/Developer/CommandLineTools/usr/include/c++/v1'] + ccls_options
     endif
     call writefile(ccls_options, project_root.'/.ccls')
+    call writefile(ccls_options, project_root.'/compile_flags.txt')
   endif
 endfunction
 
