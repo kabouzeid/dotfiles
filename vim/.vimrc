@@ -7,18 +7,19 @@ Plug 'wincent/terminus'
 Plug 'mileszs/ack.vim'
 
 " Color
-Plug 'dracula/vim'
+Plug 'dracula/vim', { 'as': 'dracula'}
 Plug 'junegunn/rainbow_parentheses.vim'
 
 " Edit
 Plug 'tpope/vim-surround' " vim objects for brackets etc
 Plug 'Raimondi/delimitMate' " auto close brackets
-Plug 'vim-scripts/ReplaceWithRegister'
+" Plug 'vim-scripts/ReplaceWithRegister' " we already use nmap gr for coc
 Plug 'tpope/vim-commentary'
 
 " UI
-Plug 'vim-airline/vim-airline' " bottom bar
-Plug 'vim-airline/vim-airline-themes'
+" Plug 'vim-airline/vim-airline' " bottom bar
+" Plug 'vim-airline/vim-airline-themes'
+Plug 'itchyny/lightline.vim'
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'mbbill/undotree', { 'on': 'UndotreeToggle' }
 Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim' " fuzzy finder
@@ -32,42 +33,34 @@ Plug 'airblade/vim-gitgutter'
 Plug 'justinmk/vim-sneak' " sneak to locations
 Plug 'tpope/vim-sleuth' " auto indentation detection
 
+" Snippets
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
+
 " Completion
-Plug 'Shougo/neosnippet'
-Plug 'Shougo/neosnippet-snippets'
-
-if has('nvim')
-  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-else
-  Plug 'Shougo/deoplete.nvim'
-  Plug 'roxma/nvim-yarp'
-  Plug 'roxma/vim-hug-neovim-rpc'
-endif
-
-" Deoplete completions
-Plug 'Shougo/neco-syntax' " keywords from language syntax file
-Plug 'Shougo/neco-vim' " VimL
-" Plug 'zchee/deoplete-jedi' " Replaced by pyls
-Plug 'wellle/tmux-complete.vim' " words from tmux panes
-Plug 'Shougo/neoinclude.vim' " C/C++ header files
-" Plug 'Shougo/deoplete-clangx' " Replaced by ccls
+Plug 'Shougo/neco-vim' " VimL support (supported by coc.nvim)
+Plug 'Shougo/neoinclude.vim' " C/C++ header files (supported by coc.nvim)
 
 " Lang
-Plug 'lervag/vimtex' " latex completions and more
-Plug 'octol/vim-cpp-enhanced-highlight'
-Plug 'majutsushi/tagbar', { 'on': 'Tagbar' } " ctags
-Plug 'ludovicchabant/vim-gutentags' " ctags
-Plug 'petRUShka/vim-gap' " gap support
-Plug 'bumaociyuan/vim-swift' " clone of official apple swift plugin
+Plug 'lervag/vimtex' " provides omnicompletion, text objects and more for LaTeX
+Plug 'octol/vim-cpp-enhanced-highlight' " better syntax highlighting for cpp
+Plug 'petRUShka/vim-gap' " GAP (computer algebra system) lang support
+Plug 'bumaociyuan/vim-swift' " clone of official apple swift syntax plugin
+Plug 'leafgarland/typescript-vim' " typescript syntax
+Plug 'JuliaEditorSupport/julia-vim'
+
+" Tags
+Plug 'majutsushi/tagbar', { 'on': 'Tagbar' } " displays ctags in sidebar
+Plug 'ludovicchabant/vim-gutentags' " automatically generates ctags
 
 " Lint
-Plug 'w0rp/ale'
+Plug 'w0rp/ale' " linter for many languages
 
 " LSP
-Plug 'autozimu/LanguageClient-neovim', {
-    \ 'branch': 'next',
-    \ 'do': 'bash install.sh',
-    \ }
+Plug 'neoclide/coc.nvim', {'tag': '*', 'do': './install.sh'} " LSP and completion framework
+Plug 'neoclide/coc-neco' " support neco-vim in coc.nvim
+Plug 'jsfaint/coc-neoinclude' " support neoinclude in coc.nvim
+Plug 'wellle/tmux-complete.vim'
 
 call plug#end()
 
@@ -123,7 +116,7 @@ set nostartofline
 " Show the cursor position
 set ruler
 " Don’t show the intro message when starting Vim
-set shortmess=atI
+set shortmess+=atIc
 " Show the (partial) command as it’s being typed
 set showcmd
 " Hide the mode, it's already shown by the airline plugin
@@ -145,29 +138,13 @@ endif
 
 let delimitMate_expand_cr=1
 
-" Deoplete
-let g:deoplete#enable_at_startup = 1
-if !exists('g:deoplete#omni#input_patterns')
-  let g:deoplete#omni#input_patterns = {}
-endif
-let g:deoplete#omni#input_patterns.tex = g:vimtex#re#deoplete
-
 " Ale
 let g:ale_lint_delay = 1000 " Better performance
 " ALL c/cpp ['ccls', 'clang', 'clangcheck', 'clangd', 'clangtidy', 'clazy', 'cppcheck', 'cpplint', 'cquery', 'flawfinder', 'gcc'],
+" do not use ccls, since it's already used in coc
 let g:ale_linters = {
       \   'cpp': ['clang', 'clangcheck', 'clangtidy', 'clazy', 'cppcheck', 'flawfinder'],
       \}
-
-" <TAB>: completion.
-inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
-inoremap <expr><S-TAB>  pumvisible() ? "\<C-p>" : "\<S-TAB>"
-
-" Plugin key-mappings.
-" Note: It must be "imap" and "smap".  It uses <Plug> mappings.
-imap <C-k>     <Plug>(neosnippet_expand_or_jump)
-smap <C-k>     <Plug>(neosnippet_expand_or_jump)
-xmap <C-k>     <Plug>(neosnippet_expand_target)
 
 nnoremap j gj
 nnoremap gj j
@@ -221,17 +198,20 @@ set completeopt-=preview
 
 set updatetime=250 " Can cause glitches"
 
-" Cocoapods
-au BufRead,BufNewFile Podfile set filetype=ruby
+augroup auto_filetypes
+  autocmd!
+  " Latex
+  autocmd BufRead,BufNewFile *.cls set filetype=tex
+  autocmd Filetype tex set conceallevel=1
+  " autocmd Filetype tex setlocal spell
+  " Cocoapods
+  autocmd BufRead,BufNewFile Podfile set filetype=ruby
+  " Singular
+  autocmd BufNewFile,BufRead *.lib silent set filetype=singular | set syntax=singular | set indentexpr=
+  " C
+  autocmd BufNewFile,BufRead * call CheckSetupForC()
+augroup END
 
-" Latex Classes
-au BufRead,BufNewFile *.cls set filetype=tex
-
-" Singular
-au BufNewFile,BufRead *.lib silent set filetype=singular | set syntax=singular | set indentexpr=
-
-" C
-au BufNewFile,BufRead * call CheckSetupForC()
 function! CheckSetupForC() " includes all dirs at the project root
   if (&filetype == 'cpp' || &filetype == 'c')
     let project_root = ale#c#FindProjectRoot(bufnr(''))
@@ -246,18 +226,16 @@ function! CheckSetupForC() " includes all dirs at the project root
     let b:ale_c_gcc_options = compiler_flags
     " call deoplete#custom#var('clangx', 'default_c_options', compiler_flags)
     " call deoplete#custom#var('clangx', 'default_cpp_options', compiler_flags)
-    call writefile(dirs, project_root.'/.ccls')
+    let ccls_options = dirs
+    if has('macunix')
+      " needed for std completion on macOS
+      let ccls_options = ['%clang', '%c -std=gnu11', '%cpp -std=c++17', '-isystem', '/Library/Developer/CommandLineTools/usr/include/c++/v1'] + ccls_options
+    endif
+    call writefile(ccls_options, project_root.'/.ccls')
   endif
 endfunction
 
 " LSP
-let g:LanguageClient_serverCommands = {
-      \ 'c': ['ccls', '--log-file=/tmp/cc.log'],
-      \ 'cpp': ['ccls', '--log-file=/tmp/cc.log'],
-      \ 'sh': ['bash-language-server', 'start'],
-      \ 'python': ['pyls'],
-      \ }
-let g:LanguageClient_hasSnippetSupport = 0
 let g:gutentags_ctags_exclude = ['.ccls-cache']
 
 " vimtex
@@ -295,7 +273,8 @@ let g:fzf_colors =
 
 set clipboard=unnamed
 
-nnoremap <silent> <C-L> :nohlsearch<C-R>=has('diff')?'<Bar>diffupdate':''<CR><CR><C-L>
+" now handled by vim-slash
+" nnoremap <silent> <C-L> :nohlsearch<C-R>=has('diff')?'<Bar>diffupdate':''<CR><CR><C-L>
 
 if !has('nvim')
   if exists('$TMUX')
@@ -312,3 +291,123 @@ if !has('nvim')
 endif
 
 command Cdev NERDTree | Tagbar
+
+let g:airline_section_error = '%{airline#util#wrap(airline#extensions#coc#get_error(),0)}'
+let g:airline_section_warning = '%{airline#util#wrap(airline#extensions#coc#get_warning(),0)}'
+
+" Use tab for trigger completion with characters ahead and navigate.
+" Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+" Use <cr> (enter) for confirm completion, `<C-g>u` means break undo chain at current position.
+" Coc only does snippet and additional edit on confirm.
+inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+
+" Remap keys for gotos
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+
+" Use gK for show documentation in preview window (because K is default in vim)
+nnoremap <silent> gK :call CocAction('doHover')<CR>
+
+" Remap for rename current word
+nmap <leader>rn <Plug>(coc-rename)
+
+" Remap for format selected region
+vmap <leader>f  <Plug>(coc-format-selected)
+nmap <leader>f  <Plug>(coc-format-selected)
+
+" Remap for do codeAction of selected region, ex: `<leader>aap` for current paragraph
+vmap <leader>a  <Plug>(coc-codeaction-selected)
+nmap <leader>a  <Plug>(coc-codeaction-selected)
+
+" Fix autofix problem of current line
+nmap <leader>qf  <Plug>(coc-fix-current)
+
+" Use `:Format` for format current buffer
+command! -nargs=0 Format :call CocAction('format')
+
+augroup autococ
+  autocmd!
+  " Update signature help on jump placeholder
+  autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+  " Highlight symbol under cursor on CursorHold
+  autocmd CursorHold * silent call CocActionAsync('highlight')
+  " Update status line after diagnostics change
+  autocmd User CocDiagnosticChange call lightline#update()
+  autocmd User CocNvimInit call lightline#update()
+augroup end
+
+" Use <C-l> to trigger snippet expand.
+imap <C-l> <Plug>(coc-snippets-expand)
+" " Use <C-j> to select text for visual text of snippet.
+vmap <C-j> <Plug>(coc-snippets-select)
+
+let g:UltiSnipsExpandTrigger="<C-l>"
+let g:UltiSnipsJumpForwardTrigger="<C-j>"
+let g:UltiSnipsJumpBackwardTrigger="<C-k>"
+
+let g:tex_flavor='latex'
+let g:tex_conceal='abdmg'
+let spelllang='en,de'
+
+" for dracula, display conceal as normal text (dracula sets some weird colors otherwise)
+highlight Conceal guifg=NONE ctermfg=NONE guibg=NONE ctermbg=NONE gui=NONE cterm=NONE guisp=NONE
+
+function! CocWarnings() abort
+  let info = get(b:, 'coc_diagnostic_info', {})
+  if get(info, 'warning', 0) == 0 | return '' | endif
+  return 'W:' . info['warning']
+endfunction
+
+function! CocErrors() abort
+  let info = get(b:, 'coc_diagnostic_info', {})
+  if get(info, 'error', 0) == 0 | return '' | endif
+  return 'E:' . info['error']
+endfunction
+
+function! CocStatus() abort
+  return get(g:, 'coc_status', '')
+endfunction
+
+function! GitBranch() abort
+  let branch = FugitiveHead(9) " if head is detached, return 9 chars of commit hash
+  return empty(branch) ? '' : ('ᚠ ' . branch)
+endfunction
+
+let g:lightline = {
+      \ 'colorscheme': 'dracula',
+      \ 'active': {
+      \     'left': [ [ 'mode', 'paste' ],
+      \             [ 'readonly', 'gitbranch', 'filename', 'modified'] ],
+      \     'right': [ [ 'coc_errors', 'coc_warnings', 'coc_status', 'lineinfo' ],
+      \              [ 'percent' ],
+      \              [ 'fileformat', 'fileencoding', 'filetype' ] ]
+      \ },
+      \ 'component_function': {
+      \     'gitbranch': 'GitBranch',
+      \ },
+      \ 'component_expand': {
+      \     'coc_warnings': 'CocWarnings',
+      \     'coc_errors': 'CocErrors',
+      \     'coc_status': 'CocStatus',
+      \ },
+      \ 'component_type': {
+      \     'coc_warnings': 'warning',
+      \     'coc_errors': 'error',
+      \     'coc_status': 'left',
+      \ }
+      \ }
+
+nnoremap <C-L> :nohlsearch<CR><C-L>

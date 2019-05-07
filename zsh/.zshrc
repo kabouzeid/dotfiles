@@ -104,3 +104,14 @@ unalias gap
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
+swift-sh-editor() {
+  if [ $# -ne 1 ] ; then
+    echo "Usage: $0 script" >&2
+    return 1
+  fi
+  if ! [ -e "$1" ] ; then
+    touch "$1"
+  fi
+  swift sh editor "$1"
+}
+alias se=swift-sh-editor
