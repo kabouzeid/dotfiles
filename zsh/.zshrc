@@ -1,6 +1,7 @@
 # My environment variables
 export JAVA_HOME="$(/usr/libexec/java_home)"
 export ANDROID_SDK_ROOT="/usr/local/share/android-sdk"
+export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 export GOPATH="$HOME/Code/go"
 export PATH="$GOPATH/bin:$PATH"
 export PATH="/usr/local/bin:$PATH"
