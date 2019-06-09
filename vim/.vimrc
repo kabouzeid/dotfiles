@@ -412,3 +412,9 @@ let g:lightline = {
       \ }
 
 nnoremap <C-L> :nohlsearch<CR><C-L>
+
+if has('python3')
+  set pyx=3
+elseif has('python')
+  set pyx=2
+endif
