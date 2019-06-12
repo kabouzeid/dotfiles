@@ -350,6 +350,12 @@ augroup autococ
   autocmd User CocNvimInit call lightline#update()
 augroup end
 
+augroup GutentagsStatusLineRefresher
+  autocmd!
+  autocmd User GutentagsUpdating call lightline#update()
+  autocmd User GutentagsUpdated call lightline#update()
+augroup END
+
 " Use <C-l> to trigger snippet expand.
 imap <C-l> <Plug>(coc-snippets-expand)
 " " Use <C-j> to select text for visual text of snippet.
@@ -392,7 +398,7 @@ let g:lightline = {
       \ 'active': {
       \     'left': [ [ 'mode', 'paste' ],
       \             [ 'readonly', 'gitbranch', 'filename', 'modified'] ],
-      \     'right': [ [ 'coc_errors', 'coc_warnings', 'coc_status', 'lineinfo' ],
+      \     'right': [[ 'gutentags_status', 'coc_status', 'coc_errors', 'coc_warnings', 'lineinfo' ],
       \              [ 'percent' ],
       \              [ 'fileformat', 'fileencoding', 'filetype' ] ]
       \ },
@@ -403,11 +409,13 @@ let g:lightline = {
       \     'coc_warnings': 'CocWarnings',
       \     'coc_errors': 'CocErrors',
       \     'coc_status': 'CocStatus',
+      \     'gutentags_status': 'gutentags#statusline',
       \ },
       \ 'component_type': {
       \     'coc_warnings': 'warning',
       \     'coc_errors': 'error',
-      \     'coc_status': 'left',
+      \     'coc_status': 'right',
+      \     'gutentags_status': 'right',
       \ }
       \ }
 
