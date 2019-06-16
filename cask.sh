@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 
-brew tap caskroom/cask
 brew update
 
 echo "Installing Homebrew Casks"
@@ -22,7 +21,6 @@ brew cask install istat-menus
 brew cask install iterm2
 brew cask install java
 brew cask install jdownloader
-brew cask install karabiner-elements
 brew cask install logitech-options
 brew cask install mactex-no-gui
 brew cask install macvim

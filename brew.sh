@@ -5,6 +5,9 @@ if test ! $(which brew); then
     /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 fi
 
+brew tap brewsci/science
+brew tap homebrew/cask-drivers
+brew tap sidaf/pentest
 brew update
 
 echo "Installing Homebrew packages"
@@ -44,7 +47,7 @@ brew install rename
 brew install singular
 brew install speedtest-cli
 brew install sshfs
-brew install swift-sh
+brew install mxcl/made/swift-sh
 brew install the_silver_searcher
 brew install tmux
 brew install unrar
@@ -55,4 +58,3 @@ brew install wget
 brew install yarn
 brew install z
 brew install zsh
-brew install zsh-autosuggestions
