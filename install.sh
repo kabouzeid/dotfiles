@@ -23,6 +23,7 @@ echo "You can ignore this vim error:"
 vim -c "execute \"PlugInstall!\" | qa"
 
 pip3 install neovim
+pip3 install neovim-remote
 
 echo "${GREEN}Installing TPM (for tmux)${WHITE}"
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm

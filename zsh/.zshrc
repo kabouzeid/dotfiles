@@ -1,13 +1,13 @@
 # My environment variables
 export JAVA_HOME="$(/usr/libexec/java_home)"
-export ANDROID_SDK_ROOT="/usr/local/share/android-sdk"
+export ANDROID_SDK_ROOT="/Users/karim/Library/Android/sdk"
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 export GOPATH="$HOME/Code/go"
 export PATH="$GOPATH/bin:$PATH"
 export PATH="/usr/local/bin:$PATH"
 export PATH="/usr/local/sbin:$PATH"
 export PATH="$HOME/bin:$PATH"
-export PATH="$HOME/bin/nvim-osx64/bin:$PATH"
+export PATH="$HOME/bin/nvim-osx64/bin:$PATH" # temporary
 
 # for fastlane set UTF-8
 export LC_ALL=en_US.UTF-8
@@ -16,7 +16,6 @@ export LANG=en_US.UTF-8
 eval "$(rbenv init - zsh)"
 
 . /usr/local/etc/profile.d/z.sh
-. ~/.fastlane/completions/completion.sh
 
 # Path to your oh-my-zsh installation.
 export ZSH=~/.oh-my-zsh
@@ -113,8 +112,6 @@ alias nproc="sysctl -n hw.ncpu"
 export LSCOLORS="Gxfxcxdxbxegedabagacad"
 export LS_COLORS="di=1;36:ln=35:so=32:pi=33:ex=31:bd=34;46:cd=34;43:su=30;41:sg=30;46:tw=30;42:ow=30;43"
 zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
-
-source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 unalias gap
 
