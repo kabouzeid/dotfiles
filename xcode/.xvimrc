@@ -1,0 +1,4 @@
+set smartcase
+set wrapscan
+set laststatus=0
+set clipboard=unnamed
