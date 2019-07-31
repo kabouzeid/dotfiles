@@ -57,7 +57,7 @@ Plug 'ludovicchabant/vim-gutentags' " automatically generates ctags
 Plug 'w0rp/ale' " linter for many languages
 
 " LSP
-Plug 'neoclide/coc.nvim', {'tag': '*', 'do': './install.sh'} " LSP and completion framework
+Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'} " LSP and completion framework, build from source
 Plug 'neoclide/coc-neco' " support neco-vim in coc.nvim
 Plug 'jsfaint/coc-neoinclude' " support neoinclude in coc.nvim
 Plug 'wellle/tmux-complete.vim'
