@@ -20,6 +20,7 @@ brew install cmake
 brew install colordiff
 brew install ctags
 brew install curl
+brew install exiftool
 brew install fd
 brew install ffmpeg
 brew install flint
