@@ -58,3 +58,6 @@ brew install wget
 brew install yarn
 brew install z
 brew install zsh
+
+
+$(brew --prefix)/opt/fzf/install
