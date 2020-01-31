@@ -16,11 +16,6 @@
             "filetypes": ["sh"],
             "ignoredRootPaths": ["~"]
         },
-        "swift": {
-            "command": "/Users/karim/Code/sourcekit-lsp/.build/debug/sourcekit-lsp",
-            "filetypes": ["swift"],
-            "rootPatterns": [".git/", ".hg/", "Podfile"]
-        },
         "golang": {
             "command": "gopls",
             "filetypes": ["go"],
@@ -35,5 +30,7 @@
     },
     "diagnostic.virtualText": true,
     "codeLens.enable": true,
-    "python.jediEnabled": false
+    "python.jediEnabled": false,
+    "sourcekit.enable": true,
+    "sourcekit.commandPath": "/Users/karim/Code/sourcekit-lsp/.build/release/sourcekit-lsp"
 }
