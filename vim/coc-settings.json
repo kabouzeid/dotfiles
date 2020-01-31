@@ -22,10 +22,9 @@
             "rootPatterns": [".git/", ".hg/", "Podfile"]
         },
         "golang": {
-            "command": "bingo",
+            "command": "gopls",
             "filetypes": ["go"],
-            "rootPatterns": ["go.mod", ".vim/", ".git/", ".hg/"],
-            "args": ["--diagnostics-style=instant"]
+            "rootPatterns": ["go.mod", ".git/", ".hg/"]
         },
         "julia": {
             "command": "julia",
@@ -35,5 +34,6 @@
         }
     },
     "diagnostic.virtualText": true,
-    "codeLens.enable": true
+    "codeLens.enable": true,
+    "python.jediEnabled": false
 }

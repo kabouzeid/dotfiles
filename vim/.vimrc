@@ -48,6 +48,8 @@ Plug 'petRUShka/vim-gap' " GAP (computer algebra system) lang support
 Plug 'bumaociyuan/vim-swift' " clone of official apple swift syntax plugin
 Plug 'leafgarland/typescript-vim' " typescript syntax
 Plug 'JuliaEditorSupport/julia-vim'
+Plug 'westeri/asl-vim' " ACPI
+Plug 'tikhomirov/vim-glsl' " GLSL (OpenGL Shader)
 
 " Tags
 Plug 'majutsushi/tagbar', { 'on': 'Tagbar' } " displays ctags in sidebar
