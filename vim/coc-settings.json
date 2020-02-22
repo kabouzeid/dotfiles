@@ -15,5 +15,7 @@
     "codeLens.enable": true,
     "python.jediEnabled": false,
     "sourcekit.enable": true,
-    "sourcekit.commandPath": "/Users/karim/Code/sourcekit-lsp/.build/release/sourcekit-lsp"
+    "sourcekit.commandPath": "/Users/karim/Code/sourcekit-lsp/.build/release/sourcekit-lsp",
+    "vimlsp.suggest.fromRuntimepath": true,
+    "vimlsp.indexes.runtimepath": true
 }

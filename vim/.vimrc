@@ -58,7 +58,7 @@ Plug 'ludovicchabant/vim-gutentags' " automatically generates ctags
 Plug 'w0rp/ale' " linter for many languages
 
 " LSP
-Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'} " LSP and completion framework, build from source
+Plug 'neoclide/coc.nvim', {'branch': 'release'} " LSP and completion framework, build from source
 Plug 'neoclide/coc-neco' " support neco-vim in coc.nvim
 Plug 'jsfaint/coc-neoinclude' " support neoinclude in coc.nvim
 Plug 'wellle/tmux-complete.vim'
@@ -132,6 +132,8 @@ set hidden
 set ttimeoutlen=10
 
 set statusline+=%{gutentags#statusline()}
+
+let g:coc_global_extensions = ['coc-json', 'coc-python', 'coc-texlab', 'coc-yaml', 'coc-vimlsp', 'coc-sourcekit', 'coc-sh', 'coc-go']
 
 if executable('ag')
   let g:ackprg = 'ag --vimgrep'
