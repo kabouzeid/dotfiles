@@ -4,7 +4,6 @@ brew update
 
 echo "Installing Homebrew Casks"
 
-brew cask install 1password
 brew cask install android-sdk
 brew cask install android-studio
 brew cask install betterzip
@@ -29,11 +28,9 @@ brew cask install proxyman
 brew cask install sf-symbols
 brew cask install sketch
 brew cask install skim
-brew cask install telegram
 brew cask install timing
 brew cask install tower
 brew cask install tunnelblick
 brew cask install ukelele
-brew cask install whatsapp
 brew cask install wireshark
 brew cask install xld
