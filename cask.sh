@@ -23,8 +23,10 @@ brew cask install maciasl
 brew cask install mactex-no-gui
 brew cask install macvim
 brew cask install osxfuse
+brew install sshfs
 brew cask install presentation
 brew cask install proxyman
+brew cask install sf-symbols
 brew cask install sketch
 brew cask install skim
 brew cask install telegram

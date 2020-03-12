@@ -2,7 +2,7 @@
 
 if test ! $(which brew); then
     echo "Installing Homebrew"
-    /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
 fi
 
 brew tap brewsci/science
@@ -54,7 +54,6 @@ brew install rename
 brew install ruby
 brew install singular
 brew install speedtest-cli
-brew install sshfs
 brew install mxcl/made/swift-sh
 brew install the_silver_searcher
 brew install tmux
