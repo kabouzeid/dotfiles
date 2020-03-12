@@ -31,7 +31,10 @@ brew install gnu-sed
 brew install gnu-time
 brew install go
 brew install grep
+brew install heroku/brew/heroku
 brew install htop
+brew install imagemagick
+brew install iperf
 brew install make
 brew install mkvtoolnix
 brew install mpfr
@@ -40,11 +43,15 @@ brew install nmap
 brew install node
 brew install ntl
 brew install octave
+brew install openssl
+brew install pdfgrep
 brew install python
 brew install ranger
 brew install rbenv
+brew install readline
 brew install reattach-to-user-namespace
 brew install rename
+brew install ruby
 brew install singular
 brew install speedtest-cli
 brew install sshfs
