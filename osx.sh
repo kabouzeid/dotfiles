@@ -113,17 +113,17 @@ echo "Setting OS X settings"
 # defaults write com.apple.frameworks.diskimages auto-open-rw-root -bool true
 # defaults write com.apple.finder OpenWindowForNewRemovableDisk -bool true
 
-echo "Display full POSIX path as Finder window title"
-defaults write com.apple.finder _FXShowPosixPathInTitle -bool true
+# echo "Display full POSIX path as Finder window title"
+# defaults write com.apple.finder _FXShowPosixPathInTitle -bool true
 
 # Increase window resize speed for Cocoa applications
 # defaults write NSGlobalDomain NSWindowResizeTime -float 0.001
 
-echo "Avoid creating .DS_Store files on network volumes"
-defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
+# echo "Avoid creating .DS_Store files on network volumes"
+# defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
 
-echo "Disable the warning when changing a file extension"
-defaults write com.apple.finder FXEnableExtensionChangeWarning -bool false
+# echo "Disable the warning when changing a file extension"
+# defaults write com.apple.finder FXEnableExtensionChangeWarning -bool false
 
 # echo "Show item info below desktop icons"
 # /usr/libexec/PlistBuddy -c "Set :DesktopViewSettings:IconViewSettings:showItemInfo true" ~/Library/Preferences/com.apple.finder.plist
