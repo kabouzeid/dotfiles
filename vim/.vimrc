@@ -1,4 +1,4 @@
-set nocompatible              " be iMproved
+set nocompatible " be iMproved
 
 call plug#begin('~/.vim/plugged')
 
@@ -34,8 +34,7 @@ Plug 'justinmk/vim-sneak' " sneak to locations
 Plug 'tpope/vim-sleuth' " auto indentation detection
 
 " Snippets
-Plug 'SirVer/ultisnips'
-Plug 'honza/vim-snippets'
+Plug 'honza/vim-snippets' " ultisnips snippets
 
 " Completion
 Plug 'Shougo/neco-vim' " VimL support (supported by coc.nvim)
@@ -44,7 +43,8 @@ Plug 'Shougo/neoinclude.vim' " C/C++ header files (supported by coc.nvim)
 " Lang
 Plug 'lervag/vimtex' " provides omnicompletion, text objects and more for LaTeX
 Plug 'octol/vim-cpp-enhanced-highlight' " better syntax highlighting for cpp
-Plug 'petRUShka/vim-gap' " GAP (computer algebra system) lang support
+Plug 'petRUShka/vim-gap' " GAP lang support
+Plug 'petRUShka/vim-magma' " MAGMA lang support
 Plug 'bumaociyuan/vim-swift' " clone of official apple swift syntax plugin
 Plug 'leafgarland/typescript-vim' " typescript syntax
 Plug 'westeri/asl-vim' " ACPI
@@ -53,9 +53,6 @@ Plug 'tikhomirov/vim-glsl' " GLSL (OpenGL Shader)
 " Tags
 Plug 'majutsushi/tagbar', { 'on': 'Tagbar' } " displays ctags in sidebar
 Plug 'ludovicchabant/vim-gutentags' " automatically generates ctags
-
-" Lint
-Plug 'w0rp/ale' " linter for many languages
 
 " LSP
 Plug 'neoclide/coc.nvim', {'branch': 'release'} " LSP and completion framework, build from source
@@ -131,23 +128,21 @@ set hidden
 
 set ttimeoutlen=10
 
-set statusline+=%{gutentags#statusline()}
+if has("patch-8.1.1564")
+  " Recently vim can merge signcolumn and number column into one
+  set signcolumn=number
+else
+  " Always show the signcolumn
+  set signcolumn=yes
+endif
 
-let g:coc_global_extensions = ['coc-json', 'coc-python', 'coc-texlab', 'coc-yaml', 'coc-vimlsp', 'coc-sourcekit', 'coc-sh', 'coc-go']
+let g:coc_global_extensions = ['coc-json', 'coc-python', 'coc-texlab', 'coc-yaml', 'coc-vimlsp', 'coc-sourcekit', 'coc-sh', 'coc-go', 'coc-snippets']
 
 if executable('ag')
   let g:ackprg = 'ag --vimgrep'
 endif
 
 let delimitMate_expand_cr=1
-
-" Ale
-let g:ale_lint_delay = 1000 " Better performance
-" ALL c/cpp ['ccls', 'clang', 'clangcheck', 'clangd', 'clangtidy', 'clazy', 'cppcheck', 'cpplint', 'cquery', 'flawfinder', 'gcc'],
-" do not use ccls, since it's already used in coc
-let g:ale_linters = {
-      \   'cpp': ['clang', 'clangcheck', 'clangtidy', 'clazy', 'cppcheck', 'flawfinder'],
-      \}
 
 nnoremap j gj
 nnoremap gj j
@@ -199,7 +194,7 @@ vnoremap ¬ >gv
 
 set completeopt-=preview
 
-set updatetime=250 " Can cause glitches"
+set updatetime=300
 
 augroup auto_filetypes
   autocmd!
@@ -210,32 +205,71 @@ augroup auto_filetypes
   " Cocoapods
   autocmd BufRead,BufNewFile Podfile set filetype=ruby
   " Singular
-  autocmd BufNewFile,BufRead *.lib silent set filetype=singular | set syntax=singular | set indentexpr=
+  autocmd BufNewFile,BufRead *.lib,*.tst silent set filetype=singular | set syntax=singular | set indentexpr=
   " C
-  autocmd BufNewFile,BufRead * call CheckSetupForC()
+  autocmd FileType c,cpp call s:AutoGenerateCCLS()
 augroup END
 
-function! CheckSetupForC() " includes all dirs at the project root
-  if (&filetype == 'cpp' || &filetype == 'c')
-    let project_root = ale#c#FindProjectRoot(bufnr(''))
-    " let git_project_root = substitute(system('cd '.expand('%:p:h',1).' && git rev-parse --show-toplevel'), '\n', '', '') " Get the git project dir and remove linebreaks
-    let dirs = split(glob(project_root.'/*'), '\n') + [project_root] " get the dirs in the root dir
-    call filter(dirs, 'isdirectory(v:val)')
-    call map(dirs, '"-I" . v:val') " format them
-    let compiler_flags = join(dirs)
-    let b:ale_cpp_clang_options = compiler_flags
-    let b:ale_cpp_gcc_options = compiler_flags
-    let b:ale_c_clang_options = compiler_flags
-    let b:ale_c_gcc_options = compiler_flags
-    " call deoplete#custom#var('clangx', 'default_c_options', compiler_flags)
-    " call deoplete#custom#var('clangx', 'default_cpp_options', compiler_flags)
-    let ccls_options = dirs
-    if has('macunix')
-      " needed for std completion on macOS
-      let ccls_options = ['%clang', '%c -std=gnu11', '%cpp -std=c++17', '-isystem', '/Library/Developer/CommandLineTools/usr/include/c++/v1'] + ccls_options
+function! s:_GenerateCCLS(project_root)
+  let dirs = split(glob(a:project_root.'/*'), '\n') + [a:project_root] " get the dirs in the root dir
+  call filter(dirs, 'isdirectory(v:val)')
+  call map(dirs, '"-I" . v:val') " format them
+  let ccls_options = dirs
+  if has('macunix')
+    " needed for std completion on macOS
+    let ccls_options = ['%clang', '%c -std=gnu11', '%cpp -std=c++17', '-isystem', '/Library/Developer/CommandLineTools/usr/include/c++/v1'] + ccls_options
+  endif
+  return ccls_options
+  call writefile(ccls_options, a:project_root.'/.ccls') " ccls
+  echo "generated file " . a:project_root . '/.ccls'
+  " call writefile(ccls_options, project_root.'/compile_flags.txt') " clangd
+endfunction
+
+command! -nargs=0 GenerateCCLS :call GenerateCCLS()
+
+function! GenerateCCLS() " includes all dirs at the project root
+  if (get(g:, 'coc_service_initialized', 0) == 0)
+    return
+  endif
+  let project_root = ProjectRoot()
+  if !empty(project_root)
+    let filename = project_root . '/.ccls'
+    let ccls = s:_GenerateCCLS(project_root)
+    call writefile(ccls, filename)
+    echo "generated file " . filename
+  endif
+endfunction
+
+function! s:AutoGenerateCCLS()
+  if (&filetype != 'c' && &filetype != 'cpp')
+    return
+  endif
+  if get(g:, 'coc_service_initialized', 0) == 0
+    return
+  endif
+  let project_root = ProjectRoot()
+  if !empty(project_root)
+    let filename = project_root . '/.ccls'
+    if !file_readable(filename)
+      let ccls = s:_GenerateCCLS(project_root)
+      call writefile(ccls, filename)
+      echo "auto generated file " . filename
     endif
-    call writefile(ccls_options, project_root.'/.ccls')
-    call writefile(ccls_options, project_root.'/compile_flags.txt')
+  endif
+endfunction
+
+function! ProjectRoot()
+  let project_roots = get(g:, 'WorkspaceFolders', []) " set by coc.nvim
+  let count = len(project_roots)
+  if (count == 1)
+    return project_roots[0]
+  elseif (count > 1)
+    let choices = copy(project_roots)
+    call map(choices, 'v:key + 1 . ". " . v:val') " format them
+    let index = inputlist(["Select root directory for .ccls"] + choices) - 1
+    if (index >= 0 && index < count)
+      return project_roots[index]
+    endif
   endif
 endfunction
 
@@ -277,9 +311,6 @@ let g:fzf_colors =
 
 set clipboard=unnamed
 
-" now handled by vim-slash
-" nnoremap <silent> <C-L> :nohlsearch<C-R>=has('diff')?'<Bar>diffupdate':''<CR><CR><C-L>
-
 if !has('nvim')
   if exists('$TMUX')
     " tmux cursor
@@ -312,9 +343,22 @@ function! s:check_back_space() abort
   return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
 
-" Use <cr> (enter) for confirm completion, `<C-g>u` means break undo chain at current position.
-" Coc only does snippet and additional edit on confirm.
-inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+" Use <c-space> to trigger completion.
+inoremap <silent><expr> <c-space> coc#refresh()
+
+" Use <cr> to confirm completion, `<C-g>u` means break undo chain at current
+" position. Coc only does snippet and additional edit on confirm.
+" <cr> could be remapped by other vim plugin, try `:verbose imap <CR>`.
+if exists('*complete_info')
+  inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
+else
+  inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+endif
+
+" Use `[g` and `]g` to navigate diagnostics
+" Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
+nmap <silent> [g <Plug>(coc-diagnostic-prev)
+nmap <silent> ]g <Plug>(coc-diagnostic-next)
 
 " Remap keys for gotos
 nmap <silent> gd <Plug>(coc-definition)
@@ -322,8 +366,16 @@ nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 
-" Use gK for show documentation in preview window (because K is default in vim)
-nnoremap <silent> gK :call CocAction('doHover')<CR>
+" Use gK to show documentation in preview window (because K is default in vim).
+nnoremap <silent> gK :call <SID>show_documentation()<CR>
+
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
+endfunction
 
 " Remap for rename current word
 nmap <leader>rn <Plug>(coc-rename)
@@ -349,8 +401,11 @@ augroup autococ
   " Highlight symbol under cursor on CursorHold
   autocmd CursorHold * silent call CocActionAsync('highlight')
   " Update status line after diagnostics change
-  autocmd User CocDiagnosticChange call lightline#update()
+  autocmd User CocStatusChange,CocDiagnosticChange call lightline#update()
   autocmd User CocNvimInit call lightline#update()
+
+  autocmd User CocNvimInit call s:AutoGenerateCCLS()
+
 augroup end
 
 augroup GutentagsStatusLineRefresher
@@ -358,15 +413,6 @@ augroup GutentagsStatusLineRefresher
   autocmd User GutentagsUpdating call lightline#update()
   autocmd User GutentagsUpdated call lightline#update()
 augroup END
-
-" Use <C-l> to trigger snippet expand.
-imap <C-l> <Plug>(coc-snippets-expand)
-" " Use <C-j> to select text for visual text of snippet.
-vmap <C-j> <Plug>(coc-snippets-select)
-
-let g:UltiSnipsExpandTrigger="<C-l>"
-let g:UltiSnipsJumpForwardTrigger="<C-j>"
-let g:UltiSnipsJumpBackwardTrigger="<C-k>"
 
 let g:tex_flavor='latex'
 let g:tex_conceal='abdmg'
@@ -399,11 +445,15 @@ endfunction
 let g:lightline = {
       \ 'colorscheme': 'dracula',
       \ 'active': {
-      \     'left': [ [ 'mode', 'paste' ],
-      \             [ 'readonly', 'gitbranch', 'filename', 'modified'] ],
-      \     'right': [[ 'gutentags_status', 'coc_status', 'coc_errors', 'coc_warnings', 'lineinfo' ],
-      \              [ 'percent' ],
-      \              [ 'fileformat', 'fileencoding', 'filetype' ] ]
+      \     'left': [
+      \         [ 'mode', 'paste' ],
+      \         [ 'gitbranch', 'readonly', 'filename', 'modified']
+      \     ],
+      \     'right': [
+      \         [ 'gutentags_status', 'coc_status', 'coc_errors', 'coc_warnings', 'lineinfo' ],
+      \         [ 'percent' ],
+      \         [ 'fileformat', 'fileencoding', 'filetype' ]
+      \     ]
       \ },
       \ 'component_function': {
       \     'gitbranch': 'GitBranch',
