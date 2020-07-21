@@ -136,7 +136,7 @@ else
   set signcolumn=yes
 endif
 
-let g:coc_global_extensions = ['coc-json', 'coc-python', 'coc-texlab', 'coc-yaml', 'coc-vimlsp', 'coc-sourcekit', 'coc-sh', 'coc-go', 'coc-snippets']
+let g:coc_global_extensions = ['coc-json', 'coc-clangd', 'coc-python', 'coc-texlab', 'coc-yaml', 'coc-vimlsp', 'coc-sourcekit', 'coc-sh', 'coc-go', 'coc-snippets']
 
 if executable('ag')
   let g:ackprg = 'ag --vimgrep'
@@ -207,40 +207,38 @@ augroup auto_filetypes
   " Singular
   autocmd BufNewFile,BufRead *.lib,*.tst silent set filetype=singular | set syntax=singular | set indentexpr=
   " C
-  autocmd FileType c,cpp call s:AutoGenerateCCLS()
+  autocmd FileType c,cpp call AutoGenerateClangCompileFlags()
 augroup END
 
-function! s:_GenerateCCLS(project_root)
+function! _GenerateClangCompileFlags(project_root)
   let dirs = split(glob(a:project_root.'/*'), '\n') + [a:project_root] " get the dirs in the root dir
   call filter(dirs, 'isdirectory(v:val)')
   call map(dirs, '"-I" . v:val') " format them
-  let ccls_options = dirs
+  let compile_flags = dirs
   if has('macunix')
-    " needed for std completion on macOS
-    let ccls_options = ['%clang', '%c -std=gnu11', '%cpp -std=c++17', '-isystem', '/Library/Developer/CommandLineTools/usr/include/c++/v1'] + ccls_options
+    " eg for gmp and so on installed via Homebrew
+    let compile_flags = ['-I/usr/local/include'] + compile_flags
   endif
-  return ccls_options
-  call writefile(ccls_options, a:project_root.'/.ccls') " ccls
-  echo "generated file " . a:project_root . '/.ccls'
-  " call writefile(ccls_options, project_root.'/compile_flags.txt') " clangd
+  return compile_flags
 endfunction
 
-command! -nargs=0 GenerateCCLS :call GenerateCCLS()
+command! -nargs=0 GenerateClangCompileFlags :call GenerateClangCompileFlags()
 
-function! GenerateCCLS() " includes all dirs at the project root
+function! GenerateClangCompileFlags() " includes all dirs at the project root
   if (get(g:, 'coc_service_initialized', 0) == 0)
     return
   endif
   let project_root = ProjectRoot()
   if !empty(project_root)
-    let filename = project_root . '/.ccls'
-    let ccls = s:_GenerateCCLS(project_root)
-    call writefile(ccls, filename)
-    echo "generated file " . filename
+    let compile_flags = _GenerateClangCompileFlags(project_root)
+
+    let compile_flags_filename = project_root . '/compile_flags.txt'
+    call writefile(compile_flags, compile_flags_filename)
+    echo "generated file " . compile_flags_filename
   endif
 endfunction
 
-function! s:AutoGenerateCCLS()
+function! AutoGenerateClangCompileFlags()
   if (&filetype != 'c' && &filetype != 'cpp')
     return
   endif
@@ -249,11 +247,11 @@ function! s:AutoGenerateCCLS()
   endif
   let project_root = ProjectRoot()
   if !empty(project_root)
-    let filename = project_root . '/.ccls'
-    if !file_readable(filename)
-      let ccls = s:_GenerateCCLS(project_root)
-      call writefile(ccls, filename)
-      echo "auto generated file " . filename
+    let compile_flags_filename = project_root . '/compile_flags.txt'
+    if !file_readable(compile_flags_filename)
+      let compile_flags = _GenerateClangCompileFlags(project_root)
+      call writefile(compile_flags, compile_flags_filename)
+      echo "auto generated file " . compile_flags_filename
     endif
   endif
 endfunction
@@ -266,7 +264,7 @@ function! ProjectRoot()
   elseif (count > 1)
     let choices = copy(project_roots)
     call map(choices, 'v:key + 1 . ". " . v:val') " format them
-    let index = inputlist(["Select root directory for .ccls"] + choices) - 1
+    let index = inputlist(["Specify project root directory"] + choices) - 1
     if (index >= 0 && index < count)
       return project_roots[index]
     endif
@@ -404,7 +402,7 @@ augroup autococ
   autocmd User CocStatusChange,CocDiagnosticChange call lightline#update()
   autocmd User CocNvimInit call lightline#update()
 
-  autocmd User CocNvimInit call s:AutoGenerateCCLS()
+  autocmd User CocNvimInit call AutoGenerateClangCompileFlags()
 
 augroup end
 
