@@ -2,6 +2,7 @@
     "diagnostic.virtualText": true,
     "codeLens.enable": true,
     "python.jediEnabled": false,
+    "python.pythonPath": "python3",
     "sourcekit.enable": true,
     "vimlsp.suggest.fromRuntimepath": true,
     "vimlsp.indexes.runtimepath": true

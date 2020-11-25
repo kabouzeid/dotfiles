@@ -20,7 +20,7 @@ Plug 'tpope/vim-commentary'
 " Plug 'vim-airline/vim-airline' " bottom bar
 " Plug 'vim-airline/vim-airline-themes'
 Plug 'itchyny/lightline.vim'
-Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
+Plug 'tpope/vim-vinegar'
 Plug 'mbbill/undotree', { 'on': 'UndotreeToggle' }
 Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim' " fuzzy finder
 Plug 'majutsushi/tagbar' " ctags bar
@@ -208,6 +208,8 @@ augroup auto_filetypes
   autocmd BufNewFile,BufRead *.lib,*.tst silent set filetype=singular | set syntax=singular | set indentexpr=
   " C
   autocmd FileType c,cpp call AutoGenerateClangCompileFlags()
+  " Vapor Leaf
+  autocmd BufRead,BufNewFile *.leaf set filetype=html
 augroup END
 
 function! _GenerateClangCompileFlags(project_root)

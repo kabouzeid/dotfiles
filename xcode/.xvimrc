@@ -2,3 +2,9 @@ set smartcase
 set wrapscan
 set laststatus=0
 set clipboard=unnamed
+
+" mappings don't work in Xcode 12.1
+" nmap [g :pissue
+" nmap ]g :nissue
+" nmap gd -> go to definition is supported natively
+" nmap gh :xhelp
