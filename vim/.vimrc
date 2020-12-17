@@ -416,7 +416,7 @@ augroup END
 
 let g:tex_flavor='latex'
 let g:tex_conceal='abdmg'
-let spelllang='en,de'
+set spelllang=en_us,de_de
 
 " for dracula, display conceal as normal text (dracula sets some weird colors otherwise)
 highlight Conceal guifg=NONE ctermfg=NONE guibg=NONE ctermbg=NONE gui=NONE cterm=NONE guisp=NONE
@@ -479,3 +479,13 @@ if has('python3')
 elseif has('python')
   set pyx=2
 endif
+
+" let g:netrw_banner = 0
+" let g:netrw_liststyle = 3
+" let g:netrw_browse_split = 4
+" let g:netrw_altv = 1
+" let g:netrw_winsize = 25
+" augroup ProjectDrawer
+"   autocmd!
+"   autocmd VimEnter * :Vexplore
+" augroup END
