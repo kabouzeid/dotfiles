@@ -24,6 +24,7 @@ Plug 'tpope/vim-vinegar'
 Plug 'mbbill/undotree', { 'on': 'UndotreeToggle' }
 Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim' " fuzzy finder
 Plug 'majutsushi/tagbar' " ctags bar
+Plug 'junegunn/goyo.vim' " distraction free writing
 
 " Git
 Plug 'tpope/vim-fugitive'
@@ -144,17 +145,17 @@ endif
 
 let delimitMate_expand_cr=1
 
-nnoremap j gj
-nnoremap gj j
+" nnoremap j gj
+" nnoremap gj j
 
-nnoremap k gk
-nnoremap gk k
+" nnoremap k gk
+" nnoremap gk k
 
-nnoremap $ g$
-nnoremap g$ $
+" nnoremap $ g$
+" nnoremap g$ $
 
-nnoremap 0 g0
-nnoremap g0 0
+" nnoremap 0 g0
+" nnoremap g0 0
 
 " Make Y behave like other capitals
 nnoremap Y y$
@@ -275,6 +276,26 @@ endfunction
 
 " LSP
 let g:gutentags_ctags_exclude = ['.ccls-cache']
+
+" Goyo
+nnoremap <C-w>z :Goyo<CR>
+
+function! s:goyo_enter()
+  if executable('tmux') && strlen($TMUX)
+    silent !tmux set status off
+    silent !tmux list-panes -F '\#F' | grep -q Z || tmux resize-pane -Z
+  endif
+endfunction
+
+function! s:goyo_leave()
+  if executable('tmux') && strlen($TMUX)
+    silent !tmux set status on
+    silent !tmux list-panes -F '\#F' | grep -q Z && tmux resize-pane -Z
+  endif
+endfunction
+
+autocmd! User GoyoEnter nested call <SID>goyo_enter()
+autocmd! User GoyoLeave nested call <SID>goyo_leave()
 
 " vimtex
 if !has('clientserver') && !has('nvim')
