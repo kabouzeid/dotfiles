@@ -4,11 +4,20 @@ call plug#begin('~/.vim/plugged')
 
 " General
 Plug 'wincent/terminus'
-Plug 'mileszs/ack.vim'
+" Plug 'mileszs/ack.vim'
 
 " Color
-Plug 'dracula/vim', { 'as': 'dracula'}
-Plug 'junegunn/rainbow_parentheses.vim'
+Plug 'sainnhe/sonokai'
+Plug 'vimpostor/vim-prism'
+" Plug 'dracula/vim', { 'as': 'dracula'}
+" Plug 'whatyouhide/vim-gotham'
+" Plug 'joshdick/onedark.vim'
+" Plug 'sonph/onehalf'
+" Plug 'rakr/vim-one'
+" Plug 'kaicataldo/material.vim', { 'branch': 'main' }
+" Plug 'tomasr/molokai'
+" Plug 'phanviet/vim-monokai-pro'
+" Plug 'patstockwell/vim-monokai-tasty'
 
 " Edit
 Plug 'tpope/vim-surround' " vim objects for brackets etc
@@ -20,15 +29,14 @@ Plug 'tpope/vim-commentary'
 " Plug 'vim-airline/vim-airline' " bottom bar
 " Plug 'vim-airline/vim-airline-themes'
 Plug 'itchyny/lightline.vim'
-Plug 'tpope/vim-vinegar'
-Plug 'mbbill/undotree', { 'on': 'UndotreeToggle' }
+" Plug 'tpope/vim-vinegar'
+" Plug 'mbbill/undotree', { 'on': 'UndotreeToggle' }
 Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim' " fuzzy finder
-Plug 'majutsushi/tagbar' " ctags bar
 Plug 'junegunn/goyo.vim' " distraction free writing
 
 " Git
-Plug 'tpope/vim-fugitive'
-Plug 'airblade/vim-gitgutter'
+" Plug 'tpope/vim-fugitive'
+" Plug 'airblade/vim-gitgutter'
 
 " Movement
 Plug 'justinmk/vim-sneak' " sneak to locations
@@ -38,11 +46,11 @@ Plug 'tpope/vim-sleuth' " auto indentation detection
 Plug 'honza/vim-snippets' " ultisnips snippets
 
 " Completion
-Plug 'Shougo/neco-vim' " VimL support (supported by coc.nvim)
-Plug 'Shougo/neoinclude.vim' " C/C++ header files (supported by coc.nvim)
+" Plug 'Shougo/neco-vim' " VimL support (supported by coc.nvim)
+" Plug 'Shougo/neoinclude.vim' " C/C++ header files (supported by coc.nvim)
 
 " Lang
-Plug 'lervag/vimtex' " provides omnicompletion, text objects and more for LaTeX
+Plug 'lervag/vimtex' " text objects and more for LaTeX
 Plug 'octol/vim-cpp-enhanced-highlight' " better syntax highlighting for cpp
 Plug 'petRUShka/vim-gap' " GAP lang support
 Plug 'petRUShka/vim-magma' " MAGMA lang support
@@ -50,23 +58,66 @@ Plug 'bumaociyuan/vim-swift' " clone of official apple swift syntax plugin
 Plug 'leafgarland/typescript-vim' " typescript syntax
 Plug 'westeri/asl-vim' " ACPI
 Plug 'tikhomirov/vim-glsl' " GLSL (OpenGL Shader)
+Plug 'posva/vim-vue' " vue syntax
+Plug 'othree/html5.vim'
+Plug 'hail2u/vim-css3-syntax'
+Plug 'mattn/emmet-vim'
+Plug 'pangloss/vim-javascript' " better JS syntax
 
 " Tags
-Plug 'majutsushi/tagbar', { 'on': 'Tagbar' } " displays ctags in sidebar
-Plug 'ludovicchabant/vim-gutentags' " automatically generates ctags
+" Plug 'majutsushi/tagbar', { 'on': 'Tagbar' } " displays ctags in sidebar
+" Plug 'ludovicchabant/vim-gutentags' " automatically generates ctags
 
 " LSP
 Plug 'neoclide/coc.nvim', {'branch': 'release'} " LSP and completion framework, build from source
-Plug 'neoclide/coc-neco' " support neco-vim in coc.nvim
-Plug 'jsfaint/coc-neoinclude' " support neoinclude in coc.nvim
+" Plug 'neoclide/coc-neco' " support neco-vim in coc.nvim
+" Plug 'jsfaint/coc-neoinclude' " support neoinclude in coc.nvim
 Plug 'wellle/tmux-complete.vim'
+
+Plug 'junegunn/vader.vim'
 
 call plug#end()
 
+let g:coc_global_extensions = [
+      \'coc-clangd',
+      \'coc-css',
+      \'coc-emmet',
+      \'coc-eslint',
+      \'coc-explorer',
+      \'coc-git',
+      \'coc-go',
+      \'coc-highlight',
+      \'coc-html',
+      \'coc-java',
+      \'coc-json',
+      \'coc-julia',
+      \'coc-lua',
+      \'coc-markdownlint',
+      \'coc-marketplace',
+      \'coc-phpls',
+      \'coc-prettier',
+      \'coc-pyright',
+      \'coc-rome',
+      \'coc-sh',
+      \'coc-snippets',
+      \'coc-sourcekit',
+      \'coc-sql',
+      \'coc-texlab',
+      \'coc-terminal',
+      \'coc-tsserver',
+      \'coc-vetur',
+      \'coc-vimlsp',
+      \'coc-xml',
+      \'coc-yaml',
+      \]
+
 " Set theme
 set background=dark
-" colorscheme gruvbox
-colorscheme dracula
+" let g:sonokai_style = 'maia'
+let g:sonokai_diagnostic_line_highlight = 1
+let g:sonokai_sign_column_background = 'none'
+let g:sonokai_enable_italic = 1
+colorscheme sonokai
 " Enhance command-line completion
 set wildmenu
 " Allow cursor keys in insert mode
@@ -102,7 +153,7 @@ filetype plugin indent on
 
 set fileformat=unix
 " Show “invisible” characters
-set listchars=tab:▸\ ,trail:·,eol:¬,nbsp:_
+set listchars=trail:·,nbsp:_
 set list
 " Highlight searches
 set hlsearch
@@ -129,15 +180,9 @@ set hidden
 
 set ttimeoutlen=10
 
-if has("patch-8.1.1564")
-  " Recently vim can merge signcolumn and number column into one
-  set signcolumn=number
-else
-  " Always show the signcolumn
-  set signcolumn=yes
-endif
+" Always show the signcolumn
+set signcolumn=yes
 
-let g:coc_global_extensions = ['coc-json', 'coc-clangd', 'coc-python', 'coc-texlab', 'coc-yaml', 'coc-vimlsp', 'coc-sourcekit', 'coc-sh', 'coc-go', 'coc-snippets']
 
 if executable('ag')
   let g:ackprg = 'ag --vimgrep'
@@ -201,8 +246,9 @@ augroup auto_filetypes
   autocmd!
   " Latex
   autocmd BufRead,BufNewFile *.cls set filetype=tex
-  autocmd Filetype tex set conceallevel=1
-  " autocmd Filetype tex setlocal spell
+  " autocmd Filetype tex set conceallevel=1
+  " Tex
+  autocmd Filetype tex setlocal spell
   " Cocoapods
   autocmd BufRead,BufNewFile Podfile set filetype=ruby
   " Singular
@@ -278,13 +324,14 @@ endfunction
 let g:gutentags_ctags_exclude = ['.ccls-cache']
 
 " Goyo
-nnoremap <C-w>z :Goyo<CR>
+nnoremap <C-w>G :Goyo<CR>
 
 function! s:goyo_enter()
   if executable('tmux') && strlen($TMUX)
     silent !tmux set status off
     silent !tmux list-panes -F '\#F' | grep -q Z || tmux resize-pane -Z
   endif
+  set signcolumn=no
 endfunction
 
 function! s:goyo_leave()
@@ -292,6 +339,7 @@ function! s:goyo_leave()
     silent !tmux set status on
     silent !tmux list-panes -F '\#F' | grep -q Z && tmux resize-pane -Z
   endif
+  set signcolumn=yes
 endfunction
 
 autocmd! User GoyoEnter nested call <SID>goyo_enter()
@@ -442,54 +490,47 @@ set spelllang=en_us,de_de
 " for dracula, display conceal as normal text (dracula sets some weird colors otherwise)
 highlight Conceal guifg=NONE ctermfg=NONE guibg=NONE ctermbg=NONE gui=NONE cterm=NONE guisp=NONE
 
-function! CocWarnings() abort
+function! LightlineCocWarnings() abort
   let info = get(b:, 'coc_diagnostic_info', {})
   if get(info, 'warning', 0) == 0 | return '' | endif
   return 'W:' . info['warning']
 endfunction
 
-function! CocErrors() abort
+function! LightlineCocErrors() abort
   let info = get(b:, 'coc_diagnostic_info', {})
   if get(info, 'error', 0) == 0 | return '' | endif
   return 'E:' . info['error']
 endfunction
 
-function! CocStatus() abort
-  return get(g:, 'coc_status', '')
-endfunction
-
-function! GitBranch() abort
-  let branch = FugitiveHead(9) " if head is detached, return 9 chars of commit hash
-  return empty(branch) ? '' : ('ᚠ ' . branch)
+function! LightlineGitBranch() abort
+  return get(g:, 'coc_git_status', '')
 endfunction
 
 let g:lightline = {
-      \ 'colorscheme': 'dracula',
+      \ 'colorscheme': 'sonokai',
       \ 'active': {
       \     'left': [
       \         [ 'mode', 'paste' ],
-      \         [ 'gitbranch', 'readonly', 'filename', 'modified']
+      \         [ 'gitbranch', 'readonly', 'filename', 'modified'],
       \     ],
       \     'right': [
       \         [ 'gutentags_status', 'coc_status', 'coc_errors', 'coc_warnings', 'lineinfo' ],
       \         [ 'percent' ],
-      \         [ 'fileformat', 'fileencoding', 'filetype' ]
+      \         [ 'fileformat', 'fileencoding', 'filetype' ],
       \     ]
       \ },
       \ 'component_function': {
-      \     'gitbranch': 'GitBranch',
+      \     'gitbranch': 'LightlineGitBranch',
       \ },
       \ 'component_expand': {
-      \     'coc_warnings': 'CocWarnings',
-      \     'coc_errors': 'CocErrors',
-      \     'coc_status': 'CocStatus',
-      \     'gutentags_status': 'gutentags#statusline',
+      \     'coc_warnings': 'LightlineCocWarnings',
+      \     'coc_errors': 'LightlineCocErrors',
+      \     'coc_status': 'coc#status',
       \ },
       \ 'component_type': {
       \     'coc_warnings': 'warning',
       \     'coc_errors': 'error',
       \     'coc_status': 'right',
-      \     'gutentags_status': 'right',
       \ }
       \ }
 
@@ -510,3 +551,48 @@ endif
 "   autocmd!
 "   autocmd VimEnter * :Vexplore
 " augroup END
+
+nmap <silent> <leader>e :CocCommand explorer<CR>
+
+
+" The default doesn't work properly: https://github.com/posva/vim-vue/issues/135
+" let html_no_rendering=1
+
+command! -nargs=0 Prettier :CocCommand prettier.formatFile
+command! -nargs=0 Headwind :CocCommand headwind.sortTailwindClasses
+
+" augroup autoheadwind
+"   autocmd!
+"   " Note: use :call CocAction('runCommand', ...) instead of :CocCommand ..., because we need to run synchronous
+"   autocmd BufWritePre * :call CocAction('runCommand', 'headwind.sortTailwindClasses')
+" augroup end
+
+set runtimepath^=/Users/karim/Code/coc-headwind
+set runtimepath^=/Users/karim/Code/coc-tailwind-intellisense
+
+" navigate chunks of current buffer
+nmap [c <Plug>(coc-git-prevchunk)
+nmap ]c <Plug>(coc-git-nextchunk)
+" show chunk diff at current position
+nmap gs <Plug>(coc-git-chunkinfo)
+" show commit contains current position
+nmap <leader>gc <Plug>(coc-git-commit)
+" show commit contains current position
+nmap <leader>hu :CocCommand git.chunkUndo<CR>
+nmap <leader>hs :CocCommand git.chunkStage<CR>
+" create text object for git chunks
+omap ig <Plug>(coc-git-chunk-inner)
+xmap ig <Plug>(coc-git-chunk-inner)
+omap ag <Plug>(coc-git-chunk-outer)
+xmap ag <Plug>(coc-git-chunk-outer)
+
+function! s:tabterm(...) abort
+  if a:0 == 0
+    tabedit term://$SHELL
+  else
+    execute "tabedit term://" . a:1
+  endif
+endfunction
+command! -nargs=? -complete=shellcmd Tabterm call <SID>tabterm(<f-args>) " eg `:tabterm yarn dev` will open a new tab and run `yarn dev`
+
+nmap <Leader>t <Plug>(coc-terminal-toggle)

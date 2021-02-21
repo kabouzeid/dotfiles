@@ -1,6 +1,5 @@
 # My environment variables
 # export JAVA_HOME="$(/usr/libexec/java_home)"
-export JAVA_HOME="/Applications/Android Studio.app/Contents/jre/jdk/Contents/Home"
 export ANDROID_SDK_ROOT="/Users/karim/Library/Android/sdk"
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 export GOPATH="$HOME/Code/go"
@@ -8,7 +7,7 @@ export PATH="$GOPATH/bin:$PATH"
 export PATH="/usr/local/bin:$PATH"
 export PATH="/usr/local/sbin:$PATH"
 export PATH="$HOME/bin:$PATH"
-export PATH="$HOME/bin/nvim-osx64/bin:$PATH" # temporary
+export PATH="$PATH:$HOME/.composer/vendor/bin"
 
 # for fastlane set UTF-8
 export LC_ALL=en_US.UTF-8
@@ -81,11 +80,12 @@ source $ZSH/oh-my-zsh.sh
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
 
-# Preferred editor for local and remote sessions
-if [[ -n $SSH_CONNECTION ]]; then
+if hash nvim 2>/dev/null; then
+  export EDITOR='nvim'
+elif hash vim 2>/dev/nul; then
   export EDITOR='vim'
 else
-  export EDITOR='nvim'
+  export EDITOR='vi'
 fi
 
 # Compilation flags
@@ -103,7 +103,7 @@ fi
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias e=$EDITOR
-alias vim=nvim
+alias ide="$EDITOR '+CocCommand explorer'"
 alias sudoedit="sudo -e"
 # alias htop="sudo htop"
 alias diff="colordiff"

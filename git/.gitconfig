@@ -18,3 +18,5 @@
 	email = karim23697@gmail.com
 [pull]
 	ff = only
+[init]
+	defaultBranch = main
