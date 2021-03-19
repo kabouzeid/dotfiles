@@ -8,7 +8,7 @@ Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 " -- LSP
 " Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'neovim/nvim-lspconfig'
-Plug '~/Code/nvim-lspinstall'
+Plug 'kabouzeid/nvim-lspinstall'
 Plug 'onsails/lspkind-nvim'
 
 " -- Completion

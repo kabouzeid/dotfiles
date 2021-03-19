@@ -82,7 +82,7 @@ local function make_config()
 end
 
 local function setup_servers()
-  lspinstall.set_configs() -- sets lspconfig[server_name] for installed servers
+  lspinstall.setup() -- sets lspconfig[server_name] for installed servers
 
   local servers = lspinstall.installed_servers()
   table.insert(servers, "clangd")
@@ -106,7 +106,7 @@ local function setup_servers()
   end
 end
 
-setup_servers()
+setup_servers() -- call once when we start nvim
 
 local function post_install()
   -- register the config and setup the server
