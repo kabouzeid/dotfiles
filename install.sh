@@ -19,6 +19,7 @@ source link.sh "$@"
 
 # Install vim plugins
 echo "${GREEN}Installing vim plugins${WHITE}"
+sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
 echo "You can ignore this vim error:"
 vim -c "execute \"PlugInstall!\" | qa"
 
