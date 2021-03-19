@@ -1,2 +1,5 @@
-vim/.vim/spell/**
-vim/.vim/sessions/**
+nvim/backup/**
+nvim/swap/**
+nvim/undo/**
+nvim/plugged/**
+nvim/spell/**

@@ -103,7 +103,7 @@ fi
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias e=$EDITOR
-alias ide="$EDITOR '+CocCommand explorer'"
+alias ide="$EDITOR '+CHADopen'"
 alias sudoedit="sudo -e"
 # alias htop="sudo htop"
 alias diff="colordiff"

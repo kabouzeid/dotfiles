@@ -1,1 +1,0 @@
-:CocInstall coc-vimtex coc-ultisnips coc-pyls coc-json coc-highlight coc-java coc-tsserver coc-yaml
