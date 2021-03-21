@@ -232,9 +232,9 @@ function! s:lsp_config_file() abort
 endfunction
 command! -nargs=0 LspConfig execute "edit " . <SID>lsp_config_file()
 
-if executable("rustywind")
-  command! -nargs=0 Headwind :!rustywind --write %
-endif
+" if executable("rustywind")
+"   command! -nargs=0 Headwind :!rustywind --write %
+" endif
 
 call Source('plugin-settings')
 :lua require'init'

@@ -1,11 +1,9 @@
-local prettier = { formatCommand = "prettier" }
-
-local eslint = {
-  lintCommand = "eslint -f unix --stdin",
-  lintIgnoreExitCode = true,
-  lintStdin = true
-}
-
+-- local prettier = { formatCommand = "prettier" }
+-- local eslint = {
+--   lintCommand = "eslint -f unix --stdin",
+--   lintIgnoreExitCode = true,
+--   lintStdin = true
+-- }
 local shellcheck = {
   lintCommand = "shellcheck -f gcc -x -",
   lintStdin = true,
@@ -53,10 +51,16 @@ local bladeFormatter = {
   formatStdin = true
 }
 
+local rustywind = {
+  -- yarn global add rustywind
+  formatCommand = "rustywind --stdin",
+  formatStdin = true
+}
+
 local languages = {
   lua = { luaformat },
   sh = { shellcheck, shfmt },
-  javascript = { eslint, prettier },
+  -- javascript = { eslint, prettier },
   vim = { vint },
   php = { phpstan },
   python = { flake8 },
@@ -64,6 +68,15 @@ local languages = {
   yaml = { yamllint },
   make = { checkmake }
 }
+
+local tailwind_fts = require"lspinstall/servers".tailwindcss.default_config.filetypes
+for _, filetype in ipairs(tailwind_fts) do
+  if languages[filetype] then
+    table.insert(languages[filetype], rustywind)
+  else
+    languages[filetype] = { rustywind }
+  end
+end
 
 return {
   filetypes = vim.tbl_keys(languages),
