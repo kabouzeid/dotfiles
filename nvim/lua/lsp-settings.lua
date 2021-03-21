@@ -1,4 +1,4 @@
--- vim.lsp.set_log_level("debug")
+vim.lsp.set_log_level("debug")
 
 -- keymaps
 local on_attach = function(client, bufnr)
@@ -100,6 +100,12 @@ local function setup_servers()
     end
     if server == "clangd" then
       config.filetypes = {"c", "cpp"}; -- we don't want objective-c and objective-cpp!
+    end
+    if server == "efm" then
+      config = vim.tbl_extend("force", config, require'efm')
+    end
+    if server == "diagnosticls" then
+      config = vim.tbl_extend("force", config, require'diagnosticls')
     end
 
     require'lspconfig'[server].setup(config)

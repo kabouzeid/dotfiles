@@ -1,9 +1,10 @@
-require'lspconfig'.diagnosticls.setup { -- npm install -g diagnostic-languageserver
+return {
   filetypes = {
     "sh",
     "python",
     "email",
     "prose",
+    "vim",
   },
   init_options = {
     linters = {
@@ -71,55 +72,49 @@ require'lspconfig'.diagnosticls.setup { -- npm install -g diagnostic-languageser
           C = "error",
           N = "error"
         }
+      },
+      vint = {
+        command = "vint",
+        debounce = 100,
+        args = { "--enable-neovim", "-" },
+        offsetLine = 0,
+        offsetColumn = 0,
+        sourceName = "vint",
+        formatLines = 1,
+        formatPattern = {
+          "[^:]+:(\\d+):(\\d+):\\s*(.*)(\\r|\\n)*$",
+          {
+            line = 1,
+            column = 2,
+            message = 3
+          }
+        }
+      },
+      ["write-good"] = {
+        command = "write-good",
+        debounce = 100,
+        args = { "--text=%text" },
+        offsetLine = 0,
+        offsetColumn = 1,
+        sourceName = "write-good",
+        formatLines = 1,
+        formatPattern = {
+          "(.*)\\s+on\\s+line\\s+(\\d+)\\s+at\\s+column\\s+(\\d+)\\s*$",
+          {
+            line = 2,
+            column = 3,
+            message = 1
+          }
+        }
       }
-      -- "vint": {
-      --   "command": "vint",
-      --   "debounce": 100,
-      --   "args": [ "--enable-neovim", "-"],
-      --   "offsetLine": 0,
-      --   "offsetColumn": 0,
-      --   "sourceName": "vint",
-      --   "formatLines": 1,
-      --   "formatPattern": [
-      --     "[^:]+:(\\d+):(\\d+):\\s*(.*)(\\r|\\n)*$",
-      --     {
-      --       "line": 1,
-      --       "column": 2,
-      --       "message": 3
-      --     }
-      --   ]
-      -- }
-      -- "write-good": {
-      --   "command": "write-good",
-      --   "debounce": 100,
-      --   "args": [ "--text=%text" ],
-      --   "offsetLine": 0,
-      --   "offsetColumn": 1,
-      --   "sourceName": "write-good",
-      --   "formatLines": 1,
-      --   "formatPattern": [
-      --     "(.*)\\s+on\\s+line\\s+(\\d+)\\s+at\\s+column\\s+(\\d+)\\s*$",
-      --     {
-      --       "line": 2,
-      --       "column": 3,
-      --       "message": 1
-      --     }
-      --   ]
-      -- }
     },
-    formatters = {
-      -- dartfmt = {
-      --   command = "dartfmt",
-      --   args = { "--fix" },
-      -- }
-    },
+    formatters = {},
     filetypes = {
       sh = "shellcheck",
       prose = "languagetool",
       python = "flake8",
+      vim = "vint",
     },
-    formatFiletypes = {
-      -- dart = "dartfmt"
-    }
+    formatFiletypes = {}
   }
 }

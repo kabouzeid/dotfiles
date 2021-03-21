@@ -224,13 +224,13 @@ endfunction
 command! -nargs=? -complete=shellcmd Tabterm call <SID>tabterm(<f-args>) " eg `:tabterm yarn dev` will open a new tab and run `yarn dev`
 
 function! s:init_file() abort
-  return stdpath("config") .. "/init.vim"
+  return stdpath("config") . "/init.vim"
 endfunction
-command! -nargs=0 Config execute "edit " .. <SID>init_file()
+command! -nargs=0 Config execute "edit " . <SID>init_file()
 function! s:lsp_config_file() abort
-  return stdpath("config") .. "/lua/lsp-settings.lua"
+  return stdpath("config") . "/lua/lsp-settings.lua"
 endfunction
-command! -nargs=0 LspConfig execute "edit " .. <SID>lsp_config_file()
+command! -nargs=0 LspConfig execute "edit " . <SID>lsp_config_file()
 
 if executable("rustywind")
   command! -nargs=0 Headwind :!rustywind --write %
