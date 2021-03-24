@@ -47,6 +47,7 @@ Plug 'itchyny/lightline.vim'
 " Plug 'mbbill/undotree', { 'on': 'UndotreeToggle' }
 Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim' " fuzzy finder
 Plug 'junegunn/goyo.vim' " distraction free writing
+Plug 'akinsho/nvim-toggleterm.lua'
 
 " -- Files
 " Plug 'tpope/vim-vinegar'
@@ -79,6 +80,7 @@ Plug 'othree/html5.vim'
 Plug 'hail2u/vim-css3-syntax'
 Plug 'mattn/emmet-vim'
 Plug 'pangloss/vim-javascript'
+Plug 'pest-parser/pest.vim'
 
 " -- Tags
 " Plug 'majutsushi/tagbar' " displays ctags in sidebar

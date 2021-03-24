@@ -119,3 +119,10 @@ do
 
   compe.register_source('tmux', Source)
 end
+
+
+-------------
+-- toggleterm
+-------------
+
+require"toggleterm".setup { open_mapping = [[<c-\>]], }
