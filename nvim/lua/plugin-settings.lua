@@ -26,6 +26,7 @@ require'compe'.setup {
     tags = true;
     -- treesitter = true;
     tmux = true;
+    latex_symbols = true;
   };
 }
 
@@ -124,3 +125,10 @@ end
 -------------
 
 require"toggleterm".setup { open_mapping = [[<c-\>]], }
+
+
+-----------
+-- gitsigns
+-----------
+
+require('gitsigns').setup()

@@ -58,8 +58,9 @@ Plug 'justinmk/vim-gtfo' " open file in system explorer/terminal
 
 " -- Git
 Plug 'tpope/vim-fugitive'
-Plug 'airblade/vim-gitgutter'
-Plug 'itchyny/vim-gitbranch'
+Plug 'lewis6991/gitsigns.nvim'
+" Plug 'airblade/vim-gitgutter'
+" Plug 'itchyny/vim-gitbranch'
 
 " -- Snippets
 Plug 'hrsh7th/vim-vsnip' | Plug 'kitagry/vs-snippets'
@@ -89,15 +90,16 @@ Plug 'pest-parser/pest.vim'
 " -- Misc
 Plug 'junegunn/vader.vim'
 Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
+Plug 'nvim-lua/plenary.nvim' " needed by some lua plugins
 
 " Experimenting
 Plug 'tpope/vim-unimpaired'
-Plug 'golang/vscode-go' " for snippets
 
 Plug 'mfussenegger/nvim-dap'
 Plug 'theHamsta/nvim-dap-virtual-text'
 
+Plug 'GoldsteinE/compe-latex-symbols'
+
 " Plug 'nvim-lua/popup.nvim'
-" Plug 'nvim-lua/plenary.nvim'
 " Plug 'nvim-telescope/telescope.nvim'
 call plug#end()

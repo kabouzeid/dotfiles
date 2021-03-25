@@ -56,10 +56,11 @@ function! LightlineTreeSitter() abort
 endfunction
 
 function! LightlineGit() abort
-  let branch = gitbranch#name()
+  let branch = get(b:,'gitsigns_head','')
   if branch == '' | return '' | endif
-  let [a,m,r] = GitGutterGetHunkSummary()
-  return "\uE0A0 " . branch . printf(' +%d ~%d -%d', a, m, r)
+  let status = get(b:,'gitsigns_status','')
+  let separator = status == '' ? '' : ' '
+  return "\uE0A0 " . branch . separator . status
 endfunction
 
 function! LightlineCondEncoding() abort
