@@ -8,6 +8,7 @@ export PATH="/usr/local/bin:$PATH"
 export PATH="/usr/local/sbin:$PATH"
 export PATH="$HOME/bin:$PATH"
 export PATH="$PATH:$HOME/.composer/vendor/bin"
+export PATH="$PATH:$HOME/.cargo/bin"
 
 # for fastlane set UTF-8
 export LC_ALL=en_US.UTF-8
