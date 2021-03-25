@@ -19,14 +19,12 @@ require'compe'.setup {
   source = {
     path = true;
     buffer = true;
-    calc = false;
     vsnip = true;
     nvim_lsp = true;
     nvim_lua = true;
     spell = true;
     tags = true;
-    snippets_nvim = false;
-    treesitter = true;
+    -- treesitter = true;
     tmux = true;
   };
 }
