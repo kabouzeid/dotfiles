@@ -72,14 +72,7 @@ function! LightlineCondFormat() abort
 endfunction
 
 function! LightlineLspStatus() abort
-  if !luaeval('not vim.tbl_isempty(vim.lsp.buf_get_clients(0))')
-    return ''
-  endif
-  let sl = ''
-  let sl .= 'E:' . luaeval("vim.lsp.diagnostic.get_count(0, [[Error]])")
-  let sl .= ' '
-  let sl .= 'W:' . luaeval("vim.lsp.diagnostic.get_count(0, [[Warning]])")
-  return sl
+  return v:lua.require'lightline'.lsp_status()
 endfunction
 
 let g:lightline = {
