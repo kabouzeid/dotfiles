@@ -10,7 +10,8 @@ Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'neovim/nvim-lspconfig'
 " Plug 'kabouzeid/nvim-lspinstall'
 Plug '~/Code/nvim-lspinstall'
-Plug 'onsails/lspkind-nvim'
+" Plug 'onsails/lspkind-nvim'
+Plug 'kosayoda/nvim-lightbulb'
 
 " -- Completion
 Plug 'hrsh7th/nvim-compe'
