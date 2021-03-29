@@ -34,6 +34,7 @@ local vint = {
 
 local checkmake = { lintCommand = "checkmake", lintStdin = true }
 
+-- brew install yamllint
 local yamllint = { lintCommand = "yamllint -f parsable -", lintStdin = true }
 
 local flake8 = {
