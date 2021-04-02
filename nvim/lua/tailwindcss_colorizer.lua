@@ -11,9 +11,9 @@ end
 
 local bit = require 'bit'
 
-local CSS_RGB_FN_MINIMUM_LENGTH = #'rgb(0,0,0)'
+local CSS_RGB_MIN_LEN = #'rgb(0,0,0)'
 function _G.css_rgb_to_hex(color)
-  if #color < CSS_RGB_FN_MINIMUM_LENGTH then return end
+  if #color < CSS_RGB_MIN_LEN then return end
   local r, g, b, match_end = color:match("^rgb%(%s*(%d+%%?)%s*,%s*(%d+%%?)%s*,%s*(%d+%%?)%s*%)()")
   if not match_end then return end
   r = percent_or_hex(r) if not r then return end
@@ -22,9 +22,9 @@ function _G.css_rgb_to_hex(color)
   return bit.tohex(bit.bor(bit.lshift(r, 16), bit.lshift(g, 8), b), 6)
 end
 
-local CSS_RGBA_FN_MINIMUM_LENGTH = #'rgba(0,0,0,0)'
+local CSS_RGBA_MIN_LEN = #'rgba(0,0,0,0)'
 local function css_rgba_to_hex(color)
-  if #color < CSS_RGBA_FN_MINIMUM_LENGTH then return end
+  if #color < CSS_RGBA_MIN_LEN then return end
   local r, g, b, a, match_end = color:match("^rgba%(%s*(%d+%%?)%s*,%s*(%d+%%?)%s*,%s*(%d+%%?)%s*,%s*([.%d]+)%s*%)()")
   if not match_end then return end
   a = tonumber(a) if not a or a > 1 then return end
@@ -51,13 +51,16 @@ local function color_is_bright(r, g, b)
   end
 end
 
---- returns HEX of 16 random bytes
 local function generate_id()
-  local id = ""
-  for _ = 1, 16, 1 do
-    id = id .. string.format('%.2X', math.random(0, 255))
-  end
-  return id
+	-- --- returns HEX of 16 random bytes
+  -- local id = ""
+  -- for _ = 1, 16, 1 do
+    -- id = id .. string.format('%.2X', math.random(0, 255))
+  -- end
+  -- return id
+
+	-- this is also works and is probably more efficient than string formatting
+	return math.random(1, 2^64)
 end
 
 local NAMESPACE = vim.api.nvim_create_namespace("tailwindcss")
@@ -129,6 +132,7 @@ end
 
 local M = {}
 
+--- Should be called when the LSP client attaches
 function M.on_attach(bufnr, options)
   if not options then options = { mode = 'background' } end
   if BUFFER_OPTIONS[bufnr] ~= nil then return end
