@@ -103,7 +103,6 @@ local function buf_set_highlights(bufnr, colors, options)
     local rgb_hex = css_color_to_hex(color_info.color)
     local highlight_name = create_highlight(rgb_hex, options)
     local range = color_info.range
-    print(vim.inspect(range))
     vim.api.nvim_buf_add_highlight(bufnr, NAMESPACE, highlight_name, range.start.line, range.start.character, range["end"].character)
   end
 end
@@ -134,9 +133,7 @@ function M.on_attach(bufnr, options)
   if not options then options = { mode = 'background' } end
   if BUFFER_OPTIONS[bufnr] ~= nil then return end
   BUFFER_OPTIONS[bufnr] = options
-  -- debouncing 200ms because the VSCode extension also does that.
-  -- not sure if it's actually worth the overhead, since it seems to work fine without debouncing
-  -- TODO: find a good way to measure the performance of both solutions
+  -- VSCode extension also does 200ms debouncing
   local trigger_update_highlight, timer = require'defer'.debounce_trailing(update_highlight, 200, false)
 
   update_highlight(bufnr, options)
