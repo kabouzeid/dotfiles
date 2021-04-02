@@ -1,4 +1,67 @@
-vim.lsp.set_log_level("debug")
+-- vim.lsp.set_log_level("debug")
+
+local function range_formatting_sync(options, timeout_ms, start_pos, end_pos)
+  local sts = vim.bo.softtabstop;
+  options = vim.tbl_extend('keep', options or {}, {
+    tabSize = (sts > 0 and sts) or (sts < 0 and vim.bo.shiftwidth) or vim.bo.tabstop;
+    insertSpaces = vim.bo.expandtab;
+  })
+  local params = vim.lsp.util.make_given_range_params(start_pos, end_pos)
+  params.options = options
+  local result = vim.lsp.buf_request_sync(0, "textDocument/rangeFormatting", params, timeout_ms)
+  if not result or vim.tbl_isempty(result) then return end
+  local _, range_formatting_result = next(result)
+  result = range_formatting_result.result
+  if not result then return end
+  vim.lsp.util.apply_text_edits(result)
+end
+
+function _G.buf_format()
+  local formatting = false
+  local range_formatting = false
+
+  for _, client in pairs(vim.lsp.buf_get_clients()) do
+    if client.resolved_capabilities.document_formatting then
+      formatting = true
+    end
+    if client.resolved_capabilities.document_range_formatting then
+      range_formatting = true
+    end
+  end
+
+  if formatting then
+    vim.lsp.buf.formatting_sync(nil, 1000)
+  end
+
+  -- format the whole range
+  -- this is needed because some LSPs only provide range formatting
+  if range_formatting then
+    local last_line = vim.fn.line("$")
+    local last_col = vim.fn.col({last_line, "$"})
+    range_formatting_sync({}, 1000, {1,0}, {last_line, last_col})
+  end
+
+  vim.cmd("Prettier")
+end
+
+function _G.buf_range_format()
+  local range_formatting = false
+
+  for _, client in pairs(vim.lsp.buf_get_clients()) do
+    if client.resolved_capabilities.document_range_formatting then
+      range_formatting = true
+    end
+  end
+
+  if range_formatting then
+    range_formatting_sync({}, 1000)
+  end
+
+  vim.cmd("PrettierPartial")
+end
+
+vim.api.nvim_set_keymap("n", "<space>f", "<cmd>lua buf_format()<CR>", { noremap=true })
+vim.api.nvim_set_keymap("v", "<space>f", "<cmd>lua buf_range_format()<CR>", { noremap=true })
 
 -- keymaps
 local on_attach = function(client, bufnr)
@@ -25,13 +88,6 @@ local on_attach = function(client, bufnr)
   buf_set_keymap('n', '[d', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', opts)
   buf_set_keymap('n', ']d', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
   buf_set_keymap('n', '<space>q', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
-
-  -- Set some keybinds conditional on server capabilities
-  if client.resolved_capabilities.document_formatting then
-    buf_set_keymap("n", "<space>f", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
-  elseif client.resolved_capabilities.document_range_formatting then
-    buf_set_keymap("n", "<space>f", "<cmd>lua vim.lsp.buf.range_formatting()<CR>", opts)
-  end
 
   -- Set autocommands conditional on server_capabilities
   if client.resolved_capabilities.document_highlight then
@@ -79,6 +135,8 @@ local function make_config()
   }
 end
 
+require'tailwindcss_colorizer'
+
 -- lsp-install
 local function setup_servers()
   require'lspinstall'.setup()
@@ -106,6 +164,13 @@ local function setup_servers()
     end
     if server == "diagnosticls" then
       config = vim.tbl_extend("force", config, require'diagnosticls')
+    end
+    if server == "tailwindcss" then
+      local _on_attach = config.on_attach
+      config.on_attach = function (client, bufnr)
+        _on_attach(client, bufnr)
+        require'tailwindcss_colorizer'.on_attach(bufnr)
+      end
     end
 
     require'lspconfig'[server].setup(config)

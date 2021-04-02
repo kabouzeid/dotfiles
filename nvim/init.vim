@@ -53,8 +53,10 @@ set lazyredraw
 set ignorecase
 set smartcase
 set autoread
-" Allows jumping between tags without saving
+
 set hidden
+nnoremap <C-N> :bnext<CR>
+nnoremap <C-P> :bprev<CR>
 
 set ttimeoutlen=10
 
