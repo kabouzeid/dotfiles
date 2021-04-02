@@ -97,7 +97,7 @@ local function create_highlight(rgb_hex, options)
   return highlight_name
 end
 
-local BUFFER_OPTIONS = {}
+local ATTACHED_BUFFERS = {}
 
 local function buf_set_highlights(bufnr, colors, options)
   vim.api.nvim_buf_clear_namespace(bufnr, NAMESPACE, 0, -1)
@@ -132,11 +132,22 @@ end
 
 local M = {}
 
---- Should be called when the LSP client attaches
-function M.on_attach(bufnr, options)
-  if not options then options = { mode = 'background' } end
-  if BUFFER_OPTIONS[bufnr] ~= nil then return end
-  BUFFER_OPTIONS[bufnr] = options
+local function expand_bufnr(bufnr)
+  if bufnr == 0 or bufnr == nil then
+    return vim.api.nvim_get_current_buf()
+  else
+    return bufnr
+  end
+end
+
+--- Should be called `on_attach` when the LSP client attaches
+function M.buf_attach(bufnr, options)
+  bufnr = expand_bufnr(bufnr)
+  if ATTACHED_BUFFERS[bufnr] then return end
+  ATTACHED_BUFFERS[bufnr] = true
+
+  options = options or { mode = 'background' }
+
   -- VSCode extension also does 200ms debouncing
   local trigger_update_highlight, timer = require'defer'.debounce_trailing(update_highlight, 200, false)
 
@@ -144,14 +155,29 @@ function M.on_attach(bufnr, options)
   -- react to changes
   vim.api.nvim_buf_attach(bufnr, false, {
     on_lines = function()
-      if not BUFFER_OPTIONS[bufnr] then return true end
-      trigger_update_highlight(bufnr, BUFFER_OPTIONS[bufnr])
+      if not ATTACHED_BUFFERS[bufnr] then return true end
+      trigger_update_highlight(bufnr, options)
     end,
     on_detach = function()
       timer:close()
-      BUFFER_OPTIONS[bufnr] = nil
+      ATTACHED_BUFFERS[bufnr] = true
     end
   })
+end
+
+--- Can be used to detach from the buffer
+function M.buf_detach(bufnr)
+  bufnr = expand_bufnr(bufnr)
+  vim.api.nvim_buf_clear_namespace(bufnr, NAMESPACE, 0, -1)
+  ATTACHED_BUFFERS[bufnr] = nil
+end
+
+--- To be used with nvim-lspconfig
+function M.wrap_on_attach(on_attach, options)
+  return function(client, bufnr)
+    on_attach(client, bufnr)
+    M.buf_attach(bufnr, options)
+  end
 end
 
 return M

@@ -135,8 +135,6 @@ local function make_config()
   }
 end
 
-require'tailwindcss_colorizer'
-
 -- lsp-install
 local function setup_servers()
   require'lspinstall'.setup()
@@ -166,11 +164,7 @@ local function setup_servers()
       config = vim.tbl_extend("force", config, require'diagnosticls')
     end
     if server == "tailwindcss" then
-      local _on_attach = config.on_attach
-      config.on_attach = function (client, bufnr)
-        _on_attach(client, bufnr)
-        require'tailwindcss_colorizer'.on_attach(bufnr)
-      end
+      config.on_attach = require'tailwindcss-colorizer'.wrap_on_attach(config.on_attach)
     end
 
     require'lspconfig'[server].setup(config)
