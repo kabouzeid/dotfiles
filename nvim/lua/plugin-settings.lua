@@ -196,24 +196,24 @@ do
   -- vim.cmd([[highlight NvimTreeFolderName guifg=]] .. vim.g.terminal_color_4) -- blue
   -- vim.cmd([[highlight NvimTreeEmptyFolderName guifg=]] .. vim.g.terminal_color_4) -- blue
 
-  function _G.auto_refresh_nvim_tree()
-    local tree = require "nvim-tree.lib"
-    if _G.nvim_tree_refresh_timer_id and
-        not vim.tbl_isempty(vim.fn.timer_info(_G.nvim_tree_refresh_timer_id)) then
-      return
-    end
-    _G.nvim_tree_refresh_timer_id = vim.fn.timer_start(2000, function(_)
-      if tree.win_open() then
-        tree.refresh_tree()
-      else
-        vim.fn.timer_stop(_G.nvim_tree_refresh_timer_id)
-        _G.nvim_tree_refresh_timer_id = nil
-      end
-    end, { ["repeat"] = -1 })
-  end
-  vim.api.nvim_command [[augroup nvimtree]]
-  vim.api.nvim_command [[autocmd Filetype NvimTree lua auto_refresh_nvim_tree()]]
-  vim.api.nvim_command [[augroup END]]
+  -- function _G.auto_refresh_nvim_tree()
+  --   local tree = require "nvim-tree.lib"
+  --   if _G.nvim_tree_refresh_timer_id and
+  --       not vim.tbl_isempty(vim.fn.timer_info(_G.nvim_tree_refresh_timer_id)) then
+  --     return
+  --   end
+  --   _G.nvim_tree_refresh_timer_id = vim.fn.timer_start(2000, function(_)
+  --     if tree.win_open() then
+  --       tree.refresh_tree()
+  --     else
+  --       vim.fn.timer_stop(_G.nvim_tree_refresh_timer_id)
+  --       _G.nvim_tree_refresh_timer_id = nil
+  --     end
+  --   end, { ["repeat"] = -1 })
+  -- end
+  -- vim.api.nvim_command [[augroup nvimtree]]
+  -- vim.api.nvim_command [[autocmd Filetype NvimTree lua auto_refresh_nvim_tree()]]
+  -- vim.api.nvim_command [[augroup END]]
 end
 
 -----------------
