@@ -11,7 +11,7 @@ Plug 'neovim/nvim-lspconfig'
 " Plug '~/Code/nvim-lspconfig'
 " Plug 'kabouzeid/nvim-lspinstall'
 Plug '~/Code/nvim-lspinstall'
-" Plug 'onsails/lspkind-nvim'
+Plug 'onsails/lspkind-nvim'
 Plug 'kosayoda/nvim-lightbulb'
 
 " -- Completion
@@ -104,4 +104,8 @@ Plug 'GoldsteinE/compe-latex-symbols'
 
 " Plug 'nvim-lua/popup.nvim'
 " Plug 'nvim-telescope/telescope.nvim'
+
+Plug 'yamatsum/nvim-web-nonicons'
+Plug 'kyazdani42/nvim-web-devicons'
+Plug 'kyazdani42/nvim-tree.lua'
 call plug#end()

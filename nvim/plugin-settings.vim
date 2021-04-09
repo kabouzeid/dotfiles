@@ -102,7 +102,7 @@ let g:lightline = {
 " CHADTree
 "--------
 
-nnoremap <leader>c <cmd>CHADopen<cr>
+nnoremap <leader>c <cmd>NvimTreeToggle<cr>
 
 let g:chadtree_settings =
       \ {

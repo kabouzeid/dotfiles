@@ -104,7 +104,7 @@ fi
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias e=$EDITOR
-alias ide="$EDITOR '+CHADopen'"
+alias ide="$EDITOR '+NvimTreeOpen'"
 alias sudoedit="sudo -e"
 # alias htop="sudo htop"
 alias diff="colordiff"

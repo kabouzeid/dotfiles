@@ -153,3 +153,96 @@ function _G.update_lightbulb()
 end
 
 vim.cmd [[autocmd CursorHold,CursorHoldI * lua update_lightbulb()]]
+
+
+------------------
+-- nvim-lspinstall
+------------------
+
+function _G.lsp_reinstall_all()
+  local lspinstall = require'lspinstall'
+  for _, server in ipairs(lspinstall.installed_servers()) do
+    lspinstall.install_server(server)
+  end
+end
+
+vim.cmd [[command! -nargs=0 LspReinstallAll call v:lua.lsp_reinstall_all()]]
+
+
+------------
+-- nvim-tree
+------------
+
+do
+  local icons = require("nvim-nonicons")
+  vim.g.nvim_tree_icons = {
+    default = icons.get("file"),
+    symlink = icons.get("file-symlink"),
+    git = {
+      -- unstaged = icons.get("diff-modified"),
+      -- staged = icons.get("check-circle"),
+      -- unmerged = icons.get("git-merge"),
+      -- renamed = icons.get("diff-renamed"),
+      -- untracked = icons.get("diff-added"),
+      -- deleted = icons.get("diff-removed"),
+      -- ignored = icons.get("diff-ignored")
+      unstaged = "M",
+      staged = "S",
+      unmerged = icons.get("git-merge"),
+      renamed = "R",
+      untracked = "U",
+      deleted = "D",
+      ignored = "I"
+    },
+    folder = {
+      default = icons.get("file-directory"),
+      open = icons.get("file-directory-outline"),
+      empty = icons.get("file-directory-outline"),
+      empty_open = icons.get("file-directory-outline"),
+      symlink = icons.get("file-submodule"),
+      symlink_open = icons.get("file-submodule"),
+    }
+  }
+  vim.g.nvim_tree_group_empty = 1
+  vim.g.nvim_tree_add_trailing = 1
+  vim.cmd([[highlight NvimTreeGitDirty guifg=]] .. vim.g.terminal_color_11) -- orange
+  vim.cmd([[highlight NvimTreeGitMerge guifg=]] .. vim.g.terminal_color_9) -- dark red
+  vim.cmd([[highlight NvimTreeFolderName guifg=]] .. vim.g.terminal_color_4) -- blue
+  vim.cmd([[highlight NvimTreeEmptyFolderName guifg=]] .. vim.g.terminal_color_4) -- blue
+end
+
+
+---------------
+-- lspkind-nvim
+---------------
+
+require('lspkind').init({
+  with_text = true,
+  symbol_map = {
+    Function = 'ƒ',
+    Method = '',
+    Variable = '',
+    Constant = '',
+    Struct = '',
+    Class = '',
+    Interface = '',
+    Text = '',
+    Enum = '',
+    EnumMember = '',
+    Module = '',
+    Color = '',
+    Property = '',
+    Field = '',
+    Unit = '',
+    File = '',
+    Value = '',
+    Event = '',
+    Folder = '',
+    Keyword = '',
+    Snippet = '',
+    Operator = '',
+    Reference = '',
+    TypeParameter = '',
+    Constructor = '',
+  },
+})

@@ -12,6 +12,13 @@ call Source('plugins')
 
 " Set theme
 set background=dark
+
+" set this before enabling colorscheme
+if has('termguicolors')
+  let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+  let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+  set termguicolors
+endif
 " let g:sonokai_style = 'maia'
 let g:sonokai_diagnostic_line_highlight = 1
 let g:sonokai_sign_column_background = 'none'
@@ -172,12 +179,6 @@ function! WorkspaceFolder()
   endif
 endfunction
 
-if has('termguicolors')
-  let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
-  let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
-  set termguicolors
-endif
-
 set clipboard=unnamed
 
 if !has('nvim')
@@ -237,6 +238,10 @@ command! -nargs=0 LspConfig execute "edit " . <SID>lsp_config_file()
 " if executable("rustywind")
 "   command! -nargs=0 Headwind :!rustywind --write %
 " endif
+
+function! SyntaxItem()
+  return synIDattr(synID(line("."),col("."),1),"name")
+endfunction
 
 call Source('plugin-settings')
 :lua require'init'
