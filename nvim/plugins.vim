@@ -11,7 +11,7 @@ Plug 'neovim/nvim-lspconfig'
 " Plug '~/Code/nvim-lspconfig'
 " Plug 'kabouzeid/nvim-lspinstall'
 Plug '~/Code/nvim-lspinstall'
-Plug 'onsails/lspkind-nvim'
+" Plug 'onsails/lspkind-nvim'
 Plug 'kosayoda/nvim-lightbulb'
 
 " -- Completion
@@ -31,6 +31,7 @@ Plug 'sainnhe/sonokai'
 " Plug 'tomasr/molokai'
 " Plug 'phanviet/vim-monokai-pro'
 " Plug 'patstockwell/vim-monokai-tasty'
+Plug 'norcalli/nvim-colorizer.lua'
 
 " -- Edit
 Plug 'tpope/vim-surround' " vim objects for brackets etc
