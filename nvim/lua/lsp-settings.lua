@@ -166,6 +166,9 @@ local function setup_servers()
     if server == "tailwindcss" then
       config.on_attach = require'tailwindcss-colorizer'.wrap_on_attach(config.on_attach)
     end
+    -- if server == "vim" then
+    --   config.init_options.isNeovim = true
+    -- end
 
     require'lspconfig'[server].setup(config)
   end

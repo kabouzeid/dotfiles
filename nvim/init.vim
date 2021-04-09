@@ -1,4 +1,4 @@
-set nocompatible " be iMproved
+scriptencoding utf-8
 
 function! Source(name)
   if has('nvim')
@@ -23,6 +23,7 @@ endif
 let g:sonokai_diagnostic_line_highlight = 1
 let g:sonokai_sign_column_background = 'none'
 let g:sonokai_enable_italic = 1
+let g:sonokai_virtual_text = 'colored'
 colorscheme sonokai
 " Enable line numbers
 set number
@@ -37,7 +38,7 @@ filetype plugin on
 filetype plugin indent on
 
 set fileformat=unix
-" Show “invisible” characters
+" Show invisible characters
 set listchars=trail:·,nbsp:_,tab:\ \ 
 set list
 " Highlight searches
@@ -166,14 +167,14 @@ command! -nargs=0 GenerateClangCompileFlags :call GenerateClangCompileFlags()
 
 function! WorkspaceFolder()
   let project_roots = v:lua.vim.lsp.buf.list_workspace_folders()
-  let count = len(project_roots)
-  if (count == 1)
+  let project_root_count = len(project_roots)
+  if (project_root_count == 1)
     return project_roots[0]
-  elseif (count > 1)
+  elseif (project_root_count > 1)
     let choices = copy(project_roots)
     call map(choices, 'v:key + 1 . ". " . v:val') " format them
     let index = inputlist(["Specify project root directory"] + choices) - 1
-    if (index >= 0 && index < count)
+    if (index >= 0 && index < project_root_count)
       return project_roots[index]
     endif
   endif
