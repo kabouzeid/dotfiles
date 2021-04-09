@@ -54,9 +54,12 @@ Plug 'akinsho/nvim-toggleterm.lua'
 " -- Files
 " Plug 'tpope/vim-vinegar'
 Plug 'justinmk/vim-dirvish'
-Plug 'ms-jpq/chadtree', {'branch': 'chad', 'do': 'python3 -m chadtree deps'}
+" Plug 'ms-jpq/chadtree', {'branch': 'chad', 'do': 'python3 -m chadtree deps'}
 Plug 'tpope/vim-eunuch'
 Plug 'justinmk/vim-gtfo' " open file in system explorer/terminal
+Plug 'kyazdani42/nvim-tree.lua'
+Plug 'kyazdani42/nvim-web-devicons'
+Plug 'yamatsum/nvim-web-nonicons'
 
 " -- Git
 Plug 'tpope/vim-fugitive'
@@ -104,8 +107,4 @@ Plug 'GoldsteinE/compe-latex-symbols'
 
 " Plug 'nvim-lua/popup.nvim'
 " Plug 'nvim-telescope/telescope.nvim'
-
-Plug 'yamatsum/nvim-web-nonicons'
-Plug 'kyazdani42/nvim-web-devicons'
-Plug 'kyazdani42/nvim-tree.lua'
 call plug#end()
