@@ -51,8 +51,8 @@ augroup END
 
 function! LightlineTreeSitter() abort
   let status = nvim_treesitter#statusline(90)
-  if status == v:null | return '' | endif
-  return status
+  if status == v:null || status == '' | return '' | endif
+  return ' ' . status
 endfunction
 
 function! LightlineGit() abort
@@ -60,7 +60,7 @@ function! LightlineGit() abort
   if branch == '' | return '' | endif
   let status = get(b:,'gitsigns_status','')
   let separator = status == '' ? '' : ' '
-  return "\uE0A0 " . branch . separator . status
+  return "שׂ " . branch . separator . status
 endfunction
 
 function! LightlineCondEncoding() abort
