@@ -191,8 +191,10 @@ do
 
   vim.cmd([[highlight NvimTreeGitDirty guifg=]] .. vim.g.terminal_color_11) -- orange
   vim.cmd([[highlight NvimTreeGitMerge guifg=]] .. vim.g.terminal_color_9) -- dark red
-  vim.cmd([[highlight NvimTreeFolderName guifg=]] .. vim.g.terminal_color_4) -- blue
-  vim.cmd([[highlight NvimTreeEmptyFolderName guifg=]] .. vim.g.terminal_color_4) -- blue
+  vim.cmd [[highlight link NvimTreeFolderName NONE]]
+  vim.cmd [[highlight link NvimTreeEmptyFolderName NONE]]
+  -- vim.cmd([[highlight NvimTreeFolderName guifg=]] .. vim.g.terminal_color_4) -- blue
+  -- vim.cmd([[highlight NvimTreeEmptyFolderName guifg=]] .. vim.g.terminal_color_4) -- blue
 
   function _G.auto_refresh_nvim_tree()
     local tree = require "nvim-tree.lib"
