@@ -37,10 +37,13 @@ require"packer".startup(function(use)
   use "itchyny/lightline.vim"
   use "junegunn/goyo.vim" -- distraction free writing
   use "akinsho/nvim-toggleterm.lua"
+
+	-- Telescope
   use {
     "nvim-telescope/telescope.nvim",
     requires = { "nvim-lua/popup.nvim", "nvim-lua/plenary.nvim" }
   }
+	use 'nvim-telescope/telescope-dap.nvim'
 
   -- Files
   use "justinmk/vim-dirvish"
