@@ -140,3 +140,13 @@ let g:fzf_colors = {
       \ 'spinner': ['fg', 'Label'],
       \ 'header':  ['fg', 'Comment']
       \}
+
+
+"----------
+" Telescope
+"----------
+nnoremap <leader>fp <cmd>Telescope<cr>
+nnoremap <leader>ff <cmd>Telescope find_files<cr>
+nnoremap <leader>fg <cmd>Telescope live_grep<cr>
+nnoremap <leader>fb <cmd>Telescope buffers<cr>
+nnoremap <leader>fh <cmd>Telescope help_tags<cr>

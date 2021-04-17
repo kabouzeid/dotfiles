@@ -10,9 +10,10 @@ endfunc
 
 :lua require'plugins'
 
+" ###
+
 " Set theme
 set background=dark
-
 " set this before enabling colorscheme
 if has('termguicolors')
   let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
@@ -25,6 +26,12 @@ let g:sonokai_diagnostic_virtual_text = 'colored'
 let g:sonokai_sign_column_background = 'none'
 let g:sonokai_enable_italic = 1
 colorscheme sonokai
+
+" " let g:palenight_terminal_italics=1
+" colorscheme palenight
+
+" ###
+
 " Enable line numbers
 set number
 " Enable syntax highlighting
