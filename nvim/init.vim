@@ -8,7 +8,7 @@ function! Source(name)
   endif
 endfunc
 
-call Source('plugins')
+:lua require'plugins'
 
 " Set theme
 set background=dark
