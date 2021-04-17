@@ -88,6 +88,7 @@ Plug 'hail2u/vim-css3-syntax'
 Plug 'mattn/emmet-vim'
 Plug 'pangloss/vim-javascript'
 Plug 'pest-parser/pest.vim'
+Plug 'jwalton512/vim-blade'
 
 " -- Tags
 " Plug 'majutsushi/tagbar' " displays ctags in sidebar
@@ -105,6 +106,8 @@ Plug 'mfussenegger/nvim-dap'
 Plug 'theHamsta/nvim-dap-virtual-text'
 
 Plug 'GoldsteinE/compe-latex-symbols'
+
+" Plug 'ray-x/lsp_signature.nvim'
 
 " Plug 'nvim-lua/popup.nvim'
 " Plug 'nvim-telescope/telescope.nvim'

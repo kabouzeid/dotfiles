@@ -21,9 +21,9 @@ if has('termguicolors')
 endif
 " let g:sonokai_style = 'maia'
 let g:sonokai_diagnostic_line_highlight = 1
+let g:sonokai_diagnostic_virtual_text = 'colored'
 let g:sonokai_sign_column_background = 'none'
 let g:sonokai_enable_italic = 1
-let g:sonokai_virtual_text = 'colored'
 colorscheme sonokai
 " Enable line numbers
 set number
@@ -140,9 +140,13 @@ augroup auto_filetypes
   " Cocoapods
   autocmd BufRead,BufNewFile Podfile set filetype=ruby
   " " Singular
-  " autocmd BufNewFile,BufRead *.lib,*.tst silent set filetype=singular | set syntax=singular | set indentexpr=
+  autocmd BufRead,BufNewFile *.lib,*.tst set filetype=singular
   " Vapor Leaf
   autocmd BufRead,BufNewFile *.leaf set filetype=html
+  " lspinfo
+  autocmd Filetype lspinfo setlocal nowrap
+  " nvim-tree
+  autocmd Filetype NvimTree setlocal cursorline
 augroup END
 
 function! GenerateClangCompileFlags() " includes all dirs at the project root

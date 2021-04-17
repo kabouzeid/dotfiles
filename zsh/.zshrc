@@ -24,7 +24,7 @@ export ZSH=~/.oh-my-zsh
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-ZSH_THEME="dracula"
+ZSH_THEME="" # we're using 'pure'
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -74,6 +74,12 @@ plugins=(osx git brew colored-man-pages sudo tmux zsh-autosuggestions fast-synta
 
 source $ZSH/oh-my-zsh.sh
 
+autoload -U promptinit; promptinit
+prompt pure
+
+zstyle :prompt:pure:git:stash show yes
+zstyle :prompt:pure:prompt:success color cyan
+
 # User configuration
 
 # export MANPATH="/usr/local/man:$MANPATH"
@@ -104,7 +110,7 @@ fi
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias e=$EDITOR
-alias ide="$EDITOR '+NvimTreeOpen'"
+alias ide="$EDITOR -c 'let g:nvim_tree_auto_open=1'"
 alias sudoedit="sudo -e"
 # alias htop="sudo htop"
 alias diff="colordiff"

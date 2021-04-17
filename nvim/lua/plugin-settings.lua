@@ -187,10 +187,11 @@ do
   }
   vim.g.nvim_tree_group_empty = 1
   vim.g.nvim_tree_add_trailing = 1
-  vim.g.nvim_tree_follow = 1
+  -- vim.g.nvim_tree_follow = 1
 
   vim.cmd([[highlight NvimTreeGitDirty guifg=]] .. vim.g.terminal_color_11) -- orange
   vim.cmd([[highlight NvimTreeGitMerge guifg=]] .. vim.g.terminal_color_9) -- dark red
+  vim.cmd [[highlight link NvimTreeCursorLine CurrentWord]]
   vim.cmd [[highlight link NvimTreeFolderName NONE]]
   vim.cmd [[highlight link NvimTreeEmptyFolderName NONE]]
   -- vim.cmd([[highlight NvimTreeFolderName guifg=]] .. vim.g.terminal_color_4) -- blue

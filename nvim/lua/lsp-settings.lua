@@ -1,4 +1,4 @@
--- vim.lsp.set_log_level("debug")
+vim.lsp.set_log_level("debug")
 
 -- needs https://github.com/microsoft/vscode-codicons/blob/master/dist/codicon.ttf
 require('vim.lsp.protocol').CompletionItemKind = {
@@ -29,68 +29,70 @@ require('vim.lsp.protocol').CompletionItemKind = {
   '  TypeParameter'; -- = 25;
 }
 
-local function range_formatting_sync(options, timeout_ms, start_pos, end_pos)
-  local sts = vim.bo.softtabstop;
-  options = vim.tbl_extend('keep', options or {}, {
-    tabSize = (sts > 0 and sts) or (sts < 0 and vim.bo.shiftwidth) or vim.bo.tabstop;
-    insertSpaces = vim.bo.expandtab;
-  })
-  local params = vim.lsp.util.make_given_range_params(start_pos, end_pos)
-  params.options = options
-  local result = vim.lsp.buf_request_sync(0, "textDocument/rangeFormatting", params, timeout_ms)
-  if not result or vim.tbl_isempty(result) then return end
-  local _, range_formatting_result = next(result)
-  result = range_formatting_result.result
-  if not result then return end
-  vim.lsp.util.apply_text_edits(result)
-end
+-- local function range_formatting_sync(options, timeout_ms, start_pos, end_pos)
+--   local sts = vim.bo.softtabstop;
+--   options = vim.tbl_extend('keep', options or {}, {
+--     tabSize = (sts > 0 and sts) or (sts < 0 and vim.bo.shiftwidth) or vim.bo.tabstop;
+--     insertSpaces = vim.bo.expandtab;
+--   })
+--   local params = vim.lsp.util.make_given_range_params(start_pos, end_pos)
+--   params.options = options
+--   local result = vim.lsp.buf_request_sync(0, "textDocument/rangeFormatting", params, timeout_ms)
+--   if not result or vim.tbl_isempty(result) then return end
+--   local _, range_formatting_result = next(result)
+--   result = range_formatting_result.result
+--   if not result then return end
+--   vim.lsp.util.apply_text_edits(result)
+-- end
 
-function _G.buf_format()
-  local formatting = false
-  local range_formatting = false
+-- function _G.buf_format()
+--   local formatting = false
+--   local range_formatting = false
 
-  for _, client in pairs(vim.lsp.buf_get_clients()) do
-    if client.resolved_capabilities.document_formatting then
-      formatting = true
-    end
-    if client.resolved_capabilities.document_range_formatting then
-      range_formatting = true
-    end
-  end
+--   for _, client in pairs(vim.lsp.buf_get_clients()) do
+--     if client.resolved_capabilities.document_formatting then
+--       formatting = true
+--     end
+--     if client.resolved_capabilities.document_range_formatting then
+--       range_formatting = true
+--     end
+--   end
 
-  if formatting then
-    vim.lsp.buf.formatting_sync(nil, 1000)
-  end
+--   if formatting then
+--     vim.lsp.buf.formatting_sync(nil, 1000)
+--   end
 
-  -- format the whole range
-  -- this is needed because some LSPs only provide range formatting
-  if range_formatting then
-    local last_line = vim.fn.line("$")
-    local last_col = vim.fn.col({last_line, "$"})
-    range_formatting_sync({}, 1000, {1,0}, {last_line, last_col})
-  end
+--   -- format the whole range
+--   -- this is needed because some LSPs only provide range formatting
+--   if range_formatting then
+--     local last_line = vim.fn.line("$")
+--     local last_col = vim.fn.col({last_line, "$"})
+--     range_formatting_sync({}, 1000, {1,0}, {last_line, last_col})
+--   end
 
-  vim.cmd("Prettier")
-end
+--   -- vim.cmd("Prettier")
+-- end
 
-function _G.buf_range_format()
-  local range_formatting = false
+-- function _G.buf_range_format()
+--   local range_formatting = false
 
-  for _, client in pairs(vim.lsp.buf_get_clients()) do
-    if client.resolved_capabilities.document_range_formatting then
-      range_formatting = true
-    end
-  end
+--   for _, client in pairs(vim.lsp.buf_get_clients()) do
+--     if client.resolved_capabilities.document_range_formatting then
+--       range_formatting = true
+--     end
+--   end
 
-  if range_formatting then
-    range_formatting_sync({}, 1000)
-  end
+--   if range_formatting then
+--     range_formatting_sync({}, 1000)
+--   end
 
-  vim.cmd("PrettierPartial")
-end
+--   vim.cmd("PrettierPartial")
+-- end
 
-vim.api.nvim_set_keymap("n", "<space>f", "<cmd>lua buf_format()<CR>", { noremap=true })
-vim.api.nvim_set_keymap("v", "<space>f", "<cmd>lua buf_range_format()<CR>", { noremap=true })
+-- vim.api.nvim_set_keymap("n", "<space>f", "<cmd>lua buf_format()<CR>", { noremap=true })
+-- vim.api.nvim_set_keymap("v", "<space>f", "<cmd>lua buf_range_format()<CR>", { noremap=true })
+
+vim.api.nvim_set_keymap("n", "<space>f", "<cmd>lua require'lsp-formatting-chain'.formatting_chain_sync(nil, 1000, {'efm'})<CR>", { noremap=true })
 
 -- keymaps
 local on_attach = function(client, bufnr)
@@ -122,9 +124,9 @@ local on_attach = function(client, bufnr)
   if client.resolved_capabilities.document_highlight then
     vim.api.nvim_exec([[
     augroup lsp_document_highlight
-    autocmd! * <buffer>
-    autocmd CursorHold <buffer> lua vim.lsp.buf.document_highlight()
-    autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()
+      autocmd! * <buffer>
+      autocmd CursorHold <buffer> lua vim.lsp.buf.document_highlight()
+      autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()
     augroup END
     ]], false)
   end
@@ -195,9 +197,10 @@ local function setup_servers()
     if server == "tailwindcss" then
       config.on_attach = require'tailwindcss-colorizer'.wrap_on_attach(config.on_attach)
     end
-    -- if server == "vim" then
-    --   config.init_options.isNeovim = true
-    -- end
+    if server == "vim" then
+      config.init_options = config.init_options or {}
+      config.init_options.isNeovim = true
+    end
 
     require'lspconfig'[server].setup(config)
   end
@@ -210,3 +213,12 @@ require'lspinstall'.post_install_hook = function ()
   setup_servers() -- reload installed servers
   vim.cmd("bufdo e") -- this triggers the FileType autocmd that starts the server
 end
+
+vim.api.nvim_command("command! LspCapabilities lua require'lsp-capabilities'()")
+
+vim.api.nvim_exec([[
+function! G_formatting_client_name_completion(arg, line, pos) abort
+  return join(luaeval('require("lsp-formatting").formatting_client_name_completion()'), "\n")
+endfunction
+command! -nargs=1 -complete=custom,G_formatting_client_name_completion LspFormatting lua require'lsp-formatting'.formatting_client_name(<f-args>)
+]], false)

@@ -60,7 +60,7 @@ function! LightlineGit() abort
   if branch == '' | return '' | endif
   let status = get(b:,'gitsigns_status','')
   let separator = status == '' ? '' : ' '
-  return "שׂ " . branch . separator . status
+  return " " . branch . separator . status
 endfunction
 
 function! LightlineCondEncoding() abort

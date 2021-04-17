@@ -48,13 +48,19 @@ local phpstan = {
 }
 
 local bladeFormatter = {
-  formatCommand = "blade-formatter --stdin",
+  formatCommand = "blade-formatter --stdin ${--indent-size:tabSize}",
   formatStdin = true
 }
 
 local rustywind = {
   -- yarn global add rustywind
   formatCommand = "rustywind --stdin",
+  formatStdin = true
+}
+
+local fixjson = {
+  -- yarn global add fixjson
+  formatCommand = "fixjson",
   formatStdin = true
 }
 
@@ -67,7 +73,8 @@ local languages = {
   python = { flake8 },
   blade = { bladeFormatter },
   yaml = { yamllint },
-  make = { checkmake }
+  make = { checkmake },
+  json = { fixjson }
 }
 
 local tailwind_fts = require"lspinstall/servers".tailwindcss.default_config.filetypes
