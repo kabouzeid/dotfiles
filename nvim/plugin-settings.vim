@@ -142,11 +142,21 @@ let g:fzf_colors = {
       \}
 
 
+"-------
+" Packer
+"-------
+
+augroup Packer
+  autocmd!
+  autocmd BufWritePost plugins.lua PackerCompile
+augroup END
+
 "----------
 " Telescope
 "----------
 nnoremap <leader>fp <cmd>Telescope<cr>
 nnoremap <leader>ff <cmd>Telescope find_files<cr>
+nnoremap <leader>fd <cmd>Telescope file_browser<cr>
 nnoremap <leader>fg <cmd>Telescope live_grep<cr>
 nnoremap <leader>fb <cmd>Telescope buffers<cr>
 nnoremap <leader>fh <cmd>Telescope help_tags<cr>

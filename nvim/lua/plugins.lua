@@ -3,6 +3,7 @@ require"packer".startup(function(use)
   use "wincent/terminus"
 
   use { "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" }
+  use 'nvim-treesitter/playground' -- treesitter debugging
 
   -- LSP
   use "neovim/nvim-lspconfig"
@@ -84,4 +85,5 @@ require"packer".startup(function(use)
 
   -- Experimenting
   use "tpope/vim-unimpaired"
+  use { 'TimUntersberger/neogit', requires = 'nvim-lua/plenary.nvim' }
 end)
