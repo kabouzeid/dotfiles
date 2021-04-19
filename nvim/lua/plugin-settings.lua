@@ -88,7 +88,10 @@ vim.api.nvim_set_keymap("i", "<C-d>", "compe#scroll({ 'delta': -4 })",
 -- treesitter
 -------------
 
-require"nvim-treesitter.configs".setup { highlight = { enable = true } }
+require"nvim-treesitter.configs".setup {
+  highlight = { enable = true },
+  indent = { enable = true }
+}
 
 ----------------
 -- tmux-complete
@@ -221,7 +224,7 @@ end
 ---- lspkind-nvim
 -----------------
 
---do
+-- do
 --  local icons = require("nvim-nonicons")
 --  require("lspkind").init({
 --    with_text = true,
@@ -253,27 +256,20 @@ end
 --      TypeParameter = ""
 --    }
 --  })
---end
+-- end
 
 ------------
 -- Telescope
 ------------
 
-local actions = require('telescope.actions')
-require('telescope').setup {
-  defaults = {
-    mappings = {
-      i = {
-        ["<esc>"] = actions.close
-      },
-    },
-  }
+local actions = require("telescope.actions")
+require("telescope").setup {
+  defaults = { mappings = { i = { ["<esc>"] = actions.close } } }
 }
-require('telescope').load_extension('dap')
-
+require("telescope").load_extension("dap")
 
 ---------
 -- neogit
 ---------
 
-require('neogit').setup()
+require("neogit").setup()

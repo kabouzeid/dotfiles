@@ -21,8 +21,6 @@ require"packer".startup(function(use)
 
   -- Color
   use "sainnhe/sonokai"
-  use "Luxed/ayu-vim"
-  use "drewtempelmeyer/palenight.vim"
   use "norcalli/nvim-colorizer.lua"
 
   -- Edit
@@ -44,7 +42,7 @@ require"packer".startup(function(use)
     "nvim-telescope/telescope.nvim",
     requires = { "nvim-lua/popup.nvim", "nvim-lua/plenary.nvim" }
   }
-	use 'nvim-telescope/telescope-dap.nvim'
+  use 'nvim-telescope/telescope-dap.nvim'
 
   -- Files
   use "justinmk/vim-dirvish"
@@ -55,35 +53,26 @@ require"packer".startup(function(use)
   use "yamatsum/nvim-web-nonicons"
 
   -- Git
-  use "tpope/vim-fugitive"
   use { "lewis6991/gitsigns.nvim", requires = "nvim-lua/plenary.nvim" }
+  use { 'TimUntersberger/neogit', requires = 'nvim-lua/plenary.nvim' }
 
   -- Snippets
   use { "hrsh7th/vim-vsnip", requires = "kitagry/vs-snippets" }
 
   -- Lang
   use "lervag/vimtex"
-  use "octol/vim-cpp-enhanced-highlight"
   use "petRUShka/vim-gap"
   use "petRUShka/vim-magma"
   use "kabouzeid/vim-singular"
-  use "bumaociyuan/vim-swift"
-  use "leafgarland/typescript-vim"
   use "westeri/asl-vim" -- ACPI
   use "tikhomirov/vim-glsl" -- GLSL (OpenGL Shader)
-  use "posva/vim-vue"
-  use "othree/html5.vim"
-  use "hail2u/vim-css3-syntax"
   use "mattn/emmet-vim"
-  use "pangloss/vim-javascript"
-  use "pest-parser/pest.vim"
+  use "pest-parser/pest.vim" -- pest parser generator
   use "jwalton512/vim-blade"
 
   -- Misc
-  use "junegunn/vader.vim"
   use { "prettier/vim-prettier", run = "yarn install" }
 
   -- Experimenting
   use "tpope/vim-unimpaired"
-  use { 'TimUntersberger/neogit', requires = 'nvim-lua/plenary.nvim' }
 end)

@@ -1,4 +1,4 @@
-vim.lsp.set_log_level("debug")
+-- vim.lsp.set_log_level("debug")
 
 -- needs https://github.com/microsoft/vscode-codicons/blob/master/dist/codicon.ttf
 require('vim.lsp.protocol').CompletionItemKind = {
