@@ -138,3 +138,7 @@ swift-sh-editor() {
   swift sh editor "$1"
 }
 alias se=swift-sh-editor
+
+if [ $TERM = "xterm-kitty" ] ; then
+  alias ssh="kitty +kitten ssh"
+fi
