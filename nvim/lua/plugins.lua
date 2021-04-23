@@ -21,6 +21,7 @@ require"packer".startup(function(use)
 
   -- Color
   use "sainnhe/sonokai"
+  use 'folke/tokyonight.nvim'
   use "norcalli/nvim-colorizer.lua"
 
   -- Edit
