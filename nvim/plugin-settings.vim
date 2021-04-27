@@ -105,11 +105,12 @@ let g:lightline = {
       \ },
       \ }
 
-"--------
-" CHADTree
-"--------
+"---------
+" NvimTree
+"---------
 
-nnoremap <leader>c <cmd>NvimTreeToggle<cr>
+nnoremap <leader>tt <cmd>NvimTreeToggle<cr>
+nnoremap <leader>tf <cmd>NvimTreeFindFile<cr>
 
 let g:chadtree_settings =
       \ {
