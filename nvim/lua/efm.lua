@@ -26,10 +26,12 @@ local luaformat = {
 
 local vint = {
   -- brew install vint --HEAD
-  lintCommand = "vint --enable-neovim -",
+  lintCommand = "vint -f '{file_path}:{line_number}:{column_number}: {severity}: {description} (see: {reference})' --enable-neovim -",
   -- stdin needs vint >= 0.4
   lintStdin = true,
-  lintFormats = { "%f:%l:%c: %m" }
+  lintFormats = {
+    "%f:%l:%c: %trror: %m", "%f:%l:%c: %tarning: %m"
+  }
 }
 
 local checkmake = { lintCommand = "checkmake", lintStdin = true }

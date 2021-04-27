@@ -3,7 +3,7 @@ require"packer".startup(function(use)
   use "wincent/terminus"
 
   use { "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" }
-  use 'nvim-treesitter/playground' -- treesitter debugging
+  use "nvim-treesitter/playground" -- treesitter debugging
 
   -- LSP
   use "neovim/nvim-lspconfig"
@@ -21,7 +21,8 @@ require"packer".startup(function(use)
 
   -- Color
   use "sainnhe/sonokai"
-  use 'folke/tokyonight.nvim'
+  use "drewtempelmeyer/palenight.vim"
+  use "folke/tokyonight.nvim"
   use "norcalli/nvim-colorizer.lua"
 
   -- Edit
@@ -38,12 +39,12 @@ require"packer".startup(function(use)
   use "junegunn/goyo.vim" -- distraction free writing
   use "akinsho/nvim-toggleterm.lua"
 
-	-- Telescope
+  -- Telescope
   use {
     "nvim-telescope/telescope.nvim",
     requires = { "nvim-lua/popup.nvim", "nvim-lua/plenary.nvim" }
   }
-  use 'nvim-telescope/telescope-dap.nvim'
+  use "nvim-telescope/telescope-dap.nvim"
 
   -- Files
   use "justinmk/vim-dirvish"
@@ -55,7 +56,7 @@ require"packer".startup(function(use)
 
   -- Git
   use { "lewis6991/gitsigns.nvim", requires = "nvim-lua/plenary.nvim" }
-  use { 'TimUntersberger/neogit', requires = 'nvim-lua/plenary.nvim' }
+  use { "TimUntersberger/neogit", requires = "nvim-lua/plenary.nvim" }
 
   -- Snippets
   use { "hrsh7th/vim-vsnip", requires = "kitagry/vs-snippets" }

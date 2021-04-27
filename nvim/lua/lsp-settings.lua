@@ -30,28 +30,23 @@ require("vim.lsp.protocol").CompletionItemKind =
     }
 
 vim.lsp.handlers["textDocument/publishDiagnostics"] =
-    vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics,
-                 { virtual_text = { prefix = "●" } })
+    function(...)
+      vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics,
+                   { virtual_text = { prefix = "●" } })(...)
+      vim.fn["lightline#update"]()
+    end
 
-vim.fn.sign_define("LspDiagnosticsSignError", {
-  text = "",
-  texthl = "LspDiagnosticsSignError",
-})
+vim.fn.sign_define("LspDiagnosticsSignError",
+                   { text = "", texthl = "LspDiagnosticsSignError" })
 
-vim.fn.sign_define("LspDiagnosticsSignWarning", {
-  text = "",
-  texthl = "LspDiagnosticsSignWarning",
-})
+vim.fn.sign_define("LspDiagnosticsSignWarning",
+                   { text = "", texthl = "LspDiagnosticsSignWarning" })
 
-vim.fn.sign_define("LspDiagnosticsSignHint", {
-  text = "",
-  texthl = "LspDiagnosticsSignHint",
-})
+vim.fn.sign_define("LspDiagnosticsSignHint",
+                   { text = "", texthl = "LspDiagnosticsSignHint" })
 
-vim.fn.sign_define("LspDiagnosticsSignInformation", {
-  text = "",
-  texthl = "LspDiagnosticsSignInformation",
-})
+vim.fn.sign_define("LspDiagnosticsSignInformation",
+                   { text = "", texthl = "LspDiagnosticsSignInformation" })
 
 -- local function range_formatting_sync(options, timeout_ms, start_pos, end_pos)
 --   local sts = vim.bo.softtabstop;
@@ -230,10 +225,7 @@ local function setup_servers()
       config.on_attach = require"tailwindcss-colorizer".wrap_on_attach(
                              config.on_attach)
     end
-    if server == "vim" then
-      config.init_options = config.init_options or {}
-      config.init_options.isNeovim = true
-    end
+    if server == "vim" then config.init_options = { isNeovim = true } end
     if server == "hls" then
       config.root_dir = require"lspconfig/util".root_pattern("*.cabal",
                                                              "stack.yaml",

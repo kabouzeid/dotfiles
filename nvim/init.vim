@@ -12,28 +12,23 @@ endfunc
 
 " ###
 
-" Set theme
+set termguicolors
 set background=dark
-" set this before enabling colorscheme
-if has('termguicolors')
-  let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
-  let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
-  set termguicolors
-endif
-" let g:sonokai_style = 'maia'
-let g:sonokai_diagnostic_line_highlight = 1
-let g:sonokai_diagnostic_virtual_text = 'colored'
-let g:sonokai_sign_column_background = 'none'
-let g:sonokai_enable_italic = 1
-colorscheme sonokai
 
-" " let g:palenight_terminal_italics=1
-" colorscheme palenight
+" let g:sonokai_style = 'maia'
+" let g:sonokai_diagnostic_line_highlight = 1
+" let g:sonokai_diagnostic_virtual_text = 'colored'
+" let g:sonokai_sign_column_background = 'none'
+" let g:sonokai_enable_italic = 1
+" colorscheme sonokai
+
+let g:palenight_terminal_italics=1
+colorscheme palenight
+
+set guifont=JetBrains\ Mono,nonicon,codicon,3270Medium\ Nerd\ Font
 
 " ###
 
-" Enable line numbers
-set number
 " Enable syntax highlighting
 syntax on
 " Set tab width
@@ -192,20 +187,6 @@ function! WorkspaceFolder()
 endfunction
 
 set clipboard=unnamed
-
-if !has('nvim')
-  if exists('$TMUX')
-    " tmux cursor
-    let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
-    let &t_SR = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=2\x7\<Esc>\\"
-    let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
-  else
-    " iTerm2 cursor
-    let &t_SI = "\<Esc>]50;CursorShape=1\x7"
-    let &t_SR = "\<Esc>]50;CursorShape=2\x7"
-    let &t_EI = "\<Esc>]50;CursorShape=0\x7"
-  endif
-endif
 
 let g:tex_flavor='latex'
 let g:tex_conceal='abdmg'

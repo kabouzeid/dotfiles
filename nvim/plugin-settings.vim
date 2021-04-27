@@ -75,8 +75,12 @@ function! LightlineLspStatus() abort
   return v:lua.require'lightline'.lsp_status()
 endfunction
 
+function! LightlineLspServers() abort
+  return v:lua.require'lightline'.lsp_servers()
+endfunction
+
 let g:lightline = {
-      \ 'colorscheme': 'sonokai',
+      \ 'colorscheme': 'palenight',
       \ 'active': {
       \     'left': [
       \         [ 'mode', 'paste' ],
@@ -84,17 +88,20 @@ let g:lightline = {
       \         [ 'gutentags_status' ],
       \     ],
       \     'right': [
-      \         [ 'lspstatus' ],
+      \         [ 'lspservers' ],
       \         [ 'filetype' ],
-      \         [ 'treesitter' ],
+      \         [ 'lspstatus' ],
       \     ]
       \ },
       \ 'component_function': {
       \     'gitbranch': 'LightlineGit',
       \     'treesitter': 'LightlineTreeSitter',
-      \     'lspstatus': 'LightlineLspStatus',
+      \     'lspservers': 'LightlineLspServers',
       \     'fileformat': 'LightlineCondFormat',
       \     'fileencoding': 'LightlineCondEncoding',
+      \ },
+      \ 'component_expand': {
+      \     'lspstatus': 'LightlineLspStatus',
       \ },
       \ }
 
@@ -113,7 +120,7 @@ let g:chadtree_settings =
 "-----
 " GTFO
 "-----
-let g:gtfo#terminals = { 'mac': 'iterm' }
+let g:gtfo#terminals = { 'mac': 'kitty' }
 
 
 "----------
