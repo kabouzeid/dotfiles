@@ -84,7 +84,7 @@ source $ZSH/oh-my-zsh.sh
 
 if hash nvim 2>/dev/null; then
   export EDITOR='nvim'
-elif hash vim 2>/dev/nul; then
+elif hash vim 2>/dev/null; then
   export EDITOR='vim'
 else
   export EDITOR='vi'
