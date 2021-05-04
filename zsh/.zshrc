@@ -110,12 +110,10 @@ fi
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias e=$EDITOR
-alias ide="$EDITOR -c 'let g:nvim_tree_auto_open=1'"
 alias sudoedit="sudo -e"
-# alias htop="sudo htop"
 alias diff="colordiff"
-
 alias nproc="sysctl -n hw.ncpu"
+alias nvim_debug="VIMRUNTIME=~/Code/neovim/runtime ~/Code/neovim/build/bin/nvim"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
