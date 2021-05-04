@@ -26,7 +26,7 @@ local shfmt = {
 
 local luaformat = {
   -- luarocks install --server=https://luarocks.org/dev luaformatter
-  formatCommand = "lua-format -i ${--tab-width:tabSize} ${--indent-width:tabSize} --spaces-inside-table-braces --single-quote-to-double-quote",
+  formatCommand = "lua-format -i ${--tab-width:tabSize} ${--indent-width:tabSize} ${--continuation-indent-width:tabSize} --spaces-inside-table-braces --single-quote-to-double-quote --chop-down-parameter --chop-down-table --chop-down-kv-table --extra-sep-at-table-end --column-limit=100",
   formatStdin = true
 }
 
