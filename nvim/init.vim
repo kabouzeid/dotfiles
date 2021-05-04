@@ -106,9 +106,6 @@ let maplocalleader = "\<Space>"
 let python_highlight_all=1
 
 set undofile " Persistent undo history
-set undodir=~/.config/nvim/undo " Undo data location
-set directory=~/.config/nvim/swap " Swap file location
-set backupdir=~/.config/nvim/backup " Backup file location
 
 " Alt+j/k moves lines down/up (macOS compatible)
 nnoremap <A-j> :m+<CR>==

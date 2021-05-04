@@ -33,7 +33,6 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] =
     function(...)
       vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics,
                    { virtual_text = { prefix = "●" } })(...)
-      -- vim.fn["lightline#update"]()
     end
 
 vim.fn.sign_define("LspDiagnosticsSignError",
@@ -42,83 +41,11 @@ vim.fn.sign_define("LspDiagnosticsSignError",
 vim.fn.sign_define("LspDiagnosticsSignWarning",
                    { text = "", texthl = "LspDiagnosticsSignWarning" })
 
-vim.fn.sign_define("LspDiagnosticsSignHint",
-                   { text = "", texthl = "LspDiagnosticsSignHint" })
-
 vim.fn.sign_define("LspDiagnosticsSignInformation",
                    { text = "", texthl = "LspDiagnosticsSignInformation" })
 
--- local function range_formatting_sync(options, timeout_ms, start_pos, end_pos)
---   local sts = vim.bo.softtabstop;
---   options = vim.tbl_extend('keep', options or {}, {
---     tabSize = (sts > 0 and sts) or (sts < 0 and vim.bo.shiftwidth) or vim.bo.tabstop;
---     insertSpaces = vim.bo.expandtab;
---   })
---   local params = vim.lsp.util.make_given_range_params(start_pos, end_pos)
---   params.options = options
---   local result = vim.lsp.buf_request_sync(0, "textDocument/rangeFormatting", params, timeout_ms)
---   if not result or vim.tbl_isempty(result) then return end
---   local _, range_formatting_result = next(result)
---   result = range_formatting_result.result
---   if not result then return end
---   vim.lsp.util.apply_text_edits(result)
--- end
-
--- function _G.buf_format()
---   local formatting = false
---   local range_formatting = false
-
---   for _, client in pairs(vim.lsp.buf_get_clients()) do
---     if client.resolved_capabilities.document_formatting then
---       formatting = true
---     end
---     if client.resolved_capabilities.document_range_formatting then
---       range_formatting = true
---     end
---   end
-
---   if formatting then
---     vim.lsp.buf.formatting_sync(nil, 1000)
---   end
-
---   -- format the whole range
---   -- this is needed because some LSPs only provide range formatting
---   if range_formatting then
---     local last_line = vim.fn.line("$")
---     local last_col = vim.fn.col({last_line, "$"})
---     range_formatting_sync({}, 1000, {1,0}, {last_line, last_col})
---   end
-
---   -- vim.cmd("Prettier")
--- end
-
--- function _G.buf_range_format()
---   local range_formatting = false
-
---   for _, client in pairs(vim.lsp.buf_get_clients()) do
---     if client.resolved_capabilities.document_range_formatting then
---       range_formatting = true
---     end
---   end
-
---   if range_formatting then
---     range_formatting_sync({}, 1000)
---   end
-
---   vim.cmd("PrettierPartial")
--- end
-
--- vim.api.nvim_set_keymap("n", "<space>f", "<cmd>lua buf_format()<CR>", { noremap=true })
--- vim.api.nvim_set_keymap("v", "<space>f", "<cmd>lua buf_range_format()<CR>", { noremap=true })
-
-vim.api.nvim_set_keymap("n", "<space>p",
-                        "<cmd>lua require'lsp-formatting-chain'.formatting_chain_sync(nil, 1000, { 'html', 'php', 'efm' })<CR>",
-                        -- "<cmd>lua vim.lsp.buf.formatting_seq_sync(nil, 1000, {'efm'})<CR>",
-                        { noremap = true })
-
-vim.api.nvim_set_keymap("n", "<space>P",
-                        "<cmd>lua vim.lsp.buf.formatting()<CR>",
-                        { noremap = true })
+vim.fn.sign_define("LspDiagnosticsSignHint",
+                   { text = "", texthl = "LspDiagnosticsSignHint" })
 
 -- keymaps
 local on_attach = function(client, bufnr)
@@ -134,24 +61,31 @@ local on_attach = function(client, bufnr)
   buf_set_keymap("n", "K", "<Cmd>lua vim.lsp.buf.hover()<CR>", opts)
   buf_set_keymap("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<CR>", opts)
   buf_set_keymap("n", "<C-k>", "<cmd>lua vim.lsp.buf.signature_help()<CR>", opts)
-  buf_set_keymap("n", "<space>a", "<cmd>lua vim.lsp.buf.code_action()<CR>", opts)
-  buf_set_keymap("n", "<space>wa",
+  buf_set_keymap("n", "<Leader>a", "<cmd>lua vim.lsp.buf.code_action()<CR>",
+                 opts)
+  buf_set_keymap("n", "<Leader>wa",
                  "<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>", opts)
-  buf_set_keymap("n", "<space>wr",
+  buf_set_keymap("n", "<Leader>wr",
                  "<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>", opts)
-  buf_set_keymap("n", "<space>wl",
+  buf_set_keymap("n", "<Leader>wl",
                  "<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>",
                  opts)
-  buf_set_keymap("n", "<space>D", "<cmd>lua vim.lsp.buf.type_definition()<CR>",
+  buf_set_keymap("n", "<Leader>D", "<cmd>lua vim.lsp.buf.type_definition()<CR>",
                  opts)
-  buf_set_keymap("n", "<space>rn", "<cmd>lua vim.lsp.buf.rename()<CR>", opts)
+  buf_set_keymap("n", "<Leader>rn", "<cmd>lua vim.lsp.buf.rename()<CR>", opts)
   buf_set_keymap("n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>", opts)
-  buf_set_keymap("n", "<space>e",
+  buf_set_keymap("n", "<Leader>e",
                  "<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>", opts)
   buf_set_keymap("n", "[d", "<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>", opts)
   buf_set_keymap("n", "]d", "<cmd>lua vim.lsp.diagnostic.goto_next()<CR>", opts)
-  buf_set_keymap("n", "<space>q",
+  buf_set_keymap("n", "<Leader>q",
                  "<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>", opts)
+  buf_set_keymap("n", "<Leader>p",
+                 "<cmd>lua require'lsp-formatting-chain'.formatting_chain_sync(nil, 1000, { 'html', 'php', 'efm' })<CR>",
+                 opts)
+  buf_set_keymap("n", "<Leader>P", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
+  buf_set_keymap("v", "<Leader>p",
+                 "<cmd>lua vim.lsp.buf.range_formatting()<CR>", opts)
 
   -- Set autocommands conditional on server_capabilities
   if client.resolved_capabilities.document_highlight then
@@ -251,11 +185,5 @@ require"lspinstall".post_install_hook = function()
   vim.cmd("bufdo e") -- this triggers the FileType autocmd that starts the server
 end
 
+-- UI just like `:LspInfo` to show which capabilities each attached server has
 vim.api.nvim_command("command! LspCapabilities lua require'lsp-capabilities'()")
-
-vim.api.nvim_exec([[
-function! G_formatting_client_name_completion(arg, line, pos) abort
-  return join(luaeval('require("lsp-formatting").formatting_client_name_completion()'), "\n")
-endfunction
-command! -nargs=1 -complete=custom,G_formatting_client_name_completion LspFormatting lua require'lsp-formatting'.formatting_client_name(<f-args>)
-]], false)

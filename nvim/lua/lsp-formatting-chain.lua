@@ -1,36 +1,5 @@
 local M = {}
 
--- SOURCE: copied from lsp.lua
-local wait_result_reason = { [-1] = "timeout", [-2] = "interrupted", [-3] = "error" }
-
--- SOURCE: adjusted from buf_request_sync in lsp.lua
--- NOTE: this should be moved to lsp.lua as `client.request_sync`
---
--- @returns { err, result }, where `err` and `result` come from the lsp-handler
---- 				On timeout, cancel or error, returns `(nil, err)` where `err` is a
---- 			  string describing the failure reason. If the request was unsuccessful
---- 			  returns `nil`.
-local function client_request_sync(client, method, params, timeout_ms, bufnr)
-  local request_result = nil
-  local function _sync_handler(err, _, result)
-    request_result = { error = err, result = result }
-  end
-
-  local success, request_id = client.request(method, params, _sync_handler,
-                                             bufnr)
-  if not success then return nil end
-
-  local wait_result, reason = vim.wait(timeout_ms or 100, function()
-    return request_result ~= nil
-  end, 10)
-
-  if not wait_result then
-    client.cancel_request(request_id)
-    return nil, wait_result_reason[reason]
-  end
-  return request_result
-end
-
 --- Formats the current buffer by chaining formatting and/or range_formatting requests to all
 --- attached clients of the current buffer.
 ---
@@ -68,7 +37,7 @@ function M.formatting_chain_sync(options, timeout_ms, order)
   -- loop through the clients and make synchronous formatting requests
   for _, client in ipairs(clients) do
     if client.resolved_capabilities.document_formatting then
-      local result = client_request_sync(client, "textDocument/formatting", vim.lsp.util.make_formatting_params(options), timeout_ms)
+      local result = client.request_sync("textDocument/formatting", vim.lsp.util.make_formatting_params(options), timeout_ms)
       handle_request_result(result)
     elseif client.resolved_capabilities.document_range_formatting then
       local last_line = vim.fn.line("$")
@@ -77,7 +46,7 @@ function M.formatting_chain_sync(options, timeout_ms, order)
         last_line, last_col
       })
       params.options = vim.lsp.util.make_formatting_params(options).options
-      local result = client_request_sync(client, "textDocument/rangeFormatting", params, timeout_ms)
+      local result = client.request_sync("textDocument/rangeFormatting", params, timeout_ms)
       handle_request_result(result)
     end
   end

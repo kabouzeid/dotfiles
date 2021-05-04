@@ -1,5 +1,2 @@
-nvim/backup/**
-nvim/swap/**
-nvim/undo/**
 nvim/plugin/**
 nvim/spell/**
