@@ -33,20 +33,20 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] =
     function(...)
       vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics,
                    { virtual_text = { prefix = "●" } })(...)
-      vim.fn["lightline#update"]()
+      -- vim.fn["lightline#update"]()
     end
 
 vim.fn.sign_define("LspDiagnosticsSignError",
-                   { text = "", texthl = "LspDiagnosticsSignError" })
+                   { text = "", texthl = "LspDiagnosticsSignError" })
 
 vim.fn.sign_define("LspDiagnosticsSignWarning",
-                   { text = "", texthl = "LspDiagnosticsSignWarning" })
+                   { text = "", texthl = "LspDiagnosticsSignWarning" })
 
 vim.fn.sign_define("LspDiagnosticsSignHint",
-                   { text = "", texthl = "LspDiagnosticsSignHint" })
+                   { text = "", texthl = "LspDiagnosticsSignHint" })
 
 vim.fn.sign_define("LspDiagnosticsSignInformation",
-                   { text = "", texthl = "LspDiagnosticsSignInformation" })
+                   { text = "", texthl = "LspDiagnosticsSignInformation" })
 
 -- local function range_formatting_sync(options, timeout_ms, start_pos, end_pos)
 --   local sts = vim.bo.softtabstop;
@@ -111,8 +111,13 @@ vim.fn.sign_define("LspDiagnosticsSignInformation",
 -- vim.api.nvim_set_keymap("n", "<space>f", "<cmd>lua buf_format()<CR>", { noremap=true })
 -- vim.api.nvim_set_keymap("v", "<space>f", "<cmd>lua buf_range_format()<CR>", { noremap=true })
 
-vim.api.nvim_set_keymap("n", "<space>f",
-                        "<cmd>lua require'lsp-formatting-chain'.formatting_chain_sync(nil, 1000, {'efm'})<CR>",
+vim.api.nvim_set_keymap("n", "<space>p",
+                        "<cmd>lua require'lsp-formatting-chain'.formatting_chain_sync(nil, 1000, { 'html', 'php', 'efm' })<CR>",
+                        -- "<cmd>lua vim.lsp.buf.formatting_seq_sync(nil, 1000, {'efm'})<CR>",
+                        { noremap = true })
+
+vim.api.nvim_set_keymap("n", "<space>P",
+                        "<cmd>lua vim.lsp.buf.formatting()<CR>",
                         { noremap = true })
 
 -- keymaps

@@ -1,9 +1,15 @@
--- local prettier = { formatCommand = "prettier" }
--- local eslint = {
---   lintCommand = "eslint -f unix --stdin",
---   lintIgnoreExitCode = true,
---   lintStdin = true
--- }
+local prettier = {
+  formatCommand = "./node_modules/.bin/prettier --stdin-filepath=${INPUT}",
+  formatStdin = true
+}
+
+local eslint = {
+  lintCommand = "./node_modules/.bin/eslint -f visualstudio --stdin --stdin-filename ${INPUT}",
+  lintIgnoreExitCode = true,
+  lintStdin = true,
+  lintFormats = { "%f(%l,%c): %tarning %m", "%f(%l,%c): %rror %m" }
+}
+
 local shellcheck = {
   lintCommand = "shellcheck -f gcc -x -",
   lintStdin = true,
@@ -29,9 +35,7 @@ local vint = {
   lintCommand = "vint -f '{file_path}:{line_number}:{column_number}: {severity}: {description} (see: {reference})' --enable-neovim -",
   -- stdin needs vint >= 0.4
   lintStdin = true,
-  lintFormats = {
-    "%f:%l:%c: %trror: %m", "%f:%l:%c: %tarning: %m"
-  }
+  lintFormats = { "%f:%l:%c: %trror: %m", "%f:%l:%c: %tarning: %m" }
 }
 
 local checkmake = { lintCommand = "checkmake", lintStdin = true }
@@ -69,20 +73,24 @@ local fixjson = {
 local languages = {
   lua = { luaformat },
   sh = { shellcheck, shfmt },
-  -- javascript = { eslint, prettier },
+  javascript = { prettier, eslint },
+  typescript = { prettier, eslint },
+  html = { prettier },
+  css = { prettier },
   vim = { vint },
   php = { phpstan },
   python = { flake8 },
   blade = { bladeFormatter },
-  yaml = { yamllint },
+  yaml = { yamllint, prettier },
   make = { checkmake },
   json = { fixjson }
 }
 
-local tailwind_fts = require"lspinstall/servers".tailwindcss.default_config.filetypes
+local tailwind_fts = require"lspinstall/servers".tailwindcss.default_config
+                         .filetypes
 for _, filetype in ipairs(tailwind_fts) do
   if languages[filetype] then
-    table.insert(languages[filetype], rustywind)
+    table.insert(languages[filetype], 1, rustywind)
   else
     languages[filetype] = { rustywind }
   end

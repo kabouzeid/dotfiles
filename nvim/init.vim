@@ -22,8 +22,10 @@ set background=dark
 " let g:sonokai_enable_italic = 1
 " colorscheme sonokai
 
-let g:palenight_terminal_italics=1
-colorscheme palenight
+" let g:palenight_terminal_italics=1
+" colorscheme palenight
+
+colorscheme tokyonight
 
 set guifont=JetBrains\ Mono,nonicon,codicon,3270Medium\ Nerd\ Font
 
@@ -57,7 +59,7 @@ set ruler
 set shortmess+=atIc
 " Show the (partial) command as it’s being typed
 set showcmd
-" Hide the mode, it's already shown by the airline plugin
+" Hide the mode, it's already shown in the statusline
 set noshowmode
 set lazyredraw
 set ignorecase

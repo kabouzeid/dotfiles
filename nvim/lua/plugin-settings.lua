@@ -192,11 +192,11 @@ do
   vim.g.nvim_tree_add_trailing = 1
   -- vim.g.nvim_tree_follow = 1
 
-  vim.cmd([[highlight NvimTreeGitDirty guifg=]] .. vim.g.terminal_color_11) -- orange
-  vim.cmd([[highlight NvimTreeGitMerge guifg=]] .. vim.g.terminal_color_9) -- dark red
-  vim.cmd [[highlight link NvimTreeCursorLine CurrentWord]]
-  vim.cmd [[highlight link NvimTreeFolderName NONE]]
-  vim.cmd [[highlight link NvimTreeEmptyFolderName NONE]]
+  -- vim.cmd([[highlight NvimTreeGitDirty guifg=]] .. vim.g.terminal_color_11) -- orange
+  -- vim.cmd([[highlight NvimTreeGitMerge guifg=]] .. vim.g.terminal_color_9) -- dark red
+  -- vim.cmd [[highlight link NvimTreeCursorLine CurrentWord]]
+  -- vim.cmd [[highlight link NvimTreeFolderName NONE]]
+  -- vim.cmd [[highlight link NvimTreeEmptyFolderName NONE]]
   -- vim.cmd([[highlight NvimTreeFolderName guifg=]] .. vim.g.terminal_color_4) -- blue
   -- vim.cmd([[highlight NvimTreeEmptyFolderName guifg=]] .. vim.g.terminal_color_4) -- blue
 
@@ -273,3 +273,80 @@ require("telescope").load_extension("dap")
 ---------
 
 require("neogit").setup()
+
+--------------
+-- lsp-trouble
+--------------
+
+require"trouble".setup {
+  signs = {
+    error = "",
+    warning = "",
+    hint = "",
+    information = "",
+    other = ""
+  }
+}
+
+----------
+-- lualine
+----------
+
+local function lsp_servers_status()
+  local clients = vim.lsp.buf_get_clients(0)
+  if vim.tbl_isempty(clients) then return "" end
+
+  local client_names = {}
+  for _, client in pairs(clients) do table.insert(client_names, client.name) end
+
+  return " " .. table.concat(client_names, "|")
+end
+
+require("lualine").setup {
+  options = { theme = "tokyonight" },
+  sections = {
+    lualine_a = { "mode" },
+    lualine_b = {
+      "branch", {
+        "diff",
+        color_added = "#449dab",
+        color_modified = "#6183bb",
+        color_removed = "#914c54"
+      }
+    },
+    lualine_c = { "filename" },
+    lualine_x = {
+      {
+        "diagnostics",
+        sources = { "nvim_lsp" },
+        color_error = "#db4b4b",
+        color_warn = "#e0af68",
+        color_info = "#0db9d7"
+      }
+    },
+    lualine_y = {
+      {
+        "encoding",
+        condition = function()
+          -- when filencoding="" lualine would otherwise report utf-8 anyways
+          return vim.bo.fileencoding and #vim.bo.fileencoding > 0 and
+                     vim.bo.fileencoding ~= "utf-8"
+        end
+      }, {
+        "fileformat",
+        condition = function() return vim.bo.fileformat ~= "unix" end,
+        icons_enabled = false
+      }, { "filetype", icons_enabled = false }
+    },
+    lualine_z = { lsp_servers_status }
+  },
+  inactive_sections = {
+    lualine_a = {},
+    lualine_b = {},
+    lualine_c = { "filename" },
+    lualine_x = {},
+    lualine_y = {},
+    lualine_z = {}
+  },
+  extensions = { "nvim-tree" }
+}

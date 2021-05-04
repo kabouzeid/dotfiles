@@ -9,6 +9,7 @@ require"packer".startup(function(use)
   use "neovim/nvim-lspconfig"
   use "~/Code/nvim-lspinstall"
   use "kosayoda/nvim-lightbulb"
+  use "folke/lsp-trouble.nvim"
 
   -- Completion
   use "hrsh7th/nvim-compe"
@@ -35,7 +36,7 @@ require"packer".startup(function(use)
   use "tpope/vim-sleuth" -- auto indentation detection
 
   -- UI
-  use "itchyny/lightline.vim"
+	use "hoob3rt/lualine.nvim"
   use "junegunn/goyo.vim" -- distraction free writing
   use "akinsho/nvim-toggleterm.lua"
 
@@ -74,6 +75,7 @@ require"packer".startup(function(use)
 
   -- Misc
   use { "prettier/vim-prettier", run = "yarn install" }
+  use 'marcushwz/nvim-workbench'
 
   -- Experimenting
   use "tpope/vim-unimpaired"

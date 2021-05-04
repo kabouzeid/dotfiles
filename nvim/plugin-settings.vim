@@ -20,8 +20,10 @@ function! s:goyo_leave()
   set signcolumn=yes
 endfunction
 
-autocmd! User GoyoEnter nested call <SID>goyo_enter()
-autocmd! User GoyoLeave nested call <SID>goyo_leave()
+augroup Goyo
+  autocmd! User GoyoEnter nested call <SID>goyo_enter()
+  autocmd! User GoyoLeave nested call <SID>goyo_leave()
+augroup END
 
 
 "--------
@@ -39,84 +41,12 @@ if has('macunix') " macOS only
 endif
 let g:vimtex_quickfix_open_on_warning = 0
 
-"--------
-" Lightline
-"--------
-
-augroup GutentagsStatusLineRefresher
-  autocmd!
-  autocmd User GutentagsUpdating call lightline#update()
-  autocmd User GutentagsUpdated call lightline#update()
-augroup END
-
-function! LightlineTreeSitter() abort
-  let status = nvim_treesitter#statusline(90)
-  if status == v:null || status == '' | return '' | endif
-  return ' ' . status
-endfunction
-
-function! LightlineGit() abort
-  let branch = get(b:,'gitsigns_head','')
-  if branch == '' | return '' | endif
-  let status = get(b:,'gitsigns_status','')
-  let separator = status == '' ? '' : ' '
-  return " " . branch . separator . status
-endfunction
-
-function! LightlineCondEncoding() abort
-  return &encoding == 'utf-8' ? '' : &encoding
-endfunction
-
-function! LightlineCondFormat() abort
-  return &fileformat == "unix" ? '' : &fileformat
-endfunction
-
-function! LightlineLspStatus() abort
-  return v:lua.require'lightline'.lsp_status()
-endfunction
-
-function! LightlineLspServers() abort
-  return v:lua.require'lightline'.lsp_servers()
-endfunction
-
-let g:lightline = {
-      \ 'colorscheme': 'palenight',
-      \ 'active': {
-      \     'left': [
-      \         [ 'mode', 'paste' ],
-      \         [ 'gitbranch', 'readonly', 'fileformat', 'fileencoding', 'filename', 'modified' ],
-      \         [ 'gutentags_status' ],
-      \     ],
-      \     'right': [
-      \         [ 'lspservers' ],
-      \         [ 'filetype' ],
-      \         [ 'lspstatus' ],
-      \     ]
-      \ },
-      \ 'component_function': {
-      \     'gitbranch': 'LightlineGit',
-      \     'treesitter': 'LightlineTreeSitter',
-      \     'lspservers': 'LightlineLspServers',
-      \     'fileformat': 'LightlineCondFormat',
-      \     'fileencoding': 'LightlineCondEncoding',
-      \ },
-      \ 'component_expand': {
-      \     'lspstatus': 'LightlineLspStatus',
-      \ },
-      \ }
-
 "---------
 " NvimTree
 "---------
 
 nnoremap <leader>tt <cmd>NvimTreeToggle<cr>
 nnoremap <leader>tf <cmd>NvimTreeFindFile<cr>
-
-let g:chadtree_settings =
-      \ {
-      \ 'theme.icon_glyph_set': 'ascii',
-      \ 'options.mimetypes.warn': [],
-      \ }
 
 "-----
 " GTFO
@@ -130,26 +60,6 @@ let g:gtfo#terminals = { 'mac': 'kitty' }
 let g:gutentags_ctags_exclude = ['.ccls-cache']
 
 
-"----
-" FZF
-"----
-let g:fzf_colors = {
-      \ 'fg':      ['fg', 'Normal'],
-      \ 'bg':      ['bg', 'Normal'],
-      \ 'hl':      ['fg', 'Comment'],
-      \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
-      \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
-      \ 'hl+':     ['fg', 'Statement'],
-      \ 'info':    ['fg', 'PreProc'],
-      \ 'border':  ['fg', 'Ignore'],
-      \ 'prompt':  ['fg', 'Conditional'],
-      \ 'pointer': ['fg', 'Exception'],
-      \ 'marker':  ['fg', 'Keyword'],
-      \ 'spinner': ['fg', 'Label'],
-      \ 'header':  ['fg', 'Comment']
-      \}
-
-
 "-------
 " Packer
 "-------
@@ -158,6 +68,7 @@ augroup Packer
   autocmd!
   autocmd BufWritePost plugins.lua PackerCompile
 augroup END
+
 
 "----------
 " Telescope
@@ -168,3 +79,12 @@ nnoremap <leader>fd <cmd>Telescope file_browser<cr>
 nnoremap <leader>fg <cmd>Telescope live_grep<cr>
 nnoremap <leader>fb <cmd>Telescope buffers<cr>
 nnoremap <leader>fh <cmd>Telescope help_tags<cr>
+
+
+"---------------
+" nvim-workbench
+"---------------
+
+nmap <leader>bp <Plug>ToggleProjectWorkbench
+nmap <leader>bb <Plug>ToggleBranchWorkbench
+let g:workbench_storage_path = stdpath('data') . '/workbench/'
