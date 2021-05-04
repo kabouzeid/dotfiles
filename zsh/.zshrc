@@ -1,20 +1,21 @@
-# My environment variables
-# export JAVA_HOME="$(/usr/libexec/java_home)"
-export ANDROID_SDK_ROOT="/Users/karim/Library/Android/sdk"
-export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
-export GOPATH="$HOME/Code/go"
-export PATH="$GOPATH/bin:$PATH"
 export PATH="/usr/local/bin:$PATH"
 export PATH="/usr/local/sbin:$PATH"
 export PATH="$HOME/bin:$PATH"
+
+# yarn
+export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+
+# composer
 export PATH="$PATH:$HOME/.composer/vendor/bin"
+
+# cargo
 export PATH="$PATH:$HOME/.cargo/bin"
 
-# for fastlane set UTF-8
-export LC_ALL=en_US.UTF-8
-export LANG=en_US.UTF-8
+# go
+export GOPATH="$HOME/Code/go"
+export PATH="$GOPATH/bin:$PATH"
 
-eval "$(rbenv init - zsh)"
+export LANG=en_US.UTF-8
 
 . /usr/local/etc/profile.d/z.sh
 
@@ -24,7 +25,7 @@ export ZSH=~/.oh-my-zsh
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-ZSH_THEME="" # we're using 'pure'
+ZSH_THEME="gentoo"
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -74,12 +75,6 @@ plugins=(osx git brew colored-man-pages sudo tmux zsh-autosuggestions fast-synta
 
 source $ZSH/oh-my-zsh.sh
 
-autoload -U promptinit; promptinit
-prompt pure
-
-zstyle :prompt:pure:git:stash show yes
-zstyle :prompt:pure:prompt:success color cyan
-
 # User configuration
 
 # export MANPATH="/usr/local/man:$MANPATH"
@@ -110,33 +105,23 @@ fi
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias e=$EDITOR
-alias sudoedit="sudo -e"
-alias diff="colordiff"
-alias nproc="sysctl -n hw.ncpu"
 alias nvim_debug="VIMRUNTIME=~/Code/neovim/runtime ~/Code/neovim/build/bin/nvim"
+
+if [ uname = "Darwin" ] ; then
+  alias nproc="sysctl -n hw.ncpu"
+  alias sudoedit="sudo -e"
+  alias diff="colordiff"
+fi
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-export LSCOLORS="Gxfxcxdxbxegedabagacad"
-export LS_COLORS="di=1;36:ln=35:so=32:pi=33:ex=31:bd=34;46:cd=34;43:su=30;41:sg=30;46:tw=30;42:ow=30;43"
-zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
-
 unalias gap
-
-test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
-
-swift-sh-editor() {
-  if [ $# -ne 1 ] ; then
-    echo "Usage: $0 script" >&2
-    return 1
-  fi
-  if ! [ -e "$1" ] ; then
-    touch "$1"
-  fi
-  swift sh editor "$1"
-}
-alias se=swift-sh-editor
 
 if [ $TERM = "xterm-kitty" ] ; then
   alias ssh="kitty +kitten ssh"
 fi
+
+# node version manager
+# export NVM_DIR="$HOME/.nvm"
+# [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+# [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
