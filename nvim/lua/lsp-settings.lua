@@ -44,6 +44,8 @@ vim.fn.sign_define("LspDiagnosticsSignInformation",
 
 vim.fn.sign_define("LspDiagnosticsSignHint", { text = "", texthl = "LspDiagnosticsSignHint" })
 
+require('lsp-codelens').setup()
+
 -- keymaps
 local on_attach = function(client, bufnr)
   local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
@@ -75,6 +77,7 @@ local on_attach = function(client, bufnr)
                  opts)
   buf_set_keymap("n", "<Leader>P", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
   buf_set_keymap("v", "<Leader>p", "<cmd>lua vim.lsp.buf.range_formatting()<CR>", opts)
+  buf_set_keymap("n", "<Leader>l", "<cmd>lua require'lsp-codelens'.buf_codelens_action()<CR>", opts)
 
   -- Set autocommands conditional on server_capabilities
   if client.resolved_capabilities.document_highlight then
@@ -85,6 +88,15 @@ local on_attach = function(client, bufnr)
       autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()
     augroup END
     ]], false)
+  end
+
+  if client.resolved_capabilities.code_lens then
+    vim.cmd[[
+    augroup lsp_codelens
+      autocmd! * <buffer>
+      autocmd CursorHold,CursorHoldI,InsertLeave <buffer> lua require"lsp-codelens".buf_codelens_refresh()
+    augroup END
+    ]]
   end
 end
 
@@ -138,10 +150,10 @@ local function setup_servers()
     -- language specific config
     if server == "lua" then config.settings = lua_settings end
     if server == "sourcekit" then
-      config.filetypes = { "swift", "objective-c", "objective-cpp" }; -- we don't want c and cpp!
+      config.filetypes = { "swift", "objective-c", "objective-cpp" } -- we don't want c and cpp!
     end
     if server == "clangd" then
-      config.filetypes = { "c", "cpp" }; -- we don't want objective-c and objective-cpp!
+      config.filetypes = { "c", "cpp" } -- we don't want objective-c and objective-cpp!
     end
     if server == "efm" then config = vim.tbl_extend("force", config, require "efm") end
     if server == "diagnosticls" then

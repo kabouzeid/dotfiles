@@ -48,8 +48,6 @@ end
 _G.tab_complete = function()
   if vim.fn.pumvisible() == 1 then
     return t "<C-n>"
-  elseif vim.fn.call("vsnip#available", { 1 }) == 1 then
-    return t "<Plug>(vsnip-expand-or-jump)"
   elseif check_back_space() then
     return t "<Tab>"
   else
@@ -59,8 +57,6 @@ end
 _G.s_tab_complete = function()
   if vim.fn.pumvisible() == 1 then
     return t "<C-p>"
-  elseif vim.fn.call("vsnip#jumpable", { -1 }) == 1 then
-    return t "<Plug>(vsnip-jump-prev)"
   else
     return t "<S-Tab>"
   end
@@ -302,6 +298,35 @@ local function lsp_servers_status()
   return " " .. table.concat(client_names, "|")
 end
 
+local function lsp_messages()
+  local msgs = {}
+
+  for _, msg in ipairs(vim.lsp.util.get_progress_messages()) do
+    local content
+    if msg.progress then
+      content = msg.title
+      if msg.message then content = content .. ' ' .. msg.message end
+      if msg.percentage then content = content .. ' (' .. msg.percentage .. '%%)' end
+    elseif msg.status then
+      content = msg.content
+      if msg.uri then
+        local filename = vim.uri_to_fname(msg.uri)
+        filename = vim.fn.fnamemodify(filename, ':~:.')
+        local space = math.min(60, math.floor(0.6 * vim.fn.winwidth(0)))
+        if #filename > space then filename = vim.fn.pathshorten(filename) end
+
+        content = '(' .. filename .. ') ' .. content
+      end
+    else
+      content = msg.content
+    end
+
+    table.insert(msgs, '[' .. msg.name .. '] ' .. content)
+  end
+
+  return table.concat(msgs, ' | ')
+end
+
 require("lualine").setup {
   options = { theme = "tokyonight" },
   sections = {
@@ -316,6 +341,7 @@ require("lualine").setup {
     },
     lualine_c = { "filename" },
     lualine_x = {
+      lsp_messages,
       {
         "diagnostics",
         sources = { "nvim_lsp" },

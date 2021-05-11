@@ -1,18 +1,20 @@
 [core]
 	excludesfile = ~/.gitignore_global
 	autocrlf = input
+	pager = delta
+[interactive]
+	diffFilter = delta --color-only
+[delta]
+	features = line-numbers decorations
+	syntax-theme = Monokai Extended
+	navigate = true
+[delta "decorations"]
+	commit-decoration-style = bold yellow box ul
+	file-style = bold yellow ul
+	file-decoration-style = none
+	hunk-header-decoration-style = yellow box
 [alias]
 	ignore = "!gi() { curl -L -s https://www.gitignore.io/api/$@ ;}; gi"
-	worddiff = "!git diff --color | diff-highlight"
-[merge]
-	tool = intellij
-[mergetool "intellij"]
-	cmd = /usr/local/bin/idea merge $(cd $(dirname "$LOCAL") && pwd)/$(basename "$LOCAL") $(cd $(dirname "$REMOTE") && pwd)/$(basename "$REMOTE") $(cd $(dirname "$BASE") && pwd)/$(basename "$BASE") $(cd $(dirname "$MERGED") && pwd)/$(basename "$MERGED")
-	trustExitCode = false
-[diff]
-	tool = intellij
-[difftool "intellij"]
-	cmd = /usr/local/bin/idea diff $(cd $(dirname "$LOCAL") && pwd)/$(basename "$LOCAL") $(cd $(dirname "$REMOTE") && pwd)/$(basename "$REMOTE")
 [user]
 	name = Karim Abou Zeid
 	email = karim23697@gmail.com

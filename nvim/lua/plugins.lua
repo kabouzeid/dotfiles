@@ -36,7 +36,7 @@ require"packer".startup(function(use)
   use "tpope/vim-sleuth" -- auto indentation detection
 
   -- UI
-	use "hoob3rt/lualine.nvim"
+  use "hoob3rt/lualine.nvim"
   use "junegunn/goyo.vim" -- distraction free writing
   use "akinsho/nvim-toggleterm.lua"
 
@@ -53,7 +53,7 @@ require"packer".startup(function(use)
   use "justinmk/vim-gtfo" -- open file in system explorer/terminal
   use "kyazdani42/nvim-tree.lua"
   use "kyazdani42/nvim-web-devicons"
-  use "yamatsum/nvim-web-nonicons"
+  use "yamatsum/nvim-nonicons"
 
   -- Git
   use { "lewis6991/gitsigns.nvim", requires = "nvim-lua/plenary.nvim" }
