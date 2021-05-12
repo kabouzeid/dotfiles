@@ -1,3 +1,5 @@
+local icons = require("nvim-nonicons")
+
 --------
 -- compe
 --------
@@ -25,13 +27,11 @@ require"compe".setup {
     tags = true,
     -- treesitter = true;
     tmux = true,
-    latex_symbols = true
-  }
+    latex_symbols = true,
+  },
 }
 
-local t = function(str)
-  return vim.api.nvim_replace_termcodes(str, true, true, true)
-end
+local t = function(str) return vim.api.nvim_replace_termcodes(str, true, true, true) end
 
 local check_back_space = function()
   local col = vim.fn.col(".") - 1
@@ -61,10 +61,8 @@ end
 
 vim.api.nvim_set_keymap("i", "<Tab>", "v:lua.tab_complete()", { expr = true })
 vim.api.nvim_set_keymap("s", "<Tab>", "v:lua.tab_complete()", { expr = true })
-vim.api.nvim_set_keymap("i", "<S-Tab>", "v:lua.s_tab_complete()",
-                        { expr = true })
-vim.api.nvim_set_keymap("s", "<S-Tab>", "v:lua.s_tab_complete()",
-                        { expr = true })
+vim.api.nvim_set_keymap("i", "<S-Tab>", "v:lua.s_tab_complete()", { expr = true })
+vim.api.nvim_set_keymap("s", "<S-Tab>", "v:lua.s_tab_complete()", { expr = true })
 
 vim.api.nvim_set_keymap("i", "<C-Space>", "compe#complete()",
                         { expr = true, silent = true, noremap = true })
@@ -81,10 +79,7 @@ vim.api.nvim_set_keymap("i", "<C-d>", "compe#scroll({ 'delta': -4 })",
 -- treesitter
 -------------
 
-require"nvim-treesitter.configs".setup {
-  highlight = { enable = true },
-  indent = { enable = true }
-}
+require"nvim-treesitter.configs".setup { highlight = { enable = true }, indent = { enable = true } }
 
 ----------------
 -- tmux-complete
@@ -94,15 +89,13 @@ do
   local compe = require "compe"
   local Source = {}
 
-  function Source.get_metadata(_)
-    return { priority = 10, dup = 0, menu = "[Tmux]" }
-  end
+  function Source.get_metadata(_) return { priority = 10, dup = 0, menu = "[Tmux]" } end
 
   function Source.determine(_, context) return compe.helper.determine(context) end
 
   function Source.complete(_, context)
     vim.fn["tmuxcomplete#async#gather_candidates"](
-        function(items) context.callback({ items = items }) end)
+      function(items) context.callback({ items = items }) end)
   end
 
   compe.register_source("tmux", Source)
@@ -128,7 +121,7 @@ function _G.update_lightbulb()
   require"nvim-lightbulb".update_lightbulb {
     sign = { enabled = false },
     float = { enabled = false },
-    virtual_text = { enabled = true }
+    virtual_text = { enabled = true },
   }
 end
 
@@ -140,9 +133,7 @@ vim.cmd [[autocmd CursorHold,CursorHoldI * lua update_lightbulb()]]
 
 function _G.lsp_reinstall_all()
   local lspinstall = require "lspinstall"
-  for _, server in ipairs(lspinstall.installed_servers()) do
-    lspinstall.install_server(server)
-  end
+  for _, server in ipairs(lspinstall.installed_servers()) do lspinstall.install_server(server) end
 end
 
 vim.cmd [[command! -nargs=0 LspReinstallAll call v:lua.lsp_reinstall_all()]]
@@ -151,67 +142,66 @@ vim.cmd [[command! -nargs=0 LspReinstallAll call v:lua.lsp_reinstall_all()]]
 -- nvim-tree
 ------------
 
-do
-  local icons = require("nvim-nonicons")
-  vim.g.nvim_tree_icons = {
-    default = icons.get("file"),
-    symlink = icons.get("file-symlink"),
-    git = {
-      -- unstaged = icons.get("diff-modified"),
-      -- staged = icons.get("check-circle"),
-      -- unmerged = icons.get("git-merge"),
-      -- renamed = icons.get("diff-renamed"),
-      -- untracked = icons.get("diff-added"),
-      -- deleted = icons.get("diff-removed"),
-      -- ignored = icons.get("diff-ignored")
-      unstaged = "M",
-      staged = "S",
-      unmerged = icons.get("git-merge"),
-      renamed = "R",
-      untracked = "U",
-      deleted = "D",
-      ignored = "I"
-    },
-    folder = {
-      default = icons.get("file-directory"),
-      open = icons.get("file-directory-outline"),
-      empty = icons.get("file-directory-outline"),
-      empty_open = icons.get("file-directory-outline"),
-      symlink = icons.get("file-submodule"),
-      symlink_open = icons.get("file-submodule")
-    }
-  }
-  vim.g.nvim_tree_group_empty = 1
-  vim.g.nvim_tree_add_trailing = 1
-  -- vim.g.nvim_tree_follow = 1
+vim.g.nvim_tree_icons = {
+  default = icons.get("file"),
+  symlink = icons.get("file-symlink"),
+  git = {
+    -- unstaged = icons.get("diff-modified"),
+    -- staged = icons.get("check-circle"),
+    -- unmerged = icons.get("git-merge"),
+    -- renamed = icons.get("diff-renamed"),
+    -- untracked = icons.get("diff-added"),
+    -- deleted = icons.get("diff-removed"),
+    -- ignored = icons.get("diff-ignored")
+    unstaged = "M",
+    staged = "S",
+    unmerged = icons.get("git-merge"),
+    renamed = "R",
+    untracked = "U",
+    deleted = "D",
+    ignored = "I",
+  },
+  folder = {
+    default = icons.get("chevron-right"),
+    open = icons.get("chevron-down"),
+    empty = icons.get("chevron-right"),
+    empty_open = icons.get("chevron-down"),
+    symlink = icons.get("chevron-right"),
+    symlink_open = icons.get("chevron-down"),
+  },
+  lsp = { error = "", warning = "", info = "", hint = "" },
+}
 
-  -- vim.cmd([[highlight NvimTreeGitDirty guifg=]] .. vim.g.terminal_color_11) -- orange
-  -- vim.cmd([[highlight NvimTreeGitMerge guifg=]] .. vim.g.terminal_color_9) -- dark red
-  -- vim.cmd [[highlight link NvimTreeCursorLine CurrentWord]]
-  -- vim.cmd [[highlight link NvimTreeFolderName NONE]]
-  -- vim.cmd [[highlight link NvimTreeEmptyFolderName NONE]]
-  -- vim.cmd([[highlight NvimTreeFolderName guifg=]] .. vim.g.terminal_color_4) -- blue
-  -- vim.cmd([[highlight NvimTreeEmptyFolderName guifg=]] .. vim.g.terminal_color_4) -- blue
+vim.g.nvim_tree_group_empty = 1
+vim.g.nvim_tree_add_trailing = 1
+-- vim.g.nvim_tree_follow = 1
 
-  -- function _G.auto_refresh_nvim_tree()
-  --   local tree = require "nvim-tree.lib"
-  --   if _G.nvim_tree_refresh_timer_id and
-  --       not vim.tbl_isempty(vim.fn.timer_info(_G.nvim_tree_refresh_timer_id)) then
-  --     return
-  --   end
-  --   _G.nvim_tree_refresh_timer_id = vim.fn.timer_start(2000, function(_)
-  --     if tree.win_open() then
-  --       tree.refresh_tree()
-  --     else
-  --       vim.fn.timer_stop(_G.nvim_tree_refresh_timer_id)
-  --       _G.nvim_tree_refresh_timer_id = nil
-  --     end
-  --   end, { ["repeat"] = -1 })
-  -- end
-  -- vim.api.nvim_command [[augroup nvimtree]]
-  -- vim.api.nvim_command [[autocmd Filetype NvimTree lua auto_refresh_nvim_tree()]]
-  -- vim.api.nvim_command [[augroup END]]
-end
+-- vim.cmd([[highlight NvimTreeGitDirty guifg=]] .. vim.g.terminal_color_11) -- orange
+-- vim.cmd([[highlight NvimTreeGitMerge guifg=]] .. vim.g.terminal_color_9) -- dark red
+-- vim.cmd [[highlight link NvimTreeCursorLine CurrentWord]]
+-- vim.cmd [[highlight link NvimTreeFolderName NONE]]
+-- vim.cmd [[highlight link NvimTreeEmptyFolderName NONE]]
+-- vim.cmd([[highlight NvimTreeFolderName guifg=]] .. vim.g.terminal_color_4) -- blue
+-- vim.cmd([[highlight NvimTreeEmptyFolderName guifg=]] .. vim.g.terminal_color_4) -- blue
+
+-- function _G.auto_refresh_nvim_tree()
+--   local tree = require "nvim-tree.lib"
+--   if _G.nvim_tree_refresh_timer_id and
+--       not vim.tbl_isempty(vim.fn.timer_info(_G.nvim_tree_refresh_timer_id)) then
+--     return
+--   end
+--   _G.nvim_tree_refresh_timer_id = vim.fn.timer_start(2000, function(_)
+--     if tree.win_open() then
+--       tree.refresh_tree()
+--     else
+--       vim.fn.timer_stop(_G.nvim_tree_refresh_timer_id)
+--       _G.nvim_tree_refresh_timer_id = nil
+--     end
+--   end, { ["repeat"] = -1 })
+-- end
+-- vim.api.nvim_command [[augroup nvimtree]]
+-- vim.api.nvim_command [[autocmd Filetype NvimTree lua auto_refresh_nvim_tree()]]
+-- vim.api.nvim_command [[augroup END]]
 
 -----------------
 ---- lspkind-nvim
@@ -256,9 +246,7 @@ end
 ------------
 
 local actions = require("telescope.actions")
-require("telescope").setup {
-  defaults = { mappings = { i = { ["<esc>"] = actions.close } } }
-}
+require("telescope").setup { defaults = { mappings = { i = { ["<esc>"] = actions.close } } } }
 require("telescope").load_extension("dap")
 
 ---------
@@ -272,13 +260,7 @@ require("neogit").setup()
 --------------
 
 require"trouble".setup {
-  signs = {
-    error = "",
-    warning = "",
-    information = "",
-    hint = "",
-    other = ""
-  }
+  signs = { error = icons.get("x-circle"), warning = icons.get("alert"), information = icons.get("info"), hint = icons.get("comment"), other = icons.get("circle") },
 }
 
 ----------
@@ -292,7 +274,7 @@ local function lsp_servers_status()
   local client_names = {}
   for _, client in pairs(clients) do table.insert(client_names, client.name) end
 
-  return " " .. table.concat(client_names, "|")
+  return icons.get("zap") .. " " .. table.concat(client_names, "|")
 end
 
 local function lsp_messages()
@@ -302,26 +284,26 @@ local function lsp_messages()
     local content
     if msg.progress then
       content = msg.title
-      if msg.message then content = content .. ' ' .. msg.message end
-      if msg.percentage then content = content .. ' (' .. msg.percentage .. '%%)' end
+      if msg.message then content = content .. " " .. msg.message end
+      if msg.percentage then content = content .. " (" .. msg.percentage .. "%%)" end
     elseif msg.status then
       content = msg.content
       if msg.uri then
         local filename = vim.uri_to_fname(msg.uri)
-        filename = vim.fn.fnamemodify(filename, ':~:.')
+        filename = vim.fn.fnamemodify(filename, ":~:.")
         local space = math.min(60, math.floor(0.6 * vim.fn.winwidth(0)))
         if #filename > space then filename = vim.fn.pathshorten(filename) end
 
-        content = '(' .. filename .. ') ' .. content
+        content = "(" .. filename .. ") " .. content
       end
     else
       content = msg.content
     end
 
-    table.insert(msgs, '[' .. msg.name .. '] ' .. content)
+    table.insert(msgs, "[" .. msg.name .. "] " .. content)
   end
 
-  return table.concat(msgs, ' | ')
+  return table.concat(msgs, " | ")
 end
 
 require("lualine").setup {
@@ -329,39 +311,41 @@ require("lualine").setup {
   sections = {
     lualine_a = { "mode" },
     lualine_b = {
-      { "branch", icon = "" }, {
-        "diff",
-        color_added = "#449dab",
-        color_modified = "#6183bb",
-        color_removed = "#914c54"
-      }
+      { "branch", icon = icons.get("git-branch") },
+      { "diff", color_added = "#449dab", color_modified = "#6183bb", color_removed = "#914c54" },
     },
-    lualine_c = { "filename" },
+    lualine_c = { { "filename", path = 1 } },
     lualine_x = {
       lsp_messages,
       {
         "diagnostics",
+        symbols = {
+          error = icons.get("x-circle") .. " ",
+          warn = icons.get("alert") .. " ",
+          info = icons.get("info") .. " ",
+        },
         sources = { "nvim_lsp" },
         color_error = "#db4b4b",
         color_warn = "#e0af68",
-        color_info = "#0db9d7"
-      }
+        color_info = "#0db9d7",
+      },
     },
     lualine_y = {
       {
         "encoding",
         condition = function()
           -- when filencoding="" lualine would otherwise report utf-8 anyways
-          return vim.bo.fileencoding and #vim.bo.fileencoding > 0 and
-                     vim.bo.fileencoding ~= "utf-8"
-        end
-      }, {
+          return vim.bo.fileencoding and #vim.bo.fileencoding > 0 and vim.bo.fileencoding ~= "utf-8"
+        end,
+      },
+      {
         "fileformat",
         condition = function() return vim.bo.fileformat ~= "unix" end,
-        icons_enabled = false
-      }, { "filetype", icons_enabled = false }
+        icons_enabled = false,
+      },
+      { "filetype", icons_enabled = false },
     },
-    lualine_z = { lsp_servers_status }
+    lualine_z = { lsp_servers_status },
   },
   inactive_sections = {
     lualine_a = {},
@@ -369,7 +353,7 @@ require("lualine").setup {
     lualine_c = { "filename" },
     lualine_x = {},
     lualine_y = {},
-    lualine_z = {}
+    lualine_z = {},
   },
-  extensions = { "nvim-tree" }
+  extensions = { "nvim-tree" },
 }

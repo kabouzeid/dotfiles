@@ -25,6 +25,8 @@ require"packer".startup(function(use)
   use "drewtempelmeyer/palenight.vim"
   use "folke/tokyonight.nvim"
   use "norcalli/nvim-colorizer.lua"
+	use "tjdevries/colorbuddy.vim"
+	use "Th3Whit3Wolf/spacebuddy"
 
   -- Edit
   use "tpope/vim-surround" -- vim objects for brackets etc

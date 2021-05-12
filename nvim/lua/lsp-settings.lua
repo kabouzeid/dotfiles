@@ -34,15 +34,16 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] =
       ...)
   end
 
-vim.fn.sign_define("LspDiagnosticsSignError", { text = "", texthl = "LspDiagnosticsSignError" })
+local icons = require("nvim-nonicons")
+vim.fn.sign_define("LspDiagnosticsSignError", { text = icons.get("x-circle"), texthl = "LspDiagnosticsSignError" })
 
 vim.fn.sign_define("LspDiagnosticsSignWarning",
-                   { text = "", texthl = "LspDiagnosticsSignWarning" })
+                   { text = icons.get("alert"), texthl = "LspDiagnosticsSignWarning" })
 
 vim.fn.sign_define("LspDiagnosticsSignInformation",
-                   { text = "", texthl = "LspDiagnosticsSignInformation" })
+                   { text = icons.get("info"), texthl = "LspDiagnosticsSignInformation" })
 
-vim.fn.sign_define("LspDiagnosticsSignHint", { text = "", texthl = "LspDiagnosticsSignHint" })
+vim.fn.sign_define("LspDiagnosticsSignHint", { text = icons.get("comment"), texthl = "LspDiagnosticsSignHint" })
 
 require('lsp-codelens').setup()
 
