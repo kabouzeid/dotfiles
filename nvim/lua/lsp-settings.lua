@@ -29,13 +29,13 @@ require("vim.lsp.protocol").CompletionItemKind = {
 }
 
 vim.lsp.handlers["textDocument/publishDiagnostics"] =
-  function(...)
-    vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, { virtual_text = { prefix = "●" } })(
-      ...)
-  end
+  vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, { virtual_text = { prefix = "●" } })
+
+vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "single" })
 
 local icons = require("nvim-nonicons")
-vim.fn.sign_define("LspDiagnosticsSignError", { text = icons.get("x-circle"), texthl = "LspDiagnosticsSignError" })
+vim.fn.sign_define("LspDiagnosticsSignError",
+                   { text = icons.get("x-circle"), texthl = "LspDiagnosticsSignError" })
 
 vim.fn.sign_define("LspDiagnosticsSignWarning",
                    { text = icons.get("alert"), texthl = "LspDiagnosticsSignWarning" })
@@ -43,9 +43,10 @@ vim.fn.sign_define("LspDiagnosticsSignWarning",
 vim.fn.sign_define("LspDiagnosticsSignInformation",
                    { text = icons.get("info"), texthl = "LspDiagnosticsSignInformation" })
 
-vim.fn.sign_define("LspDiagnosticsSignHint", { text = icons.get("comment"), texthl = "LspDiagnosticsSignHint" })
+vim.fn.sign_define("LspDiagnosticsSignHint",
+                   { text = icons.get("comment"), texthl = "LspDiagnosticsSignHint" })
 
-require('lsp-codelens').setup()
+require("lsp-codelens").setup()
 
 -- keymaps
 local on_attach = function(client, bufnr)
@@ -92,7 +93,7 @@ local on_attach = function(client, bufnr)
   end
 
   if client.resolved_capabilities.code_lens then
-    vim.cmd[[
+    vim.cmd [[
     augroup lsp_codelens
       autocmd! * <buffer>
       autocmd CursorHold,CursorHoldI,InsertLeave <buffer> lua require"lsp-codelens".buf_codelens_refresh()
@@ -149,7 +150,14 @@ local function setup_servers()
     local config = make_config()
 
     -- language specific config
-    if server == "lua" then config.settings = lua_settings end
+    if server == "lua" then
+      config.settings = lua_settings
+      config.root_dir = function (fname)
+        if fname:match("lush_theme") ~= nil then return nil end
+        local util = require 'lspconfig/util'
+        return util.find_git_ancestor(fname) or util.path.dirname(fname)
+      end
+    end
     if server == "sourcekit" then
       config.filetypes = { "swift", "objective-c", "objective-cpp" } -- we don't want c and cpp!
     end

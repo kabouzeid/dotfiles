@@ -16,18 +16,33 @@ set termguicolors
 set background=dark
 
 " let g:sonokai_style = 'maia'
-" let g:sonokai_diagnostic_line_highlight = 1
-" let g:sonokai_diagnostic_virtual_text = 'colored'
-" let g:sonokai_sign_column_background = 'none'
-" let g:sonokai_enable_italic = 1
+let g:sonokai_diagnostic_line_highlight = 1
+let g:sonokai_diagnostic_virtual_text = 'colored'
+let g:sonokai_sign_column_background = 'none'
+let g:sonokai_enable_italic = 1
 " colorscheme sonokai
 
-" let g:palenight_terminal_italics=1
+let g:palenight_terminal_italics=1
 " colorscheme palenight
 
-colorscheme tokyonight
+" colorscheme tokyonight
 
-set guifont=JetBrains\ Mono,nonicon,codicon,3270Medium\ Nerd\ Font
+let ayucolor='mirage'
+" colorscheme ayu
+
+let g:one_allow_italics = 1
+
+let g:onedark_terminal_italics = 1
+
+let g:everforest_background = 'hard'
+
+let g:gruvbox_material_background = 'hard'
+
+let g:edge_style = 'dark'
+
+colorscheme jellybeans
+
+set guifont=MonoLisa,nonicon,codicon,3270Medium\ Nerd\ Font
 
 " ###
 

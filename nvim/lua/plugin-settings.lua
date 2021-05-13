@@ -1,8 +1,9 @@
+-- vim:foldmethod=marker
+
 local icons = require("nvim-nonicons")
 
---------
--- compe
---------
+-- compe: {{{
+
 require"compe".setup {
   enabled = true,
   autocomplete = true,
@@ -75,15 +76,15 @@ vim.api.nvim_set_keymap("i", "<C-f>", "compe#scroll({ 'delta': +4 })",
 vim.api.nvim_set_keymap("i", "<C-d>", "compe#scroll({ 'delta': -4 })",
                         { expr = true, silent = true, noremap = true })
 
--------------
--- treesitter
--------------
+-- }}}
+
+-- treesitter {{{
 
 require"nvim-treesitter.configs".setup { highlight = { enable = true }, indent = { enable = true } }
 
-----------------
--- tmux-complete
-----------------
+-- }}}
+
+-- tmux-complete {{{
 
 do
   local compe = require "compe"
@@ -101,21 +102,21 @@ do
   compe.register_source("tmux", Source)
 end
 
--------------
--- toggleterm
--------------
+-- }}}
+
+-- toggleterm {{{
 
 require"toggleterm".setup { open_mapping = [[<c-\>]] }
 
------------
--- gitsigns
------------
+-- }}}
+
+-- gitsigns {{{
 
 require("gitsigns").setup()
 
------------------
--- nvim-lightbulb
------------------
+-- }}}
+
+-- nvim-lightbulb {{{
 
 function _G.update_lightbulb()
   require"nvim-lightbulb".update_lightbulb {
@@ -127,9 +128,9 @@ end
 
 vim.cmd [[autocmd CursorHold,CursorHoldI * lua update_lightbulb()]]
 
-------------------
--- nvim-lspinstall
-------------------
+-- }}}
+
+-- nvim-lspinstall {{{
 
 function _G.lsp_reinstall_all()
   local lspinstall = require "lspinstall"
@@ -138,9 +139,9 @@ end
 
 vim.cmd [[command! -nargs=0 LspReinstallAll call v:lua.lsp_reinstall_all()]]
 
-------------
--- nvim-tree
-------------
+-- }}}
+
+-- nvim-tree {{{
 
 vim.g.nvim_tree_icons = {
   default = icons.get("file"),
@@ -203,69 +204,31 @@ vim.g.nvim_tree_add_trailing = 1
 -- vim.api.nvim_command [[autocmd Filetype NvimTree lua auto_refresh_nvim_tree()]]
 -- vim.api.nvim_command [[augroup END]]
 
------------------
----- lspkind-nvim
------------------
+-- }}}
 
--- do
---  local icons = require("nvim-nonicons")
---  require("lspkind").init({
---    with_text = true,
---    symbol_map = {
---      Text = "",
---      Method = "",
---      Function = "",
---      Constructor = "",
---      Field = "",
---      Variable = "",
---      Class = "",
---      Interface = "",
---      Module = "", -- "",
---      Property = "",
---      Unit = "",
---      Value = "",
---      Enum = "",
---      Keyword = "",
---      Snippet = "",
---      Color = "", -- "",
---      File = "",
---      Reference = "",
---      Folder = "",
---      EnumMember = "",
---      Constant = "",
---      Struct = "",
---      Event = "",
---      Operator = "",
---      TypeParameter = ""
---    }
---  })
--- end
-
-------------
--- Telescope
-------------
+-- Telescope {{{
 
 local actions = require("telescope.actions")
 require("telescope").setup { defaults = { mappings = { i = { ["<esc>"] = actions.close } } } }
 require("telescope").load_extension("dap")
 
----------
--- neogit
----------
+-- }}}
+
+-- neogit {{{
 
 require("neogit").setup()
 
---------------
--- lsp-trouble
---------------
+-- }}}
+
+-- lsp-trouble {{{
 
 require"trouble".setup {
   signs = { error = icons.get("x-circle"), warning = icons.get("alert"), information = icons.get("info"), hint = icons.get("comment"), other = icons.get("circle") },
 }
 
-----------
--- lualine
-----------
+-- }}}
+
+-- lualine {{{
 
 local function lsp_servers_status()
   local clients = vim.lsp.buf_get_clients(0)
@@ -307,12 +270,12 @@ local function lsp_messages()
 end
 
 require("lualine").setup {
-  options = { theme = "tokyonight" },
+  options = { theme = "jellybeans" },
   sections = {
     lualine_a = { "mode" },
     lualine_b = {
       { "branch", icon = icons.get("git-branch") },
-      { "diff", color_added = "#449dab", color_modified = "#6183bb", color_removed = "#914c54" },
+      { "diff", colored = false },
     },
     lualine_c = { { "filename", path = 1 } },
     lualine_x = {
@@ -325,9 +288,6 @@ require("lualine").setup {
           info = icons.get("info") .. " ",
         },
         sources = { "nvim_lsp" },
-        color_error = "#db4b4b",
-        color_warn = "#e0af68",
-        color_info = "#0db9d7",
       },
     },
     lualine_y = {
@@ -357,3 +317,5 @@ require("lualine").setup {
   },
   extensions = { "nvim-tree" },
 }
+
+-- }}}

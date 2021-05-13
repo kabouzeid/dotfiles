@@ -1,6 +1,6 @@
-"------
-" compe
-"------
+" vim:foldmethod=marker
+
+" compe {{{
 
 " Jump forward or backward
 imap <expr> <C-j> vsnip#jumpable(1)  ? '<Plug>(vsnip-jump-next)' : '<C-j>'
@@ -8,10 +8,9 @@ smap <expr> <C-j> vsnip#jumpable(1)  ? '<Plug>(vsnip-jump-next)' : '<C-j>'
 imap <expr> <C-k> vsnip#jumpable(-1) ? '<Plug>(vsnip-jump-prev)' : '<C-k>'
 smap <expr> <C-k> vsnip#jumpable(-1) ? '<Plug>(vsnip-jump-prev)' : '<C-k>'
 
+" }}}
 
-"--------
-" Goyo
-"--------
+" Goyo {{{
 
 nnoremap <C-w>G :Goyo<CR>
 
@@ -36,10 +35,9 @@ augroup Goyo
   autocmd! User GoyoLeave nested call <SID>goyo_leave()
 augroup END
 
+" }}}
 
-"--------
-" VimTeX
-"--------
+" VimTeX {{{
 
 if !has('clientserver') && !has('nvim')
   let g:vimtex_compiler_latexmk = {'callback' : 0}
@@ -52,38 +50,38 @@ if has('macunix') " macOS only
 endif
 let g:vimtex_quickfix_open_on_warning = 0
 
-"---------
-" NvimTree
-"---------
+" }}}
+
+" NvimTree {{{
 
 nnoremap <leader>tt <cmd>NvimTreeToggle<cr>
 nnoremap <leader>tf <cmd>NvimTreeFindFile<cr>
 
-"-----
-" GTFO
-"-----
+" }}}
+
+" GTFO {{{
+
 let g:gtfo#terminals = { 'mac': 'kitty' }
 
+" }}}
 
-"----------
-" gutentags
-"----------
+" gutentags {{{
+
 let g:gutentags_ctags_exclude = ['.ccls-cache']
 
+" }}}
 
-"-------
-" Packer
-"-------
+" Packer {{{
 
 augroup Packer
   autocmd!
   autocmd BufWritePost plugins.lua PackerCompile
 augroup END
 
+" }}}
 
-"----------
-" Telescope
-"----------
+" Telescope {{{
+
 nnoremap <leader>fp <cmd>Telescope<cr>
 nnoremap <leader>ff <cmd>Telescope find_files<cr>
 nnoremap <leader>fd <cmd>Telescope file_browser<cr>
@@ -91,11 +89,12 @@ nnoremap <leader>fg <cmd>Telescope live_grep<cr>
 nnoremap <leader>fb <cmd>Telescope buffers<cr>
 nnoremap <leader>fh <cmd>Telescope help_tags<cr>
 
+" }}}
 
-"---------------
-" nvim-workbench
-"---------------
+" nvim-workbench {{{
 
 nmap <leader>bp <Plug>ToggleProjectWorkbench
 nmap <leader>bb <Plug>ToggleBranchWorkbench
 let g:workbench_storage_path = stdpath('data') . '/workbench/'
+
+" }}}

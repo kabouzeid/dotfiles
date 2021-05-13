@@ -21,12 +21,29 @@ require"packer".startup(function(use)
   use "theHamsta/nvim-dap-virtual-text"
 
   -- Color
+  use "rktjmp/lush.nvim"
+  use { "~/Code/nvim-jellybeans", requires = "rktjmp/lush.nvim" }
   use "sainnhe/sonokai"
-  use "drewtempelmeyer/palenight.vim"
+  use "sainnhe/edge"
+  use "sainnhe/everforest"
+  use "sainnhe/gruvbox-material"
+  use "kyazdani42/nvim-palenight.lua"
   use "folke/tokyonight.nvim"
   use "norcalli/nvim-colorizer.lua"
-	use "tjdevries/colorbuddy.vim"
-	use "Th3Whit3Wolf/spacebuddy"
+  use "tjdevries/colorbuddy.vim"
+  use "tjdevries/gruvbuddy.nvim"
+  use "Th3Whit3Wolf/spacebuddy"
+  use "Luxed/ayu-vim"
+  use "connorholyday/vim-snazzy"
+  use "fratajczak/one-monokai-vim"
+  use "crusoexia/vim-monokai"
+  use "rakr/vim-one"
+  use "joshdick/onedark.vim"
+  use { "olimorris/onedark.nvim", requires = "rktjmp/lush.nvim" }
+  use { "alaric/nortia.nvim", requires = "rktjmp/lush.nvim" }
+  use "junegunn/seoul256.vim"
+  use "mhartington/oceanic-next"
+  use "saltdotac/citylights.vim"
 
   -- Edit
   use "tpope/vim-surround" -- vim objects for brackets etc
@@ -45,7 +62,7 @@ require"packer".startup(function(use)
   -- Telescope
   use {
     "nvim-telescope/telescope.nvim",
-    requires = { "nvim-lua/popup.nvim", "nvim-lua/plenary.nvim" }
+    requires = { "nvim-lua/popup.nvim", "nvim-lua/plenary.nvim" },
   }
   use "nvim-telescope/telescope-dap.nvim"
 
@@ -68,7 +85,7 @@ require"packer".startup(function(use)
   use "lervag/vimtex"
   use "petRUShka/vim-gap"
   use "petRUShka/vim-magma"
-  use "kabouzeid/vim-singular"
+  use "~/Code/vim-singular"
   use "westeri/asl-vim" -- ACPI
   use "tikhomirov/vim-glsl" -- GLSL (OpenGL Shader)
   use "mattn/emmet-vim"
@@ -77,7 +94,7 @@ require"packer".startup(function(use)
 
   -- Misc
   use { "prettier/vim-prettier", run = "yarn install" }
-  use 'marcushwz/nvim-workbench'
+  use "marcushwz/nvim-workbench"
 
   -- Experimenting
   use "tpope/vim-unimpaired"
