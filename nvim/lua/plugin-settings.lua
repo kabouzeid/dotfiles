@@ -223,7 +223,13 @@ require("neogit").setup()
 -- lsp-trouble {{{
 
 require"trouble".setup {
-  signs = { error = icons.get("x-circle"), warning = icons.get("alert"), information = icons.get("info"), hint = icons.get("comment"), other = icons.get("circle") },
+  signs = {
+    error = icons.get("x-circle"),
+    warning = icons.get("alert"),
+    information = icons.get("info"),
+    hint = icons.get("comment"),
+    other = icons.get("circle"),
+  },
 }
 
 -- }}}
@@ -273,10 +279,7 @@ require("lualine").setup {
   options = { theme = "jellybeans" },
   sections = {
     lualine_a = { "mode" },
-    lualine_b = {
-      { "branch", icon = icons.get("git-branch") },
-      { "diff", colored = false },
-    },
+    lualine_b = { { "branch", icon = icons.get("git-branch") }, { "diff", colored = false } },
     lualine_c = { { "filename", path = 1 } },
     lualine_x = {
       lsp_messages,
@@ -316,6 +319,15 @@ require("lualine").setup {
     lualine_z = {},
   },
   extensions = { "nvim-tree" },
+}
+
+-- }}}
+
+-- zen-mode {{{
+
+require"zen-mode".setup {
+  window = { backdrop = 1, options = { signcolumn = "no" } },
+  plugins = { tmux = true },
 }
 
 -- }}}
