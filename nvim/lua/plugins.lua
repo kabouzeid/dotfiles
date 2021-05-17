@@ -56,7 +56,7 @@ require"packer".startup(function(use)
 
   -- UI
   use "hoob3rt/lualine.nvim"
-  use "junegunn/goyo.vim" -- distraction free writing
+  use "folke/zen-mode.nvim"
   use "akinsho/nvim-toggleterm.lua"
 
   -- Telescope
