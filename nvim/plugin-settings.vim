@@ -98,3 +98,9 @@ nmap <leader>bb <Plug>ToggleBranchWorkbench
 let g:workbench_storage_path = stdpath('data') . '/workbench/'
 
 " }}}
+
+" delimitMate {{{
+
+let delimitMate_expand_cr=1
+
+" }}}
