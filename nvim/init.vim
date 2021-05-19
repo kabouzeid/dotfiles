@@ -111,5 +111,5 @@ function! SyntaxItem()
   return synIDattr(synID(line("."),col("."),1),"name")
 endfunction
 
-source ./plugin-settings.vim
+exec "source " . stdpath('config') . "/plugin-settings.vim"
 :lua require'init'
