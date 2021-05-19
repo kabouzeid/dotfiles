@@ -104,3 +104,9 @@ let g:workbench_storage_path = stdpath('data') . '/workbench/'
 let delimitMate_expand_cr=1
 
 " }}}
+
+" gina {{{
+
+command! Blame Gina blame
+
+" }}}
