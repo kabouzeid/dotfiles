@@ -214,12 +214,6 @@ require("telescope").load_extension("dap")
 
 -- }}}
 
--- neogit {{{
-
-require("neogit").setup()
-
--- }}}
-
 -- lsp-trouble {{{
 
 require"trouble".setup {
