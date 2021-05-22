@@ -81,9 +81,7 @@ local on_attach = function(client, bufnr)
   buf_set_keymap("n", "<Leader>l", "<cmd>lua require'lsp-codelens'.buf_codelens_action()<CR>", opts)
 
   -- vim already has builtin docs
-  if vim.bo.ft ~= 'vim' then
-    buf_set_keymap("n", "K", "<Cmd>lua vim.lsp.buf.hover()<CR>", opts)
-  end
+  if vim.bo.ft ~= "vim" then buf_set_keymap("n", "K", "<Cmd>lua vim.lsp.buf.hover()<CR>", opts) end
 
   -- Set autocommands conditional on server_capabilities
   if client.resolved_capabilities.document_highlight then
@@ -103,6 +101,10 @@ local on_attach = function(client, bufnr)
       autocmd CursorHold,CursorHoldI,InsertLeave <buffer> lua require"lsp-codelens".buf_codelens_refresh()
     augroup END
     ]]
+  end
+
+  if client.server_capabilities.colorProvider then
+    require"lsp-documentcolors".buf_attach(bufnr, { single_column = true })
   end
 end
 
@@ -132,6 +134,7 @@ local lua_settings = {
 local function make_config()
   local capabilities = vim.lsp.protocol.make_client_capabilities()
   capabilities.textDocument.completion.completionItem.snippetSupport = true
+  capabilities.textDocument.colorProvider = { dynamicRegistration = false }
   return {
     -- enable snippet support
     capabilities = capabilities,
@@ -156,9 +159,9 @@ local function setup_servers()
     -- language specific config
     if server == "lua" then
       config.settings = lua_settings
-      config.root_dir = function (fname)
+      config.root_dir = function(fname)
         if fname:match("lush_theme") ~= nil then return nil end
-        local util = require 'lspconfig/util'
+        local util = require "lspconfig/util"
         return util.find_git_ancestor(fname) or util.path.dirname(fname)
       end
     end
@@ -173,7 +176,13 @@ local function setup_servers()
       config = vim.tbl_extend("force", config, require "diagnosticls")
     end
     if server == "tailwindcss" then
-      config.on_attach = require"tailwindcss-colorizer".wrap_on_attach(config.on_attach)
+      config.settings = {
+        tailwindCSS = {
+          -- NOTE: values for `validate` and `lint.cssConflict` are required by the server
+          validate = true,
+          lint = { cssConflict = "warning" },
+        },
+      }
     end
     if server == "vim" then config.init_options = { isNeovim = true } end
     if server == "hls" then

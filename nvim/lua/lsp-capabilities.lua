@@ -42,7 +42,8 @@ return function ()
   local function make_client_info(client)
     return {
       "Client: "..client.name.." (id "..tostring(client.id)..")",
-      "\t"..table.concat(available_capabilities(client.resolved_capabilities or {}), ', '),
+      "resolved: \t"..table.concat(available_capabilities(client.resolved_capabilities or {}), ', '),
+      "raw: \t"..table.concat(vim.tbl_keys(client.server_capabilities or {}), ', '),
     }
   end
 
