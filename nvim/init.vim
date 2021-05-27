@@ -19,7 +19,7 @@ filetype plugin indent on
 
 set listchars=trail:·,nbsp:_,tab:\ \ 
 set list
-set shortmess+=tI
+set shortmess+=tIc
 set showcmd
 set noshowmode
 set lazyredraw

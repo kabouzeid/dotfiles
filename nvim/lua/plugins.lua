@@ -77,6 +77,7 @@ require"packer".startup(function(use)
   -- Git
   use { "lewis6991/gitsigns.nvim", requires = "nvim-lua/plenary.nvim" }
   use "lambdalisue/gina.vim"
+  use "kdheepak/lazygit.nvim"
 
   -- Snippets
   use { "hrsh7th/vim-vsnip", requires = "kitagry/vs-snippets" }

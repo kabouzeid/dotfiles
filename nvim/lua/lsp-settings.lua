@@ -183,6 +183,12 @@ local function setup_servers()
           lint = { cssConflict = "warning" },
         },
       }
+      config.on_new_config = function (new_config)
+        new_config.settings.editor = {
+          -- optional, for hover code indentation
+          tabSize = vim.lsp.util.get_effective_tabstop()
+        }
+      end
     end
     if server == "vim" then config.init_options = { isNeovim = true } end
     if server == "hls" then
