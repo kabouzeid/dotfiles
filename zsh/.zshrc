@@ -121,6 +121,9 @@ if [ $TERM = "xterm-kitty" ] ; then
   alias ssh="kitty +kitten ssh"
 fi
 
+# asciinema doesn't support xterm-kitty
+alias asciinema="TERM=xterm-256color asciinema"
+
 # node version manager
 # export NVM_DIR="$HOME/.nvm"
 # [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm

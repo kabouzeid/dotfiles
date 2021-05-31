@@ -92,6 +92,7 @@ require"packer".startup(function(use)
   use "mattn/emmet-vim"
   use "pest-parser/pest.vim"
   use "jwalton512/vim-blade"
+  use "pantharshit00/vim-prisma"
 
   -- Misc
   use "wincent/terminus"
