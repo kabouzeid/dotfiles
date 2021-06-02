@@ -97,6 +97,7 @@ require"packer".startup(function(use)
   -- Misc
   use "wincent/terminus"
   use "marcushwz/nvim-workbench"
+	use "milisims/nvim-luaref"
 
   -- Experimenting
   use "tpope/vim-unimpaired"
