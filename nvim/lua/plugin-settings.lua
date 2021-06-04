@@ -1,5 +1,4 @@
 -- vim:foldmethod=marker
-
 local icons = require("nvim-nonicons")
 
 -- compe: {{{
@@ -209,7 +208,19 @@ vim.g.nvim_tree_add_trailing = 1
 -- Telescope {{{
 
 local actions = require("telescope.actions")
-require("telescope").setup { defaults = { mappings = { i = { ["<esc>"] = actions.close } } } }
+require("telescope").setup {
+  defaults = {
+    mappings = {
+      i = {
+        ["<esc>"] = actions.close,
+        ["œ"] = actions.send_selected_to_qflist + actions.open_qflist, -- Alt-q on macOS
+      },
+      n = {
+        ["œ"] = actions.send_selected_to_qflist + actions.open_qflist, -- Alt-q on macOS
+      },
+    },
+  },
+}
 require("telescope").load_extension("dap")
 
 -- }}}
