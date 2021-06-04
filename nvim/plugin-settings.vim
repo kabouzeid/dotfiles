@@ -57,6 +57,10 @@ let g:vimtex_quickfix_open_on_warning = 0
 nnoremap <leader>tt <cmd>NvimTreeToggle<cr>
 nnoremap <leader>tf <cmd>NvimTreeFindFile<cr>
 
+" don't disable netrw because it's used by Neovim for downloading spell files
+let g:nvim_tree_disable_netrw = 0
+let g:nvim_tree_hijack_netrw = 1
+
 " }}}
 
 " GTFO {{{

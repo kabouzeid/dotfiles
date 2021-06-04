@@ -105,6 +105,7 @@ fi
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias e=$EDITOR
+alias v=$EDITOR
 alias nvim_debug="VIMRUNTIME=~/Code/neovim/runtime ~/Code/neovim/build/bin/nvim"
 
 if [ uname = "Darwin" ] ; then
