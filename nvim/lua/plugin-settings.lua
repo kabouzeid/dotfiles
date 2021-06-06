@@ -162,12 +162,12 @@ vim.g.nvim_tree_icons = {
     ignored = "I",
   },
   folder = {
-    default = icons.get("chevron-right"),
-    open = icons.get("chevron-down"),
-    empty = icons.get("chevron-right"),
-    empty_open = icons.get("chevron-down"),
-    symlink = icons.get("chevron-right"),
-    symlink_open = icons.get("chevron-down"),
+    default = icons.get("file-directory"),
+    open = icons.get("file-directory"),
+    empty = icons.get("file-directory-outline"),
+    empty_open = icons.get("file-directory-outline"),
+    symlink = icons.get("file-submodule"),
+    symlink_open = icons.get("file-submodule"),
   },
   lsp = { error = "", warning = "", info = "", hint = "" },
 }
