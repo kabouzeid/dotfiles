@@ -65,6 +65,7 @@ require"packer".startup(function(use)
     requires = { "nvim-lua/popup.nvim", "nvim-lua/plenary.nvim" },
   }
   use "nvim-telescope/telescope-dap.nvim"
+  use { "nvim-telescope/telescope-fzf-native.nvim", run = "make" }
 
   -- Files
   use "justinmk/vim-dirvish"
@@ -97,7 +98,7 @@ require"packer".startup(function(use)
   -- Misc
   use "wincent/terminus"
   use "marcushwz/nvim-workbench"
-	use "milisims/nvim-luaref"
+  use "milisims/nvim-luaref"
 
   -- Experimenting
   use "tpope/vim-unimpaired"
