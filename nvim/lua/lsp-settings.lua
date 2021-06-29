@@ -46,7 +46,7 @@ vim.fn.sign_define("LspDiagnosticsSignInformation",
 vim.fn.sign_define("LspDiagnosticsSignHint",
                    { text = icons.get("comment"), texthl = "LspDiagnosticsSignHint" })
 
-require("lsp-codelens").setup()
+vim.api.nvim_command("highlight default link LspCodeLens Comment")
 
 -- keymaps
 local on_attach = function(client, bufnr)
@@ -78,7 +78,7 @@ local on_attach = function(client, bufnr)
                  opts)
   buf_set_keymap("n", "<Leader>P", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
   buf_set_keymap("v", "<Leader>p", "<cmd>lua vim.lsp.buf.range_formatting()<CR>", opts)
-  buf_set_keymap("n", "<Leader>l", "<cmd>lua require'lsp-codelens'.buf_codelens_action()<CR>", opts)
+  buf_set_keymap("n", "<Leader>l", "<cmd>lua vim.lsp.codelens.run()<CR>", opts)
 
   -- vim already has builtin docs
   if vim.bo.ft ~= "vim" then buf_set_keymap("n", "K", "<Cmd>lua vim.lsp.buf.hover()<CR>", opts) end
@@ -98,7 +98,7 @@ local on_attach = function(client, bufnr)
     vim.cmd [[
     augroup lsp_codelens
       autocmd! * <buffer>
-      autocmd CursorHold,CursorHoldI,InsertLeave <buffer> lua require"lsp-codelens".buf_codelens_refresh()
+      autocmd BufEnter,CursorHold,InsertLeave <buffer> lua vim.lsp.codelens.refresh()
     augroup END
     ]]
   end
