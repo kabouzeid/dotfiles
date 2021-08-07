@@ -151,7 +151,6 @@ local function setup_servers()
   local servers = require"lspinstall".installed_servers()
   -- ... and add manually installed servers
   table.insert(servers, "sourcekit")
-  table.insert(servers, "hls")
 
   for _, server in pairs(servers) do
     local config = make_config()
@@ -176,7 +175,7 @@ local function setup_servers()
       config = vim.tbl_extend("force", config, require "diagnosticls")
     end
     if server == "vim" then config.init_options = { isNeovim = true } end
-    if server == "hls" then
+    if server == "haskell" then
       config.root_dir = require"lspconfig/util".root_pattern("*.cabal", "stack.yaml",
                                                              "cabal.project", "package.yaml",
                                                              "hie.yaml", ".git");

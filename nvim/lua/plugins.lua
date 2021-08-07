@@ -99,6 +99,7 @@ require"packer".startup(function(use)
   use "wincent/terminus"
   use "marcushwz/nvim-workbench"
   use "milisims/nvim-luaref"
+  use "jbyuki/nabla.nvim"
 
   -- Experimenting
   use "tpope/vim-unimpaired"
