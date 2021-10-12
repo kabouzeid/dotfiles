@@ -225,7 +225,9 @@ require'nvim-tree'.setup {
   -- updates the root directory of the tree on `DirChanged` (when your run `:cd` usually)
   update_cwd          = true,
   -- show lsp diagnostics in the signcolumn
-  lsp_diagnostics     = true,
+  diagnostics         = {
+    enable = true
+  },
 }
 
 -- disable nvim tree autocmds --- they are buggy
