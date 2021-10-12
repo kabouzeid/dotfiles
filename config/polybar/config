@@ -1,0 +1,131 @@
+;==========================================================
+;
+;
+;   ██████╗  ██████╗ ██╗  ██╗   ██╗██████╗  █████╗ ██████╗
+;   ██╔══██╗██╔═══██╗██║  ╚██╗ ██╔╝██╔══██╗██╔══██╗██╔══██╗
+;   ██████╔╝██║   ██║██║   ╚████╔╝ ██████╔╝███████║██████╔╝
+;   ██╔═══╝ ██║   ██║██║    ╚██╔╝  ██╔══██╗██╔══██║██╔══██╗
+;   ██║     ╚██████╔╝███████╗██║   ██████╔╝██║  ██║██║  ██║
+;   ╚═╝      ╚═════╝ ╚══════╝╚═╝   ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝
+;
+;
+;   To learn more about how to configure Polybar
+;   go to https://github.com/polybar/polybar
+;
+;   The README contains a lot of information
+;
+;==========================================================
+
+[colors]
+;background = ${xrdb:color0:#222}
+background = #151515
+background-alt = #403c41
+;foreground = ${xrdb:color7:#222}
+foreground = #e8e8d3
+foreground-alt = #888888
+primary = #b0d0f0
+secondary = #f0a0c0
+alert = #902020
+
+[bar/main]
+width = 100%
+height = 56
+; offset-x = 1%
+; offset-y = 1%
+; radius = 4.8
+; fixed-center = false
+
+background = ${colors.background}
+foreground = ${colors.foreground}
+
+line-size = 4
+; line-color = #f00
+
+border-size = 0
+border-color = #00000000
+
+padding-left = 3
+padding-right = 3
+
+module-margin-left = 2
+module-margin-right = 2
+
+font-0 = Inter:pixelsize=20;1
+
+modules-left = bspwm
+;modules-center =
+modules-right = date time
+
+;tray-position = right
+;tray-padding = 2
+;tray-background = #0063ff
+
+;wm-restack = bspwm
+;wm-restack = i3
+
+;override-redirect = true
+
+;scroll-up = bspwm-desknext
+;scroll-down = bspwm-deskprev
+
+;scroll-up = i3wm-wsnext
+;scroll-down = i3wm-wsprev
+
+cursor-click = pointer
+cursor-scroll = ns-resize
+
+[module/bspwm]
+type = internal/bspwm
+
+label-focused = %index%
+; label-focused-background = ${colors.background-alt}
+label-focused-underline= ${colors.primary}
+label-focused-padding = 2
+
+label-occupied = %index%
+label-occupied-padding = 2
+
+label-urgent = %index%!
+label-urgent-background = ${colors.alert}
+label-urgent-padding = 2
+
+label-empty = %index%
+label-empty-foreground = ${colors.foreground-alt}
+label-empty-padding = 2
+
+; Separator in between workspaces
+; label-separator = |
+
+[module/date]
+type = internal/date
+interval = 5
+
+date = "%a, %d. %b"
+
+format-underline = ${colors.secondary}
+
+label = %date%
+
+[module/time]
+type = internal/date
+interval = 5
+
+time = "%H:%M"
+
+format-underline = ${colors.secondary}
+
+label = %time%
+
+[settings]
+screenchange-reload = true
+; compositing-background = xor
+;compositing-background = screen
+;compositing-foreground = source
+;compositing-border = over
+;pseudo-transparency = false
+
+; [global/wm]
+; margin-top = 5
+; margin-bottom = 5
+
+; vim:ft=dosini

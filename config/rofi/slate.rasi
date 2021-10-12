@@ -1,0 +1,57 @@
+/* rofi theme spec: https://github.com/davatorium/rofi/blob/next/doc/rofi-theme.5.markdown */
+
+* {
+  border-color: #888888;
+  spacing: 0;
+  width: 1024;
+  font: "Inter 24";
+}
+
+inputbar {
+  border: 0 0 1px 0;
+  children: [prompt,entry];
+  margin: 0px 0px 8px 0px;
+}
+
+prompt {
+  padding: 16px;
+  color: #3e3e3e;
+}
+
+textbox {
+  background-color: #2e343f;
+  border: 0 0 1px 0;
+  border-color: #282C33;
+  padding: 8px 16px;
+}
+
+entry {
+  padding: 16px;
+}
+
+listview {
+  cycle: false;
+}
+
+element {
+  padding: 16px;
+}
+
+element-text {
+  padding: 16px;
+  background-color: transparent;
+  highlight: underline;
+}
+
+element-icon {
+  padding: 0 16px 0 16px;
+  vertical-align: 0.5;
+  size: 48;
+  background-color: transparent;
+}
+
+element selected {
+  background-color: #eeeeee;
+}
+
+/* vim:ft=css

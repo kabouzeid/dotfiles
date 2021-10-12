@@ -1,0 +1,36 @@
+export PATH=$PATH:"/home/karim/bin"
+
+# Path to your oh-my-zsh installation.
+export ZSH="/home/karim/.oh-my-zsh"
+
+ZSH_THEME="gentoo"
+
+# Uncomment the following line to change how often to auto-update (in days).
+export UPDATE_ZSH_DAYS=45
+
+# Which plugins would you like to load?
+# Standard plugins can be found in $ZSH/plugins/
+# Custom plugins may be added to $ZSH_CUSTOM/plugins/
+# Example format: plugins=(rails git textmate ruby lighthouse)
+# Add wisely, as too many plugins slow down shell startup.
+plugins=(git colored-man-pages)
+
+[[ -r $ZSH/oh-my-zsh.sh ]] && source $ZSH/oh-my-zsh.sh
+
+[[ -r /usr/share/fzf/key-bindings.zsh ]] && source /usr/share/fzf/key-bindings.zsh
+[[ -r /usr/share/fzf/completion.zsh ]] && source /usr/share/fzf/completion.zsh
+
+[[ -r /usr/share/z/z.sh ]] && source /usr/share/z/z.sh
+
+# User configuration
+
+export EDITOR='nvim'
+
+alias e=$EDITOR 
+alias v=$EDITOR 
+
+alias ssh="kitty +kitten ssh"
+
+alias open=xdg-open
+
+unalias gap
