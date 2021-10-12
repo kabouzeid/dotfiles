@@ -7,7 +7,7 @@ require"packer".startup(function(use)
 
   -- LSP
   use "neovim/nvim-lspconfig"
-  use "~/Code/nvim-lspinstall"
+  use "kabouzeid/nvim-lspinstall"
   use "kosayoda/nvim-lightbulb"
   use "folke/lsp-trouble.nvim"
 
