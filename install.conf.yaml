@@ -13,3 +13,30 @@
     ~/.config/:
       glob: true
       path: config/*
+
+- shell:
+  -
+    description: Installing oh my zsh
+    command: >-
+      if [ ! -e ~/.oh-my-zsh ]; then
+      sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)" --unattended --keep-zshrc;
+      fi
+  -
+    description: Installing zsh-autosuggestions
+    command: >-
+      if [ ! -e ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions ]; then
+      git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions;
+      fi
+  -
+    description: Installing tpm and plugins.
+    command: >-
+      if [ ! -e ~/.tmux/plugins/tpm ]; then
+      git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm;
+      ~/.tmux/plugins/tpm/bin/install_plugins;
+      fi
+  -
+    description: Installing packer.nvim
+    command: >-
+      if [ ! -e ~/.local/share/nvim/site/pack/packer/start/packer.nvim ]; then
+      git clone --depth 1 https://github.com/wbthomason/packer.nvim ~/.local/share/nvim/site/pack/packer/start/packer.nvim;
+      fi
