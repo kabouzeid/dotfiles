@@ -28,6 +28,12 @@
       git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions;
       fi
   -
+    description: Installing zsh-syntax-highlighting
+    command: >-
+      if [ ! -e ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting ]; then
+      git clone https://github.com/zsh-users/zsh-syntax-highlighting ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting;
+      fi
+  -
     description: Installing tpm and plugins.
     command: >-
       if [ ! -e ~/.tmux/plugins/tpm ]; then
