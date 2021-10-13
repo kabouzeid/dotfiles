@@ -1,2 +1,2 @@
-nvim/plugin/**
-nvim/spell/**
+config/nvim/plugin/**
+config/nvim/spell/**
