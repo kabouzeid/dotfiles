@@ -22,27 +22,41 @@ export UPDATE_ZSH_DAYS=45
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(git colored-man-pages zsh-autosuggestions zsh-syntax-highlighting)
 
-[[ -r $ZSH/oh-my-zsh.sh ]] && source $ZSH/oh-my-zsh.sh
+if [ -r $ZSH/oh-my-zsh.sh ]; then
+    source "$ZSH/oh-my-zsh.sh"
+fi
 
-[[ -r /usr/share/fzf/key-bindings.zsh ]] && source /usr/share/fzf/key-bindings.zsh
-[[ -r /usr/share/fzf/completion.zsh ]] && source /usr/share/fzf/completion.zsh
+if [ -r /usr/share/fzf/key-bindings.zsh ]; then
+    source /usr/share/fzf/key-bindings.zsh
+fi
+if [ -r /usr/share/fzf/completion.zsh ]; then
+    source /usr/share/fzf/completion.zsh
+fi
 
-[[ -r /usr/share/z/z.sh ]] && source /usr/share/z/z.sh
+if [ -r /usr/share/z/z.sh ]; then
+    source /usr/share/z/z.sh
+fi
 
-[[ -r $HOME/.linuxbrew/bin/brew ]] && eval "$($HOME/.linuxbrew/bin/brew shellenv)"
+if [ -r $HOME/.linuxbrew/bin/brew ]; then
+    eval "$($HOME/.linuxbrew/bin/brew shellenv)"
+fi
 
 # User configuration
 
 export EDITOR='nvim'
 
-alias e=$EDITOR 
-alias v=$EDITOR 
+alias e=\"\$EDITOR\"
+alias v=\"\$EDITOR\"
 
-alias ssh="kitty +kitten ssh"
+if [ "$TERM" = "xterm-kitty" ] && whence kitty &>/dev/null; then
+    alias ssh="kitty +kitten ssh"
+    alias icat="kitty +kitten icat"
+    alias diff="kitty +kitten diff"
+fi
 
-alias open=xdg-open
-
-unalias gap
+if whence xdg-open &>/dev/null && whence setsid &>/dev/null; then
+    alias open="setsid xdg-open"
+fi
 
 # Allow local customizations in the ~/.zshrc_local file
 if [ -r ~/.zshrc_local ]; then
