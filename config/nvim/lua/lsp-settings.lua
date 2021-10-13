@@ -123,11 +123,11 @@ local function setup_servers()
   local servers = require"lspinstall".installed_servers()
 
   -- ... and add manually installed servers
-  if (vim.fn.executable("xcrun") or vim.fn.executable("sourcekit-lsp")) then
+  if (vim.fn.executable("xcrun") == 1 or vim.fn.executable("sourcekit-lsp") == 1) then
     table.insert(servers, "sourcekit")
   end
   -- when on arch, most LSPs will be installed manually
-  if (vim.fn.executable("pacman")) then
+  if (vim.fn.executable("pacman") == 1) then
     table.insert(servers, "bashls")
     table.insert(servers, "clangd")
     table.insert(servers, "cmake")
