@@ -51,9 +51,13 @@ require('lspkind').init {
 
 -- {{{ cmp
 
-local check_back_space = function()
+local function check_back_space()
     local col = vim.fn.col('.') - 1
     return col == 0 or vim.fn.getline('.'):sub(col, col):match('%s')
+end
+
+local function feedkey(key, mode)
+  vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(key, true, true, true), mode, true)
 end
 
 local cmp = require('cmp')
@@ -96,12 +100,12 @@ cmp.setup {
     }),
     ['<Tab>'] = cmp.mapping(
     function(fallback)
-      if vim.fn.pumvisible() == 1 then
-        vim.fn.feedkeys(vim.api.nvim_replace_termcodes('<C-n>', true, true, true), 'n')
+      if cmp.visible() then
+        cmp.select_next_item()
       elseif check_back_space() then
-        vim.fn.feedkeys(vim.api.nvim_replace_termcodes('<Tab>', true, true, true), 'n')
+        fallback()
       elseif vim.fn['vsnip#jumpable'](1) == 1 then
-        vim.fn.feedkeys(vim.api.nvim_replace_termcodes('<Plug>(vsnip-jump-next)', true, true, true), '')
+        feedkey('<Plug>(vsnip-jump-next)', '')
       else
         fallback()
       end
@@ -110,10 +114,10 @@ cmp.setup {
     ),
     ['<S-Tab>'] = cmp.mapping(
     function(fallback)
-      if vim.fn.pumvisible() == 1 then
-        vim.fn.feedkeys(vim.api.nvim_replace_termcodes('<C-p>', true, true, true), 'n')
+      if cmp.visible() then
+        cmp.select_prev_item()
       elseif vim.fn['vsnip#jumpable'](-1) == 1 then
-        vim.fn.feedkeys(vim.api.nvim_replace_termcodes('<Plug>(vsnip-jump-prev)', true, true, true), '')
+        feedkey("<Plug>(vsnip-jump-prev)", "")
       else
         fallback()
       end
