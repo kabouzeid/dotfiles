@@ -1,8 +1,8 @@
-local lspui = require 'lspconfig/_lspui'
+local windows = require 'lspconfig/ui/windows'
 
 return function ()
   local buf_clients = vim.lsp.buf_get_clients()
-  local win_info = lspui.percentage_range_window(0.8, 0.7)
+  local win_info = windows.percentage_range_window(0.8, 0.7)
   local bufnr, win_id = win_info.bufnr, win_info.win_id
 
   local buf_lines = {}

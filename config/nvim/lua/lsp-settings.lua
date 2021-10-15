@@ -103,92 +103,84 @@ local lua_settings = {
 }
 
 -- config that activates keymaps and enables snippet support
-local function make_config()
+local function get_config(server_name)
   local capabilities = vim.lsp.protocol.make_client_capabilities()
   capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
   capabilities.textDocument.colorProvider = { dynamicRegistration = false }
-  return {
+  local config = {
     -- enable snippet support
     capabilities = capabilities,
     -- map buffer local keybindings when the language server attaches
     on_attach = on_attach,
   }
+
+  if server_name == "sumneko_lua" then
+    config.cmd = { "lua-language-server" }
+  end
+  if server_name == "lua" or server_name == "sumneko_lua" then
+    config.settings = lua_settings
+    config.root_dir = function(fname)
+      if fname:match("lush_theme") ~= nil then return nil end
+      local util = require "lspconfig/util"
+      return util.find_git_ancestor(fname) or util.path.dirname(fname)
+    end
+  end
+  if server_name == "sourcekit" then
+    config.filetypes = { "swift", "objective-c", "objective-cpp" } -- we don't want c and cpp!
+  end
+  if server_name == "clangd" then
+    config.filetypes = { "c", "cpp" } -- we don't want objective-c and objective-cpp!
+  end
+  if server_name == "efm" then config = vim.tbl_extend("force", config, require "efm") end
+  if server_name == "diagnosticls" then
+    config = vim.tbl_extend("force", config, require "diagnosticls")
+  end
+  if server_name == "vim" then config.init_options = { isNeovim = true } end
+  if server_name == "haskell" then
+    config.root_dir = require"lspconfig/util".root_pattern("*.cabal", "stack.yaml",
+    "cabal.project", "package.yaml",
+    "hie.yaml", ".git");
+  end
+
+  return config
 end
 
--- lsp-install
-local function setup_servers()
-  require"lspinstall".setup()
+-- setup servers
 
-  -- get all installed servers
-  local servers = require"lspinstall".installed_servers()
+-- setup servers installed with nvim-lsp-installer
+require"nvim-lsp-installer".on_server_ready(function(server)
+    server:setup(get_config(server.name))
+    vim.cmd [[ do User LspAttachBuffers ]]
+end)
 
-  -- ... and add manually installed servers
-  if (vim.fn.executable("xcrun") == 1 or vim.fn.executable("sourcekit-lsp") == 1) then
-    table.insert(servers, "sourcekit")
-  end
-  -- when on arch, most LSPs will be installed manually
-  if (vim.fn.executable("pacman") == 1) then
-    table.insert(servers, "bashls")
-    table.insert(servers, "clangd")
-    table.insert(servers, "cmake")
-    table.insert(servers, "dockerls")
-    table.insert(servers, "gopls")
-    table.insert(servers, "hls")
-    table.insert(servers, "intelephense")
-    table.insert(servers, "pyright")
-    table.insert(servers, "rust_analyzer")
-    table.insert(servers, "sumneko_lua")
-    table.insert(servers, "svelte")
-    table.insert(servers, "tailwindcss")
-    table.insert(servers, "texlab")
-    table.insert(servers, "tsserver")
-    table.insert(servers, "vimls")
-    table.insert(servers, "vuels")
-    table.insert(servers, "yamlls")
-  end
-
-  for _, server in pairs(servers) do
-    local config = make_config()
-
-    -- language specific config
-    if server == "sumneko_lua" then
-      config.cmd = { "lua-language-server" }
-    end
-    if server == "lua" or server == "sumneko_lua" then
-      config.settings = lua_settings
-      config.root_dir = function(fname)
-        if fname:match("lush_theme") ~= nil then return nil end
-        local util = require "lspconfig/util"
-        return util.find_git_ancestor(fname) or util.path.dirname(fname)
-      end
-    end
-    if server == "sourcekit" then
-      config.filetypes = { "swift", "objective-c", "objective-cpp" } -- we don't want c and cpp!
-    end
-    if server == "clangd" then
-      config.filetypes = { "c", "cpp" } -- we don't want objective-c and objective-cpp!
-    end
-    if server == "efm" then config = vim.tbl_extend("force", config, require "efm") end
-    if server == "diagnosticls" then
-      config = vim.tbl_extend("force", config, require "diagnosticls")
-    end
-    if server == "vim" then config.init_options = { isNeovim = true } end
-    if server == "haskell" then
-      config.root_dir = require"lspconfig/util".root_pattern("*.cabal", "stack.yaml",
-                                                             "cabal.project", "package.yaml",
-                                                             "hie.yaml", ".git");
-    end
-
-    require"lspconfig"[server].setup(config)
-  end
+-- setup manually installed servers
+local servers = {}
+if (vim.fn.executable("xcrun") == 1 or vim.fn.executable("sourcekit-lsp") == 1) then
+  table.insert(servers, "sourcekit")
+end
+-- when on arch, most LSPs will be installed manually
+if (vim.fn.executable("pacman") == 1) then
+  table.insert(servers, "bashls")
+  table.insert(servers, "clangd")
+  table.insert(servers, "cmake")
+  table.insert(servers, "dockerls")
+  table.insert(servers, "gopls")
+  table.insert(servers, "hls")
+  table.insert(servers, "intelephense")
+  table.insert(servers, "pyright")
+  table.insert(servers, "rust_analyzer")
+  table.insert(servers, "sumneko_lua")
+  table.insert(servers, "svelte")
+  table.insert(servers, "tailwindcss")
+  table.insert(servers, "texlab")
+  table.insert(servers, "tsserver")
+  table.insert(servers, "vimls")
+  table.insert(servers, "vuels")
+  table.insert(servers, "yamlls")
 end
 
-setup_servers()
-
--- Automatically reload after `:LspInstall <server>` so we don't have to restart neovim
-require"lspinstall".post_install_hook = function()
-  setup_servers() -- reload installed servers
-  vim.cmd("bufdo e") -- this triggers the FileType autocmd that starts the server
+for _, server in pairs(servers) do
+  require"lspconfig"[server].setup(get_config(server))
 end
 
 -- UI just like `:LspInfo` to show which capabilities each attached server has

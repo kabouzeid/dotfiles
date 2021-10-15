@@ -7,7 +7,7 @@ require"packer".startup(function(use)
 
   -- LSP
   use "neovim/nvim-lspconfig"
-  use "kabouzeid/nvim-lspinstall"
+  use "williamboman/nvim-lsp-installer"
   use "kosayoda/nvim-lightbulb"
   use "folke/lsp-trouble.nvim"
 
@@ -49,7 +49,8 @@ require"packer".startup(function(use)
   use "rktjmp/lush.nvim"
 
   -- Themes
-  use "Pocco81/Catppuccino.nvim"
+  use "rose-pine/neovim"
+  -- use "Pocco81/Catppuccino.nvim"
   -- use { "kabouzeid/nvim-jellybeans", requires = "rktjmp/lush.nvim" }
   -- use "sainnhe/sonokai"
   -- use "sainnhe/edge"

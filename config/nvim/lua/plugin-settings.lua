@@ -175,12 +175,12 @@ vim.cmd [[autocmd CursorHold,CursorHoldI * lua update_lightbulb()]]
 
 -- nvim-lspinstall {{{
 
-function _G.lsp_reinstall_all()
-  local lspinstall = require "lspinstall"
-  for _, server in ipairs(lspinstall.installed_servers()) do lspinstall.install_server(server) end
-end
+-- function _G.lsp_reinstall_all()
+--   local lspinstall = require "lspinstall"
+--   for _, server in ipairs(lspinstall.installed_servers()) do lspinstall.install_server(server) end
+-- end
 
-vim.cmd [[command! -nargs=0 LspReinstallAll call v:lua.lsp_reinstall_all()]]
+-- vim.cmd [[command! -nargs=0 LspReinstallAll call v:lua.lsp_reinstall_all()]]
 
 -- }}}
 
@@ -346,7 +346,7 @@ local function lsp_messages()
 end
 
 require("lualine").setup {
-  options = { theme = "catppuccino" },
+  options = { theme = "rose-pine" },
   sections = {
     lualine_a = { "mode" },
     lualine_b = { { "branch", icon = icons.get("git-branch") }, { "diff", colored = false } },
@@ -421,45 +421,45 @@ vim.cmd [[autocmd CursorHold,CursorHoldI <buffer> lua require'lint'.try_lint()]]
 
 -- {{{ catppuccino
 
-require"catppuccino".setup {
-  colorscheme = "dark_catppuccino",
-  term_colors = true,
-  styles = {
-    comments = "italic",
-    functions = "italic",
-    keywords = "italic",
-    strings = "NONE",
-    variables = "NONE",
-  },
-  integrations = {
-    treesitter = true,
-    native_lsp = {
-      enabled = true,
-      virtual_text = {
-        errors = "italic",
-        hints = "italic",
-        warnings = "italic",
-        information = "italic",
-      },
-      underlines = {
-        errors = "underline",
-        hints = "underline",
-        warnings = "underline",
-        information = "underline",
-      }
-    },
-    lsp_trouble = true,
-    gitsigns = true,
-    telescope = true,
-    nvimtree = {
-      enabled = true,
-      show_root = true,
-    },
-    vim_sneak = true,
-    markdown = true,
-  }
-}
+-- require"catppuccino".setup {
+--   colorscheme = "dark_catppuccino",
+--   term_colors = true,
+--   styles = {
+--     comments = "italic",
+--     functions = "italic",
+--     keywords = "italic",
+--     strings = "NONE",
+--     variables = "NONE",
+--   },
+--   integrations = {
+--     treesitter = true,
+--     native_lsp = {
+--       enabled = true,
+--       virtual_text = {
+--         errors = "italic",
+--         hints = "italic",
+--         warnings = "italic",
+--         information = "italic",
+--       },
+--       underlines = {
+--         errors = "underline",
+--         hints = "underline",
+--         warnings = "underline",
+--         information = "underline",
+--       }
+--     },
+--     lsp_trouble = true,
+--     gitsigns = true,
+--     telescope = true,
+--     nvimtree = {
+--       enabled = true,
+--       show_root = true,
+--     },
+--     vim_sneak = true,
+--     markdown = true,
+--   }
+-- }
 
-vim.cmd [[colorscheme catppuccino]]
+-- vim.cmd [[colorscheme catppuccino]]
 
 -- }}}

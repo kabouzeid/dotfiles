@@ -5,7 +5,8 @@ scriptencoding utf-8
 set termguicolors
 set background=dark
 
-" colorscheme jellybeans
+let g:rose_pine_variant = 'moon'
+colorscheme rose-pine
 syntax enable
 
 set guifont=JetBrains\ Mono,nonicon,codicon,Symbols-1000-em\ Nerd\ Font\ Complete
