@@ -11,7 +11,7 @@ xsetroot -cursor_name left_ptr
 pgrep -x sxhkd > /dev/null || sxhkd &
 pgrep -x picom > /dev/null || picom &
 
-$HOME/.config/polybar/launch.sh
+"$HOME"/.config/polybar/launch.sh
 
 bspc monitor -d I II III IV V VI VII VIII IX X
 
