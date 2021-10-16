@@ -1,3 +1,5 @@
+" vim:foldmethod=marker
+
 scriptencoding utf-8
 
 :lua require'plugins'
@@ -110,6 +112,22 @@ command! -nargs=? -complete=shellcmd Tabterm call <SID>tabterm(<f-args>) " eg `:
 function! SyntaxItem()
   return synIDattr(synID(line("."),col("."),1),"name")
 endfunction
+
+" hack to change firenvim fontsize {{{
+
+" function! SetGuiFontForFirenvim(timer)
+"     set guifont=JetBrains\ Mono:h20
+" endfunction
+
+" function! OnUIEnter(event) abort
+"   if 'Firenvim' ==# get(get(nvim_get_chan_info(a:event.chan), 'client', {}), 'name', '')
+"     " wait 100ms before changing fontsize
+"     call timer_start(100, function("SetGuiFontForFirenvim"))
+"   endif
+" endfunction
+" autocmd UIEnter * call OnUIEnter(deepcopy(v:event))
+
+" }}}
 
 exec "source " . stdpath('config') . "/plugin-settings.vim"
 :lua require'init'

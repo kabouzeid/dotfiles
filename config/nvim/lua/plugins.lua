@@ -125,6 +125,10 @@ require"packer".startup(function(use)
   use "marcushwz/nvim-workbench"
   use "milisims/nvim-luaref"
   use "jbyuki/nabla.nvim"
+  --[[ use {
+    'glacambre/firenvim',
+    run = function() vim.fn['firenvim#install'](0) end
+  } ]]
 
   -- Experimenting
   use "tpope/vim-unimpaired"
