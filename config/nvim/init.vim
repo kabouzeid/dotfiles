@@ -4,6 +4,8 @@ scriptencoding utf-8
 
 :lua require'plugins'
 
+" options {{{
+
 set termguicolors
 set background=dark
 
@@ -38,13 +40,10 @@ set clipboard=unnamedplus
 set spelllang=en_us,de_de
 
 set hidden
-nnoremap <C-N> :bnext<CR>
-nnoremap <C-P> :bprev<CR>
 
-let mapleader = "\<Space>"
-let maplocalleader = "\<Space>"
+" }}}
 
-nnoremap <C-L> :nohlsearch<CR><C-L>
+" filetypes {{{
 
 let g:tex_flavor='latex'
 let g:tex_conceal='abdmg'
@@ -64,6 +63,21 @@ augroup auto_filetypes
   " nvim-tree
   autocmd Filetype NvimTree setlocal cursorline
 augroup END
+
+" }}}
+
+" mappings {{{
+
+let mapleader = "\<Space>"
+let maplocalleader = "\<Space>"
+
+nnoremap <C-L> :nohlsearch<CR><C-L>
+nnoremap <C-N> :bnext<CR>
+nnoremap <C-P> :bprev<CR>
+
+" }}}
+
+" utilities {{{
 
 function! GenerateClangCompileFlags() " includes all dirs at the project root
   let root = WorkspaceFolder()
@@ -113,6 +127,8 @@ function! SyntaxItem()
   return synIDattr(synID(line("."),col("."),1),"name")
 endfunction
 
+" }}}
+
 " hack to change firenvim fontsize {{{
 
 " function! SetGuiFontForFirenvim(timer)
@@ -130,4 +146,5 @@ endfunction
 " }}}
 
 exec "source " . stdpath('config') . "/plugin-settings.vim"
+
 :lua require'init'
