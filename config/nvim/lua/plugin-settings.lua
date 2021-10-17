@@ -463,3 +463,9 @@ vim.cmd [[autocmd CursorHold,CursorHoldI <buffer> lua require'lint'.try_lint()]]
 -- vim.cmd [[colorscheme catppuccino]]
 
 -- }}}
+
+-- {{{ comments.nvim
+
+require"Comment".setup()
+
+-- }}}

@@ -76,7 +76,7 @@ require"packer".startup(function(use)
   -- Edit
   use "tpope/vim-surround"
   use "Raimondi/delimitMate"
-  use "b3nj5m1n/kommentary"
+  use "numToStr/Comment.nvim"
 
   -- Movement
   use "justinmk/vim-sneak"
