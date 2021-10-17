@@ -13,9 +13,9 @@ tar -xzf delta.tar.gz
 ln -s delta-0.8.3-x86_64-unknown-linux-gnu/delta .
 
 # gh
-curl -L -o gh.tar.gz "https://github.com/cli/cli/releases/download/v2.0.0/gh_2.0.0_linux_amd64.tar.gz"
+curl -L -o gh.tar.gz "https://github.com/cli/cli/releases/download/v2.1.0/gh_2.1.0_linux_amd64.tar.gz"
 tar -xzf gh.tar.gz
-ln -s gh_2.0.0_linux_amd64/bin/gh .
+ln -s gh_2.1.0_linux_amd64/bin/gh .
 
 # node
 curl -L -o node.tar.xz "https://nodejs.org/dist/v16.11.1/node-v16.11.1-linux-x64.tar.xz"
