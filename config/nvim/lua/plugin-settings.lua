@@ -469,3 +469,9 @@ vim.cmd [[autocmd CursorHold,CursorHoldI <buffer> lua require'lint'.try_lint()]]
 require"Comment".setup()
 
 -- }}}
+
+-- {{{ which-key
+
+require"which-key".setup()
+
+-- }}}

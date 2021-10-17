@@ -50,6 +50,7 @@ require"packer".startup(function(use)
 
   -- Themes
   use "rose-pine/neovim"
+  -- use "~/Code/rose-pine"
   -- use "Pocco81/Catppuccino.nvim"
   -- use { "kabouzeid/nvim-jellybeans", requires = "rktjmp/lush.nvim" }
   -- use "sainnhe/sonokai"
@@ -125,6 +126,7 @@ require"packer".startup(function(use)
   use "marcushwz/nvim-workbench"
   use "milisims/nvim-luaref"
   use "jbyuki/nabla.nvim"
+  use "folke/which-key.nvim"
   --[[ use {
     'glacambre/firenvim',
     run = function() vim.fn['firenvim#install'](0) end
