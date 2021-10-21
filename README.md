@@ -2,7 +2,9 @@
 
 ```bash
 # link dotfiles and install ohmyzsh + plugins, tpm and packer
-./install
+git clone https://github.com/kabouzeid/dotfiles ~/.dotfiles
+  && cd ~/.dotfiles
+  && ./install
 ```
 
 ```bash
