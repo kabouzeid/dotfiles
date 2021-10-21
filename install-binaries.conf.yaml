@@ -1,0 +1,57 @@
+- defaults:
+    link:
+      create: true
+      relink: true
+
+- clean: [~/.local/bin, ~/.local/share/man/man1]
+
+- create:
+  - ~/.local/share/packages
+
+- shell:
+  -
+    description: Download Binaries
+    command: >-
+      cd ~/.local/share/packages || exit 1;
+      wget "https://github.com/neovim/neovim/releases/download/stable/nvim-linux64.tar.gz" -O - | tar -xz;
+      wget "https://github.com/BurntSushi/ripgrep/releases/download/13.0.0/ripgrep-13.0.0-x86_64-unknown-linux-musl.tar.gz" -O - | tar -xz;
+      wget "https://github.com/sharkdp/fd/releases/download/v8.2.1/fd-v8.2.1-x86_64-unknown-linux-gnu.tar.gz" -O - | tar -xz;
+      wget "https://nodejs.org/dist/v17.0.0/node-v17.0.0-linux-x64.tar.xz" -O - | tar -xJ;
+      wget "https://github.com/cli/cli/releases/download/v2.1.0/gh_2.1.0_linux_amd64.tar.gz" -O - | tar -xz;
+      wget "https://github.com/dandavison/delta/releases/download/0.8.3/delta-0.8.3-x86_64-unknown-linux-gnu.tar.gz" -O - | tar -xz;
+
+- link:
+    ~/.local/bin/nvim:
+      path: ~/.local/share/packages/nvim-linux64/bin/nvim
+    ~/.local/share/man/man1/nvim.1:
+      path: ~/.local/share/packages/nvim-linux64/share/man/man1/nvim.1
+
+- link:
+    ~/.local/bin/rg:
+      path: ~/.local/share/packages/ripgrep-13.0.0-x86_64-unknown-linux-musl/rg
+    ~/.local/share/man/man1/rg.1:
+      path: ~/.local/share/packages/ripgrep-13.0.0-x86_64-unknown-linux-musl/doc/rg.1
+
+- link:
+    ~/.local/bin/fd:
+      path: ~/.local/share/packages/fd-v8.2.1-x86_64-unknown-linux-gnu/fd
+    ~/.local/share/man/man1/fd.1:
+      path: ~/.local/share/packages/fd-v8.2.1-x86_64-unknown-linux-gnu/fd.1
+
+- link:
+    ~/.local/bin:
+      glob: true
+      path: ~/.local/share/packages/node-v17.0.0-linux-x64/bin/*
+    ~/.local/share/man/man1/node.1:
+      path: ~/.local/share/packages/node-v17.0.0-linux-x64/share/man/man1/node.1
+
+- link:
+    ~/.local/bin/gh:
+      path: ~/.local/share/packages/gh_2.1.0_linux_amd64/bin/gh
+    ~/.local/share/man/man1:
+      glob: true
+      path: ~/.local/share/packages/gh_2.1.0_linux_amd64/share/man/man1/*
+
+- link:
+    ~/.local/bin/delta:
+      path: ~/.local/share/packages/delta-0.8.3-x86_64-unknown-linux-gnu/delta

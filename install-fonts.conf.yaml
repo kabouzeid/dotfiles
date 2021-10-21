@@ -1,0 +1,11 @@
+- defaults:
+    link:
+      create: true
+      relink: true
+
+- clean: [~/.local/share/fonts]
+
+- link:
+    ~/.local/share/fonts:
+      glob: true
+      path: fonts/*
