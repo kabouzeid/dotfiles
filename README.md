@@ -1,16 +1,16 @@
 # 🏠 dotfiles
 
 ```bash
-# links dotfiles and installs ohmyzsh + plugins, tpm and packer
+# link dotfiles and install ohmyzsh + plugins, tpm and packer
 ./install
 ```
 
 ```bash
-# (optional) downloads and links essential binaries, useful when one can't use the package manager
+# (optional) download and link essential binaries
 ./install -vv -c install-binaries.conf.yaml
 ```
 
 ```bash
-# (optional) links bundled fonts (including symbol fonts for neovim)
+# (optional) link bundled fonts (including symbol fonts for neovim)
 ./install -c install-fonts.conf.yaml
 ```
