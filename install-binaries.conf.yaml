@@ -25,6 +25,10 @@
       path: ~/.local/share/packages/nvim-linux64/bin/nvim
     ~/.local/share/man/man1/nvim.1:
       path: ~/.local/share/packages/nvim-linux64/share/man/man1/nvim.1
+    ~/.local/share/applications/nvim.desktop:
+      path: ~/.local/share/packages/nvim-linux64/share/applications/nvim.desktop
+    ~/.local/share/icons/hicolor/128x128/apps/nvim.png:
+      path: ~/.local/share/packages/nvim-linux64/share/icons/hicolor/128x128/apps/nvim.png
 
 - link:
     ~/.local/bin/rg:
