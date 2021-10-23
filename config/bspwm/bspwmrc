@@ -1,9 +1,5 @@
 #! /bin/sh
 
-# make Gnome Apps scale correctly
-export GDK_SCALE=2
-export GDK_DPI_SCALE=0.5
-
 # better defaults for key repeate rate and cursor img
 xset r rate 250 25
 xsetroot -cursor_name left_ptr

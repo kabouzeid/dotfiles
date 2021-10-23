@@ -234,4 +234,4 @@ default_border pixel 2
 
 include /etc/sway/config.d/*
 
-exec xrdb -merge ~/.Xresources
+# exec xrdb -merge ~/.Xresources
