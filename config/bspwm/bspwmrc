@@ -1,9 +1,5 @@
 #! /bin/sh
 
-# better defaults for key repeate rate and cursor img
-xset r rate 250 25
-xsetroot -cursor_name left_ptr
-
 pgrep -x sxhkd > /dev/null || sxhkd &
 pgrep -x picom > /dev/null || picom &
 
