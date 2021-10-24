@@ -10,6 +10,10 @@ super + Return
 super + b
 	chromium
 
+# email
+super + e
+	mailspring
+
 # program launcher
 super + @space
 	rofi -show drun
