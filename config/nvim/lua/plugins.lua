@@ -84,7 +84,7 @@ require"packer".startup(function(use)
   use "tpope/vim-sleuth"
 
   -- UI
-  use "hoob3rt/lualine.nvim"
+  use "nvim-lualine/lualine.nvim"
   use "folke/zen-mode.nvim"
   use "akinsho/nvim-toggleterm.lua"
 
