@@ -1,3 +1,6 @@
 config/nvim/plugin/**
 config/nvim/spell/**
+config/ranger/bookmarks
+config/ranger/history
+config/ranger/tagged
 *_local*
