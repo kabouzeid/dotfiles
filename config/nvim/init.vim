@@ -7,7 +7,6 @@ scriptencoding utf-8
 " options {{{
 
 set termguicolors
-set background=dark
 
 let g:rose_pine_variant = 'moon'
 colorscheme rose-pine

@@ -50,6 +50,7 @@ require"packer".startup(function(use)
 
   -- Themes
   use { "rose-pine/neovim", as = 'rose-pine' }
+  use "projekt0n/github-nvim-theme"
   -- use "~/Code/rose-pine"
   -- use "Pocco81/Catppuccino.nvim"
   -- use { "kabouzeid/nvim-jellybeans", requires = "rktjmp/lush.nvim" }
@@ -120,6 +121,7 @@ require"packer".startup(function(use)
   use "pest-parser/pest.vim"
   use "jwalton512/vim-blade"
   use "pantharshit00/vim-prisma"
+  use "evanleck/vim-svelte"
 
   -- Misc
   use "wincent/terminus"
