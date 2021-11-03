@@ -10,6 +10,7 @@ require"packer".startup(function(use)
   use "williamboman/nvim-lsp-installer"
   use "kosayoda/nvim-lightbulb"
   use "folke/lsp-trouble.nvim"
+  use "arkav/lualine-lsp-progress"
 
   -- Linting
   use "mfussenegger/nvim-lint"

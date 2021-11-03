@@ -11,7 +11,7 @@ vim.cmd "nnoremap <silent> <leader>dr :lua require'dap'.repl.toggle()<CR>"
 vim.cmd "nnoremap <silent> <leader>dK :lua require'dap.ui.variables'.hover()<CR>"
 vim.cmd "nnoremap <silent> <leader>df :lua require'dap.ui.variables'.scopes()<CR>"
 
-vim.g.dap_virtual_text = true
+require("nvim-dap-virtual-text").setup()
 
 dap.adapters.lldb = {
   type = 'executable',
