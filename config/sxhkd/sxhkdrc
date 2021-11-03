@@ -149,5 +149,5 @@ XF86AudioMute
 #
 
 # suspend
-ctrl + alt + super + Insert
+ctrl + alt + super + BackSpace
 	systemctl suspend
