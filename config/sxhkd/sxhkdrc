@@ -129,20 +129,14 @@ super + {Left,Down,Up,Right}
 	bspc node -v {-20 0,0 20,0 -20,20 0}
 
 #
-# audio
+# media
 #
 
-# volume up
-XF86AudioRaiseVolume
-	pamixer --increase 10
+{XF86AudioRaiseVolume,XF86AudioLowerVolume,XF86AudioMute}
+	pamixer {--increase 5,--decrease 5,--toggle-mute}
 
-# volume down
-XF86AudioLowerVolume
-	pamixer --decrease 10
-
-# mute
-XF86AudioMute
-	pamixer --toggle-mute
+{XF86AudioPrev, XF86AudioPlay, XF86AudioNext}
+	playerctl {previous,play-pause,next}
 
 #
 # power
