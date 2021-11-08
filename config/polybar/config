@@ -19,7 +19,7 @@
 [colors]
 ;background = ${xrdb:color0:#222}
 background = #232136
-;background-alt = #403c41
+background-alt = #403c41
 ;foreground = ${xrdb:color7:#222}
 foreground = #e0def4
 foreground-alt = #817c9c
@@ -51,9 +51,10 @@ module-margin-left = 2
 module-margin-right = 2
 
 ; font-0 = Inter:pixelsize=20;1
-font-0 = JetBrains Mono:pixelsize=19;1
+font-0 = JetBrains Mono:pixelsize=19;3
 ; somehow pixelsize doesn't work for the emoji font, use scale instead
-font-1 = "Noto Color Emoji:style=Regular:scale=5;1"
+font-1 = "Noto Color Emoji:style=Regular:scale=5;3"
+font-2 = "Material Icons:pixelsize=24;5"
 
 modules-left = bspwm
 ;modules-center =
@@ -81,8 +82,8 @@ cursor-scroll = ns-resize
 type = internal/bspwm
 
 label-focused = %index%
-; label-focused-background = ${colors.background-alt}
-label-focused-underline= ${colors.primary}
+label-focused-background = ${colors.background-alt}
+; label-focused-underline= ${colors.primary}
 label-focused-padding = 1
 
 label-occupied = %index%
@@ -105,9 +106,9 @@ interval = 5
 
 date = "%A %B %d"
 
-format-underline = ${colors.secondary}
+; format-underline = ${colors.secondary}
 
-label = %{A3:gnome-calendar:}%date%%{A}
+label = %{A3:gnome-calendar:} %date%%{A}
 
 [module/time]
 type = internal/date
@@ -115,9 +116,9 @@ interval = 1
 
 time = "%H:%M"
 
-format-underline = ${colors.secondary}
+; format-underline = ${colors.secondary}
 
-label = %{A3:gnome-clocks:}%time%%{A}
+label = %{A3:gnome-clocks:} %time%%{A}
 
 click-right = gnome-clocks
 
@@ -125,26 +126,23 @@ click-right = gnome-clocks
 type = internal/pulseaudio
 use-ui-max = false
 interval = 10
-format-volume = <label-volume> <ramp-volume>
+format-volume =  <label-volume>
 click-right = pavucontrol
-ramp-volume-0 = 🔈
-ramp-volume-1 = 🔉
-ramp-volume-2 = 🔊
-label-muted = %percentage%% 🔇
-format-volume-underline = ${colors.secondary}
-format-muted-underline = ${colors.secondary}
+label-muted =  %percentage%%
+; format-volume-underline = ${colors.secondary}
+; format-muted-underline = ${colors.secondary}
 
 [module/network]
 type = internal/network
 interface = eno1
 accumulate-stats = true
-format-connected-underline = ${colors.secondary}
+; format-connected-underline = ${colors.secondary}
 format-packetloss = <animation-packetloss> <label-connected>
-format-packetloss-underline = ${colors.secondary}
-label-connected = %upspeed:9% 🔼 %downspeed:9% 🔽
-animation-packetloss-0 = ⚠
+; format-packetloss-underline = ${colors.secondary}
+label-connected =  %upspeed% %downspeed%
+animation-packetloss-0 = 
 animation-packetloss-0-foreground = #ffa64c
-animation-packetloss-1 = 📶
+animation-packetloss-1 = 
 animation-packetloss-1-foreground = #000000
 animation-packetloss-framerate = 500
 
