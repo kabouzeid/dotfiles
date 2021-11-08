@@ -393,7 +393,7 @@ vim.cmd [[autocmd CursorHold,CursorHoldI <buffer> lua require'lint'.try_lint()]]
 -- {{{ catppuccino
 
 -- require"catppuccino".setup {
---   colorscheme = "dark_catppuccino",
+--   colorscheme = "neon_latte",
 --   term_colors = true,
 --   styles = {
 --     comments = "italic",

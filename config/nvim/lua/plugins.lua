@@ -51,30 +51,31 @@ require"packer".startup(function(use)
 
   -- Themes
   use { "rose-pine/neovim", as = 'rose-pine' }
-  use "projekt0n/github-nvim-theme"
   -- use "~/Code/rose-pine"
-  -- use "Pocco81/Catppuccino.nvim"
-  -- use { "kabouzeid/nvim-jellybeans", requires = "rktjmp/lush.nvim" }
-  -- use "sainnhe/sonokai"
-  -- use "sainnhe/edge"
-  -- use "sainnhe/everforest"
-  -- use "sainnhe/gruvbox-material"
-  -- use "kyazdani42/nvim-palenight.lua"
-  -- use "folke/tokyonight.nvim"
-  -- use "tjdevries/colorbuddy.vim"
-  -- use "tjdevries/gruvbuddy.nvim"
-  -- use "Th3Whit3Wolf/spacebuddy"
-  -- use "Luxed/ayu-vim"
-  -- use "connorholyday/vim-snazzy"
-  -- use "fratajczak/one-monokai-vim"
-  -- use "crusoexia/vim-monokai"
-  -- use "rakr/vim-one"
-  -- use "joshdick/onedark.vim"
-  -- use { "olimorris/onedark.nvim", requires = "rktjmp/lush.nvim" }
-  -- use { "alaric/nortia.nvim", requires = "rktjmp/lush.nvim" }
-  -- use "junegunn/seoul256.vim"
-  -- use "mhartington/oceanic-next"
-  -- use "saltdotac/citylights.vim"
+  use "projekt0n/github-nvim-theme"
+  use "Pocco81/Catppuccino.nvim"
+  use { "kabouzeid/nvim-jellybeans", requires = "rktjmp/lush.nvim" }
+  -- use { "~/Code/nvim-jellybeans", requires = "rktjmp/lush.nvim" }
+  use "sainnhe/sonokai"
+  use "sainnhe/edge"
+  use "sainnhe/everforest"
+  use "sainnhe/gruvbox-material"
+  use "kyazdani42/nvim-palenight.lua"
+  use "folke/tokyonight.nvim"
+  use "tjdevries/colorbuddy.vim"
+  use "tjdevries/gruvbuddy.nvim"
+  use "Th3Whit3Wolf/spacebuddy"
+  use "Luxed/ayu-vim"
+  use "connorholyday/vim-snazzy"
+  use "fratajczak/one-monokai-vim"
+  use "crusoexia/vim-monokai"
+  use "rakr/vim-one"
+  use "joshdick/onedark.vim"
+  use { "olimorris/onedark.nvim", requires = "rktjmp/lush.nvim" }
+  use { "alaric/nortia.nvim", requires = "rktjmp/lush.nvim" }
+  use "junegunn/seoul256.vim"
+  use "mhartington/oceanic-next"
+  use "saltdotac/citylights.vim"
 
   -- Edit
   use "tpope/vim-surround"
