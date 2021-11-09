@@ -51,14 +51,14 @@ module-margin-left = 2
 module-margin-right = 2
 
 ; font-0 = Inter:pixelsize=20;1
-font-0 = JetBrains Mono:pixelsize=19;3
+font-0 = JetBrains Mono:pixelsize=19;4
 ; somehow pixelsize doesn't work for the emoji font, use scale instead
-font-1 = "Noto Color Emoji:style=Regular:scale=5;3"
-font-2 = "Material Icons:pixelsize=24;5"
+font-1 = "Noto Color Emoji:style=Regular:scale=5;4"
+font-2 = "Material Icons:pixelsize=24;6"
 
 modules-left = bspwm
-;modules-center =
-modules-right = network pulseaudio date time
+; modules-center = title
+modules-right = network player-mpris pulseaudio date time
 
 ;tray-position = right
 ;tray-padding = 2
@@ -145,6 +145,14 @@ animation-packetloss-0-foreground = #ffa64c
 animation-packetloss-1 = 
 animation-packetloss-1-foreground = #000000
 animation-packetloss-framerate = 500
+
+[module/title]
+type = internal/xwindow
+
+[module/player-mpris]
+type = custom/script
+exec = ~/.config/polybar/player-mpris-tail.py -f '{icon} {:artist:t18:{artist}:}{:artist: • :}{:t24:{title}:}' --icon-playing= --icon-paused=  --icon-stopped='' --icon-none=''
+tail = true
 
 [settings]
 screenchange-reload = true

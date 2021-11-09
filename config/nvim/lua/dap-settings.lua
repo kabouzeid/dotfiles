@@ -10,8 +10,12 @@ vim.cmd "nnoremap <silent> <leader>dl :lua require'dap'.set_breakpoint(nil, nil,
 vim.cmd "nnoremap <silent> <leader>dr :lua require'dap'.repl.toggle()<CR>"
 vim.cmd "nnoremap <silent> <leader>dK :lua require'dap.ui.variables'.hover()<CR>"
 vim.cmd "nnoremap <silent> <leader>df :lua require'dap.ui.variables'.scopes()<CR>"
+vim.cmd "nnoremap <silent> <leader>du :lua require'dapui'.toggle()<CR>"
 
 require("nvim-dap-virtual-text").setup()
+require("dapui").setup()
+
+require("dap-python").setup("python")
 
 dap.adapters.lldb = {
   type = 'executable',
@@ -37,38 +41,21 @@ dap.configurations.cpp = {
 	}),
 
 	vim.tbl_extend("force", lldb_configuration, {
+		name = "Launch with arguments",
+		request = "launch",
+		stopOnEntry = false,
+		runInTerminal = false,
+                args = function()
+                  local args_string = vim.fn.input('Arguments: ')
+                  return vim.split(args_string, " +")
+                end,
+	}),
+
+	vim.tbl_extend("force", lldb_configuration, {
 		name = "Attach to process",
 		request = "attach",
 		pid = require('dap.utils').pick_process,
 	})
 }
-
-local M = {}
-
--- meant to be called from a vim command
-M.cmd_run_lldb = function(args)
-  if args and #args > 0 then
-    local program = table.remove(args, 1)
-
-    local env = {}
-    for k, v in pairs(vim.fn.environ()) do
-      table.insert(env, string.format("%s=%s", k, v))
-    end
-
-    dap.run(vim.tbl_extend("force", lldb_configuration, {
-			name = "Launch",
-			request = "launch",
-			stopOnEntry = false,
-			runInTerminal = false,
-			program,
-			env,
-			args,
-		}))
-  else
-    print('No binary to debug set!')
-  end
-end
-
-vim.cmd 'command! -complete=file -nargs=* DapLLDB lua require "dap-settings".cmd_run_lldb({<f-args>})'
-
-return M
+dap.configurations.c = dap.configurations.cpp
+dap.configurations.rust = dap.configurations.cpp

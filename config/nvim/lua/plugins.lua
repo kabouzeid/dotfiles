@@ -43,7 +43,9 @@ require"packer".startup(function(use)
 
   -- DAP
   use "mfussenegger/nvim-dap"
-  use "theHamsta/nvim-dap-virtual-text"
+  use { "theHamsta/nvim-dap-virtual-text", requires = "mfussenegger/nvim-dap" }
+  use { "rcarriga/nvim-dap-ui", requires = "mfussenegger/nvim-dap" }
+  use { "mfussenegger/nvim-dap-python", requires = "mfussenegger/nvim-dap" }
 
   -- Color
   use "norcalli/nvim-colorizer.lua"
