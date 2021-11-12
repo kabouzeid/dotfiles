@@ -1,4 +1,4 @@
-local dap = require('dap')
+local dap = require("dap")
 
 vim.cmd "nnoremap <silent> <leader>dc :lua require'dap'.continue()<CR>"
 vim.cmd "nnoremap <silent> <leader>dn :lua require'dap'.step_over()<CR>"
@@ -17,45 +17,38 @@ require("dapui").setup()
 
 require("dap-python").setup("python")
 
-dap.adapters.lldb = {
-  type = 'executable',
-  command = 'lldb-vscode',
-  name = "lldb"
-}
-
+dap.adapters.lldb = { type = "executable", command = "lldb-vscode", name = "lldb" }
 
 local lldb_configuration = {
-	type = "lldb",
-	program = function()
-		return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
-	end,
-	cwd = '${workspaceFolder}',
+  type = "lldb",
+  program = function() return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file") end,
+  cwd = "${workspaceFolder}",
 }
 
 dap.configurations.cpp = {
-	vim.tbl_extend("force", lldb_configuration, {
-		name = "Launch",
-		request = "launch",
-		stopOnEntry = false,
-		runInTerminal = false,
-	}),
+  vim.tbl_extend("force", lldb_configuration, {
+    name = "Launch",
+    request = "launch",
+    stopOnEntry = false,
+    runInTerminal = false,
+  }),
 
-	vim.tbl_extend("force", lldb_configuration, {
-		name = "Launch with arguments",
-		request = "launch",
-		stopOnEntry = false,
-		runInTerminal = false,
-                args = function()
-                  local args_string = vim.fn.input('Arguments: ')
-                  return vim.split(args_string, " +")
-                end,
-	}),
+  vim.tbl_extend("force", lldb_configuration, {
+    name = "Launch with arguments",
+    request = "launch",
+    stopOnEntry = false,
+    runInTerminal = false,
+    args = function()
+      local args_string = vim.fn.input("Arguments: ")
+      return vim.split(args_string, " +")
+    end,
+  }),
 
-	vim.tbl_extend("force", lldb_configuration, {
-		name = "Attach to process",
-		request = "attach",
-		pid = require('dap.utils').pick_process,
-	})
+  vim.tbl_extend("force", lldb_configuration, {
+    name = "Attach to process",
+    request = "attach",
+    pid = require("dap.utils").pick_process,
+  }),
 }
 dap.configurations.c = dap.configurations.cpp
 dap.configurations.rust = dap.configurations.cpp

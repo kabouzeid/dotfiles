@@ -4,7 +4,7 @@ local icons = require("nvim-nonicons")
 -- {{{ coq
 
 vim.g.coq_settings = {
-  auto_start = 'shut-up',
+  auto_start = "shut-up",
   ["display.icons.mappings"] = {
     Boolean = "",
     -- Character = "",
@@ -36,106 +36,91 @@ vim.g.coq_settings = {
     Unit = "",
     Value = "",
     Variable = "",
-  }
+  },
 }
 
 -- }}} ]]
 
 -- {{{ lspkind
 
-require('lspkind').init {
-  preset = 'codicons',
-}
+require("lspkind").init { preset = "codicons" }
 
 -- }}}
 
 -- {{{ cmp
 
 local function check_back_space()
-    local col = vim.fn.col('.') - 1
-    return col == 0 or vim.fn.getline('.'):sub(col, col):match('%s')
+  local col = vim.fn.col(".") - 1
+  return col == 0 or vim.fn.getline("."):sub(col, col):match("%s")
 end
 
 local function feedkey(key, mode)
   vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(key, true, true, true), mode, true)
 end
 
-local cmp = require('cmp')
+local cmp = require("cmp")
 cmp.setup {
-  snippet = {
-    expand = function(args)
-      vim.fn['vsnip#anonymous'](args.body)
-    end
-  },
+  snippet = { expand = function(args) vim.fn["vsnip#anonymous"](args.body) end },
   formatting = {
     format = function(entry, vim_item)
       vim_item.kind = require("lspkind").presets.codicons[vim_item.kind] .. " " .. vim_item.kind
 
       -- set a name for each source
       vim_item.menu = ({
-        nvim_lsp      = "[LSP]",
-        buffer        = "[Buffer]",
-        nvim_lua      = "[Lua]",
-        tags          = "[Tags]",
-        vsnip         = "[Snippet]",
-        path          = "[Path]",
-        tmux          = "[Tmux]",
+        nvim_lsp = "[LSP]",
+        buffer = "[Buffer]",
+        nvim_lua = "[Lua]",
+        tags = "[Tags]",
+        vsnip = "[Snippet]",
+        path = "[Path]",
+        tmux = "[Tmux]",
         latex_symbols = "[LaTeX]",
-        spell         = "[Spell]",
+        spell = "[Spell]",
       })[entry.source.name]
 
       return vim_item
     end,
   },
   mapping = {
-    ['<C-p>'] = cmp.mapping.select_prev_item(),
-    ['<C-n>'] = cmp.mapping.select_next_item(),
-    ['<C-d>'] = cmp.mapping.scroll_docs(-4),
-    ['<C-f>'] = cmp.mapping.scroll_docs(4),
-    ['<C-Space>'] = cmp.mapping.complete(),
-    ['<C-e>'] = cmp.mapping.close(),
-    ['<CR>'] = cmp.mapping.confirm({
-      behavior = cmp.ConfirmBehavior.Insert,
-      select = true,
-    }),
-    ['<Tab>'] = cmp.mapping(
-    function(fallback)
+    ["<C-p>"] = cmp.mapping.select_prev_item(),
+    ["<C-n>"] = cmp.mapping.select_next_item(),
+    ["<C-d>"] = cmp.mapping.scroll_docs(-4),
+    ["<C-f>"] = cmp.mapping.scroll_docs(4),
+    ["<C-Space>"] = cmp.mapping.complete(),
+    ["<C-e>"] = cmp.mapping.close(),
+    ["<CR>"] = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Insert, select = true }),
+    ["<Tab>"] = cmp.mapping(function(fallback)
       if cmp.visible() then
         cmp.select_next_item()
       elseif check_back_space() then
         fallback()
-      elseif vim.fn['vsnip#jumpable'](1) == 1 then
-        feedkey('<Plug>(vsnip-jump-next)', '')
+      elseif vim.fn["vsnip#jumpable"](1) == 1 then
+        feedkey("<Plug>(vsnip-jump-next)", "")
       else
         fallback()
       end
-    end,
-    { "i", "s" }
-    ),
-    ['<S-Tab>'] = cmp.mapping(
-    function(fallback)
+    end, { "i", "s" }),
+    ["<S-Tab>"] = cmp.mapping(function(fallback)
       if cmp.visible() then
         cmp.select_prev_item()
-      elseif vim.fn['vsnip#jumpable'](-1) == 1 then
+      elseif vim.fn["vsnip#jumpable"](-1) == 1 then
         feedkey("<Plug>(vsnip-jump-prev)", "")
       else
         fallback()
       end
-    end,
-    { "i", "s" }
-    ),
+    end, { "i", "s" }),
   },
   sources = {
-    { name = 'nvim_lsp' },
-    { name = 'nvim_lua' },
-    { name = 'tags' },
-    { name = 'vsnip' },
-    { name = 'path' },
-    { name = 'buffer' },
-    { name = 'tmux' },
-    { name = 'latex_symbols' },
-    { name = 'spell' },
-    { name = 'treesitter' },
+    { name = "nvim_lsp" },
+    { name = "nvim_lua" },
+    { name = "tags" },
+    { name = "vsnip" },
+    { name = "path" },
+    { name = "buffer" },
+    { name = "tmux" },
+    { name = "latex_symbols" },
+    { name = "spell" },
+    { name = "treesitter" },
   },
 }
 
@@ -219,19 +204,17 @@ vim.g.nvim_tree_icons = {
 vim.g.nvim_tree_group_empty = 1
 vim.g.nvim_tree_add_trailing = 1
 
-require'nvim-tree'.setup {
+require"nvim-tree".setup {
   -- don't disable netrw because it's used by Neovim for downloading spell files
-  disable_netrw       = false,
+  disable_netrw = false,
   -- hijack netrw window on startup
-  hijack_netrw        = false,
+  hijack_netrw = false,
   -- hijack the cursor in the tree to put it at the start of the filename
-  hijack_cursor       = true,
+  hijack_cursor = true,
   -- updates the root directory of the tree on `DirChanged` (when your run `:cd` usually)
-  update_cwd          = true,
+  update_cwd = true,
   -- show lsp diagnostics in the signcolumn
-  diagnostics         = {
-    enable = true
-  },
+  diagnostics = { enable = true },
 }
 
 -- disable nvim tree autocmds --- they are buggy

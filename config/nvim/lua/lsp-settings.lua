@@ -1,5 +1,4 @@
 -- vim.lsp.set_log_level("debug")
-
 vim.lsp.handlers["textDocument/publishDiagnostics"] =
   vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, { virtual_text = { prefix = "●" } })
 
@@ -105,7 +104,7 @@ local lua_settings = {
 -- config that activates keymaps and enables snippet support
 local function get_config(server_name)
   local capabilities = vim.lsp.protocol.make_client_capabilities()
-  capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
+  capabilities = require("cmp_nvim_lsp").update_capabilities(capabilities)
   capabilities.textDocument.colorProvider = { dynamicRegistration = false }
   local config = {
     -- enable snippet support
@@ -114,9 +113,7 @@ local function get_config(server_name)
     on_attach = on_attach,
   }
 
-  if server_name == "sumneko_lua" then
-    config.cmd = { "lua-language-server" }
-  end
+  if server_name == "sumneko_lua" then config.cmd = { "lua-language-server" } end
   if server_name == "lua" or server_name == "sumneko_lua" then
     config.settings = lua_settings
     config.root_dir = function(fname)
@@ -137,9 +134,8 @@ local function get_config(server_name)
   end
   if server_name == "vim" then config.init_options = { isNeovim = true } end
   if server_name == "haskell" then
-    config.root_dir = require"lspconfig/util".root_pattern("*.cabal", "stack.yaml",
-    "cabal.project", "package.yaml",
-    "hie.yaml", ".git");
+    config.root_dir = require"lspconfig/util".root_pattern("*.cabal", "stack.yaml", "cabal.project",
+                                                           "package.yaml", "hie.yaml", ".git");
   end
 
   return config
@@ -149,8 +145,8 @@ end
 
 -- setup servers installed with nvim-lsp-installer
 require"nvim-lsp-installer".on_server_ready(function(server)
-    server:setup(get_config(server.name))
-    vim.cmd [[ do User LspAttachBuffers ]]
+  server:setup(get_config(server.name))
+  vim.cmd [[ do User LspAttachBuffers ]]
 end)
 
 -- setup manually installed servers
@@ -164,6 +160,7 @@ if (vim.fn.executable("pacman") == 1) then
   table.insert(servers, "clangd")
   table.insert(servers, "cmake")
   table.insert(servers, "dockerls")
+  table.insert(servers, "efm")
   table.insert(servers, "gopls")
   table.insert(servers, "hls")
   table.insert(servers, "intelephense")
@@ -179,9 +176,7 @@ if (vim.fn.executable("pacman") == 1) then
   table.insert(servers, "yamlls")
 end
 
-for _, server in pairs(servers) do
-  require"lspconfig"[server].setup(get_config(server))
-end
+for _, server in pairs(servers) do require"lspconfig"[server].setup(get_config(server)) end
 
 -- UI just like `:LspInfo` to show which capabilities each attached server has
 vim.api.nvim_command("command! LspCapabilities lua require'lsp-capabilities'()")

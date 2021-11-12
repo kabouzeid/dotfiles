@@ -38,7 +38,7 @@ require"packer".startup(function(use)
       "f3fora/cmp-spell",
       "quangnguyen30192/cmp-nvim-tags",
       "ray-x/cmp-treesitter",
-    }
+    },
   }
 
   -- DAP
@@ -52,7 +52,7 @@ require"packer".startup(function(use)
   use "rktjmp/lush.nvim"
 
   -- Themes
-  use { "rose-pine/neovim", as = 'rose-pine' }
+  use { "rose-pine/neovim", as = "rose-pine" }
   -- use "~/Code/rose-pine"
   use "projekt0n/github-nvim-theme"
   use "Pocco81/Catppuccino.nvim"

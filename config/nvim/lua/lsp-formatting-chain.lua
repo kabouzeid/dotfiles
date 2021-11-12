@@ -10,9 +10,9 @@ local M = {}
 --- vim.api.nvim_command[[autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_chain_sync()]]
 --- </pre>
 ---
---@param options (optional, table) `FormattingOptions` entries
---@param timeout_ms (optional, number) Request timeout
---@param order (optional, table) List of client names. The buffer is formatted with all capable
+-- @param options (optional, table) `FormattingOptions` entries
+-- @param timeout_ms (optional, number) Request timeout
+-- @param order (optional, table) List of client names. The buffer is formatted with all capable
 ---      clients in the following order: first all clients that are not in the `order` list, then
 ---      the remaining clients in the order as they occur in the `order` list.
 function M.formatting_chain_sync(options, timeout_ms, order)
@@ -37,14 +37,13 @@ function M.formatting_chain_sync(options, timeout_ms, order)
   -- loop through the clients and make synchronous formatting requests
   for _, client in ipairs(clients) do
     if client.resolved_capabilities.document_formatting then
-      local result = client.request_sync("textDocument/formatting", vim.lsp.util.make_formatting_params(options), timeout_ms)
+      local result = client.request_sync("textDocument/formatting",
+                                         vim.lsp.util.make_formatting_params(options), timeout_ms)
       handle_request_result(result)
     elseif client.resolved_capabilities.document_range_formatting then
       local last_line = vim.fn.line("$")
       local last_col = vim.fn.col({ last_line, "$" })
-      local params = vim.lsp.util.make_given_range_params({ 1, 0 }, {
-        last_line, last_col
-      })
+      local params = vim.lsp.util.make_given_range_params({ 1, 0 }, { last_line, last_col })
       params.options = vim.lsp.util.make_formatting_params(options).options
       local result = client.request_sync("textDocument/rangeFormatting", params, timeout_ms)
       handle_request_result(result)
