@@ -372,22 +372,22 @@ require("zen-mode").setup({
 
 -- }}}
 
--- {{{ nvim-lint
-require("lint").linters_by_ft = {
-  sh = { "shellcheck" },
-  -- javascript = { "eslint-local" },
-  -- typescript = { "eslint-local" },
-  -- html = { "tidy" },
-  -- go = { "revive" },
-  vim = { "vint" },
-  -- php = { "phpstan" },
-  python = { "flake8" },
-  -- yaml = { "yamllint" },
-  -- make = { "checkmake" },
-}
-
-vim.cmd([[autocmd CursorHold,CursorHoldI <buffer> lua require'lint'.try_lint()]])
--- }}}
+-- -- {{{ nvim-lint
+-- require("lint").linters_by_ft = {
+--   sh = { "shellcheck" },
+--   -- javascript = { "eslint-local" },
+--   -- typescript = { "eslint-local" },
+--   -- html = { "tidy" },
+--   -- go = { "revive" },
+--   vim = { "vint" },
+--   -- php = { "phpstan" },
+--   python = { "flake8" },
+--   -- yaml = { "yamllint" },
+--   -- make = { "checkmake" },
+-- }
+--
+-- vim.cmd([[autocmd CursorHold,CursorHoldI <buffer> lua require'lint'.try_lint()]])
+-- -- }}}
 
 -- {{{ catppuccino
 
@@ -443,5 +443,38 @@ require("Comment").setup()
 -- {{{ which-key
 
 require("which-key").setup()
+
+-- }}}
+
+-- {{{ null-ls
+
+require("null-ls").config({
+  sources = vim.tbl_filter(function(source)
+    if source._opts and source._opts.command then
+      return vim.fn.executable(source._opts.command) == 1 and source or nil
+    else
+      return source
+    end
+  end, {
+    require("null-ls").builtins.formatting.stylua,
+    require("null-ls").builtins.formatting.prettier.with({
+      command = "./node_modules/.bin/prettier",
+    }),
+    require("null-ls").builtins.formatting.rustywind,
+    require("null-ls").builtins.formatting.shellharden,
+
+    require("null-ls").builtins.diagnostics.codespell,
+    require("null-ls").builtins.diagnostics.cppcheck,
+    require("null-ls").builtins.diagnostics.flake8,
+    require("null-ls").builtins.diagnostics.proselint,
+    -- require("null-ls").builtins.diagnostics.selene,
+    require("null-ls").builtins.diagnostics.shellcheck,
+    require("null-ls").builtins.diagnostics.vint,
+    require("null-ls").builtins.diagnostics.write_good,
+    require("null-ls").builtins.diagnostics.yamllint,
+
+    require("null-ls").builtins.code_actions.proselint,
+  }),
+})
 
 -- }}}

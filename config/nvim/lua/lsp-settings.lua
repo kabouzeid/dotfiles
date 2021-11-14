@@ -51,7 +51,8 @@ local on_attach = function(client, bufnr)
   buf_set_keymap(
     "n",
     "<Leader>p",
-    "<cmd>lua vim.lsp.buf.formatting_seq_sync(nil, 1000, { 'html', 'php', 'efm' })<CR>",
+    -- null-ls might run prettier and blade-formatter, which should have higher precedence than formatting by html and php language servers
+    "<cmd>lua vim.lsp.buf.formatting_seq_sync(nil, 1000, { 'html', 'php', 'null-ls' })<CR>",
     opts
   )
   buf_set_keymap("n", "<Leader>P", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
@@ -127,8 +128,6 @@ local function get_config(server_name)
 
   if server_name == "sumneko_lua" then
     config.cmd = { "lua-language-server" }
-  end
-  if server_name == "lua" or server_name == "sumneko_lua" then
     config.settings = lua_settings
     config.root_dir = function(fname)
       if fname:match("lush_theme") ~= nil then
@@ -143,12 +142,6 @@ local function get_config(server_name)
   end
   if server_name == "clangd" then
     config.filetypes = { "c", "cpp" } -- we don't want objective-c and objective-cpp!
-  end
-  if server_name == "efm" then
-    config = vim.tbl_extend("force", config, require("efm"))
-  end
-  if server_name == "diagnosticls" then
-    config = vim.tbl_extend("force", config, require("diagnosticls"))
   end
   if server_name == "vim" then
     config.init_options = { isNeovim = true }
@@ -177,6 +170,7 @@ end)
 
 -- setup manually installed servers
 local servers = {}
+table.insert(servers, "null-ls")
 if vim.fn.executable("xcrun") == 1 or vim.fn.executable("sourcekit-lsp") == 1 then
   table.insert(servers, "sourcekit")
 end
@@ -186,7 +180,6 @@ if vim.fn.executable("pacman") == 1 then
   table.insert(servers, "clangd")
   table.insert(servers, "cmake")
   table.insert(servers, "dockerls")
-  table.insert(servers, "efm")
   table.insert(servers, "gopls")
   table.insert(servers, "hls")
   table.insert(servers, "intelephense")

@@ -93,7 +93,7 @@ function! GenerateClangCompileFlags() " includes all dirs at the project root
 
     let compile_flags_filename = root . '/compile_flags.txt'
     call writefile(compile_flags, compile_flags_filename)
-    echo "generated file " . compile_flags_filename
+    echo 'generated file ' . compile_flags_filename
   endif
 endfunction
 command! -nargs=0 GenerateClangCompileFlags :call GenerateClangCompileFlags()
@@ -106,7 +106,7 @@ function! WorkspaceFolder()
   elseif (project_root_count > 1)
     let choices = copy(project_roots)
     call map(choices, 'v:key + 1 . ". " . v:val') " format them
-    let index = inputlist(["Specify project root directory"] + choices) - 1
+    let index = inputlist(['Specify project root directory'] + choices) - 1
     if (index >= 0 && index < project_root_count)
       return project_roots[index]
     endif
@@ -117,13 +117,13 @@ function! s:tabterm(...) abort
   if a:0 == 0
     tabedit term://$SHELL
   else
-    execute "tabedit term://" . a:1
+    execute 'tabedit term://' . a:1
   endif
 endfunction
 command! -nargs=? -complete=shellcmd Tabterm call <SID>tabterm(<f-args>) " eg `:tabterm yarn dev` will open a new tab and run `yarn dev`
 
 function! SyntaxItem()
-  return synIDattr(synID(line("."),col("."),1),"name")
+  return synIDattr(synID(line('.'),col('.'),1),'name')
 endfunction
 
 " }}}
@@ -144,6 +144,6 @@ endfunction
 
 " }}}
 
-exec "source " . stdpath('config') . "/plugin-settings.vim"
+exec 'source ' . stdpath('config') . '/plugin-settings.vim'
 
 :lua require'init'
