@@ -16,7 +16,7 @@ local M = {}
 ---      clients in the following order: first all clients that are not in the `order` list, then
 ---      the remaining clients in the order as they occur in the `order` list.
 function M.formatting_chain_sync(options, timeout_ms, order)
-  local clients = vim.tbl_values(vim.lsp.buf_get_clients());
+  local clients = vim.tbl_values(vim.lsp.buf_get_clients())
 
   -- sort the clients according to `order`
   for _, client_name in ipairs(order or {}) do
@@ -30,15 +30,22 @@ function M.formatting_chain_sync(options, timeout_ms, order)
   end
 
   local function handle_request_result(result)
-    if not result then return end
-    if not result.result then return end
+    if not result then
+      return
+    end
+    if not result.result then
+      return
+    end
     vim.lsp.util.apply_text_edits(result.result)
   end
   -- loop through the clients and make synchronous formatting requests
   for _, client in ipairs(clients) do
     if client.resolved_capabilities.document_formatting then
-      local result = client.request_sync("textDocument/formatting",
-                                         vim.lsp.util.make_formatting_params(options), timeout_ms)
+      local result = client.request_sync(
+        "textDocument/formatting",
+        vim.lsp.util.make_formatting_params(options),
+        timeout_ms
+      )
       handle_request_result(result)
     elseif client.resolved_capabilities.document_range_formatting then
       local last_line = vim.fn.line("$")

@@ -1,5 +1,5 @@
-require "plugin-settings"
+require("plugin-settings")
 
-require "lsp-settings"
+require("lsp-settings")
 
-require "dap-settings"
+require("dap-settings")

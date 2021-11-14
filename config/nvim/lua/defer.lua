@@ -19,7 +19,9 @@ function M.debounce_trailing(fn, ms, first)
       local argv = { ... }
       local argc = select("#", ...)
 
-      timer:start(ms, 0, function() pcall(vim.schedule_wrap(fn), unpack(argv, 1, argc)) end)
+      timer:start(ms, 0, function()
+        pcall(vim.schedule_wrap(fn), unpack(argv, 1, argc))
+      end)
     end
   else
     local argv, argc
@@ -27,7 +29,9 @@ function M.debounce_trailing(fn, ms, first)
       argv = argv or { ... }
       argc = argc or select("#", ...)
 
-      timer:start(ms, 0, function() pcall(vim.schedule_wrap(fn), unpack(argv, 1, argc)) end)
+      timer:start(ms, 0, function()
+        pcall(vim.schedule_wrap(fn), unpack(argv, 1, argc))
+      end)
     end
   end
   return wrapped_fn, timer

@@ -1,4 +1,4 @@
-local windows = require "lspconfig/ui/windows"
+local windows = require("lspconfig/ui/windows")
 
 return function()
   local buf_clients = vim.lsp.buf_get_clients()
@@ -8,7 +8,9 @@ return function()
   local buf_lines = {}
 
   local buf_client_names = {}
-  for _, client in ipairs(buf_clients) do table.insert(buf_client_names, client.name) end
+  for _, client in ipairs(buf_clients) do
+    table.insert(buf_client_names, client.name)
+  end
 
   local function available_capabilities(resolved_capabilities)
     -- these are the capabilities that might be interesting to the user
@@ -34,14 +36,15 @@ return function()
     return vim.tbl_filter(function(key)
       -- keep only the capabilities that are interesting & available
       return vim.tbl_contains(display_keys, key) and resolved_capabilities[key] == true
-    end, vim.tbl_keys(resolved_capabilities))
+    end, vim.tbl_keys(
+      resolved_capabilities
+    ))
   end
 
   local function make_client_info(client)
     return {
       "Client: " .. client.name .. " (id " .. tostring(client.id) .. ")",
-      "resolved: \t" ..
-        table.concat(available_capabilities(client.resolved_capabilities or {}), ", "),
+      "resolved: \t" .. table.concat(available_capabilities(client.resolved_capabilities or {}), ", "),
       "raw: \t" .. table.concat(vim.tbl_keys(client.server_capabilities or {}), ", "),
     }
   end
@@ -58,4 +61,4 @@ return function()
   vim.cmd([[syntax match Title /\%(Client\):.*\zs]] .. configs_pattern .. "/")
   vim.api.nvim_buf_set_keymap(bufnr, "n", "<esc>", "<cmd>bd<CR>", { noremap = true })
   vim.lsp.util.close_preview_autocmd({ "BufHidden", "BufLeave" }, win_id)
-end;
+end

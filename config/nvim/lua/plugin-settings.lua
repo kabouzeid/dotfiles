@@ -43,7 +43,7 @@ vim.g.coq_settings = {
 
 -- {{{ lspkind
 
-require("lspkind").init { preset = "codicons" }
+require("lspkind").init({ preset = "codicons" })
 
 -- }}}
 
@@ -59,8 +59,12 @@ local function feedkey(key, mode)
 end
 
 local cmp = require("cmp")
-cmp.setup {
-  snippet = { expand = function(args) vim.fn["vsnip#anonymous"](args.body) end },
+cmp.setup({
+  snippet = {
+    expand = function(args)
+      vim.fn["vsnip#anonymous"](args.body)
+    end,
+  },
   formatting = {
     format = function(entry, vim_item)
       vim_item.kind = require("lspkind").presets.codicons[vim_item.kind] .. " " .. vim_item.kind
@@ -99,7 +103,10 @@ cmp.setup {
       else
         fallback()
       end
-    end, { "i", "s" }),
+    end, {
+      "i",
+      "s",
+    }),
     ["<S-Tab>"] = cmp.mapping(function(fallback)
       if cmp.visible() then
         cmp.select_prev_item()
@@ -108,7 +115,10 @@ cmp.setup {
       else
         fallback()
       end
-    end, { "i", "s" }),
+    end, {
+      "i",
+      "s",
+    }),
   },
   sources = {
     { name = "nvim_lsp" },
@@ -122,19 +132,19 @@ cmp.setup {
     { name = "spell" },
     { name = "treesitter" },
   },
-}
+})
 
 -- }}}
 
 -- treesitter {{{
 
-require"nvim-treesitter.configs".setup { highlight = { enable = true }, indent = { enable = true } }
+require("nvim-treesitter.configs").setup({ highlight = { enable = true }, indent = { enable = true } })
 
 -- }}}
 
 -- toggleterm {{{
 
-require"toggleterm".setup { open_mapping = [[<c-\>]] }
+require("toggleterm").setup({ open_mapping = [[<c-\>]] })
 
 -- }}}
 
@@ -147,14 +157,14 @@ require("gitsigns").setup()
 -- nvim-lightbulb {{{
 
 function _G.update_lightbulb()
-  require"nvim-lightbulb".update_lightbulb {
+  require("nvim-lightbulb").update_lightbulb({
     sign = { enabled = false },
     float = { enabled = false },
     virtual_text = { enabled = true },
-  }
+  })
 end
 
-vim.cmd [[autocmd CursorHold,CursorHoldI * lua update_lightbulb()]]
+vim.cmd([[autocmd CursorHold,CursorHoldI * lua update_lightbulb()]])
 
 -- }}}
 
@@ -204,7 +214,7 @@ vim.g.nvim_tree_icons = {
 vim.g.nvim_tree_group_empty = 1
 vim.g.nvim_tree_add_trailing = 1
 
-require"nvim-tree".setup {
+require("nvim-tree").setup({
   -- don't disable netrw because it's used by Neovim for downloading spell files
   disable_netrw = false,
   -- hijack netrw window on startup
@@ -215,12 +225,12 @@ require"nvim-tree".setup {
   update_cwd = true,
   -- show lsp diagnostics in the signcolumn
   diagnostics = { enable = true },
-}
+})
 
 -- disable nvim tree autocmds --- they are buggy
-vim.cmd "augroup NvimTreeView"
-vim.cmd "au!"
-vim.cmd "augroup END"
+vim.cmd("augroup NvimTreeView")
+vim.cmd("au!")
+vim.cmd("augroup END")
 
 -- vim.cmd([[highlight NvimTreeGitDirty guifg=]] .. vim.g.terminal_color_11) -- orange
 -- vim.cmd([[highlight NvimTreeGitMerge guifg=]] .. vim.g.terminal_color_9) -- dark red
@@ -254,7 +264,7 @@ vim.cmd "augroup END"
 -- Telescope {{{
 
 local actions = require("telescope.actions")
-require("telescope").setup {
+require("telescope").setup({
   defaults = {
     mappings = {
       i = {
@@ -266,7 +276,7 @@ require("telescope").setup {
       },
     },
   },
-}
+})
 
 require("telescope").load_extension("dap")
 -- require("telescope").load_extension("fzf")
@@ -275,7 +285,7 @@ require("telescope").load_extension("dap")
 
 -- lsp-trouble {{{
 
-require"trouble".setup {
+require("trouble").setup({
   signs = {
     error = icons.get("x-circle"),
     warning = icons.get("alert"),
@@ -283,7 +293,7 @@ require"trouble".setup {
     hint = icons.get("comment"),
     other = icons.get("circle"),
   },
-}
+})
 
 -- }}}
 
@@ -291,15 +301,19 @@ require"trouble".setup {
 
 local function lsp_servers_status()
   local clients = vim.lsp.buf_get_clients(0)
-  if vim.tbl_isempty(clients) then return "" end
+  if vim.tbl_isempty(clients) then
+    return ""
+  end
 
   local client_names = {}
-  for _, client in pairs(clients) do table.insert(client_names, client.name) end
+  for _, client in pairs(clients) do
+    table.insert(client_names, client.name)
+  end
 
   return icons.get("zap") .. " " .. table.concat(client_names, "|")
 end
 
-require("lualine").setup {
+require("lualine").setup({
   options = { theme = "rose-pine" },
   sections = {
     lualine_a = { "mode" },
@@ -327,7 +341,9 @@ require("lualine").setup {
       },
       {
         "fileformat",
-        condition = function() return vim.bo.fileformat ~= "unix" end,
+        condition = function()
+          return vim.bo.fileformat ~= "unix"
+        end,
         icons_enabled = false,
       },
       { "filetype", icons_enabled = false },
@@ -343,21 +359,21 @@ require("lualine").setup {
     lualine_z = {},
   },
   extensions = { "nvim-tree" },
-}
+})
 
 -- }}}
 
 -- zen-mode {{{
 
-require"zen-mode".setup {
+require("zen-mode").setup({
   window = { backdrop = 1, options = { signcolumn = "no" } },
   plugins = { tmux = true },
-}
+})
 
 -- }}}
 
 -- {{{ nvim-lint
-require"lint".linters_by_ft = {
+require("lint").linters_by_ft = {
   sh = { "shellcheck" },
   -- javascript = { "eslint-local" },
   -- typescript = { "eslint-local" },
@@ -370,7 +386,7 @@ require"lint".linters_by_ft = {
   -- make = { "checkmake" },
 }
 
-vim.cmd [[autocmd CursorHold,CursorHoldI <buffer> lua require'lint'.try_lint()]]
+vim.cmd([[autocmd CursorHold,CursorHoldI <buffer> lua require'lint'.try_lint()]])
 -- }}}
 
 -- {{{ catppuccino
@@ -420,12 +436,12 @@ vim.cmd [[autocmd CursorHold,CursorHoldI <buffer> lua require'lint'.try_lint()]]
 
 -- {{{ comments.nvim
 
-require"Comment".setup()
+require("Comment").setup()
 
 -- }}}
 
 -- {{{ which-key
 
-require"which-key".setup()
+require("which-key").setup()
 
 -- }}}

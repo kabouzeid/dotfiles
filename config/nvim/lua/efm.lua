@@ -82,7 +82,7 @@ local languages = {
   json = { fixjson },
 }
 
-local tailwind_fts = require"lspconfig".tailwindcss.document_config.default_config.filetypes
+local tailwind_fts = require("lspconfig").tailwindcss.document_config.default_config.filetypes
 for _, filetype in ipairs(tailwind_fts) do
   if languages[filetype] then
     table.insert(languages[filetype], 1, rustywind)
