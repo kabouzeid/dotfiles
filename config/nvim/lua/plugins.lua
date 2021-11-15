@@ -14,7 +14,7 @@ require("packer").startup(function(use)
   use({ "jose-elias-alvarez/null-ls.nvim", requires = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" } })
 
   -- Linting
-  use("mfussenegger/nvim-lint")
+  -- use("mfussenegger/nvim-lint")
 
   -- Completion
   --[[ use {
