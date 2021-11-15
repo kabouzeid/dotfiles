@@ -467,7 +467,7 @@ require("null-ls").config({
     require("null-ls").builtins.diagnostics.cppcheck,
     require("null-ls").builtins.diagnostics.flake8,
     require("null-ls").builtins.diagnostics.proselint,
-    -- require("null-ls").builtins.diagnostics.selene,
+    require("null-ls").builtins.diagnostics.selene,
     require("null-ls").builtins.diagnostics.shellcheck,
     require("null-ls").builtins.diagnostics.vint,
     require("null-ls").builtins.diagnostics.write_good,
