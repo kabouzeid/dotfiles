@@ -16,24 +16,6 @@
 
 - shell:
   -
-    description: Installing oh my zsh
-    command: >-
-      if [ ! -e ~/.oh-my-zsh ]; then
-      sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)" --unattended --keep-zshrc;
-      fi
-  -
-    description: Installing zsh-autosuggestions
-    command: >-
-      if [ ! -e ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions ]; then
-      git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions;
-      fi
-  -
-    description: Installing zsh-syntax-highlighting
-    command: >-
-      if [ ! -e ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting ]; then
-      git clone https://github.com/zsh-users/zsh-syntax-highlighting ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting;
-      fi
-  -
     description: Installing tpm and plugins.
     command: >-
       if [ ! -e ~/.tmux/plugins/tpm ]; then
