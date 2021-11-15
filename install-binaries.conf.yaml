@@ -19,6 +19,7 @@
       wget "https://nodejs.org/dist/v17.0.0/node-v17.0.0-linux-x64.tar.xz" -O - | tar -xJ;
       wget "https://github.com/cli/cli/releases/download/v2.1.0/gh_2.1.0_linux_amd64.tar.gz" -O - | tar -xz;
       wget "https://github.com/dandavison/delta/releases/download/0.8.3/delta-0.8.3-x86_64-unknown-linux-gnu.tar.gz" -O - | tar -xz;
+      wget "https://github.com/jesseduffield/lazygit/releases/download/v0.31.3/lazygit_0.31.3_Linux_x86_64.tar.gz" -O - | tar -xz lazygit;
       wget "https://git.io/antigen" -O antigen.zsh
 
 - link:
@@ -60,6 +61,10 @@
 - link:
     ~/.local/bin/delta:
       path: ~/.local/share/packages/delta-0.8.3-x86_64-unknown-linux-gnu/delta
+
+- link:
+    ~/.local/bin/lazygit:
+      path: ~/.local/share/packages/lazygit
 
 - link:
     ~/.local/share/zsh/share/antigen.zsh:
