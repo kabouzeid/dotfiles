@@ -471,7 +471,6 @@ require("null-ls").config({
     require("null-ls").builtins.diagnostics.shellcheck,
     require("null-ls").builtins.diagnostics.vint,
     require("null-ls").builtins.diagnostics.write_good,
-    require("null-ls").builtins.diagnostics.yamllint,
 
     require("null-ls").builtins.code_actions.proselint,
   }),
