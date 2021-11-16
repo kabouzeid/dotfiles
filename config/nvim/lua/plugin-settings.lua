@@ -259,6 +259,11 @@ vim.cmd("augroup END")
 -- vim.api.nvim_command [[autocmd Filetype NvimTree lua auto_refresh_nvim_tree()]]
 -- vim.api.nvim_command [[augroup END]]
 
+print("mappings")
+vim.cmd("nnoremap <leader>tt <cmd>NvimTreeToggle<cr>")
+vim.cmd("nnoremap <leader>tf <cmd>NvimTreeFindFile<cr>")
+vim.cmd("nnoremap <leader>tr <cmd>NvimTreeRefresh<cr>")
+
 -- }}}
 
 -- Telescope {{{
@@ -477,5 +482,11 @@ require("null-ls").config({
     require("null-ls").builtins.code_actions.proselint,
   }),
 })
+
+-- }}}
+
+-- {{{ gtfo
+
+vim.g["gtfo#terminals"] = { mac = "kitty" }
 
 -- }}}

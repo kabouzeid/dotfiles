@@ -20,7 +20,7 @@ set expandtab
 set smartindent
 filetype plugin indent on
 
-set listchars=trail:·,nbsp:_,tab:\ \ 
+set listchars=trail:·,nbsp:_,tab:\ \
 set list
 set shortmess+=tIc
 set showcmd

@@ -1,41 +1,11 @@
 " vim:foldmethod=marker
 
-" compe {{{
-
-" Jump forward or backward
-imap <expr> <C-j> vsnip#jumpable(1)  ? '<Plug>(vsnip-jump-next)' : '<C-j>'
-smap <expr> <C-j> vsnip#jumpable(1)  ? '<Plug>(vsnip-jump-next)' : '<C-j>'
-imap <expr> <C-k> vsnip#jumpable(-1) ? '<Plug>(vsnip-jump-prev)' : '<C-k>'
-smap <expr> <C-k> vsnip#jumpable(-1) ? '<Plug>(vsnip-jump-prev)' : '<C-k>'
-
-" }}}
-
 " VimTeX {{{
 
-if !has('clientserver') && !has('nvim')
-  let g:vimtex_compiler_latexmk = {'callback' : 0}
-endif
-if has('nvim')
-  let g:vimtex_compiler_progname = 'nvr'
-endif
-if has('macunix') " macOS only
+if has('macunix')
   let g:vimtex_view_method = 'skim'
 endif
 let g:vimtex_quickfix_open_on_warning = 0
-
-" }}}
-
-" NvimTree {{{
-
-nnoremap <leader>tt <cmd>NvimTreeToggle<cr>
-nnoremap <leader>tf <cmd>NvimTreeFindFile<cr>
-
-
-" }}}
-
-" GTFO {{{
-
-let g:gtfo#terminals = { 'mac': 'kitty' }
 
 " }}}
 
