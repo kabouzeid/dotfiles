@@ -370,6 +370,8 @@ require("zen-mode").setup({
   plugins = { tmux = true },
 })
 
+vim.cmd("nnoremap <C-w>z :ZenMode<CR>")
+
 -- }}}
 
 -- -- {{{ nvim-lint
