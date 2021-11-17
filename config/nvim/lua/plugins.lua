@@ -142,3 +142,10 @@ require("packer").startup(function(use)
   -- Experimenting
   use("tpope/vim-unimpaired")
 end)
+
+vim.cmd([[
+  augroup Packer
+    autocmd!
+    autocmd BufWritePost plugins.lua PackerCompile
+  augroup END
+]])

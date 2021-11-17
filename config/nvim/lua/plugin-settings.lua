@@ -259,7 +259,6 @@ vim.cmd("augroup END")
 -- vim.api.nvim_command [[autocmd Filetype NvimTree lua auto_refresh_nvim_tree()]]
 -- vim.api.nvim_command [[augroup END]]
 
-print("mappings")
 vim.cmd("nnoremap <leader>tt <cmd>NvimTreeToggle<cr>")
 vim.cmd("nnoremap <leader>tf <cmd>NvimTreeFindFile<cr>")
 vim.cmd("nnoremap <leader>tr <cmd>NvimTreeRefresh<cr>")
@@ -285,6 +284,15 @@ require("telescope").setup({
 
 require("telescope").load_extension("dap")
 -- require("telescope").load_extension("fzf")
+
+vim.cmd([[
+  nnoremap <leader>fp <cmd>Telescope<cr>
+  nnoremap <leader>ff <cmd>Telescope find_files<cr>
+  nnoremap <leader>fd <cmd>Telescope file_browser<cr>
+  nnoremap <leader>fg <cmd>Telescope live_grep<cr>
+  nnoremap <leader>fb <cmd>Telescope buffers<cr>
+  nnoremap <leader>fh <cmd>Telescope help_tags<cr>
+]])
 
 -- }}}
 
@@ -488,5 +496,50 @@ require("null-ls").config({
 -- {{{ gtfo
 
 vim.g["gtfo#terminals"] = { mac = "kitty" }
+
+-- }}}
+
+-- VimTeX {{{
+
+if vim.fn.has("macunix") then
+  vim.g.vimtex_view_method = "skim"
+end
+vim.g.vimtex_quickfix_open_on_warning = 0
+
+-- }}}
+
+-- workbench {{{
+
+vim.cmd([[
+  nmap <leader>bp <Plug>ToggleProjectWorkbench
+  nmap <leader>bb <Plug>ToggleBranchWorkbench
+]])
+vim.g.workbench_storage_path = vim.fn.stdpath("data") .. "/workbench/"
+
+-- }}}
+
+-- gina {{{
+
+vim.cmd("command! Blame Gina blame")
+
+-- }}}
+
+-- dirvish {{{
+
+vim.g.loaded_netrwPlugin = 1
+vim.cmd([[
+  command! -nargs=? -complete=dir Explore Dirvish <args>
+  command! -nargs=? -complete=dir Sexplore belowright split | silent Dirvish <args>
+  command! -nargs=? -complete=dir Vexplore leftabove vsplit | silent Dirvish <args>
+]])
+
+-- }}}
+
+-- svelte {{{
+
+vim.g.svelte_preprocessor_tags = {
+  { name = "ts", tag = "script", as = "typescript" },
+}
+vim.g.svelte_preprocessors = { "typescript", "ts" }
 
 -- }}}
