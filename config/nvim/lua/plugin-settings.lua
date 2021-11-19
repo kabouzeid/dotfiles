@@ -333,7 +333,20 @@ require("lualine").setup({
     lualine_b = { { "branch", icon = icons.get("git-branch") }, { "diff", colored = false } },
     lualine_c = { { "filename", path = 1 } },
     lualine_x = {
-      "lsp_progress",
+      {
+        "lsp_progress",
+        display_components = { "lsp_client_name", { "title", "message", "percentage" }, "spinner" },
+        separators = {
+          component = " ",
+          progress = " | ",
+          message = { pre = "(", post = ")" },
+          percentage = { pre = " ", post = "%%" },
+          title = { pre = "", post = ": " },
+          lsp_client_name = { pre = "[", post = "]" },
+          spinner = { pre = "", post = "" },
+        },
+        spinner_symbols = { "⣾", "⣽", "⣻", "⢿", "⡿", "⣟", "⣯", "⣷" },
+      },
       {
         "diagnostics",
         symbols = {
