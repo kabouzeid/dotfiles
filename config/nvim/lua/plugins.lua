@@ -139,12 +139,6 @@ require("packer").startup(function(use)
     run = function() vim.fn['firenvim#install'](0) end
   } ]]
 
-  -- Org
-  use({
-    "nvim-neorg/neorg",
-    requires = "nvim-lua/plenary.nvim",
-  })
-
   -- Experimenting
   use("tpope/vim-unimpaired")
 end)
