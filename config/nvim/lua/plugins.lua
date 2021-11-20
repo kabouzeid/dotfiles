@@ -12,6 +12,7 @@ require("packer").startup(function(use)
   use("folke/lsp-trouble.nvim")
   use("arkav/lualine-lsp-progress")
   use({ "jose-elias-alvarez/null-ls.nvim", requires = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" } })
+  use("ii14/lsp-command")
 
   -- Linting
   -- use("mfussenegger/nvim-lint")
