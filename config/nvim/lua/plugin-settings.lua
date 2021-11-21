@@ -556,3 +556,10 @@ vim.g.svelte_preprocessor_tags = {
 vim.g.svelte_preprocessors = { "typescript", "ts" }
 
 -- }}}
+
+-- delimitMate {{{
+
+vim.g.delimitMate_expand_cr=1
+vim.g.delimitMate_expand_space=1
+
+-- }}}
