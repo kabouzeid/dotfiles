@@ -56,3 +56,10 @@ dap.configurations.cpp = {
 }
 dap.configurations.c = dap.configurations.cpp
 dap.configurations.rust = dap.configurations.cpp
+
+-- for more compatibility set the workspace folder as cwd
+for _, value in pairs(dap.configurations.python) do
+  if not value.cwd then
+    value.cwd = "${workspaceFolder}"
+  end
+end
