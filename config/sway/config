@@ -24,7 +24,7 @@ set $menu rofi -show drun | xargs swaymsg exec --
 ### Output configuration
 #
 # Default wallpaper
-    output * bg ~/Pictures/Wallpapers/Winter-Trees-1.jpg fill
+    output * bg ~/Pictures/Wallpapers/Firewatch-Light.jpg fill
 #
 # Example configuration:
 #
@@ -61,6 +61,11 @@ set $menu rofi -show drun | xargs swaymsg exec --
 #
 # You can get the names of your inputs by running: swaymsg -t get_inputs
 # Read `man 5 sway-input` for more information about this section.
+
+    input "12951:6505:ZSA_Moonlander_Mark_I" {
+        xkb_layout de
+        xkb_variant us
+    }
 
     input "2131:308:LEOPOLD_Mini_Keyboard" {
         xkb_layout de
@@ -216,6 +221,8 @@ bindsym $mod+r mode "resize"
 # Read `man 5 sway-bar` for more information about this section.
 bar {
     position top
+
+    font "JetBrains Mono 11"
 
     # When the status_command prints a new line to stdout, swaybar updates.
     # The default just shows the current date and time.
