@@ -128,6 +128,7 @@ require("packer").startup(function(use)
   use("jwalton512/vim-blade")
   use("pantharshit00/vim-prisma")
   use("evanleck/vim-svelte")
+  use("rust-lang/rust.vim")
 
   -- Misc
   use("wincent/terminus")
