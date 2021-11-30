@@ -1,7 +1,7 @@
 configuration {
 	modi: "drun,ssh";
-  theme: "slate";
   show-icons: true;
   terminal: "kitty";
-  m: -4;
+  m: "-4";
 }
+@theme "slate"
