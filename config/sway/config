@@ -21,6 +21,8 @@ set $term kitty
 # set $menu dmenu_run | dmenu | xargs swaymsg exec --
 set $menu rofi -show drun | xargs swaymsg exec --
 
+set $font pango:JetBrains Mono 11
+
 ### Output configuration
 #
 # Default wallpaper
@@ -33,7 +35,7 @@ set $menu rofi -show drun | xargs swaymsg exec --
 # You can get the names of your outputs by running: swaymsg -t get_outputs
 
     output DP-1 scale 2
-    # xwayland scale 2
+    xwayland scale 2 # needs sway-hidpi fork
 
 ### Idle configuration
 #
@@ -47,6 +49,12 @@ set $menu rofi -show drun | xargs swaymsg exec --
 # This will lock your screen after 300 seconds of inactivity, then turn off
 # your displays after another 300 seconds, and turn your screens back on when
 # resumed. It will also lock your screen before your computer goes to sleep.
+
+exec swayidle -w \
+         timeout 300 'swaylock -f -i ~/Pictures/Wallpapers/Firewatch-Light.jpg' \
+         timeout 310 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' \
+         before-sleep 'playerctl pause' \
+         before-sleep 'swaylock -f -i ~/Pictures/Wallpapers/Firewatch-Light.jpg'
 
 ### Input configuration
 #
@@ -62,18 +70,18 @@ set $menu rofi -show drun | xargs swaymsg exec --
 # You can get the names of your inputs by running: swaymsg -t get_inputs
 # Read `man 5 sway-input` for more information about this section.
 
-    input "12951:6505:ZSA_Moonlander_Mark_I" {
+    input type:keyboard {
         xkb_layout de
         xkb_variant us
+        repeat_delay 200
+        repeat_rate 30
     }
 
-    input "2131:308:LEOPOLD_Mini_Keyboard" {
-        xkb_layout de
-        xkb_variant us
-    }
-
-    input "1133:16514:Logitech_MX_Master_3" {
+    input type:mouse {
         natural_scroll enabled
+        dwt enabled
+        accel_profile "adaptive"
+        pointer_accel 0.5
     }
 
 
@@ -216,13 +224,30 @@ mode "resize" {
 bindsym $mod+r mode "resize"
 
 #
+# Media Buttons:
+#
+
+bindsym --locked XF86AudioRaiseVolume exec pamixer --increase 5
+bindsym --locked XF86AudioLowerVolume exec pamixer --decrease 5
+bindsym --locked XF86AudioMute exec pamixer --toggle-mute
+bindsym XF86AudioMicMute exec pamixer --default-source --toggle-mute
+bindsym --locked XF86MonBrightnessDown exec brightnessctl set 5%-
+bindsym --locked XF86MonBrightnessUp exec brightnessctl set +5%
+bindsym XF86AudioPlay exec playerctl play-pause
+bindsym XF86AudioNext exec playerctl next
+bindsym XF86AudioPrev exec playerctl previous
+bindsym XF86Search exec $menu
+
+bindsym Control+Mod1+Mod4+BackSpace exec systemctl suspend
+
+#
 # Status Bar:
 #
 # Read `man 5 sway-bar` for more information about this section.
 bar {
     position top
 
-    font "JetBrains Mono 11"
+    font $font
 
     # When the status_command prints a new line to stdout, swaybar updates.
     # The default just shows the current date and time.
@@ -235,10 +260,19 @@ bar {
     }
 }
 
-gaps inner 16
+gaps inner 12
 
-default_border pixel 2
+default_border pixel 1
+
+include rose-pine.theme
+
+client.focused $focus_color $focus_color $title_color $focus_color $focus_color
+client.focused_inactive $focused_inactive_color $focused_inactive_color $title_color $focused_inactive_color $focused_inactive_color
+client.unfocused $unfocused_color $unfocused_color $title_color $unfocused_color $unfocused_color
+client.urgent $urgent_color $urgent_color $title_color $urgent_color $urgent_color
+
+font $font
+titlebar_padding 8 4
+title_align center
 
 include /etc/sway/config.d/*
-
-# exec xrdb -merge ~/.Xresources
