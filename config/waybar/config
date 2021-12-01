@@ -1,0 +1,58 @@
+{
+    "position": "bottom", 
+    "height": 30,
+    "modules-center": ["sway/workspaces", "sway/mode", "pulseaudio", "clock#date", "clock#time"],
+    // Modules configuration
+    "sway/workspaces": {
+        "disable-scroll": true,
+        "all-outputs": true,
+        "format": "{icon}",
+        "persistent_workspaces": {
+            "1": [],
+            "2": [],
+            "3": [],
+            "4": [],
+            "5": [],
+            "6": [],
+            "7": [],
+            "8": [],
+            "9": [],
+            "10": []
+        },
+        "format-icons": {
+            "1": "一",
+            "2": "二",
+            "3": "三",
+            "4": "四",
+            "5": "五",
+            "6": "六",
+            "7": "七",
+            "8": "八",
+            "9": "九",
+            "10": "〇"
+        }
+    },
+    "sway/mode": {
+        "format": "{}",
+        "max-length": 50
+    },
+    "clock#date": {
+        "on-click": "gnome-calendar",
+        "format": "<span rise='-1800'> </span>{:%A %B %d}",
+        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><big>{calendar}</big></tt>",
+    },
+    "clock#time": {
+        "on-click": "gnome-clocks",
+        "format": "<span rise='-1800'> </span>{:%H:%M}",
+        "tooltip": false,
+    },
+    "pulseaudio": {
+        "on-click": "pavucontrol",
+        "format": "<span rise='-1800'>{icon}</span> {volume}%",
+        "format-muted": "<span rise='-1800'></span> {volume}%",
+        "format-icons": {
+            "default": ""
+        },
+    }
+}
+// vim: set ft=jsonc:
