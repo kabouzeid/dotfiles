@@ -1,6 +1,5 @@
 {
     "position": "bottom", 
-    "height": 30,
     "modules-center": ["sway/workspaces", "sway/mode", "pulseaudio", "clock#date", "clock#time"],
     // Modules configuration
     "sway/workspaces": {
@@ -38,20 +37,20 @@
     },
     "clock#date": {
         "on-click": "gnome-calendar",
-        "format": "<span rise='-1800'> </span>{:%A %B %d}",
+        "format": "<span font='Symbols Nerd Font 16px' fallback='false'> </span>{:%A %B %d}",
         "tooltip-format": "<big>{:%Y %B}</big>\n<tt><big>{calendar}</big></tt>",
     },
     "clock#time": {
         "on-click": "gnome-clocks",
-        "format": "<span rise='-1800'> </span>{:%H:%M}",
+        "format": "<span font='Symbols Nerd Font 16px' fallback='false'> </span>{:%H:%M}",
         "tooltip": false,
     },
     "pulseaudio": {
         "on-click": "pavucontrol",
-        "format": "<span rise='-1800'>{icon}</span> {volume}%",
-        "format-muted": "<span rise='-1800'></span> {volume}%",
+        "format": "<span font='Symbols Nerd Font 16px' fallback='false'>{icon} </span>{volume}%",
+        "format-muted": "<span font='Symbols Nerd Font 16px' fallback='false'>婢 </span>{volume}%",
         "format-icons": {
-            "default": ""
+            "default": "墳"
         },
     }
 }
