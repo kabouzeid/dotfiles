@@ -7,16 +7,16 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
 vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "single" })
 
 local icons = require("nvim-nonicons")
-vim.fn.sign_define("LspDiagnosticsSignError", { text = icons.get("x-circle"), texthl = "LspDiagnosticsSignError" })
+vim.fn.sign_define("DiagnosticSignError", { text = icons.get("x-circle"), texthl = "DiagnosticSignError" })
 
-vim.fn.sign_define("LspDiagnosticsSignWarning", { text = icons.get("alert"), texthl = "LspDiagnosticsSignWarning" })
+vim.fn.sign_define("DiagnosticSignWarn", { text = icons.get("alert"), texthl = "DiagnosticSignWarn" })
 
 vim.fn.sign_define(
-  "LspDiagnosticsSignInformation",
-  { text = icons.get("info"), texthl = "LspDiagnosticsSignInformation" }
+  "DiagnosticSignInfo",
+  { text = icons.get("info"), texthl = "DiagnosticSignInfo" }
 )
 
-vim.fn.sign_define("LspDiagnosticsSignHint", { text = icons.get("comment"), texthl = "LspDiagnosticsSignHint" })
+vim.fn.sign_define("DiagnosticSignHint", { text = icons.get("comment"), texthl = "DiagnosticSignHint" })
 
 vim.api.nvim_command("highlight default link LspCodeLens Comment")
 
@@ -44,10 +44,10 @@ local on_attach = function(client, bufnr)
   buf_set_keymap("n", "<Leader>D", "<cmd>lua vim.lsp.buf.type_definition()<CR>", opts)
   buf_set_keymap("n", "<Leader>rn", "<cmd>lua vim.lsp.buf.rename()<CR>", opts)
   buf_set_keymap("n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>", opts)
-  buf_set_keymap("n", "<Leader>e", "<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>", opts)
+  buf_set_keymap("n", "<Leader>e", "<cmd>lua vim.diagnostic.open_float()<CR>", opts)
   buf_set_keymap("n", "[d", "<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>", opts)
   buf_set_keymap("n", "]d", "<cmd>lua vim.lsp.diagnostic.goto_next()<CR>", opts)
-  buf_set_keymap("n", "<Leader>q", "<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>", opts)
+  buf_set_keymap("n", "<Leader>q", "<cmd>lua vim.diagnostic.setloclist()<CR>", opts)
   buf_set_keymap(
     "n",
     "<Leader>p",
