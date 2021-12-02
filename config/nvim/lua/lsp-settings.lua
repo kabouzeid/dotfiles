@@ -15,7 +15,8 @@ vim.fn.sign_define("DiagnosticSignInfo", { text = icons.get("info"), texthl = "D
 
 vim.fn.sign_define("DiagnosticSignHint", { text = icons.get("comment"), texthl = "DiagnosticSignHint" })
 
-vim.api.nvim_command("highlight default link LspCodeLens Comment")
+vim.api.nvim_command("highlight default link LspCodeLens NonText")
+vim.api.nvim_command("highlight default link LspCodeLensSeparator NonText")
 
 -- keymaps
 local on_attach = function(client, bufnr)
@@ -160,6 +161,12 @@ end
 local function setup_rust_analyzer(config)
   require("rust-tools").setup({
     server = vim.tbl_extend("force", get_config("rust_analyzer"), config or {}),
+    tools = {
+      inlay_hints = {
+        highlight = "NonText",
+        only_current_line = true,
+      },
+    },
   })
 end
 
