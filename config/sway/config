@@ -239,7 +239,7 @@ bindsym XF86AudioNext exec playerctl next
 bindsym XF86AudioPrev exec playerctl previous
 bindsym XF86Search exec $menu
 
-bindsym Control+Mod1+Mod4+BackSpace exec systemctl suspend
+bindsym --locked Control+Mod1+Mod4+BackSpace exec systemctl suspend
 
 #
 # Status Bar:
