@@ -129,6 +129,7 @@ require("packer").startup(function(use)
   use("pantharshit00/vim-prisma")
   use("evanleck/vim-svelte")
   use("rust-lang/rust.vim")
+  use("simrat39/rust-tools.nvim") -- mostly lsp related
 
   -- Misc
   use("wincent/terminus")

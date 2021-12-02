@@ -11,10 +11,7 @@ vim.fn.sign_define("DiagnosticSignError", { text = icons.get("x-circle"), texthl
 
 vim.fn.sign_define("DiagnosticSignWarn", { text = icons.get("alert"), texthl = "DiagnosticSignWarn" })
 
-vim.fn.sign_define(
-  "DiagnosticSignInfo",
-  { text = icons.get("info"), texthl = "DiagnosticSignInfo" }
-)
+vim.fn.sign_define("DiagnosticSignInfo", { text = icons.get("info"), texthl = "DiagnosticSignInfo" })
 
 vim.fn.sign_define("DiagnosticSignHint", { text = icons.get("comment"), texthl = "DiagnosticSignHint" })
 
@@ -160,13 +157,13 @@ local function get_config(server_name)
   return config
 end
 
--- setup servers
+local function setup_rust_analyzer(config)
+  require("rust-tools").setup({
+    server = vim.tbl_extend("force", get_config("rust_analyzer"), config or {}),
+  })
+end
 
--- setup servers installed with nvim-lsp-installer
-require("nvim-lsp-installer").on_server_ready(function(server)
-  server:setup(get_config(server.name))
-  vim.cmd([[ do User LspAttachBuffers ]])
-end)
+-- setup servers
 
 -- setup manually installed servers
 local servers = {}
@@ -195,9 +192,23 @@ if vim.fn.executable("pacman") == 1 then
   table.insert(servers, "yamlls")
 end
 
+-- setup the servers in the table
 for _, server in pairs(servers) do
-  require("lspconfig")[server].setup(get_config(server))
+  if server == "rust_analyzer" then
+    setup_rust_analyzer()
+  else
+    require("lspconfig")[server].setup(get_config(server))
+  end
 end
+
+-- setup servers installed via nvim-lsp-installer
+require("nvim-lsp-installer").on_server_ready(function(server)
+  if server.name == "rust_analyzer" then
+    setup_rust_analyzer(server:get_default_options())
+  else
+    server:setup(get_config(server.name))
+  end
+end)
 
 -- UI just like `:LspInfo` to show which capabilities each attached server has
 vim.api.nvim_command("command! LspCapabilities lua require'lsp-capabilities'()")
