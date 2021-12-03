@@ -85,6 +85,7 @@ exec swayidle -w \
         pointer_accel -0.5
     }
 
+    seat * hide_cursor when-typing enable
 
 ### Key bindings
 #
