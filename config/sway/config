@@ -21,7 +21,7 @@ set $term kitty
 # set $menu dmenu_run | dmenu | xargs swaymsg exec --
 set $menu rofi -show drun | xargs swaymsg exec --
 
-set $font pango:JetBrains Mono 11
+set $font pango:JetBrains Mono 13px
 
 ### Output configuration
 #
@@ -78,11 +78,11 @@ exec swayidle -w \
         repeat_rate 30
     }
 
-    input type:mouse {
+    input type:pointer {
         natural_scroll enabled
         dwt enabled
         accel_profile "adaptive"
-        pointer_accel 0.5
+        pointer_accel -0.5
     }
 
 
