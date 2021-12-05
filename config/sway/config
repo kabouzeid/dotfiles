@@ -19,7 +19,19 @@ set $term kitty
 # Note: pass the final command to swaymsg so that the resulting window can be opened
 # on the original workspace that the command was run on.
 # set $menu dmenu_run | dmenu | xargs swaymsg exec --
-set $menu rofi -show drun | xargs swaymsg exec --
+# set $menu rofi -show drun | xargs swaymsg exec --
+set $menu fuzzel \
+            --font="JetBrains Mono:size=13" \
+            --terminal=$term \
+            --horizontal-pad=15 \
+            --vertical-pad=5 \
+            --background="393552ff" \
+            --text-color="e0def4ff" \
+            --match-color="ea9a97ff" \
+            --selection-color="3f3c53ff" \
+            --selection-text-color="e0def4ff" \
+            --border-color="3f3c53ff" \
+            --border-width=2
 
 set $font pango:JetBrains Mono 13px
 
