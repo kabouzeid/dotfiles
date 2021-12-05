@@ -36,7 +36,7 @@ set $font pango:JetBrains Mono 13px
 
     output DP-1 scale 2
     # needs sway-hidpi fork
-    xwayland scale 2
+    # xwayland scale 2
 
 ### Idle configuration
 #
