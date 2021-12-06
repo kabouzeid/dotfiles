@@ -327,7 +327,7 @@ local function lsp_servers_status()
 end
 
 require("lualine").setup({
-  options = { theme = "rose-pine" },
+  options = { theme = vim.g.colors_name },
   sections = {
     lualine_a = { "mode" },
     lualine_b = { { "branch", icon = icons.get("git-branch") }, { "diff", colored = false } },

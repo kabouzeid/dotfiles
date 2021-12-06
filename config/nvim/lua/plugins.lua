@@ -56,6 +56,7 @@ require("packer").startup(function(use)
   -- Themes
   use({ "rose-pine/neovim", as = "rose-pine" })
   -- use "~/Code/rose-pine"
+  use("bluz71/vim-moonfly-colors")
   use("projekt0n/github-nvim-theme")
   -- use("Pocco81/Catppuccino.nvim")
   -- use({ "kabouzeid/nvim-jellybeans", requires = "rktjmp/lush.nvim" })
