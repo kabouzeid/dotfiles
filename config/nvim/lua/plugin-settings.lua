@@ -559,13 +559,25 @@ vim.g.svelte_preprocessors = { "typescript", "ts" }
 
 -- delimitMate {{{
 
-vim.g.delimitMate_expand_cr=1
-vim.g.delimitMate_expand_space=1
+vim.g.delimitMate_expand_cr = 1
+vim.g.delimitMate_expand_space = 1
 
 -- }}}
 
 -- rust {{{
 
-vim.g.rust_fold=1
+vim.g.rust_fold = 1
+
+-- }}}
+
+-- notify {{{
+
+vim.notify = require("notify")
+
+-- }}}
+
+-- dressing {{{
+
+require("dressing").setup()
 
 -- }}}

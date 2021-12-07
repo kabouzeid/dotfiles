@@ -34,11 +34,12 @@ set $menu fuzzel \
             --border-width=2
 
 set $font pango:JetBrains Mono 13px
+set $wallpaper ~/Pictures/Wallpapers/Moon-Fishing.png
 
 ### Output configuration
 #
 # Default wallpaper
-    output * bg ~/Pictures/Wallpapers/Moon-Fishing.png fill
+    output * bg $wallpaper fill
 #
 # Example configuration:
 #
@@ -64,10 +65,10 @@ set $font pango:JetBrains Mono 13px
 # resumed. It will also lock your screen before your computer goes to sleep.
 
 exec swayidle -w \
-         timeout 900 'swaylock -f -i ~/Pictures/Wallpapers/Firewatch-Light.jpg' \
+         timeout 900 'swaylock -f -i $wallpaper' \
          timeout 930 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' \
          before-sleep 'playerctl pause' \
-         before-sleep 'swaylock -f -i ~/Pictures/Wallpapers/Firewatch-Light.jpg'
+         before-sleep 'swaylock -f -i $wallpaper'
 
 ### Input configuration
 #
@@ -277,7 +278,7 @@ bar {
 
 gaps inner 10
 
-default_border pixel 1
+default_border pixel 2
 
 include rose-pine.theme
 
