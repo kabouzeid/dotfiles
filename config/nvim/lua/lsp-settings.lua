@@ -197,6 +197,7 @@ if vim.fn.executable("pacman") == 1 then
   table.insert(servers, "vimls")
   table.insert(servers, "vuels")
   table.insert(servers, "yamlls")
+  table.insert(servers, "zk")
 end
 
 -- setup the servers in the table

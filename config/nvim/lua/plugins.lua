@@ -144,8 +144,6 @@ require("packer").startup(function(use)
 
   -- Experimenting
   use("tpope/vim-unimpaired")
-  use("stevearc/dressing.nvim")
-  use("rcarriga/nvim-notify")
 end)
 
 vim.cmd([[

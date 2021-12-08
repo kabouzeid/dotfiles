@@ -569,15 +569,3 @@ vim.g.delimitMate_expand_space = 1
 vim.g.rust_fold = 1
 
 -- }}}
-
--- notify {{{
-
-vim.notify = require("notify")
-
--- }}}
-
--- dressing {{{
-
-require("dressing").setup()
-
--- }}}
