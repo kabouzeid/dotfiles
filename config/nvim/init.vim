@@ -68,9 +68,6 @@ augroup END
 let mapleader = "\<Space>"
 let maplocalleader = "\<Space>"
 
-nnoremap <C-N> :bnext<CR>
-nnoremap <C-P> :bprev<CR>
-
 " }}}
 
 " utilities {{{

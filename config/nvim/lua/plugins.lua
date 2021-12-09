@@ -56,9 +56,9 @@ require("packer").startup(function(use)
   -- Themes
   use({ "rose-pine/neovim", as = "rose-pine" })
   -- use "~/Code/rose-pine"
-  use("bluz71/vim-moonfly-colors")
   use("projekt0n/github-nvim-theme")
   -- use("Pocco81/Catppuccino.nvim")
+  -- use("bluz71/vim-moonfly-colors")
   -- use({ "kabouzeid/nvim-jellybeans", requires = "rktjmp/lush.nvim" })
   -- use { "~/Code/nvim-jellybeans", requires = "rktjmp/lush.nvim" }
   -- use("sainnhe/sonokai")
@@ -88,8 +88,8 @@ require("packer").startup(function(use)
   use("numToStr/Comment.nvim")
 
   -- Movement
-  use("justinmk/vim-sneak")
-  use("tpope/vim-sleuth")
+  -- use("justinmk/vim-sneak")
+  use("ggandor/lightspeed.nvim")
 
   -- UI
   use("nvim-lualine/lualine.nvim")
@@ -114,7 +114,7 @@ require("packer").startup(function(use)
 
   -- Git
   use({ "lewis6991/gitsigns.nvim", requires = "nvim-lua/plenary.nvim" })
-  use("lambdalisue/gina.vim")
+  use("lambdalisue/gina.vim") -- mostly for the :Blame command
   use("kdheepak/lazygit.nvim")
 
   -- Lang
@@ -130,20 +130,21 @@ require("packer").startup(function(use)
   use("pantharshit00/vim-prisma")
   use("evanleck/vim-svelte")
   use("rust-lang/rust.vim")
-  use("simrat39/rust-tools.nvim") -- mostly lsp related
+  use("simrat39/rust-tools.nvim") -- additional rust goodies, mostly lsp related
 
   -- Misc
+  use("tpope/vim-sleuth")
   use("wincent/terminus")
-  use("marcushwz/nvim-workbench")
+  use("tpope/vim-unimpaired")
   use("milisims/nvim-luaref")
   use("folke/which-key.nvim")
+  -- use("marcushwz/nvim-workbench")
   --[[ use {
     'glacambre/firenvim',
     run = function() vim.fn['firenvim#install'](0) end
   } ]]
 
   -- Experimenting
-  use("tpope/vim-unimpaired")
 end)
 
 vim.cmd([[
