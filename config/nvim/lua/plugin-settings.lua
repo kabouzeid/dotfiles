@@ -508,7 +508,7 @@ require("null-ls").config({
 
 -- {{{ gtfo
 
-vim.g["gtfo#terminals"] = { mac = "kitty" }
+vim.g["gtfo#terminals"] = { unix = "kitty", mac = "kitty" }
 
 -- }}}
 
