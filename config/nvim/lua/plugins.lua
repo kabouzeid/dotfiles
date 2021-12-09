@@ -40,6 +40,7 @@ require("packer").startup(function(use)
       "f3fora/cmp-spell",
       "quangnguyen30192/cmp-nvim-tags",
       "ray-x/cmp-treesitter",
+      "hrsh7th/cmp-nvim-lsp-signature-help",
     },
   })
 

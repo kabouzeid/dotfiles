@@ -72,14 +72,14 @@ cmp.setup({
       -- set a name for each source
       vim_item.menu = ({
         nvim_lsp = "[LSP]",
-        buffer = "[Buffer]",
-        nvim_lua = "[Lua]",
-        tags = "[Tags]",
-        vsnip = "[Snippet]",
-        path = "[Path]",
-        tmux = "[Tmux]",
+        buffer = "[buffer]",
+        nvim_lua = "[lua]",
+        tags = "[tags]",
+        vsnip = "[snippet]",
+        path = "[path]",
+        tmux = "[tmux]",
         latex_symbols = "[LaTeX]",
-        spell = "[Spell]",
+        spell = "[spell]",
       })[entry.source.name]
 
       return vim_item
@@ -121,6 +121,7 @@ cmp.setup({
     }),
   },
   sources = {
+    { name = "nvim_lsp_signature_help" },
     { name = "nvim_lsp" },
     { name = "nvim_lua" },
     { name = "tags" },
@@ -354,7 +355,7 @@ require("lualine").setup({
           warn = icons.get("alert") .. " ",
           info = icons.get("info") .. " ",
         },
-        sources = { "nvim_lsp" },
+        sources = { "nvim_diagnostic" },
       },
     },
     lualine_y = {
