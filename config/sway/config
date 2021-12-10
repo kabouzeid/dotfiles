@@ -239,8 +239,9 @@ mode $mode_resize {
 }
 bindsym $mod+r mode $mode_resize
 
-set $mode_screenshot "screenshot [a]ctive [s]creen [r]egion [w]indow [o]utput"
+set $mode_screenshot "screenshot [a]ctive [s]creen [r]egion [w]indow [o]utput [p]ipette"
 set $grimshot /usr/share/sway/scripts/grimshot
+set $pipette ~/.local/bin/pipette.sh
 mode $mode_screenshot {
     # Target Currently active window.
     # a
@@ -266,6 +267,10 @@ mode $mode_screenshot {
     # w
     bindsym w mode "default"; exec $grimshot --notify copy window
     bindsym Shift+w mode "default"; exec $grimshot --notify save window
+
+    # Color pipette
+    # p
+    bindsym p mode "default"; exec $pipette
 
     # Return to default mode
     bindsym Return mode "default"
