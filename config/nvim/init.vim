@@ -53,6 +53,8 @@ augroup auto_filetypes
   " autocmd Filetype tex set conceallevel=1
 
   autocmd Filetype markdown setlocal spell
+  autocmd Filetype markdown syn region markdownWikiLink matchgroup=markdownLinkDelimiter start="\[\[" end="\]\]" contains=markdownUrl keepend oneline concealends
+  autocmd Filetype markdown setlocal conceallevel=2
 
   autocmd Filetype text setlocal spell
 
