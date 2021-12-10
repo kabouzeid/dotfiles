@@ -34,7 +34,6 @@ require("packer").startup(function(use)
       "hrsh7th/cmp-nvim-lsp",
       "hrsh7th/cmp-vsnip",
       "hrsh7th/cmp-path",
-      "hrsh7th/cmp-nvim-lua",
       "andersevenrud/compe-tmux",
       "kdheepak/cmp-latex-symbols",
       "f3fora/cmp-spell",
@@ -119,6 +118,7 @@ require("packer").startup(function(use)
   use("kdheepak/lazygit.nvim")
 
   -- Lang
+  use("folke/lua-dev.nvim")
   use("lervag/vimtex")
   -- use("petRUShka/vim-gap")
   -- use("petRUShka/vim-magma")

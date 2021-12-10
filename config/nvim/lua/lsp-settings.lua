@@ -90,28 +90,6 @@ local on_attach = function(client, bufnr)
   end
 end
 
--- Configure lua language server for neovim development
-local lua_settings = {
-  Lua = {
-    runtime = {
-      -- LuaJIT in the case of Neovim
-      version = "LuaJIT",
-      path = vim.split(package.path, ";"),
-    },
-    diagnostics = {
-      -- Get the language server to recognize the `vim` global
-      globals = { "vim" },
-    },
-    workspace = {
-      -- Make the server aware of Neovim runtime files
-      library = {
-        [vim.fn.expand("$VIMRUNTIME/lua")] = true,
-        [vim.fn.expand("$VIMRUNTIME/lua/vim/lsp")] = true,
-      },
-    },
-  },
-}
-
 -- config that activates keymaps and enables snippet support
 local function get_config(server_name)
   local capabilities = vim.lsp.protocol.make_client_capabilities()
@@ -125,15 +103,7 @@ local function get_config(server_name)
   }
 
   if server_name == "sumneko_lua" then
-    config.cmd = { "lua-language-server" }
-    config.settings = lua_settings
-    config.root_dir = function(fname)
-      if fname:match("lush_theme") ~= nil then
-        return nil
-      end
-      local util = require("lspconfig/util")
-      return util.find_git_ancestor(fname) or util.path.dirname(fname)
-    end
+    config = require("lua-dev").setup({ lspconfig = config })
   end
   if server_name == "sourcekit" then
     config.filetypes = { "swift", "objective-c", "objective-cpp" } -- we don't want c and cpp!
