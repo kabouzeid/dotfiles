@@ -1,5 +1,8 @@
 local windows = require("lspconfig/ui/windows")
 
+-- UI just like `:LspInfo` to show which capabilities each attached server has
+vim.cmd("command! LspCapabilities lua require'lsp-capabilities'()")
+
 return function()
   local buf_clients = vim.lsp.buf_get_clients()
   local win_info = windows.percentage_range_window(0.8, 0.7)

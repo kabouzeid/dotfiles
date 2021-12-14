@@ -1,3 +1,7 @@
+-- vim:foldmethod=marker
+
+--- {{{ visual
+
 -- vim.lsp.set_log_level("debug")
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
   vim.lsp.diagnostic.on_publish_diagnostics,
@@ -15,19 +19,21 @@ vim.fn.sign_define("DiagnosticSignInfo", { text = icons.get("info"), texthl = "D
 
 vim.fn.sign_define("DiagnosticSignHint", { text = icons.get("comment"), texthl = "DiagnosticSignHint" })
 
-vim.api.nvim_command("highlight default link LspCodeLens NonText")
-vim.api.nvim_command("highlight default link LspCodeLensSeparator NonText")
+vim.cmd("highlight default link LspCodeLens NonText")
+vim.cmd("highlight default link LspCodeLensSeparator NonText")
 
--- keymaps
+--- }}}
+
+--- {{{ keymaps
 local on_attach = function(client, bufnr)
   local function buf_set_keymap(...)
     vim.api.nvim_buf_set_keymap(bufnr, ...)
   end
-  local function buf_set_option(...)
-    vim.api.nvim_buf_set_option(bufnr, ...)
-  end
+  -- local function buf_set_option(...)
+  --   vim.api.nvim_buf_set_option(bufnr, ...)
+  -- end
 
-  buf_set_option("omnifunc", "v:lua.vim.lsp.omnifunc")
+  -- buf_set_option("omnifunc", "v:lua.vim.lsp.omnifunc")
 
   -- Mappings.
   local opts = { noremap = true, silent = true }
@@ -88,7 +94,20 @@ local on_attach = function(client, bufnr)
   if client.server_capabilities.colorProvider then
     require("lsp-documentcolors").buf_attach(bufnr, { single_column = true })
   end
+
+  if client.name == "zk" then
+    vim.cmd("command! ZkList Telescope zk list")
+    vim.cmd("command! ZkTags Telescope zk tags")
+    vim.cmd("command! ZkBacklinks Telescope zk backlinks")
+    buf_set_keymap("n", "<Leader>zl", "<cmd>Telescope zk list<CR>", opts)
+    buf_set_keymap("n", "<Leader>zt", "<cmd>Telescope zk tags<CR>", opts)
+    buf_set_keymap("n", "<Leader>zb", "<cmd>Telescope zk backlinks<CR>", opts)
+  end
 end
+
+--- }}}
+
+--- {{{ server configs
 
 -- config that activates keymaps and enables snippet support
 local function get_config(server_name)
@@ -140,11 +159,12 @@ local function setup_rust_analyzer(config)
   })
 end
 
--- setup servers
+--- }}}
+
+--- {{{ setup servers
 
 -- setup manually installed servers
 local servers = {}
-table.insert(servers, "null-ls")
 if vim.fn.executable("xcrun") == 1 or vim.fn.executable("sourcekit-lsp") == 1 then
   table.insert(servers, "sourcekit")
 end
@@ -188,5 +208,38 @@ require("nvim-lsp-installer").on_server_ready(function(server)
   end
 end)
 
--- UI just like `:LspInfo` to show which capabilities each attached server has
-vim.api.nvim_command("command! LspCapabilities lua require'lsp-capabilities'()")
+-- {{{ null-ls
+
+require("null-ls").setup({
+  on_attach = on_attach,
+  sources = vim.tbl_filter(function(source)
+    if source._opts and source._opts.command then
+      return vim.fn.executable(source._opts.command) == 1 and source or nil
+    else
+      return source
+    end
+  end, {
+    require("null-ls").builtins.formatting.stylua,
+    require("null-ls").builtins.formatting.prettier.with({
+      command = "./node_modules/.bin/prettier",
+    }),
+    require("null-ls").builtins.formatting.rustywind,
+    -- require("null-ls").builtins.formatting.shellharden,
+
+    -- require("null-ls").builtins.diagnostics.codespell,
+    require("null-ls").builtins.diagnostics.cppcheck,
+    -- require("null-ls").builtins.diagnostics.flake8,
+    require("null-ls").builtins.diagnostics.proselint,
+    require("null-ls").builtins.diagnostics.selene,
+    require("null-ls").builtins.diagnostics.shellcheck,
+    require("null-ls").builtins.diagnostics.vint,
+    -- require("null-ls").builtins.diagnostics.write_good,
+
+    require("null-ls").builtins.code_actions.proselint,
+  }),
+})
+
+-- }}}
+
+-- }}}
+

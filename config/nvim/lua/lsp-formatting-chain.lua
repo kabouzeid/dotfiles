@@ -7,7 +7,7 @@ local M = {}
 --- saved. {timeout_ms} is passed on to the |vim.lsp.client| `request_sync` method. Example:
 ---
 --- <pre>
---- vim.api.nvim_command[[autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_chain_sync()]]
+--- vim.cmd[[autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_chain_sync()]]
 --- </pre>
 ---
 -- @param options (optional, table) `FormattingOptions` entries

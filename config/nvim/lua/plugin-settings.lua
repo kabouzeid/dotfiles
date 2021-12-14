@@ -254,9 +254,9 @@ vim.cmd("augroup END")
 --     end
 --   end, { ["repeat"] = -1 })
 -- end
--- vim.api.nvim_command [[augroup nvimtree]]
--- vim.api.nvim_command [[autocmd Filetype NvimTree lua auto_refresh_nvim_tree()]]
--- vim.api.nvim_command [[augroup END]]
+-- vim.cmd [[augroup nvimtree]]
+-- vim.cmd [[autocmd Filetype NvimTree lua auto_refresh_nvim_tree()]]
+-- vim.cmd [[augroup END]]
 
 vim.cmd("nnoremap <leader>tt <cmd>NvimTreeToggle<cr>")
 vim.cmd("nnoremap <leader>tf <cmd>NvimTreeFindFile<cr>")
@@ -282,6 +282,7 @@ require("telescope").setup({
 })
 
 require("telescope").load_extension("dap")
+-- require("telescope").load_extension("zk")
 -- require("telescope").load_extension("fzf")
 
 vim.cmd([[
@@ -470,38 +471,6 @@ require("Comment").setup()
 -- {{{ which-key
 
 require("which-key").setup()
-
--- }}}
-
--- {{{ null-ls
-
-require("null-ls").config({
-  sources = vim.tbl_filter(function(source)
-    if source._opts and source._opts.command then
-      return vim.fn.executable(source._opts.command) == 1 and source or nil
-    else
-      return source
-    end
-  end, {
-    require("null-ls").builtins.formatting.stylua,
-    require("null-ls").builtins.formatting.prettier.with({
-      command = "./node_modules/.bin/prettier",
-    }),
-    require("null-ls").builtins.formatting.rustywind,
-    -- require("null-ls").builtins.formatting.shellharden,
-
-    -- require("null-ls").builtins.diagnostics.codespell,
-    require("null-ls").builtins.diagnostics.cppcheck,
-    -- require("null-ls").builtins.diagnostics.flake8,
-    require("null-ls").builtins.diagnostics.proselint,
-    require("null-ls").builtins.diagnostics.selene,
-    require("null-ls").builtins.diagnostics.shellcheck,
-    require("null-ls").builtins.diagnostics.vint,
-    -- require("null-ls").builtins.diagnostics.write_good,
-
-    require("null-ls").builtins.code_actions.proselint,
-  }),
-})
 
 -- }}}
 
