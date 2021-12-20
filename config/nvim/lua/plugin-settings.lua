@@ -282,7 +282,7 @@ require("telescope").setup({
 })
 
 require("telescope").load_extension("dap")
--- require("telescope").load_extension("zk")
+require("telescope").load_extension("zk")
 -- require("telescope").load_extension("fzf")
 
 vim.cmd([[
@@ -527,8 +527,8 @@ vim.g.svelte_preprocessors = { "typescript", "ts" }
 
 -- delimitMate {{{
 
-vim.g.delimitMate_expand_cr = 1
-vim.g.delimitMate_expand_space = 1
+-- vim.g.delimitMate_expand_cr = 1
+-- vim.g.delimitMate_expand_space = 1
 
 -- }}}
 

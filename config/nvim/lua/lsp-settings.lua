@@ -94,15 +94,6 @@ local on_attach = function(client, bufnr)
   if client.server_capabilities.colorProvider then
     require("lsp-documentcolors").buf_attach(bufnr, { single_column = true })
   end
-
-  if client.name == "zk" then
-    vim.cmd("command! ZkList Telescope zk list")
-    vim.cmd("command! ZkTags Telescope zk tags")
-    vim.cmd("command! ZkBacklinks Telescope zk backlinks")
-    buf_set_keymap("n", "<Leader>zl", "<cmd>Telescope zk list<CR>", opts)
-    buf_set_keymap("n", "<Leader>zt", "<cmd>Telescope zk tags<CR>", opts)
-    buf_set_keymap("n", "<Leader>zb", "<cmd>Telescope zk backlinks<CR>", opts)
-  end
 end
 
 --- }}}
@@ -159,6 +150,38 @@ local function setup_rust_analyzer(config)
   })
 end
 
+local function setup_zk(config)
+  require("zk").setup({
+    lsp = {
+      config = vim.tbl_extend("force", get_config("zk"), config or {}),
+    },
+  })
+
+  -- vim.cmd("command! ZkList Telescope zk notes")
+  -- vim.cmd("command! ZkTags Telescope zk tags")
+  -- vim.cmd("command! ZkBacklinks Telescope zk backlinks")
+
+  vim.api.nvim_set_keymap(
+    "n",
+    "<Leader>zn",
+    "<cmd>lua require('telescope').extensions.zk.notes()<CR>",
+    { noremap = true }
+  )
+
+  vim.api.nvim_set_keymap(
+    "n",
+    "<Leader>zt",
+    "<cmd>lua require('telescope').extensions.zk.tags()<CR>",
+    { noremap = true }
+  )
+  vim.api.nvim_set_keymap(
+    "n",
+    "<Leader>zb",
+    "<cmd>lua require('telescope').extensions.zk.backlinks()<CR>",
+    { noremap = true }
+  )
+end
+
 --- }}}
 
 --- {{{ setup servers
@@ -194,6 +217,8 @@ end
 for _, server in pairs(servers) do
   if server == "rust_analyzer" then
     setup_rust_analyzer()
+  elseif server == "zk" then
+    setup_zk()
   else
     require("lspconfig")[server].setup(get_config(server))
   end
@@ -203,6 +228,8 @@ end
 require("nvim-lsp-installer").on_server_ready(function(server)
   if server.name == "rust_analyzer" then
     setup_rust_analyzer(server:get_default_options())
+  elseif server == "zk" then
+    setup_zk(server:get_default_options())
   else
     server:setup(get_config(server.name))
   end
@@ -242,4 +269,3 @@ require("null-ls").setup({
 -- }}}
 
 -- }}}
-

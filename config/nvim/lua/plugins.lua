@@ -139,6 +139,7 @@ require("packer").startup(function(use)
   use("tpope/vim-unimpaired")
   use("milisims/nvim-luaref")
   use("folke/which-key.nvim")
+  use("~/Code/zk-nvim")
   -- use("marcushwz/nvim-workbench")
   --[[ use {
     'glacambre/firenvim',
