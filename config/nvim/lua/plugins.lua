@@ -14,22 +14,11 @@ require("packer").startup(function(use)
   use({ "jose-elias-alvarez/null-ls.nvim", requires = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" } })
   use("ii14/lsp-command")
 
-  -- Linting
-  -- use("mfussenegger/nvim-lint")
-
   -- Completion
-  --[[ use {
-    'ms-jpq/coq_nvim',
-    branch = 'coq',
-    requires = {
-      use { 'ms-jpq/coq.artifacts', branch= 'artifacts'}
-    }
-  } ]]
   use({
     "hrsh7th/nvim-cmp",
     requires = {
       { "hrsh7th/vim-vsnip", requires = "kitagry/vs-snippets" },
-      "onsails/lspkind-nvim",
       "hrsh7th/cmp-buffer",
       "hrsh7th/cmp-nvim-lsp",
       "hrsh7th/cmp-vsnip",

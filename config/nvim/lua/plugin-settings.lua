@@ -1,60 +1,37 @@
 -- vim:foldmethod=marker
 local icons = require("nvim-nonicons")
 
--- {{{ coq
-
-vim.g.coq_settings = {
-  auto_start = "shut-up",
-  ["display.icons.mappings"] = {
-    Boolean = "",
-    -- Character = "",
-    Class = "",
-    Color = "",
-    Constant = "",
-    Constructor = "",
-    Enum = "",
-    EnumMember = "",
-    Event = "",
-    Field = "",
-    File = "",
-    Folder = "",
-    Function = "",
-    Interface = "",
-    Keyword = "",
-    Method = "",
-    Module = "",
-    Number = "",
-    Operator = "",
-    Parameter = "",
-    Property = "",
-    Reference = "",
-    Snippet = "",
-    String = "",
-    Struct = "",
-    Text = "",
-    TypeParameter = "",
-    Unit = "",
-    Value = "",
-    Variable = "",
-  },
-}
-
--- }}} ]]
-
--- {{{ lspkind
-
-require("lspkind").init({ preset = "codicons" })
-
--- }}}
-
 -- {{{ cmp
 
-local function check_back_space()
-  local col = vim.fn.col(".") - 1
-  return col == 0 or vim.fn.getline("."):sub(col, col):match("%s")
-end
+local completion_item_kinds = {
+  Text = "",
+  Method = "",
+  Function = "",
+  Constructor = "",
+  Field = "",
+  Variable = "",
+  Class = "",
+  Interface = "",
+  Module = "", -- 
+  Property = "",
+  Unit = "",
+  Value = "", -- 
+  Enum = "",
+  Keyword = "",
+  Snippet = "",
+  Color = "",
+  File = "",
+  Reference = "",
+  Folder = "",
+  EnumMember = "",
+  Constant = "",
+  Struct = "",
+  Event = "",
+  Operator = "",
+  TypeParameter = "",
+}
 
-local function feedkey(key, mode)
+local feedkey = function(key, mode)
   vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(key, true, true, true), mode, true)
 end
 
@@ -67,63 +44,27 @@ cmp.setup({
   },
   formatting = {
     format = function(entry, vim_item)
-      vim_item.kind = require("lspkind").presets.codicons[vim_item.kind] .. " " .. vim_item.kind
-
-      -- set a name for each source
-      vim_item.menu = ({
-        nvim_lsp = "[LSP]",
-        buffer = "[buffer]",
-        tags = "[tags]",
-        vsnip = "[snippet]",
-        path = "[path]",
-        tmux = "[tmux]",
-        latex_symbols = "[LaTeX]",
-        spell = "[spell]",
-      })[entry.source.name]
-
+      vim_item.kind = completion_item_kinds[vim_item.kind] .. " " .. vim_item.kind
+      vim_item.menu = entry.source.name
       return vim_item
     end,
   },
   mapping = {
-    ["<C-p>"] = cmp.mapping.select_prev_item(),
-    ["<C-n>"] = cmp.mapping.select_next_item(),
-    ["<C-d>"] = cmp.mapping.scroll_docs(-4),
-    ["<C-f>"] = cmp.mapping.scroll_docs(4),
-    ["<C-Space>"] = cmp.mapping.complete(),
-    ["<C-e>"] = cmp.mapping.close(),
-    ["<CR>"] = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Insert, select = true }),
-    ["<Tab>"] = cmp.mapping(function(fallback)
-      if cmp.visible() then
-        cmp.select_next_item()
-      elseif check_back_space() then
-        fallback()
-      elseif vim.fn["vsnip#jumpable"](1) == 1 then
-        feedkey("<Plug>(vsnip-jump-next)", "")
-      else
-        fallback()
-      end
-    end, {
-      "i",
-      "s",
+    ["<C-b>"] = cmp.mapping(cmp.mapping.scroll_docs(-4), { "i", "c" }),
+    ["<C-f>"] = cmp.mapping(cmp.mapping.scroll_docs(4), { "i", "c" }),
+    ["<C-Space>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c" }),
+    ["<C-y>"] = cmp.config.disable,
+    ["<C-e>"] = cmp.mapping({
+      i = cmp.mapping.abort(),
+      c = cmp.mapping.close(),
     }),
-    ["<S-Tab>"] = cmp.mapping(function(fallback)
-      if cmp.visible() then
-        cmp.select_prev_item()
-      elseif vim.fn["vsnip#jumpable"](-1) == 1 then
-        feedkey("<Plug>(vsnip-jump-prev)", "")
-      else
-        fallback()
-      end
-    end, {
-      "i",
-      "s",
-    }),
+    ["<CR>"] = cmp.mapping.confirm({ select = true }),
   },
   sources = {
+    { name = "vsnip" },
     { name = "nvim_lsp_signature_help" },
     { name = "nvim_lsp" },
     { name = "tags" },
-    { name = "vsnip" },
     { name = "path" },
     { name = "buffer" },
     { name = "tmux" },
@@ -132,6 +73,18 @@ cmp.setup({
     { name = "treesitter" },
   },
 })
+
+vim.cmd([[
+  imap <expr> <Tab>   vsnip#jumpable(1)  ? '<Plug>(vsnip-jump-next)' : '<Tab>'
+  smap <expr> <Tab>   vsnip#jumpable(1)  ? '<Plug>(vsnip-jump-next)' : '<Tab>'
+  imap <expr> <S-Tab> vsnip#jumpable(-1) ? '<Plug>(vsnip-jump-prev)' : '<S-Tab>'
+  smap <expr> <S-Tab> vsnip#jumpable(-1) ? '<Plug>(vsnip-jump-prev)' : '<S-Tab>'
+
+  nmap        <C-s>   <Plug>(vsnip-select-text)
+  xmap        <C-s>   <Plug>(vsnip-select-text)
+  nmap        <A-s>   <Plug>(vsnip-cut-text)
+  xmap        <A-s>   <Plug>(vsnip-cut-text)
+]])
 
 -- }}}
 
@@ -307,10 +260,19 @@ local function lsp_servers_status()
   return icons.get("zap") .. " " .. table.concat(client_names, "|")
 end
 
+local function snippet_jump_status()
+  if vim.fn["vsnip#jumpable"](1) == 1 then
+    return " "
+  elseif vim.fn["vsnip#jumpable"](-1) == 1 then
+    return " "
+  end
+  return ""
+end
+
 require("lualine").setup({
   options = { theme = vim.g.colors_name },
   sections = {
-    lualine_a = { "mode" },
+    lualine_a = { "mode", snippet_jump_status },
     lualine_b = { { "branch", icon = icons.get("git-branch") }, { "diff", colored = false } },
     lualine_c = { { "filename", path = 1 } },
     lualine_x = {
@@ -341,14 +303,14 @@ require("lualine").setup({
     lualine_y = {
       {
         "encoding",
-        condition = function()
+        cond = function()
           -- when filencoding="" lualine would otherwise report utf-8 anyways
           return vim.bo.fileencoding and #vim.bo.fileencoding > 0 and vim.bo.fileencoding ~= "utf-8"
         end,
       },
       {
         "fileformat",
-        condition = function()
+        cond = function()
           return vim.bo.fileformat ~= "unix"
         end,
         icons_enabled = false,
