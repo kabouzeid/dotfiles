@@ -113,6 +113,11 @@ local function get_config(server_name)
   }
 
   if server_name == "sumneko_lua" then
+    config.settings = {
+      Lua = {
+        completion = { callSnippet = "Disable" },
+      },
+    }
     config = require("lua-dev").setup({ lspconfig = config })
   end
   if server_name == "sourcekit" then
