@@ -16,8 +16,6 @@ if has antigen; then
   antigen bundle zsh-users/zsh-syntax-highlighting
   antigen bundle zsh-users/zsh-autosuggestions
 
-  antigen bundle ellie/atuin@main
-
   antigen apply
 fi
 
@@ -29,6 +27,13 @@ fi
 # set PATH so it includes user's private bin if it exists
 if [ -d "$HOME"/.local/bin ] ; then
     export PATH="$HOME"/.local/bin:$PATH
+fi
+
+if [ -r /usr/share/fzf/key-bindings.zsh ]; then
+    source /usr/share/fzf/key-bindings.zsh
+fi
+if [ -r /usr/share/fzf/completion.zsh ]; then
+    source /usr/share/fzf/completion.zsh
 fi
 
 if [ -r /usr/share/z/z.sh ]; then
