@@ -167,17 +167,6 @@ vim.cmd([[autocmd CursorHold,CursorHoldI * lua update_lightbulb()]])
 
 -- }}}
 
--- nvim-lspinstall {{{
-
--- function _G.lsp_reinstall_all()
---   local lspinstall = require "lspinstall"
---   for _, server in ipairs(lspinstall.installed_servers()) do lspinstall.install_server(server) end
--- end
-
--- vim.cmd [[command! -nargs=0 LspReinstallAll call v:lua.lsp_reinstall_all()]]
-
--- }}}
-
 -- nvim-tree {{{
 
 vim.g.nvim_tree_icons = {
@@ -272,27 +261,19 @@ require("telescope").setup({
     mappings = {
       i = {
         ["<esc>"] = actions.close,
-        ["œ"] = actions.send_selected_to_qflist + actions.open_qflist, -- Alt-q on macOS
-      },
-      n = {
-        ["œ"] = actions.send_selected_to_qflist + actions.open_qflist, -- Alt-q on macOS
       },
     },
   },
 })
 
 require("telescope").load_extension("dap")
-require("telescope").load_extension("zk")
--- require("telescope").load_extension("fzf")
 
-vim.cmd([[
-  nnoremap <leader>fp <cmd>Telescope<cr>
-  nnoremap <leader>ff <cmd>Telescope find_files<cr>
-  nnoremap <leader>fd <cmd>Telescope file_browser<cr>
-  nnoremap <leader>fg <cmd>Telescope live_grep<cr>
-  nnoremap <leader>fb <cmd>Telescope buffers<cr>
-  nnoremap <leader>fh <cmd>Telescope help_tags<cr>
-]])
+vim.api.nvim_set_keymap("n", "<Leader>fp", "<cmd>Telescope<cr>", { noremap = true })
+vim.api.nvim_set_keymap("n", "<Leader>ff", "<cmd>Telescope find_files<cr>", { noremap = true })
+vim.api.nvim_set_keymap("n", "<Leader>fg", "<cmd>Telescope live_grep<cr>", { noremap = true })
+vim.api.nvim_set_keymap("n", "<Leader>fb", "<cmd>Telescope buffers<cr>", { noremap = true })
+vim.api.nvim_set_keymap("n", "<Leader>fh", "<cmd>Telescope help_tags<cr>", { noremap = true })
+vim.api.nvim_set_keymap("n", "<Leader>fs", "<cmd>Telescope lsp_document_symbols<cr>", { noremap = true })
 
 -- }}}
 

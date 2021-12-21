@@ -157,9 +157,12 @@ local function setup_zk(config)
     },
   })
 
-  -- vim.cmd("command! ZkList Telescope zk notes")
-  -- vim.cmd("command! ZkTags Telescope zk tags")
-  -- vim.cmd("command! ZkBacklinks Telescope zk backlinks")
+  require("telescope").load_extension("zk")
+
+  vim.cmd("command! ZkNotes lua require('telescope').extensions.zk.notes()")
+  vim.cmd("command! ZkBacklinks lua require('telescope').extensions.zk.backlinks()")
+  vim.cmd("command! ZkLinks lua require('telescope').extensions.zk.links()")
+  vim.cmd("command! ZkTags lua require('telescope').extensions.zk.tags()")
 
   vim.api.nvim_set_keymap(
     "n",
@@ -170,14 +173,22 @@ local function setup_zk(config)
 
   vim.api.nvim_set_keymap(
     "n",
-    "<Leader>zt",
-    "<cmd>lua require('telescope').extensions.zk.tags()<CR>",
-    { noremap = true }
-  )
-  vim.api.nvim_set_keymap(
-    "n",
     "<Leader>zb",
     "<cmd>lua require('telescope').extensions.zk.backlinks()<CR>",
+    { noremap = true }
+  )
+
+  vim.api.nvim_set_keymap(
+    "n",
+    "<Leader>zl",
+    "<cmd>lua require('telescope').extensions.zk.links()<CR>",
+    { noremap = true }
+  )
+
+  vim.api.nvim_set_keymap(
+    "n",
+    "<Leader>zt",
+    "<cmd>lua require('telescope').extensions.zk.tags()<CR>",
     { noremap = true }
   )
 end
