@@ -36,12 +36,12 @@ if [ -r /usr/share/fzf/completion.zsh ]; then
     source /usr/share/fzf/completion.zsh
 fi
 
-if [ -r /usr/share/z/z.sh ]; then
-    source /usr/share/z/z.sh
-fi
-
 if [ -r "$HOME"/.linuxbrew/bin/brew ]; then
     eval "$("$HOME"/.linuxbrew/bin/brew shellenv)"
+fi
+
+if has zoxide; then
+    eval "$(zoxide init zsh)"
 fi
 
 if has nvim; then
