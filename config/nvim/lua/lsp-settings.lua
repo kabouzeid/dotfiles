@@ -9,7 +9,7 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
 )
 
 vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded" })
-vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = "rounded"})
+vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = "rounded" })
 
 local icons = require("nvim-nonicons")
 vim.fn.sign_define("DiagnosticSignError", { text = icons.get("x-circle"), texthl = "DiagnosticSignError" })
@@ -43,6 +43,7 @@ local on_attach = function(client, bufnr)
   buf_set_keymap("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<CR>", opts)
   buf_set_keymap("n", "<C-k>", "<cmd>lua vim.lsp.buf.signature_help()<CR>", opts)
   buf_set_keymap("n", "<Leader>a", "<cmd>lua vim.lsp.buf.code_action()<CR>", opts)
+  buf_set_keymap("x", "<Leader>a", "<Esc><cmd>lua vim.lsp.buf.range_code_action()<CR>", opts)
   buf_set_keymap("n", "<Leader>wa", "<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>", opts)
   buf_set_keymap("n", "<Leader>wr", "<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>", opts)
   buf_set_keymap("n", "<Leader>wl", "<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>", opts)
@@ -61,7 +62,7 @@ local on_attach = function(client, bufnr)
     opts
   )
   buf_set_keymap("n", "<Leader>P", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
-  buf_set_keymap("v", "<Leader>p", "<cmd>lua vim.lsp.buf.range_formatting()<CR>", opts)
+  buf_set_keymap("v", "<Leader>p", "<Esc><cmd>lua vim.lsp.buf.range_formatting()<CR>", opts)
   buf_set_keymap("n", "<Leader>l", "<cmd>lua vim.lsp.codelens.run()<CR>", opts)
 
   -- vim already has builtin docs
@@ -157,46 +158,43 @@ local function setup_rust_analyzer(config)
 end
 
 local function setup_zk(config)
+  local api = require("zk.api")
+  local pickers = require("zk.pickers")
   require("zk").setup({
     lsp = {
       config = vim.tbl_extend("force", get_config("zk"), config or {}),
+    },
+    commands = {
+      orphans = { -- will make `fn` available as `require("zk.commands").orphans(options, path)`
+        command = "ZkOrphans", -- will create a `:ZkOrphans [<options>]` command for you
+        fn = function(options, path)
+          options = pickers.make_note_picker_api_options({ orphan = true }, options)
+          api.list(path, options, function(notes)
+            pickers.note_picker(notes, "Zk Orphans") -- will open the users picker (telescope/fzf/select)
+          end)
+        end,
+      },
     },
   })
 
   require("telescope").load_extension("zk")
 
-  vim.cmd("command! ZkNotes lua require('telescope').extensions.zk.notes()")
-  vim.cmd("command! ZkBacklinks lua require('telescope').extensions.zk.backlinks()")
-  vim.cmd("command! ZkLinks lua require('telescope').extensions.zk.links()")
-  vim.cmd("command! ZkTags lua require('telescope').extensions.zk.tags()")
+  vim.api.nvim_set_keymap("n", "<Leader>zc", "<cmd>lua require('zk.commands').new()<CR>", { noremap = true })
 
   vim.api.nvim_set_keymap(
-    "n",
-    "<Leader>zn",
-    "<cmd>lua require('telescope').extensions.zk.notes()<CR>",
+    "x",
+    "<Leader>zc",
+    "<esc><cmd>lua require('zk.commands').new_from_title_selection()<CR>",
     { noremap = true }
   )
 
-  vim.api.nvim_set_keymap(
-    "n",
-    "<Leader>zb",
-    "<cmd>lua require('telescope').extensions.zk.backlinks()<CR>",
-    { noremap = true }
-  )
+  vim.api.nvim_set_keymap("n", "<Leader>zn", "<cmd>lua require('zk.commands').notes()<CR>", { noremap = true })
 
-  vim.api.nvim_set_keymap(
-    "n",
-    "<Leader>zl",
-    "<cmd>lua require('telescope').extensions.zk.links()<CR>",
-    { noremap = true }
-  )
+  vim.api.nvim_set_keymap("n", "<Leader>zb", "<cmd>lua require('zk.commands').backlinks()<CR>", { noremap = true })
 
-  vim.api.nvim_set_keymap(
-    "n",
-    "<Leader>zt",
-    "<cmd>lua require('telescope').extensions.zk.tags()<CR>",
-    { noremap = true }
-  )
+  vim.api.nvim_set_keymap("n", "<Leader>zl", "<cmd>lua require('zk.commands').links()<CR>", { noremap = true })
+
+  vim.api.nvim_set_keymap("n", "<Leader>zt", "<cmd>lua require('zk.commands').tags()<CR>", { noremap = true })
 end
 
 --- }}}
