@@ -31,9 +31,8 @@ fi
 
 if [ -r /usr/share/fzf/key-bindings.zsh ]; then
     source /usr/share/fzf/key-bindings.zsh
-fi
-if [ -r /usr/share/fzf/completion.zsh ]; then
-    source /usr/share/fzf/completion.zsh
+elif [ -r "$HOME"/.local/share/zsh/share/fzf-key-bindings.zsh ]; then
+    source "$HOME"/.local/share/zsh/share/fzf-key-bindings.zsh
 fi
 
 if [ -r "$HOME"/.linuxbrew/bin/brew ]; then
