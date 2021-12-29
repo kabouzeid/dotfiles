@@ -158,26 +158,26 @@ local function setup_rust_analyzer(config)
 end
 
 local function setup_zk(config)
-  local api = require("zk.api")
-  local pickers = require("zk.pickers")
-  require("zk").setup({
+  local zk = require("zk")
+  local function make_edit_cmd(name, defaults, picker_options)
+    return {
+      command = name,
+      fn = function(options)
+        options = vim.tbl_extend("force", defaults, options or {})
+        zk.edit(options, picker_options)
+      end,
+    }
+  end
+  zk.setup({
+    picker = "telescope",
     lsp = {
       config = vim.tbl_extend("force", get_config("zk"), config or {}),
     },
     commands = {
-      orphans = { -- will make `fn` available as `require("zk.commands").orphans(options, path)`
-        command = "ZkOrphans", -- will create a `:ZkOrphans [<options>]` command for you
-        fn = function(options, path)
-          options = pickers.make_note_picker_api_options({ orphan = true }, options)
-          api.list(path, options, function(notes)
-            pickers.note_picker(notes, "Zk Orphans") -- will open the users picker (telescope/fzf/select)
-          end)
-        end,
-      },
+      orphans = make_edit_cmd("ZkOrphans", { orphan = true }, { title = "Zk Orphans" }),
+      recents = make_edit_cmd("ZkRecents", { createdAfter = "2 weeks ago" }, { title = "Zk Recents" }),
     },
   })
-
-  require("telescope").load_extension("zk")
 
   vim.api.nvim_set_keymap("n", "<Leader>zc", "<cmd>lua require('zk.commands').new()<CR>", { noremap = true })
 
@@ -211,10 +211,13 @@ if vim.fn.executable("pacman") == 1 then
   table.insert(servers, "bashls")
   table.insert(servers, "clangd")
   table.insert(servers, "cmake")
+  table.insert(servers, "cssls")
   table.insert(servers, "dockerls")
   table.insert(servers, "gopls")
   table.insert(servers, "hls")
+  table.insert(servers, "html")
   table.insert(servers, "intelephense")
+  table.insert(servers, "jsonls")
   table.insert(servers, "pyright")
   table.insert(servers, "rust_analyzer")
   table.insert(servers, "sumneko_lua")
