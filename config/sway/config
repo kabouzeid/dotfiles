@@ -21,7 +21,7 @@ set $term kitty
 # set $menu dmenu_run | dmenu | xargs swaymsg exec --
 # set $menu rofi -show drun | xargs swaymsg exec --
 set $menu fuzzel \
-            --font="JetBrains Mono:size=13" \
+            --font="JetBrains Mono:size=18" \
             --terminal=$term \
             --horizontal-pad=15 \
             --vertical-pad=5 \
