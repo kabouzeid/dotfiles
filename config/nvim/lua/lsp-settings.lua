@@ -3,6 +3,7 @@
 --- {{{ visual
 
 -- vim.lsp.set_log_level("debug")
+
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
   vim.lsp.diagnostic.on_publish_diagnostics,
   { virtual_text = { prefix = "●" } }
@@ -159,42 +160,33 @@ end
 
 local function setup_zk(config)
   local zk = require("zk")
-  local function make_edit_cmd(name, defaults, picker_options)
-    return {
-      command = name,
-      fn = function(options)
-        options = vim.tbl_extend("force", defaults, options or {})
-        zk.edit(options, picker_options)
-      end,
-    }
-  end
+  local commands = require("zk.commands")
+
   zk.setup({
     picker = "telescope",
     lsp = {
       config = vim.tbl_extend("force", get_config("zk"), config or {}),
     },
-    commands = {
-      orphans = make_edit_cmd("ZkOrphans", { orphan = true }, { title = "Zk Orphans" }),
-      recents = make_edit_cmd("ZkRecents", { createdAfter = "2 weeks ago" }, { title = "Zk Recents" }),
-    },
   })
 
-  vim.api.nvim_set_keymap("n", "<Leader>zc", "<cmd>lua require('zk.commands').new()<CR>", { noremap = true })
+  local function make_edit_fn(defaults, picker_options)
+    return function(options)
+      options = vim.tbl_extend("force", defaults, options or {})
+      zk.edit(options, picker_options)
+    end
+  end
 
-  vim.api.nvim_set_keymap(
-    "x",
-    "<Leader>zc",
-    "<esc><cmd>lua require('zk.commands').new_from_title_selection()<CR>",
-    { noremap = true }
-  )
+  commands.add("ZkOrphans", make_edit_fn({ orphan = true }, { title = "Zk Orphans" }))
+  commands.add("ZkRecents", make_edit_fn({ createdAfter = "2 weeks ago" }, { title = "Zk Recents" }))
 
-  vim.api.nvim_set_keymap("n", "<Leader>zn", "<cmd>lua require('zk.commands').notes()<CR>", { noremap = true })
+  vim.api.nvim_set_keymap("n", "<Leader>zc", "<cmd>ZkNew<CR>", { noremap = true })
+  vim.api.nvim_set_keymap("x", "<Leader>zc", ":'<'>ZkNewFromTitleSelection<CR>", { noremap = true })
+  vim.api.nvim_set_keymap("n", "<Leader>zn", "<cmd>ZkNotes<CR>", { noremap = true })
+  vim.api.nvim_set_keymap("n", "<Leader>zb", "<cmd>ZkBacklinks<CR>", { noremap = true })
+  vim.api.nvim_set_keymap("n", "<Leader>zl", "<cmd>ZkLinks<CR>", { noremap = true })
+  vim.api.nvim_set_keymap("n", "<Leader>zt", "<cmd>ZkTags<CR>", { noremap = true })
 
-  vim.api.nvim_set_keymap("n", "<Leader>zb", "<cmd>lua require('zk.commands').backlinks()<CR>", { noremap = true })
-
-  vim.api.nvim_set_keymap("n", "<Leader>zl", "<cmd>lua require('zk.commands').links()<CR>", { noremap = true })
-
-  vim.api.nvim_set_keymap("n", "<Leader>zt", "<cmd>lua require('zk.commands').tags()<CR>", { noremap = true })
+  require("telescope").load_extension("zk")
 end
 
 --- }}}
@@ -226,7 +218,7 @@ if vim.fn.executable("pacman") == 1 then
   table.insert(servers, "texlab")
   table.insert(servers, "tsserver")
   table.insert(servers, "vimls")
-  table.insert(servers, "vuels")
+  table.insert(servers, "volar")
   table.insert(servers, "yamlls")
   table.insert(servers, "zk")
 end

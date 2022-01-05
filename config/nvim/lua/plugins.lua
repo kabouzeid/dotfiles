@@ -23,12 +23,10 @@ require("packer").startup(function(use)
       "hrsh7th/cmp-nvim-lsp",
       "hrsh7th/cmp-vsnip",
       "hrsh7th/cmp-path",
-      "andersevenrud/compe-tmux",
+      "hrsh7th/cmp-nvim-lsp-signature-help",
       "kdheepak/cmp-latex-symbols",
-      "f3fora/cmp-spell",
       "quangnguyen30192/cmp-nvim-tags",
       "ray-x/cmp-treesitter",
-      "hrsh7th/cmp-nvim-lsp-signature-help",
     },
   })
 
@@ -77,7 +75,6 @@ require("packer").startup(function(use)
   use("numToStr/Comment.nvim")
 
   -- Movement
-  -- use("justinmk/vim-sneak")
   use("ggandor/lightspeed.nvim")
 
   -- UI
@@ -121,6 +118,7 @@ require("packer").startup(function(use)
   use("evanleck/vim-svelte")
   use("rust-lang/rust.vim")
   use("simrat39/rust-tools.nvim") -- additional rust goodies, mostly lsp related
+  use({ "iamcco/markdown-preview.nvim", run = "cd app && yarn install" })
 
   -- Misc
   use("tpope/vim-sleuth")
@@ -130,11 +128,6 @@ require("packer").startup(function(use)
   use("folke/which-key.nvim")
   use("mickael-menu/zk-nvim")
   -- use("~/Code/zk-nvim")
-  -- use("marcushwz/nvim-workbench")
-  --[[ use {
-    'glacambre/firenvim',
-    run = function() vim.fn['firenvim#install'](0) end
-  } ]]
 
   -- Experimenting
 end)

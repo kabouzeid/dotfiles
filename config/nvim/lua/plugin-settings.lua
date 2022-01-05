@@ -1,7 +1,7 @@
 -- vim:foldmethod=marker
 local icons = require("nvim-nonicons")
 
--- {{{ cmp
+-- {{{ nvim-cmp
 
 local completion_item_kinds = {
   Text = "",
@@ -30,10 +30,6 @@ local completion_item_kinds = {
   Operator = "",
   TypeParameter = "",
 }
-
-local feedkey = function(key, mode)
-  vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(key, true, true, true), mode, true)
-end
 
 local cmp = require("cmp")
 cmp.setup({
@@ -67,12 +63,14 @@ cmp.setup({
     { name = "tags" },
     { name = "path" },
     { name = "buffer" },
-    { name = "tmux" },
     { name = "latex_symbols" },
-    { name = "spell" },
     { name = "treesitter" },
   },
 })
+
+-- }}}
+
+-- {{{ vsnip
 
 vim.cmd([[
   imap <expr> <Tab>   vsnip#jumpable(1)  ? '<Plug>(vsnip-jump-next)' : '<Tab>'
