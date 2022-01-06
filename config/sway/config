@@ -297,6 +297,7 @@ bindsym XF86AudioPrev exec playerctl previous
 bindsym XF86Search exec $menu
 
 bindsym --locked Control+Mod1+Mod4+BackSpace exec systemctl suspend
+bindsym Control+Shift+space exec 1password --quick-access
 
 #
 # Status Bar:

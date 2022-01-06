@@ -64,6 +64,10 @@ if has xdg-open && has setsid; then
     alias open="setsid xdg-open"
 fi
 
+if has op; then
+    alias ops="eval \$(op signin my)"
+fi
+
 # Allow local customizations in the ~/.zshrc_local file
 if [ -r "$HOME"/.zshrc_local ]; then
     source "$HOME"/.zshrc_local
