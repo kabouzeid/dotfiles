@@ -478,3 +478,17 @@ vim.g.svelte_preprocessors = { "typescript", "ts" }
 vim.g.rust_fold = 1
 
 -- }}}
+
+-- nvim-lsp-installer {{{
+
+require("nvim-lsp-installer").settings({
+  ui = {
+    icons = {
+      server_installed = icons.get("check-circle"),
+      server_pending = icons.get("clock"),
+      server_uninstalled = icons.get("circle"),
+    },
+  },
+})
+
+-- }}}
