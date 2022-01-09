@@ -44,7 +44,7 @@ local on_attach = function(client, bufnr)
   buf_set_keymap("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<CR>", opts)
   buf_set_keymap("n", "<C-k>", "<cmd>lua vim.lsp.buf.signature_help()<CR>", opts)
   buf_set_keymap("n", "<Leader>a", "<cmd>lua vim.lsp.buf.code_action()<CR>", opts)
-  buf_set_keymap("x", "<Leader>a", "<Esc><cmd>lua vim.lsp.buf.range_code_action()<CR>", opts)
+  buf_set_keymap("x", "<Leader>a", ":'<,'>lua vim.lsp.buf.range_code_action()<CR>", opts)
   buf_set_keymap("n", "<Leader>wa", "<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>", opts)
   buf_set_keymap("n", "<Leader>wr", "<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>", opts)
   buf_set_keymap("n", "<Leader>wl", "<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>", opts)
@@ -63,7 +63,7 @@ local on_attach = function(client, bufnr)
     opts
   )
   buf_set_keymap("n", "<Leader>P", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
-  buf_set_keymap("v", "<Leader>p", "<Esc><cmd>lua vim.lsp.buf.range_formatting()<CR>", opts)
+  buf_set_keymap("v", "<Leader>p", ":'<,'>lua vim.lsp.buf.range_formatting()<CR>", opts)
   buf_set_keymap("n", "<Leader>l", "<cmd>lua vim.lsp.codelens.run()<CR>", opts)
 
   -- vim already has builtin docs
@@ -142,6 +142,18 @@ local function get_config(server_name)
       ".git"
     )
   end
+  if server_name == "ltex" then
+    config.settings = {
+      ltex = {
+        additionalRules = {
+          motherTongue = "de-DE",
+        },
+        disabledRules = {
+          ["en-US"] = { "MORFOLOGIK_RULE_EN_US" }, -- possible spelling mistakes, I prefer vim's spell
+        },
+      },
+    }
+  end
 
   return config
 end
@@ -180,11 +192,12 @@ local function setup_zk(config)
   commands.add("ZkRecents", make_edit_fn({ createdAfter = "2 weeks ago" }, { title = "Zk Recents" }))
 
   vim.api.nvim_set_keymap("n", "<Leader>zc", "<cmd>ZkNew<CR>", { noremap = true })
-  vim.api.nvim_set_keymap("x", "<Leader>zc", ":'<'>ZkNewFromTitleSelection<CR>", { noremap = true })
+  vim.api.nvim_set_keymap("x", "<Leader>zc", ":'<,'>ZkNewFromTitleSelection<CR>", { noremap = true })
   vim.api.nvim_set_keymap("n", "<Leader>zn", "<cmd>ZkNotes<CR>", { noremap = true })
   vim.api.nvim_set_keymap("n", "<Leader>zb", "<cmd>ZkBacklinks<CR>", { noremap = true })
   vim.api.nvim_set_keymap("n", "<Leader>zl", "<cmd>ZkLinks<CR>", { noremap = true })
   vim.api.nvim_set_keymap("n", "<Leader>zt", "<cmd>ZkTags<CR>", { noremap = true })
+  vim.api.nvim_set_keymap("x", "<Leader>zm", ":'<,'>ZkMatch<CR>", { noremap = true })
 
   require("telescope").load_extension("zk")
 end
@@ -266,13 +279,13 @@ require("null-ls").setup({
     -- require("null-ls").builtins.diagnostics.codespell,
     require("null-ls").builtins.diagnostics.cppcheck,
     -- require("null-ls").builtins.diagnostics.flake8,
-    require("null-ls").builtins.diagnostics.proselint,
+    -- require("null-ls").builtins.diagnostics.proselint,
     require("null-ls").builtins.diagnostics.selene,
     require("null-ls").builtins.diagnostics.shellcheck,
     require("null-ls").builtins.diagnostics.vint,
     -- require("null-ls").builtins.diagnostics.write_good,
 
-    require("null-ls").builtins.code_actions.proselint,
+    -- require("null-ls").builtins.code_actions.proselint,
   }),
 })
 
