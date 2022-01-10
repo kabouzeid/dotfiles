@@ -147,7 +147,6 @@ vim.g.nvim_tree_icons = {
     symlink = icons.get("file-submodule"),
     symlink_open = icons.get("file-submodule"),
   },
-  lsp = { error = "", warning = "", info = "", hint = "" },
 }
 
 vim.g.nvim_tree_group_empty = 1
@@ -163,40 +162,21 @@ require("nvim-tree").setup({
   -- updates the root directory of the tree on `DirChanged` (when your run `:cd` usually)
   update_cwd = true,
   -- show lsp diagnostics in the signcolumn
-  diagnostics = { enable = true },
+  diagnostics = {
+    enable = true,
+    icons = {
+      hint = icons.get("comment"),
+      info = icons.get("info"),
+      warning = icons.get("alert"),
+      error = icons.get("x-circle"),
+    },
+  },
 })
 
 -- disable nvim tree autocmds --- they are buggy
 vim.cmd("augroup NvimTreeView")
 vim.cmd("au!")
 vim.cmd("augroup END")
-
--- vim.cmd([[highlight NvimTreeGitDirty guifg=]] .. vim.g.terminal_color_11) -- orange
--- vim.cmd([[highlight NvimTreeGitMerge guifg=]] .. vim.g.terminal_color_9) -- dark red
--- vim.cmd [[highlight link NvimTreeCursorLine CurrentWord]]
--- vim.cmd [[highlight link NvimTreeFolderName NONE]]
--- vim.cmd [[highlight link NvimTreeEmptyFolderName NONE]]
--- vim.cmd([[highlight NvimTreeFolderName guifg=]] .. vim.g.terminal_color_4) -- blue
--- vim.cmd([[highlight NvimTreeEmptyFolderName guifg=]] .. vim.g.terminal_color_4) -- blue
-
--- function _G.auto_refresh_nvim_tree()
---   local tree = require "nvim-tree.lib"
---   if _G.nvim_tree_refresh_timer_id and
---       not vim.tbl_isempty(vim.fn.timer_info(_G.nvim_tree_refresh_timer_id)) then
---     return
---   end
---   _G.nvim_tree_refresh_timer_id = vim.fn.timer_start(2000, function(_)
---     if tree.win_open() then
---       tree.refresh_tree()
---     else
---       vim.fn.timer_stop(_G.nvim_tree_refresh_timer_id)
---       _G.nvim_tree_refresh_timer_id = nil
---     end
---   end, { ["repeat"] = -1 })
--- end
--- vim.cmd [[augroup nvimtree]]
--- vim.cmd [[autocmd Filetype NvimTree lua auto_refresh_nvim_tree()]]
--- vim.cmd [[augroup END]]
 
 vim.cmd("nnoremap <leader>tt <cmd>NvimTreeToggle<cr>")
 vim.cmd("nnoremap <leader>tf <cmd>NvimTreeFindFile<cr>")
