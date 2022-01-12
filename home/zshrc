@@ -58,6 +58,8 @@ if [ "$TERM" = "xterm-kitty" ] && whence kitty &>/dev/null; then
     alias ssh="kitty +kitten ssh"
     alias icat="kitty +kitten icat"
     alias diff="kitty +kitten diff"
+elif [ "$TERM" = "foot" ]; then
+    alias ssh="TERM=xterm-256color ssh"
 fi
 
 if has xdg-open && has setsid; then
@@ -65,7 +67,12 @@ if has xdg-open && has setsid; then
 fi
 
 if has op; then
-    alias ops="eval \$(op signin my)"
+    function op-session() {
+        eval "$(op signin)"
+    }
+    function op-exec() {
+        op "$@" --session="$(op signin my --raw)"
+    }
 fi
 
 # Allow local customizations in the ~/.zshrc_local file
