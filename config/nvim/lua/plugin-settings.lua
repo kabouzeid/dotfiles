@@ -88,7 +88,11 @@ vim.cmd([[
 
 -- treesitter {{{
 
-require("nvim-treesitter.configs").setup({ highlight = { enable = true }, indent = { enable = true } })
+require("nvim-treesitter.configs").setup({
+  ensure_installed = "maintained",
+  highlight = { enable = true, additional_vim_regex_highlighting = { "markdown" } },
+  indent = { enable = true },
+})
 
 -- }}}
 

@@ -53,13 +53,7 @@ augroup auto_filetypes
   " autocmd Filetype tex set conceallevel=1
 
   autocmd Filetype markdown setlocal spell
-  " markdownWikiLink is a new region
-  autocmd Filetype markdown syn region markdownWikiLink matchgroup=markdownLinkDelimiter start="\[\[" end="\]\]" contains=markdownUrl keepend oneline concealends
-  " markdownLinkText is copied from runtime files with 'concealends' appended
-  autocmd Filetype markdown syn region markdownLinkText matchgroup=markdownLinkTextDelimiter start="!\=\[\%(\%(\_[^][]\|\[\_[^][]*\]\)*]\%( \=[[(]\)\)\@=" end="\]\%( \=[[(]\)\@=" nextgroup=markdownLink,markdownId skipwhite contains=@markdownInline,markdownLineStart concealends
-  " markdownLink is copied from runtime files with 'conceal' appended
-  autocmd Filetype markdown syn region markdownLink matchgroup=markdownLinkDelimiter start="(" end=")" contains=markdownUrl keepend contained conceal
-  autocmd Filetype markdown setlocal conceallevel=2
+  autocmd FileType markdown setlocal conceallevel=2
 
   autocmd Filetype text setlocal spell
 
