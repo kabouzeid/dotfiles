@@ -18,6 +18,7 @@
 [user]
 	name = Karim Abou Zeid
 	email = karim23697@gmail.com
+	signingkey = 92DD7D5DF14928AF
 [pull]
 	ff = only
 [init]
