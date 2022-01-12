@@ -324,6 +324,9 @@ gaps inner 10
 
 default_border pixel 2
 
+for_window [class="1Password"] floating enable
+for_window [app_id="com.github.johnfactotum.QuickLookup"] floating enable
+
 include rose-pine.theme
 
 client.focused $focus_color $focus_color $title_color $focus_color $focus_color
