@@ -75,6 +75,14 @@ if has op; then
     }
 fi
 
+if has lazygit; then
+    alias lzg="lazygit"
+fi
+
+if has lazydocker; then
+    alias lzd="lazydocker"
+fi
+
 # Allow local customizations in the ~/.zshrc_local file
 if [ -r "$HOME"/.zshrc_local ]; then
     source "$HOME"/.zshrc_local

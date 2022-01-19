@@ -407,9 +407,7 @@ vim.g["gtfo#terminals"] = { unix = "kitty", mac = "kitty" }
 
 -- VimTeX {{{
 
-if vim.fn.has("macunix") then
-  vim.g.vimtex_view_method = "skim"
-end
+vim.g.vimtex_view_method = (vim.fn.has("macunix") == 1) and "skim" or "zathura"
 vim.g.vimtex_quickfix_open_on_warning = 0
 
 -- }}}
@@ -474,5 +472,11 @@ require("nvim-lsp-installer").settings({
     },
   },
 })
+
+-- }}}
+
+-- lazygit {{{
+
+vim.cmd("nnoremap <silent> <leader>gg :LazyGit<CR>")
 
 -- }}}
