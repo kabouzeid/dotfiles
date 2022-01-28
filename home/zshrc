@@ -1,22 +1,22 @@
 has() {
-  command -v "$1" 1>/dev/null 2>&1
+    command -v "$1" 1>/dev/null 2>&1
 }
 
 if [ -r /usr/share/zsh/share/antigen.zsh ]; then
-  source /usr/share/zsh/share/antigen.zsh
+    source /usr/share/zsh/share/antigen.zsh
 elif [ -r "$HOME"/.local/share/zsh/share/antigen.zsh ]; then
-  source "$HOME"/.local/share/zsh/share/antigen.zsh
+    source "$HOME"/.local/share/zsh/share/antigen.zsh
 fi
 
 if has antigen; then
-  antigen use oh-my-zsh
-  antigen bundle git
-  antigen bundle colored-man-pages
+    antigen use oh-my-zsh
+    antigen bundle git
+    antigen bundle colored-man-pages
 
-  antigen bundle zsh-users/zsh-syntax-highlighting
-  antigen bundle zsh-users/zsh-autosuggestions
+    antigen bundle zsh-users/zsh-syntax-highlighting
+    antigen bundle zsh-users/zsh-autosuggestions
 
-  antigen apply
+    antigen apply
 fi
 
 # set PATH so it includes user's private bin if it exists
@@ -44,11 +44,11 @@ if has zoxide; then
 fi
 
 if has nvim; then
-  export EDITOR='nvim'
+    export EDITOR='nvim'
 elif has vim; then
-  export EDITOR='vim'
+    export EDITOR='vim'
 elif has vi; then
-  export EDITOR='vi'
+    export EDITOR='vi'
 fi
 
 alias e=\"\$EDITOR\"
@@ -81,6 +81,10 @@ fi
 
 if has lazydocker; then
     alias lzd="lazydocker"
+fi
+
+if has swayhide; then
+    alias hide="swayhide"
 fi
 
 # Allow local customizations in the ~/.zshrc_local file

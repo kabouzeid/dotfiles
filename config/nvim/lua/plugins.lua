@@ -7,6 +7,7 @@ require("packer").startup(function(use)
 
   -- LSP
   use("neovim/nvim-lspconfig")
+  -- use("~/Code/nvim-lspconfig")
   use("williamboman/nvim-lsp-installer")
   use("kosayoda/nvim-lightbulb")
   use("folke/lsp-trouble.nvim")
@@ -80,6 +81,7 @@ require("packer").startup(function(use)
   -- UI
   use("nvim-lualine/lualine.nvim")
   use("folke/zen-mode.nvim")
+  use("folke/twilight.nvim")
   use("akinsho/nvim-toggleterm.lua")
 
   -- Telescope

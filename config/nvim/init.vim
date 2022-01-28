@@ -12,7 +12,7 @@ let g:rose_pine_variant = 'moon'
 colorscheme rose-pine
 syntax enable
 
-set guifont=JetBrains\ Mono,nonicons,codicon,Symbols-1000-em\ Nerd\ Font\ Complete:h11
+set guifont=JetBrains\ Mono,nonicons,Symbols\ Nerd\ Font:h11
 
 set tabstop=2
 set shiftwidth=0 " 0 => use same value as tabstop

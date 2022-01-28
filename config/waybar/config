@@ -1,6 +1,13 @@
 {
-    "position": "bottom", 
-    "modules-center": ["sway/workspaces", "sway/mode", "pulseaudio", "clock#date", "clock#time"],
+    "position": "bottom",
+    "modules-center": [
+        "sway/workspaces",
+        "sway/mode",
+        // "custom/notification",
+        "pulseaudio",
+        "clock#date",
+        "clock#time"
+    ],
     // Modules configuration
     "sway/workspaces": {
         "disable-scroll": true,
@@ -38,12 +45,12 @@
         "on-click": "gnome-calendar",
         // https://howardhinnant.github.io/date/date.html#to_stream_formatting
         "format": "<span font='Symbols Nerd Font 16px' fallback='false'></span> {:%a %b %d}",
-        "tooltip-format": "<span font='16px'>{:%Y %B}\n\n<tt>{calendar}</tt></span>",
+        "tooltip-format": "<span font='16px'>{:%Y %B}\n\n<tt>{calendar}</tt></span>"
     },
     "clock#time": {
         "on-click": "gnome-clocks",
         "format": "<span font='Symbols Nerd Font 16px' fallback='false'></span> {:%H:%M}",
-        "tooltip": false,
+        "tooltip": false
     },
     "pulseaudio": {
         "on-click": "pavucontrol",
@@ -51,7 +58,23 @@
         "format-muted": "<span font='Symbols Nerd Font 16px' fallback='false'>婢</span> {volume}%",
         "format-icons": {
             "default": "墳"
+        }
+    },
+    "custom/notification": {
+        "tooltip": false,
+        "format": "{icon}",
+        "format-icons": {
+            "notification": "<span font='Symbols Nerd Font 16px' fallback='false'></span>",
+            "none": "<span font='Symbols Nerd Font 16px' fallback='false'></span>",
+            "dnd-notification": "<span font='Symbols Nerd Font 16px' fallback='false'></span>",
+            "dnd-none": "<span font='Symbols Nerd Font 16px' fallback='false'></span>"
         },
+        "return-type": "json",
+        "exec-if": "which swaync-client",
+        "exec": "swaync-client -swb",
+        "on-click": "swaync-client -t -sw",
+        "on-click-right": "swaync-client -d -sw",
+        "escape": true
     }
 }
 // vim: set ft=jsonc:

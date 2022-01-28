@@ -14,7 +14,7 @@ set $down j
 set $up k
 set $right l
 # Your preferred terminal emulator
-set $term foot
+set $term kitty
 # Your preferred application launcher
 # Note: pass the final command to swaymsg so that the resulting window can be opened
 # on the original workspace that the command was run on.
@@ -68,8 +68,8 @@ set $wallpaper ~/Pictures/Wallpapers/Moon-Fishing.png
 # resumed. It will also lock your screen before your computer goes to sleep.
 
 exec swayidle -w \
-         timeout 900 'swaylock -f -i $wallpaper' \
-         timeout 930 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' \
+         timeout 1800 'swaylock -f -i $wallpaper' \
+         timeout 1860 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' \
          before-sleep 'playerctl pause' \
          before-sleep 'swaylock -f -i $wallpaper'
 
@@ -337,5 +337,15 @@ client.urgent $urgent_color $urgent_color $title_color $urgent_color $urgent_col
 font $font
 titlebar_padding 8 4
 title_align center
+
+exec swaync
+bindsym $mod+m exec swaync-client --toggle-panel --skip-wait
+# bindsym $mod+Shift+m exec swaync-client --toggle-dnd --skip-wait
+
+exec swayfloatingswitcher
+bindsym Alt+Tab exec swayfloatingswitcher-client --next
+bindsym Alt+Shift+Tab exec swayfloatingswitcher-client --previous
+
+bindsym $mod+n exec neovide
 
 include /etc/sway/config.d/*

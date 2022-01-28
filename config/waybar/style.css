@@ -66,6 +66,7 @@ tooltip {
 #battery,
 #pulseaudio,
 #network,
+#custom-notification,
 #mode,
 #workspaces {
   background-color: @base;
@@ -81,6 +82,10 @@ tooltip {
 #mode {
   background-color: @love;
   color: #0f0f0f;
+}
+
+#custom-notification {
+  color: @love;
 }
 
 #clock.date {
