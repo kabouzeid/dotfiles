@@ -154,6 +154,13 @@ local function get_config(server_name)
       },
     }
   end
+  if server_name == "jsonls" then
+    config.settings = {
+      json = {
+        schemas = require("schemastore").json.schemas(),
+      },
+    }
+  end
 
   return config
 end

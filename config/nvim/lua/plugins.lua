@@ -14,6 +14,7 @@ require("packer").startup(function(use)
   use("arkav/lualine-lsp-progress")
   use({ "jose-elias-alvarez/null-ls.nvim", requires = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" } })
   use("ii14/lsp-command")
+  use "b0o/schemastore.nvim" -- for jsonls
 
   -- Completion
   use({
