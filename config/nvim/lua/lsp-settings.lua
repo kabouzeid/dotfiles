@@ -27,48 +27,54 @@ vim.cmd("highlight default link LspCodeLensSeparator NonText")
 --- }}}
 
 --- {{{ keymaps
+
+local keymap_opts = { noremap = true, silent = true }
+vim.api.nvim_set_keymap("n", "<Leader>e", "<cmd>lua vim.diagnostic.open_float()<CR>", keymap_opts)
+vim.api.nvim_set_keymap("n", "[d", "<cmd>lua vim.diagnostic.goto_prev()<CR>", keymap_opts)
+vim.api.nvim_set_keymap("n", "]d", "<cmd>lua vim.diagnostic.goto_next()<CR>", keymap_opts)
+vim.api.nvim_set_keymap("n", "<Leader>q", "<cmd>lua vim.diagnostic.setloclist()<CR>", keymap_opts)
+
 local on_attach = function(client, bufnr)
-  local function buf_set_keymap(...)
-    vim.api.nvim_buf_set_keymap(bufnr, ...)
-  end
-  -- local function buf_set_option(...)
-  --   vim.api.nvim_buf_set_option(bufnr, ...)
-  -- end
-
-  -- buf_set_option("omnifunc", "v:lua.vim.lsp.omnifunc")
-
   -- Mappings.
-  local opts = { noremap = true, silent = true }
-  buf_set_keymap("n", "gD", "<Cmd>lua vim.lsp.buf.declaration()<CR>", opts)
-  buf_set_keymap("n", "gd", "<Cmd>lua vim.lsp.buf.definition()<CR>", opts)
-  buf_set_keymap("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<CR>", opts)
-  buf_set_keymap("n", "<C-k>", "<cmd>lua vim.lsp.buf.signature_help()<CR>", opts)
-  buf_set_keymap("n", "<Leader>a", "<cmd>lua vim.lsp.buf.code_action()<CR>", opts)
-  buf_set_keymap("x", "<Leader>a", ":'<,'>lua vim.lsp.buf.range_code_action()<CR>", opts)
-  buf_set_keymap("n", "<Leader>wa", "<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>", opts)
-  buf_set_keymap("n", "<Leader>wr", "<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>", opts)
-  buf_set_keymap("n", "<Leader>wl", "<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>", opts)
-  buf_set_keymap("n", "<Leader>D", "<cmd>lua vim.lsp.buf.type_definition()<CR>", opts)
-  buf_set_keymap("n", "<Leader>rn", "<cmd>lua vim.lsp.buf.rename()<CR>", opts)
-  buf_set_keymap("n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>", opts)
-  buf_set_keymap("n", "<Leader>e", "<cmd>lua vim.diagnostic.open_float()<CR>", opts)
-  buf_set_keymap("n", "[d", "<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>", opts)
-  buf_set_keymap("n", "]d", "<cmd>lua vim.lsp.diagnostic.goto_next()<CR>", opts)
-  buf_set_keymap("n", "<Leader>q", "<cmd>lua vim.diagnostic.setloclist()<CR>", opts)
-  buf_set_keymap(
+  vim.api.nvim_buf_set_keymap(bufnr, "n", "gD", "<Cmd>lua vim.lsp.buf.declaration()<CR>", keymap_opts)
+  vim.api.nvim_buf_set_keymap(bufnr, "n", "gd", "<Cmd>lua vim.lsp.buf.definition()<CR>", keymap_opts)
+  vim.api.nvim_buf_set_keymap(bufnr, "n", "gi", "<cmd>lua vim.lsp.buf.implementation()<CR>", keymap_opts)
+  vim.api.nvim_buf_set_keymap(bufnr, "n", "<C-k>", "<cmd>lua vim.lsp.buf.signature_help()<CR>", keymap_opts)
+  vim.api.nvim_buf_set_keymap(bufnr, "n", "<Leader>a", "<cmd>lua vim.lsp.buf.code_action()<CR>", keymap_opts)
+  vim.api.nvim_buf_set_keymap(bufnr, "x", "<Leader>a", ":'<,'>lua vim.lsp.buf.range_code_action()<CR>", keymap_opts)
+  vim.api.nvim_buf_set_keymap(bufnr, "n", "<Leader>wa", "<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>", keymap_opts)
+  vim.api.nvim_buf_set_keymap(
+    bufnr,
+    "n",
+    "<Leader>wr",
+    "<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>",
+    keymap_opts
+  )
+  vim.api.nvim_buf_set_keymap(
+    bufnr,
+    "n",
+    "<Leader>wl",
+    "<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>",
+    keymap_opts
+  )
+  vim.api.nvim_buf_set_keymap(bufnr, "n", "<Leader>D", "<cmd>lua vim.lsp.buf.type_definition()<CR>", keymap_opts)
+  vim.api.nvim_buf_set_keymap(bufnr, "n", "<Leader>rn", "<cmd>lua vim.lsp.buf.rename()<CR>", keymap_opts)
+  vim.api.nvim_buf_set_keymap(bufnr, "n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>", keymap_opts)
+  vim.api.nvim_buf_set_keymap(
+    bufnr,
     "n",
     "<Leader>p",
     -- null-ls might run prettier and blade-formatter, which should have higher precedence than formatting by html and php language servers
     "<cmd>lua vim.lsp.buf.formatting_seq_sync(nil, 1000, { 'html', 'php', 'null-ls' })<CR>",
-    opts
+    keymap_opts
   )
-  buf_set_keymap("n", "<Leader>P", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
-  buf_set_keymap("v", "<Leader>p", ":'<,'>lua vim.lsp.buf.range_formatting()<CR>", opts)
-  buf_set_keymap("n", "<Leader>l", "<cmd>lua vim.lsp.codelens.run()<CR>", opts)
+  vim.api.nvim_buf_set_keymap(bufnr, "n", "<Leader>P", "<cmd>lua vim.lsp.buf.formatting()<CR>", keymap_opts)
+  vim.api.nvim_buf_set_keymap(bufnr, "v", "<Leader>p", ":'<,'>lua vim.lsp.buf.range_formatting()<CR>", keymap_opts)
+  vim.api.nvim_buf_set_keymap(bufnr, "n", "<Leader>l", "<cmd>lua vim.lsp.codelens.run()<CR>", keymap_opts)
 
   -- vim already has builtin docs
   if vim.bo.ft ~= "vim" then
-    buf_set_keymap("n", "K", "<Cmd>lua vim.lsp.buf.hover()<CR>", opts)
+    vim.api.nvim_buf_set_keymap(bufnr, "n", "K", "<Cmd>lua vim.lsp.buf.hover()<CR>", keymap_opts)
   end
 
   -- Set autocommands conditional on server_capabilities
@@ -200,7 +206,13 @@ local function setup_zk(config)
 
   vim.api.nvim_set_keymap("n", "<Leader>zc", "<cmd>ZkNew<CR>", { noremap = true })
   vim.api.nvim_set_keymap("x", "<Leader>zc", ":'<,'>ZkNewFromTitleSelection<CR>", { noremap = true })
-  vim.api.nvim_set_keymap("n", "<Leader>zn", "<cmd>ZkNotes<CR>", { noremap = true })
+  vim.api.nvim_set_keymap("n", "<leader>zn", "<cmd>ZkNotes { sort = { 'modified' } }<CR>", { noremap = true })
+  vim.api.nvim_set_keymap(
+    "n",
+    "<leader>zf",
+    "<cmd>ZkNotes { sort = { 'modified' }, match = vim.fn.input('Search: ') }<CR>",
+    { noremap = true }
+  )
   vim.api.nvim_set_keymap("n", "<Leader>zb", "<cmd>ZkBacklinks<CR>", { noremap = true })
   vim.api.nvim_set_keymap("n", "<Leader>zl", "<cmd>ZkLinks<CR>", { noremap = true })
   vim.api.nvim_set_keymap("n", "<Leader>zt", "<cmd>ZkTags<CR>", { noremap = true })
@@ -225,11 +237,13 @@ if vim.fn.executable("pacman") == 1 then
   table.insert(servers, "cmake")
   table.insert(servers, "cssls")
   table.insert(servers, "dockerls")
+  table.insert(servers, "eslint")
   table.insert(servers, "gopls")
   table.insert(servers, "hls")
   table.insert(servers, "html")
   table.insert(servers, "intelephense")
   table.insert(servers, "jsonls")
+  table.insert(servers, "ltex")
   table.insert(servers, "pyright")
   table.insert(servers, "rust_analyzer")
   table.insert(servers, "sumneko_lua")
@@ -258,7 +272,7 @@ end
 require("nvim-lsp-installer").on_server_ready(function(server)
   if server.name == "rust_analyzer" then
     setup_rust_analyzer(server:get_default_options())
-  elseif server == "zk" then
+  elseif server.name == "zk" then
     setup_zk(server:get_default_options())
   else
     server:setup(get_config(server.name))

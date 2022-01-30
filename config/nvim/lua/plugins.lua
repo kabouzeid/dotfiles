@@ -14,7 +14,7 @@ require("packer").startup(function(use)
   use("arkav/lualine-lsp-progress")
   use({ "jose-elias-alvarez/null-ls.nvim", requires = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" } })
   use("ii14/lsp-command")
-  use "b0o/schemastore.nvim" -- for jsonls
+  use("b0o/schemastore.nvim") -- for jsonls
 
   -- Completion
   use({
@@ -131,6 +131,7 @@ require("packer").startup(function(use)
   use("folke/which-key.nvim")
   use("mickael-menu/zk-nvim")
   -- use("~/Code/zk-nvim")
+  use("nanotee/zoxide.vim")
 
   -- Experimenting
 end)

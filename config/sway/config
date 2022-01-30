@@ -346,6 +346,7 @@ exec swayfloatingswitcher
 bindsym Alt+Tab exec swayfloatingswitcher-client --next
 bindsym Alt+Shift+Tab exec swayfloatingswitcher-client --previous
 
-bindsym $mod+n exec neovide
+# hacky: for now launch via interactive zsh so that .zshrc is sourced
+bindsym $mod+n exec zsh -i -c neovide
 
 include /etc/sway/config.d/*

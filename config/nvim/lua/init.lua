@@ -1,3 +1,5 @@
+require("globals")
+
 require("plugin-settings")
 
 require("lsp-settings")
