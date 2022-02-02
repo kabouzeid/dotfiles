@@ -49,6 +49,7 @@ set $wallpaper ~/Pictures/Wallpapers/Moon-Fishing.png
 
     # output DP-1 scale 1.276
     # output DP-1 scale 1.46
+    # output DP-1 scale 1.5
     # output DP-1 scale 1.75
     output DP-1 scale 2
     # needs sway-hidpi fork

@@ -13,6 +13,7 @@ colorscheme rose-pine
 syntax enable
 
 set guifont=JetBrains\ Mono,nonicons,Symbols\ Nerd\ Font:h11
+let g:neovide_cursor_vfx_mode = 'pixiedust'
 
 set tabstop=2
 set shiftwidth=0 " 0 => use same value as tabstop
