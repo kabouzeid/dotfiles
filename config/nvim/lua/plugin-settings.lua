@@ -282,7 +282,11 @@ local function snippet_jump_status()
 end
 
 require("lualine").setup({
-  options = { theme = vim.g.colors_name },
+  options = {
+    theme = "auto",
+    -- component_separators = { left = "", right = "" },
+    -- section_separators = { left = "", right = "" },
+  },
   sections = {
     lualine_a = { "mode", snippet_jump_status },
     lualine_b = { { "branch", icon = icons.get("git-branch") }, { "diff", colored = false } },
