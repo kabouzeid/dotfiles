@@ -10,7 +10,6 @@ vim.diagnostic.config({
     prefix = "●",
   },
   float = {
-    source = true,
     border = "rounded",
   },
   severity_sort = true,
