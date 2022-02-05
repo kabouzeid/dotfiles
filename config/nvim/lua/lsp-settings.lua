@@ -206,6 +206,7 @@ local function setup_zk(config)
 
   vim.api.nvim_set_keymap("n", "<Leader>zc", "<cmd>ZkNew<CR>", { noremap = true })
   vim.api.nvim_set_keymap("x", "<Leader>zc", ":'<,'>ZkNewFromTitleSelection<CR>", { noremap = true })
+  vim.api.nvim_set_keymap("x", "<Leader>zC", ":'<,'>ZkNewFromContentSelection<CR>", { noremap = true })
   vim.api.nvim_set_keymap("n", "<leader>zn", "<cmd>ZkNotes { sort = { 'modified' } }<CR>", { noremap = true })
   vim.api.nvim_set_keymap(
     "n",

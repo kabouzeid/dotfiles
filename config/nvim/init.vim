@@ -12,9 +12,6 @@ let g:rose_pine_variant = 'moon'
 colorscheme rose-pine
 syntax enable
 
-set guifont=JetBrains\ Mono,nonicons,Symbols\ Nerd\ Font:h11
-let g:neovide_cursor_vfx_mode = 'pixiedust'
-
 set tabstop=2
 set shiftwidth=0 " 0 => use same value as tabstop
 set expandtab
@@ -38,6 +35,14 @@ set clipboard=unnamedplus
 set spelllang=en_us,de_de
 
 set hidden
+
+" }}}
+
+" GUI {{{
+
+set guifont=JetBrains\ Mono,nonicons,Symbols\ Nerd\ Font:h11
+let g:neovide_cursor_vfx_mode = 'pixiedust'
+let g:neovide_floating_opacity = 0.85
 
 " }}}
 
