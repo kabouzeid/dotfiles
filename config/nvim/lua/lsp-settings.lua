@@ -4,10 +4,17 @@
 
 -- vim.lsp.set_log_level("debug")
 
-vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
-  vim.lsp.diagnostic.on_publish_diagnostics,
-  { virtual_text = { prefix = "●" } }
-)
+vim.diagnostic.config({
+  virtual_text = {
+    severity = { min = vim.diagnostic.severity.WARN },
+    prefix = "●",
+  },
+  float = {
+    source = true,
+    border = "rounded",
+  },
+  severity_sort = true,
+})
 
 vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded" })
 vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = "rounded" })
