@@ -4,3 +4,6 @@ error_symbol = "[➜](bold red)"
 
 [git_branch]
 symbol = " "
+
+# [cmd_duration]
+# show_notifications = true

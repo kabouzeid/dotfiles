@@ -20,7 +20,7 @@ set $term kitty
 # on the original workspace that the command was run on.
 # set $menu dmenu_run | dmenu | xargs swaymsg exec --
 # set $menu rofi -show drun | xargs swaymsg exec --
-set $menu fuzzel \
+set $fuzzel_args \
             --fields="filename,name,generic,keywords" \
             --font="JetBrains Mono:size=18" \
             --terminal=$term \
@@ -33,6 +33,7 @@ set $menu fuzzel \
             --selection-text-color="e0def4ff" \
             --border-color="3f3c53ff" \
             --border-width=2
+set $menu fuzzel $fuzzel_args
 
 set $font pango:JetBrains Mono 13px
 set $wallpaper ~/Pictures/Wallpapers/Moon-Fishing.png
@@ -246,7 +247,7 @@ bindsym $mod+r mode $mode_resize
 
 set $mode_screenshot "screenshot [a]ctive [s]creen [r]egion [w]indow [o]utput [p]ipette"
 set $grimshot /usr/share/sway/scripts/grimshot
-set $pipette ~/.local/bin/pipette.sh
+set $pipette ~/.local/bin/pipette
 mode $mode_screenshot {
     # Target Currently active window.
     # a
@@ -347,6 +348,9 @@ bindsym $mod+m exec swaync-client --toggle-panel --skip-wait
 exec swayfloatingswitcher
 bindsym Alt+Tab exec swayfloatingswitcher-client --next
 bindsym Alt+Shift+Tab exec swayfloatingswitcher-client --previous
+
+set $search_docs ~/.local/bin/fuzzel_doc $fuzzel_args
+bindsym $mod+Shift+d exec $search_docs
 
 # hacky: for now launch via interactive zsh so that .zshrc is sourced
 bindsym $mod+n exec zsh -i -c neovide
