@@ -269,7 +269,7 @@ local function lsp_servers_status()
     table.insert(client_names, client.name)
   end
 
-  return icons.get("zap") .. " " .. table.concat(client_names, "|")
+  return icons.get("zap") .. " " .. table.concat(client_names, ":")
 end
 
 local function snippet_jump_status()
@@ -284,13 +284,30 @@ end
 require("lualine").setup({
   options = {
     theme = "auto",
-    -- component_separators = { left = "", right = "" },
     -- section_separators = { left = "", right = "" },
+    -- component_separators = { left = "", right = "" },
+    component_separators = { left = "|", right = "|" },
   },
   sections = {
     lualine_a = { "mode", snippet_jump_status },
-    lualine_b = { "filename" },
+    lualine_b = {
+      "filename",
+      {
+        "encoding",
+        cond = function()
+          return vim.bo.fileencoding and #vim.bo.fileencoding > 0 and vim.bo.fileencoding ~= "utf-8"
+        end,
+      },
+      {
+        "fileformat",
+        cond = function()
+          return vim.bo.fileformat ~= "unix"
+        end,
+        icons_enabled = false,
+      },
+    },
     lualine_c = { { "branch", icon = icons.get("git-branch") }, "diff" },
+
     lualine_x = {
       {
         "lsp_progress",
@@ -306,6 +323,8 @@ require("lualine").setup({
         },
         spinner_symbols = { "⣾", "⣽", "⣻", "⢿", "⡿", "⣟", "⣯", "⣷" },
       },
+    },
+    lualine_y = {
       {
         "diagnostics",
         symbols = {
@@ -316,23 +335,6 @@ require("lualine").setup({
         },
         sources = { "nvim_diagnostic" },
       },
-    },
-    lualine_y = {
-      {
-        "encoding",
-        cond = function()
-          -- when filencoding="" lualine would otherwise report utf-8 anyways
-          return vim.bo.fileencoding and #vim.bo.fileencoding > 0 and vim.bo.fileencoding ~= "utf-8"
-        end,
-      },
-      {
-        "fileformat",
-        cond = function()
-          return vim.bo.fileformat ~= "unix"
-        end,
-        icons_enabled = false,
-      },
-      { "filetype", icons_enabled = false },
     },
     lualine_z = { lsp_servers_status },
   },
