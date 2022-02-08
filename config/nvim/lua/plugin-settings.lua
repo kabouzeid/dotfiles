@@ -289,8 +289,8 @@ require("lualine").setup({
   },
   sections = {
     lualine_a = { "mode", snippet_jump_status },
-    lualine_b = { { "branch", icon = icons.get("git-branch") }, { "diff", colored = false } },
-    lualine_c = { { "filename", path = 1 } },
+    lualine_b = { "filename" },
+    lualine_c = { { "branch", icon = icons.get("git-branch") }, "diff" },
     lualine_x = {
       {
         "lsp_progress",
@@ -312,6 +312,7 @@ require("lualine").setup({
           error = icons.get("x-circle") .. " ",
           warn = icons.get("alert") .. " ",
           info = icons.get("info") .. " ",
+          hint = icons.get("comment") .. " ",
         },
         sources = { "nvim_diagnostic" },
       },
@@ -343,7 +344,15 @@ require("lualine").setup({
     lualine_y = {},
     lualine_z = {},
   },
-  extensions = { "nvim-tree" },
+  tabline = {
+    lualine_a = {},
+    lualine_b = { { "tabs", mode = 2 } },
+    lualine_c = {},
+    lualine_x = {},
+    lualine_y = {},
+    lualine_z = {},
+  },
+  extensions = { "nvim-tree", "toggleterm", "quickfix" },
 })
 
 -- }}}
