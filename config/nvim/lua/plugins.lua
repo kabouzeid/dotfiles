@@ -134,6 +134,7 @@ require("packer").startup(function(use)
   use("nanotee/zoxide.vim")
 
   -- Experimenting
+  use("danymat/neogen")
 end)
 
 vim.cmd([[
