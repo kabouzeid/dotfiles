@@ -296,6 +296,8 @@ bindsym XF86AudioMicMute exec pamixer --default-source --toggle-mute
 bindsym --locked XF86MonBrightnessDown exec brightnessctl set 5%-
 bindsym --locked XF86MonBrightnessUp exec brightnessctl set +5%
 bindsym XF86AudioPlay exec playerctl play-pause
+bindsym XF86AudioPause exec playerctl pause
+bindsym XF86AudioStop exec playerctl stop
 bindsym XF86AudioNext exec playerctl next
 bindsym XF86AudioPrev exec playerctl previous
 bindsym XF86Search exec $menu
@@ -329,7 +331,10 @@ gaps inner 10
 default_border pixel 2
 
 for_window [class="1Password"] floating enable
+for_window [class="Matplotlib"] floating enable
 for_window [app_id="com.github.johnfactotum.QuickLookup"] floating enable
+for_window [app_id="eog"] floating enable
+for_window [app_id="gnome-control-center"] floating enable
 
 include rose-pine.theme
 

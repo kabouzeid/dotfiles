@@ -5,5 +5,9 @@ error_symbol = "[➜](bold red)"
 [git_branch]
 symbol = " "
 
+[conda]
+symbol = "🐉 "
+ignore_base = false
+
 # [cmd_duration]
 # show_notifications = true
