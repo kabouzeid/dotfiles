@@ -51,8 +51,8 @@ elif has vi; then
     export EDITOR='vi'
 fi
 
-alias e=\"\$EDITOR\"
-alias v=\"\$EDITOR\"
+alias e=$EDITOR
+alias v=$EDITOR
 
 if [ "$TERM" = "xterm-kitty" ] && whence kitty &>/dev/null; then
     alias ssh="kitty +kitten ssh"
