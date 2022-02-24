@@ -335,6 +335,7 @@ for_window [class="Matplotlib"] floating enable
 for_window [app_id="com.github.johnfactotum.QuickLookup"] floating enable
 for_window [app_id="eog"] floating enable
 for_window [app_id="gnome-control-center"] floating enable
+for_window [app_id="octave-gui"] floating enable
 
 include rose-pine.theme
 

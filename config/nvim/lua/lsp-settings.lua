@@ -145,7 +145,7 @@ local function get_config(server_name)
     config.init_options = { isNeovim = true }
   end
   if server_name == "haskell" then
-    config.root_dir = require("lspconfig/util").root_pattern(
+    config.root_dir = require("lspconfig.util").root_pattern(
       "*.cabal",
       "stack.yaml",
       "cabal.project",
@@ -232,7 +232,10 @@ local function setup_zk(config)
   commands.add("ZkNewHealth", make_new_fn({ dir = "journal/health" }))
 
   commands.add("ZkDaily", make_edit_fn({ hrefs = { "journal/daily" }, sort = { "created" } }, { title = "Zk Daily" }))
-  commands.add("ZkHealth", make_edit_fn({ hrefs = { "journal/health" }, sort = { "created" } }, { title = "Zk Health" }))
+  commands.add(
+    "ZkHealth",
+    make_edit_fn({ hrefs = { "journal/health" }, sort = { "created" } }, { title = "Zk Health" })
+  )
 
   vim.api.nvim_set_keymap("n", "<Leader>zc", "<cmd>ZkNew<CR>", { noremap = true })
   vim.api.nvim_set_keymap("x", "<Leader>zc", ":'<,'>ZkNewFromTitleSelection<CR>", { noremap = true })

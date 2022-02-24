@@ -75,6 +75,8 @@ augroup END
 let mapleader = "\<Space>"
 let maplocalleader = "\<Space>"
 
+nnoremap <silent> gx :execute 'silent! !xdg-open ' . shellescape(expand('<cfile>'), 1)<CR>
+
 " }}}
 
 " utilities {{{
