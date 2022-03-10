@@ -337,6 +337,8 @@ for_window [app_id="eog"] floating enable
 for_window [app_id="gnome-control-center"] floating enable
 for_window [app_id="octave-gui"] floating enable
 
+for_window [app_id="chromium" title="DevTools*"] floating enable
+
 include rose-pine.theme
 
 client.focused $focus_color $focus_color $title_color $focus_color $focus_color

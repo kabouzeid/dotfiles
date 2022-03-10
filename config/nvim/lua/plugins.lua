@@ -75,6 +75,7 @@ require("packer").startup(function(use)
   use("tpope/vim-surround")
   use("Raimondi/delimitMate")
   use("numToStr/Comment.nvim")
+  use("JoosepAlviste/nvim-ts-context-commentstring")
 
   -- Movement
   use("ggandor/lightspeed.nvim")

@@ -92,6 +92,7 @@ require("nvim-treesitter.configs").setup({
   ensure_installed = "maintained",
   highlight = { enable = true, additional_vim_regex_highlighting = { "markdown" } },
   indent = { enable = true },
+  context_commentstring = { enable = true },
 })
 
 -- }}}
@@ -346,14 +347,6 @@ require("lualine").setup({
     lualine_y = {},
     lualine_z = {},
   },
-  tabline = {
-    lualine_a = {},
-    lualine_b = { { "tabs", mode = 2 } },
-    lualine_c = {},
-    lualine_x = {},
-    lualine_y = {},
-    lualine_z = {},
-  },
   extensions = { "nvim-tree", "toggleterm", "quickfix" },
 })
 
@@ -432,9 +425,36 @@ vim.cmd("nnoremap <C-w>z :ZenMode<CR>")
 
 -- }}}
 
--- {{{ comments.nvim
+-- {{{ Comment
 
-require("Comment").setup()
+require("Comment").setup({
+  pre_hook = function(ctx)
+    if
+      vim.tbl_contains(
+        { "typescriptreact", "javascriptreact", "jsx", "tsx", "javascript", "typescript" },
+        vim.bo.filetype
+      )
+    then
+      local U = require("Comment.utils")
+
+      -- Detemine whether to use linewise or blockwise commentstring
+      local type = ctx.ctype == U.ctype.line and "__default" or "__multiline"
+
+      -- Determine the location where to calculate commentstring from
+      local location = nil
+      if ctx.ctype == U.ctype.block then
+        location = require("ts_context_commentstring.utils").get_cursor_location()
+      elseif ctx.cmotion == U.cmotion.v or ctx.cmotion == U.cmotion.V then
+        location = require("ts_context_commentstring.utils").get_visual_start_location()
+      end
+
+      return require("ts_context_commentstring.internal").calculate_commentstring({
+        key = type,
+        location = location,
+      })
+    end
+  end,
+})
 
 -- }}}
 
@@ -513,5 +533,11 @@ require("nvim-lsp-installer").settings({
 -- lazygit {{{
 
 vim.cmd("nnoremap <silent> <leader>gg :LazyGit<CR>")
+
+-- }}}
+
+-- zoxide {{{
+
+vim.g.zoxide_hook = "pwd"
 
 -- }}}
