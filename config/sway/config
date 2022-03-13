@@ -252,28 +252,28 @@ set $pipette ~/.local/bin/pipette
 mode $mode_screenshot {
     # Target Currently active window.
     # a
-    bindsym a mode "default"; exec $grimshot --notify copy active
-    bindsym Shift+a mode "default"; exec $grimshot --notify save active
+    bindsym Shift+a mode "default"; exec $grimshot --notify copy active
+    bindsym a mode "default"; exec $grimshot --notify save active
 
     # All visible outputs.
     # s
-    bindsym s mode "default"; exec $grimshot --notify copy screen
-    bindsym Shift+s mode "default"; exec $grimshot --notify save screen
+    bindsym Shift+s mode "default"; exec $grimshot --notify copy screen
+    bindsym s mode "default"; exec $grimshot --notify save screen
 
     # Currently active output.
     # o
-    bindsym o mode "default"; exec $grimshot --notify copy output
-    bindsym Shift+o mode "default"; exec $grimshot --notify save output
+    bindsym Shift+o mode "default"; exec $glimshot --notify copy output
+    bindsym o mode "default"; exec $grimshot --notify save output
 
     # Manually select a region.
     # r
-    bindsym r mode "default"; exec $grimshot --notify copy area
-    bindsym Shift+r mode "default"; exec $grimshot --notify save area
+    bindsym Shift+r mode "default"; exec $grimshot --notify copy area
+    bindsym r mode "default"; exec $grimshot --notify save area
 
     # Manually select a window.
     # w
-    bindsym w mode "default"; exec $grimshot --notify copy window
-    bindsym Shift+w mode "default"; exec $grimshot --notify save window
+    bindsym Shift+w mode "default"; exec $grimshot --notify copy window
+    bindsym w mode "default"; exec $grimshot --notify save window
 
     # Color pipette
     # p
