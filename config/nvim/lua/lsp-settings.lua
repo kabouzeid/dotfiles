@@ -327,9 +327,8 @@ require("null-ls").setup({
   end, {
     require("null-ls").builtins.formatting.stylua,
     require("null-ls").builtins.formatting.prettier.with({
-      command = "./node_modules/.bin/prettier",
+      only_local = "node_modules/.bin",
     }),
-    require("null-ls").builtins.formatting.rustywind,
     -- require("null-ls").builtins.formatting.shellharden,
 
     -- require("null-ls").builtins.diagnostics.codespell,
