@@ -265,6 +265,10 @@ local servers = {}
 if vim.fn.executable("xcrun") == 1 or vim.fn.executable("sourcekit-lsp") == 1 then
   table.insert(servers, "sourcekit")
 end
+-- zk is never installed via lspinstaller
+if vim.fn.executable("zk") == 1 then
+  table.insert(servers, "zk")
+end
 -- when on arch, most LSPs will be installed manually
 if vim.fn.executable("pacman") == 1 then
   table.insert(servers, "bashls")
@@ -289,7 +293,6 @@ if vim.fn.executable("pacman") == 1 then
   table.insert(servers, "vimls")
   table.insert(servers, "volar")
   table.insert(servers, "yamlls")
-  table.insert(servers, "zk")
 end
 
 -- setup the servers in the table

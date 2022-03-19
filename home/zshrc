@@ -4,6 +4,8 @@ has() {
 
 if [ -r /usr/share/zsh/share/antigen.zsh ]; then
     source /usr/share/zsh/share/antigen.zsh
+elif [ -r /usr/local/share/antigen/antigen.zsh ]; then
+    source /usr/local/share/antigen/antigen.zsh
 elif [ -r "$HOME"/.local/share/zsh/share/antigen.zsh ]; then
     source "$HOME"/.local/share/zsh/share/antigen.zsh
 fi
