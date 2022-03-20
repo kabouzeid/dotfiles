@@ -33,6 +33,8 @@ fi
 
 if [ -r /usr/share/fzf/key-bindings.zsh ]; then
     source /usr/share/fzf/key-bindings.zsh
+elif [ -r /usr/local/opt/fzf/shell/key-bindings.zsh ]; then
+    source /usr/local/opt/fzf/shell/key-bindings.zsh
 elif [ -r "$HOME"/.local/share/zsh/share/fzf-key-bindings.zsh ]; then
     source "$HOME"/.local/share/zsh/share/fzf-key-bindings.zsh
 fi

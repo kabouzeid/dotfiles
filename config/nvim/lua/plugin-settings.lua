@@ -485,7 +485,7 @@ vim.cmd("command! Blame Gina blame")
 
 -- dirvish {{{
 
-vim.g.loaded_netrwPlugin = 1
+vim.g.loaded_netrwPlugin = 1 -- comment this out when need to download spell files
 vim.cmd([[
   command! -nargs=? -complete=dir Explore Dirvish <args>
   command! -nargs=? -complete=dir Sexplore belowright split | silent Dirvish <args>
