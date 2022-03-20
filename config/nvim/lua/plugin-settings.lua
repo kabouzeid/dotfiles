@@ -288,6 +288,7 @@ require("lualine").setup({
     -- section_separators = { left = "", right = "" },
     -- component_separators = { left = "", right = "" },
     component_separators = { left = "|", right = "|" },
+    globalstatus = vim.fn.has("nvim-0.7"),
   },
   sections = {
     lualine_a = { "mode", snippet_jump_status },
