@@ -123,6 +123,7 @@ require("packer").startup(function(use)
   use("rust-lang/rust.vim")
   use("simrat39/rust-tools.nvim") -- additional rust goodies, mostly lsp related
   use({ "iamcco/markdown-preview.nvim", run = "cd app && yarn install" })
+  use("fladson/vim-kitty")
 
   -- Misc
   use("tpope/vim-sleuth")
