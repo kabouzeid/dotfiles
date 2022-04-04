@@ -64,6 +64,8 @@ augroup auto_filetypes
   autocmd Filetype lspinfo setlocal nowrap
 
   autocmd Filetype NvimTree setlocal cursorline
+
+  autocmd BufRead,BufNewFile *.ff set filetype=fontforge_script
 augroup END
 
 " }}}

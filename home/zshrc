@@ -1,11 +1,13 @@
 has() {
-    command -v "$1" 1>/dev/null 2>&1
+    type "$1" &>/dev/null
 }
 
 if [ -r /usr/share/zsh/share/antigen.zsh ]; then
     source /usr/share/zsh/share/antigen.zsh
 elif [ -r /usr/local/share/antigen/antigen.zsh ]; then
     source /usr/local/share/antigen/antigen.zsh
+elif [ -r /opt/homebrew/share/antigen/antigen.zsh ]; then
+    source /opt/homebrew/share/antigen/antigen.zsh
 elif [ -r "$HOME"/.local/share/zsh/share/antigen.zsh ]; then
     source "$HOME"/.local/share/zsh/share/antigen.zsh
 fi
@@ -19,6 +21,11 @@ if has antigen; then
     antigen bundle zsh-users/zsh-autosuggestions
 
     antigen apply
+
+    if [ "$TERM" = "xterm-kitty" ]; then
+        # disable ohmyzsh titles, use kitty's shell integration instead
+        export DISABLE_AUTO_TITLE=true
+    fi
 fi
 
 # set PATH so it includes user's private bin if it exists
@@ -35,6 +42,8 @@ if [ -r /usr/share/fzf/key-bindings.zsh ]; then
     source /usr/share/fzf/key-bindings.zsh
 elif [ -r /usr/local/opt/fzf/shell/key-bindings.zsh ]; then
     source /usr/local/opt/fzf/shell/key-bindings.zsh
+elif [ -r /opt/homebrew/opt/fzf/shell/key-bindings.zsh ]; then
+    source /opt/homebrew/opt/fzf/shell/key-bindings.zsh
 elif [ -r "$HOME"/.local/share/zsh/share/fzf-key-bindings.zsh ]; then
     source "$HOME"/.local/share/zsh/share/fzf-key-bindings.zsh
 fi
@@ -58,12 +67,16 @@ fi
 alias e=$EDITOR
 alias v=$EDITOR
 
-if [ "$TERM" = "xterm-kitty" ] && whence kitty &>/dev/null; then
+if [ "$TERM" = "xterm-kitty" ] && has kitty; then
     alias ssh="kitty +kitten ssh"
     alias icat="kitty +kitten icat"
     alias diff="kitty +kitten diff"
 elif [ "$TERM" = "foot" ]; then
     alias ssh="TERM=xterm-256color ssh"
+fi
+
+if [ -r "$HOME"/.iterm2_shell_integration.zsh ]; then
+    source "$HOME"/.iterm2_shell_integration.zsh
 fi
 
 if has xdg-open && has setsid; then

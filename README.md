@@ -2,9 +2,7 @@
 
 ```bash
 # link dotfiles and install tmux-plugin-manager (tpm) and packer.nvim
-git clone https://github.com/kabouzeid/dotfiles ~/.dotfiles
-  && cd ~/.dotfiles
-  && ./install
+git clone https://github.com/kabouzeid/dotfiles ~/.dotfiles && cd ~/.dotfiles && ./install
 ```
 
 ```bash
