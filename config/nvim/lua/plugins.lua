@@ -135,6 +135,7 @@ require("packer").startup(function(use)
   use("mickael-menu/zk-nvim")
   -- use("~/Code/zk-nvim")
   use("nanotee/zoxide.vim")
+  use("trapd00r/vidir")
 
   -- Experimenting
   use("danymat/neogen")
