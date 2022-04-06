@@ -2,6 +2,10 @@ has() {
     type "$1" &>/dev/null
 }
 
+if [ -z "$LANG" ]; then
+    export LANG=en_US.UTF-8
+fi
+
 if [ -r /usr/share/zsh/share/antigen.zsh ]; then
     source /usr/share/zsh/share/antigen.zsh
 elif [ -r /usr/local/share/antigen/antigen.zsh ]; then
