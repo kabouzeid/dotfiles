@@ -122,7 +122,7 @@ require("nvim-treesitter.configs").setup({
     "regex",
     "rust",
     "svelte",
-    "swift",
+    -- "swift", -- needs tree-sitter CLI to be installed
     "toml",
     "tsx",
     "typescript",
