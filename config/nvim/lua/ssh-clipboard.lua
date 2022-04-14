@@ -5,8 +5,8 @@ if vim.env.SSH_CONNECTION ~= nil then
 
   local function paste()
     return {
-      vim.fn.split(vim.fn.getreg(''), '\n'),
-      vim.fn.getregtype('')
+      vim.fn.split(vim.fn.getreg(""), "\n"),
+      vim.fn.getregtype(""),
     }
   end
 
@@ -14,11 +14,11 @@ if vim.env.SSH_CONNECTION ~= nil then
     name = "osc52",
     copy = {
       ["+"] = copy,
-      ["*"] = copy
+      ["*"] = copy,
     },
     paste = {
       ["+"] = paste,
-      ["*"] = paste
-    }
+      ["*"] = paste,
+    },
   }
 end
