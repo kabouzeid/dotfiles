@@ -398,7 +398,10 @@ require("lualine").setup({
 
 require("zen-mode").setup({
   window = { backdrop = 1, options = { signcolumn = "no" } },
-  plugins = { tmux = true },
+  plugins = {
+    tmux = { enabled = true },
+    twilight = { enabled = false },
+  },
 })
 
 vim.cmd("nnoremap <C-w>z :ZenMode<CR>")

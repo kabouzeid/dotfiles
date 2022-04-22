@@ -6,13 +6,17 @@
 	diffFilter = delta --color-only
 [delta]
 	features = line-numbers decorations
-	syntax-theme = Monokai Extended
+	syntax-theme = base16
 	navigate = true
 [delta "decorations"]
 	commit-decoration-style = bold yellow box ul
 	file-style = bold yellow ul
 	file-decoration-style = none
 	hunk-header-decoration-style = yellow box
+[merge]
+	conflictstyle = diff3
+[diff]
+	colorMoved = default
 [alias]
 	ignore = "!gi() { curl -L -s https://www.gitignore.io/api/$@ ;}; gi"
 [user]
