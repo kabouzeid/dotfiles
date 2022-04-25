@@ -271,9 +271,15 @@ require("telescope").setup({
       },
     },
   },
+  extensions = {
+    ["ui-select"] = {
+      require("telescope.themes").get_dropdown(),
+    },
+  },
 })
 
 require("telescope").load_extension("dap")
+require("telescope").load_extension("ui-select")
 
 vim.api.nvim_set_keymap("n", "<Leader>fp", "<cmd>Telescope<cr>", { noremap = true })
 vim.api.nvim_set_keymap("n", "<Leader>ff", "<cmd>Telescope find_files<cr>", { noremap = true })

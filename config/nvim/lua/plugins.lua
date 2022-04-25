@@ -92,6 +92,7 @@ require("packer").startup(function(use)
     requires = { "nvim-lua/popup.nvim", "nvim-lua/plenary.nvim" },
   })
   use("nvim-telescope/telescope-dap.nvim")
+  use("nvim-telescope/telescope-ui-select.nvim")
   -- use { "nvim-telescope/telescope-fzf-native.nvim", run = "make" }
 
   -- Files
