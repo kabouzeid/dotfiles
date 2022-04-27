@@ -38,7 +38,7 @@ set spelllang=en_us,de_de
 
 " GUI {{{
 
-set guifont=JetBrains\ Mono,nonicons,Symbols\ Nerd\ Font:h11
+set guifont=JetBrains\ Mono\ Symbols:h13
 let g:neovide_cursor_vfx_mode = 'pixiedust'
 let g:neovide_floating_opacity = 0.85
 

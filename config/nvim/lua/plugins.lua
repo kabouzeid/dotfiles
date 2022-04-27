@@ -1,3 +1,6 @@
+require("packer").init({
+  max_jobs = 50, -- needed for iTerm2
+})
 require("packer").startup(function(use)
   use("wbthomason/packer.nvim")
 
