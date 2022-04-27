@@ -1,5 +1,4 @@
 [core]
-	excludesfile = ~/.gitignore_global
 	autocrlf = input
 	pager = delta
 [interactive]
@@ -22,10 +21,11 @@
 [user]
 	name = Karim Abou Zeid
 	email = karim23697@gmail.com
-	signingkey = 92DD7D5DF14928AF
 [pull]
 	ff = only
 [init]
 	defaultBranch = main
 [credential "https://github.com"]
 	helper = !gh auth git-credential
+[include]
+  path = config.local
