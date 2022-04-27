@@ -8,4 +8,4 @@ require("lsp-capabilities")
 
 require("dap-settings")
 
-require("ssh-clipboard")
+-- require("ssh-clipboard")
