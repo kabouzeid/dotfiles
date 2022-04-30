@@ -141,7 +141,7 @@ require("packer").startup(function(use)
   use("nanotee/zoxide.vim")
   use("trapd00r/vidir")
   use("ojroques/vim-oscyank")
-  use("vimpostor/vim-lumen")
+  -- use("vimpostor/vim-lumen")
 
   -- Experimenting
   use("danymat/neogen")
