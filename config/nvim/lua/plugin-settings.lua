@@ -592,3 +592,14 @@ vim.cmd("nnoremap <silent> <leader>gg :LazyGit<CR>")
 vim.g.zoxide_hook = "pwd"
 
 -- }}}
+
+-- mkdp {{{
+
+vim.g.mkdp_preview_options = {
+  hide_yaml_meta = 0,
+  disable_filename = 1,
+}
+
+vim.g.mkdp_page_title = "${name}"
+
+-- }}}

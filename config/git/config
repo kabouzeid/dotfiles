@@ -5,7 +5,7 @@
 	diffFilter = delta --color-only
 [delta]
 	features = line-numbers decorations
-	syntax-theme = base16
+	; syntax-theme = base16 ; works well in light/dark mode
 	navigate = true
 [delta "decorations"]
 	commit-decoration-style = bold yellow box ul

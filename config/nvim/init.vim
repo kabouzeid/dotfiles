@@ -75,7 +75,12 @@ augroup END
 let mapleader = "\<Space>"
 let maplocalleader = "\<Space>"
 
-nnoremap <silent> gx :execute 'silent! !xdg-open ' . shellescape(expand('<cfile>'), 1)<CR>
+" double expand because of environment vars
+if has('macunix')
+  nnoremap <silent> gx :execute 'silent! !open ' . shellescape(expand(expand('<cfile>')), 1)<CR>
+else
+  nnoremap <silent> gx :execute 'silent! !xdg-open ' . shellescape(expand(expand('<cfile>')), 1)<CR>
+endif
 
 " }}}
 
@@ -95,6 +100,8 @@ function! SyntaxItem()
 endfunction
 
 command! Config tabnew|tcd ~/.config/nvim|edit .
+
+command! PackerSource source ~/.config/nvim/lua/plugins.lua
 " }}}
 
 :lua require'init'
