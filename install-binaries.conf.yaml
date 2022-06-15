@@ -21,7 +21,7 @@
       wget "https://github.com/dandavison/delta/releases/download/0.12.0/delta-0.12.0-x86_64-unknown-linux-gnu.tar.gz" -O - | tar -xz;
       wget "https://github.com/jesseduffield/lazygit/releases/download/v0.33.0/lazygit_0.33.0_Linux_x86_64.tar.gz" -O - | tar -xz lazygit;
       wget "https://github.com/starship/starship/releases/download/v1.3.0/starship-x86_64-unknown-linux-gnu.tar.gz" -O - | tar -xz starship;
-      wget "https://github.com/ajeetdsouza/zoxide/releases/download/v0.8.0/zoxide-v0.8.0-x86_64-unknown-linux-musl.tar.gz" -O - | tar -xz zoxide;
+      wget "https://github.com/ajeetdsouza/zoxide/releases/download/v0.8.1/zoxide-v0.8.1-x86_64-unknown-linux-musl.tar.gz" -O - | tar -xz zoxide;
       wget "https://github.com/junegunn/fzf/releases/download/0.29.0/fzf-0.29.0-linux_amd64.tar.gz" -O - | tar -xz fzf;
       wget "https://raw.githubusercontent.com/junegunn/fzf/0.29.0/shell/key-bindings.zsh" -O fzf-key-bindings.zsh;
       wget "https://git.io/antigen" -O antigen.zsh
