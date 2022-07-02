@@ -103,6 +103,10 @@ if has swayhide; then
     alias hide="swayhide"
 fi
 
+if has "/Applications/Tailscale.app/Contents/MacOS/Tailscale"; then
+    alias tailscale="/Applications/Tailscale.app/Contents/MacOS/Tailscale"
+fi
+
 export VIDIR_EDITOR_ARGS='-c :set nolist | :set ft=vidir'
 if [ -r "$HOME"/.local/share/nvim/site/pack/packer/start/vidir/bin/vidir ]; then
     alias vidir="$HOME"/.local/share/nvim/site/pack/packer/start/vidir/bin/vidir
