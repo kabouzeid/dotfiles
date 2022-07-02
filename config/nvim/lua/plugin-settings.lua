@@ -196,38 +196,6 @@ vim.cmd([[autocmd CursorHold,CursorHoldI * lua update_lightbulb()]])
 
 -- nvim-tree {{{
 
-vim.g.nvim_tree_icons = {
-  default = icons.get("file"),
-  symlink = icons.get("file-symlink"),
-  git = {
-    -- unstaged = icons.get("diff-modified"),
-    -- staged = icons.get("check-circle"),
-    -- unmerged = icons.get("git-merge"),
-    -- renamed = icons.get("diff-renamed"),
-    -- untracked = icons.get("diff-added"),
-    -- deleted = icons.get("diff-removed"),
-    -- ignored = icons.get("diff-ignored")
-    unstaged = "M",
-    staged = "S",
-    unmerged = icons.get("git-merge"),
-    renamed = "R",
-    untracked = "U",
-    deleted = "D",
-    ignored = "I",
-  },
-  folder = {
-    default = icons.get("file-directory"),
-    open = icons.get("file-directory"),
-    empty = icons.get("file-directory-outline"),
-    empty_open = icons.get("file-directory-outline"),
-    symlink = icons.get("file-submodule"),
-    symlink_open = icons.get("file-submodule"),
-  },
-}
-
-vim.g.nvim_tree_group_empty = 1
-vim.g.nvim_tree_add_trailing = 1
-
 require("nvim-tree").setup({
   -- don't disable netrw because it's used by Neovim for downloading spell files
   disable_netrw = false,
@@ -245,6 +213,40 @@ require("nvim-tree").setup({
       info = icons.get("info"),
       warning = icons.get("alert"),
       error = icons.get("x-circle"),
+    },
+  },
+  renderer = {
+    group_empty = true,
+    add_trailing = true,
+    icons = {
+      glyphs = {
+        default = icons.get("file"),
+        symlink = icons.get("file-symlink"),
+        git = {
+          -- unstaged = icons.get("diff-modified"),
+          -- staged = icons.get("check-circle"),
+          -- unmerged = icons.get("git-merge"),
+          -- renamed = icons.get("diff-renamed"),
+          -- untracked = icons.get("diff-added"),
+          -- deleted = icons.get("diff-removed"),
+          -- ignored = icons.get("diff-ignored")
+          unstaged = "M",
+          staged = "S",
+          unmerged = icons.get("git-merge"),
+          renamed = "R",
+          untracked = "U",
+          deleted = "D",
+          ignored = "I",
+        },
+        folder = {
+          default = icons.get("file-directory"),
+          open = icons.get("file-directory"),
+          empty = icons.get("file-directory-outline"),
+          empty_open = icons.get("file-directory-outline"),
+          symlink = icons.get("file-submodule"),
+          symlink_open = icons.get("file-submodule"),
+        },
+      },
     },
   },
 })
