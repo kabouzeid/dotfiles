@@ -8,8 +8,8 @@ scriptencoding utf-8
 
 set termguicolors
 
-let g:rose_pine_variant = 'moon'
-colorscheme rose-pine
+" let g:rose_pine_variant = 'moon'
+colorscheme github_dark_default
 syntax enable
 
 set tabstop=2
@@ -53,13 +53,9 @@ augroup auto_filetypes
   autocmd!
 
   autocmd BufRead,BufNewFile *.cls set filetype=tex
-  autocmd Filetype tex setlocal spell
   " autocmd Filetype tex set conceallevel=1
 
-  autocmd Filetype markdown setlocal spell
   autocmd FileType markdown setlocal conceallevel=2
-
-  autocmd Filetype text setlocal spell
 
   autocmd Filetype lspinfo setlocal nowrap
 

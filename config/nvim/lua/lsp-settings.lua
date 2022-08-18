@@ -155,13 +155,17 @@ local function get_config(server_name)
     )
   end
   if server_name == "ltex" then
+    config.on_attach = function(client, bufnr)
+      on_attach(client, bufnr)
+      require("ltex_extra").setup({
+        load_langs = { "en-US", "de-DE" },
+        path = vim.fn.stdpath("data") .. "/ltex",
+      })
+    end
     config.settings = {
       ltex = {
         additionalRules = {
           motherTongue = "de-DE",
-        },
-        disabledRules = {
-          ["en-US"] = { "MORFOLOGIK_RULE_EN_US" }, -- possible spelling mistakes, I prefer vim's spell
         },
       },
     }
