@@ -52,7 +52,7 @@
 - link:
     ~/.local/bin/bat:
       path: ~/.local/share/packages/bat-v0.21.0-x86_64-unknown-linux-gnu/bat
-    ~/.local/share/man/man1/fd.1:
+    ~/.local/share/man/man1/bat.1:
       path: ~/.local/share/packages/bat-v0.21.0-x86_64-unknown-linux-gnu/bat.1
 
 - link:
