@@ -41,6 +41,7 @@ set spelllang=en_us,de_de
 set guifont=JetBrains\ Mono\ Symbols:h13
 let g:neovide_cursor_vfx_mode = 'pixiedust'
 let g:neovide_floating_opacity = 0.85
+let g:neovide_background_color = synIDattr(synIDtrans(hlID("Normal")), "bg#")
 
 " }}}
 
