@@ -85,3 +85,6 @@ resources/singular_resourcesconfig.h
 
 # cquery & clangd
 compile_flags.txt
+
+# pyenv
+.python-version
