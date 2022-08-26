@@ -1,16 +1,16 @@
 # 🏠 dotfiles
-
 ```bash
-# link dotfiles and install tmux-plugin-manager (tpm) and packer.nvim
+# download and link dotfiles
 git clone https://github.com/kabouzeid/dotfiles ~/.dotfiles && cd ~/.dotfiles && ./install
 ```
 
+## Optional
 ```bash
-# (optional) download and link common programs
+# download and link some binaries such as nvim, fd, rg, ...
 ./install -vv -c install-binaries.conf.yaml
 ```
 
 ```bash
-# (optional) link bundled fonts (symbol fonts for neovim)
+# link patched symbol fonts
 ./install -c install-fonts.conf.yaml
 ```
