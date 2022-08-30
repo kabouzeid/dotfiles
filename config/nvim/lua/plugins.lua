@@ -10,13 +10,13 @@ require("packer").startup(function(use)
 
   -- LSP
   use("neovim/nvim-lspconfig")
-  -- use("~/Code/nvim-lspconfig")
-  use("williamboman/nvim-lsp-installer")
+  -- use("~/Developer/nvim-lspconfig")
+  use("williamboman/mason.nvim")
+  use("williamboman/mason-lspconfig.nvim")
   use("kosayoda/nvim-lightbulb")
   use("folke/lsp-trouble.nvim")
   use("arkav/lualine-lsp-progress")
   use({ "jose-elias-alvarez/null-ls.nvim", requires = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" } })
-  use("ii14/lsp-command")
   use("b0o/schemastore.nvim") -- for jsonls
   use { "barreiroleo/ltex-extra.nvim" }
 

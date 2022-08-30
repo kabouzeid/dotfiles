@@ -169,6 +169,7 @@ local function get_config(server_name)
         },
       },
     }
+    config.filetypes = { "gitcommit", "plaintex", "tex" }
   end
   if server_name == "jsonls" then
     config.settings = {
@@ -183,7 +184,7 @@ end
 
 local function setup_rust_analyzer(config)
   require("rust-tools").setup({
-    server = vim.tbl_extend("force", get_config("rust_analyzer"), config or {}),
+    server = config,
     tools = {
       inlay_hints = {
         highlight = "NonText",
@@ -201,7 +202,7 @@ local function setup_zk(config)
   zk.setup({
     picker = "telescope",
     lsp = {
-      config = vim.tbl_extend("force", get_config("zk"), config or {}),
+      config = config,
     },
   })
 
@@ -264,74 +265,49 @@ end
 
 --- {{{ setup servers
 
--- setup manually installed servers
-local servers = {}
+require("mason-lspconfig").setup()
+
+local servers = {
+  "bashls",
+  "clangd",
+  "cmake",
+  "cssls",
+  "dockerls",
+  "eslint",
+  "gopls",
+  "hls",
+  "html",
+  "intelephense",
+  "jsonls",
+  "ltex",
+  "pyright",
+  "sumneko_lua",
+  "svelte",
+  "tailwindcss",
+  "texlab",
+  "tsserver",
+  "vimls",
+  "volar",
+  "yamlls",
+}
+
 if vim.fn.executable("xcrun") == 1 or vim.fn.executable("sourcekit-lsp") == 1 then
   table.insert(servers, "sourcekit")
-end
--- zk is never installed via lspinstaller
-if vim.fn.executable("zk") == 1 then
-  table.insert(servers, "zk")
-end
--- when on arch, most LSPs will be installed manually
-if vim.fn.executable("pacman") == 1 then
-  table.insert(servers, "bashls")
-  table.insert(servers, "clangd")
-  table.insert(servers, "cmake")
-  table.insert(servers, "cssls")
-  table.insert(servers, "dockerls")
-  table.insert(servers, "eslint")
-  table.insert(servers, "gopls")
-  table.insert(servers, "hls")
-  table.insert(servers, "html")
-  table.insert(servers, "intelephense")
-  table.insert(servers, "jsonls")
-  table.insert(servers, "ltex")
-  table.insert(servers, "pyright")
-  table.insert(servers, "rust_analyzer")
-  table.insert(servers, "sumneko_lua")
-  table.insert(servers, "svelte")
-  table.insert(servers, "tailwindcss")
-  table.insert(servers, "texlab")
-  table.insert(servers, "tsserver")
-  table.insert(servers, "vimls")
-  table.insert(servers, "volar")
-  table.insert(servers, "yamlls")
 end
 
 -- setup the servers in the table
 for _, server in pairs(servers) do
-  if server == "rust_analyzer" then
-    setup_rust_analyzer()
-  elseif server == "zk" then
-    setup_zk()
-  else
-    require("lspconfig")[server].setup(get_config(server))
-  end
+  require("lspconfig")[server].setup(get_config(server))
 end
 
--- setup servers installed via nvim-lsp-installer
-require("nvim-lsp-installer").on_server_ready(function(server)
-  if server.name == "rust_analyzer" then
-    setup_rust_analyzer(server:get_default_options())
-  elseif server.name == "zk" then
-    setup_zk(server:get_default_options())
-  else
-    server:setup(get_config(server.name))
-  end
-end)
+setup_rust_analyzer(get_config("rust_analyzer"))
+setup_zk(get_config("zk"))
 
 -- {{{ null-ls
 
 require("null-ls").setup({
   on_attach = on_attach,
-  sources = vim.tbl_filter(function(source)
-    if source._opts and source._opts.command then
-      return vim.fn.executable(source._opts.command) == 1 and source or nil
-    else
-      return source
-    end
-  end, {
+  sources = {
     require("null-ls").builtins.formatting.stylua,
     require("null-ls").builtins.formatting.prettier.with({
       only_local = "node_modules/.bin",
@@ -348,7 +324,7 @@ require("null-ls").setup({
     -- require("null-ls").builtins.diagnostics.write_good,
 
     -- require("null-ls").builtins.code_actions.proselint,
-  }),
+  },
 })
 
 -- }}}

@@ -571,17 +571,19 @@ vim.g.rust_fold = 1
 
 -- }}}
 
--- nvim-lsp-installer {{{
+-- mason {{{
 
-require("nvim-lsp-installer").settings({
+require("mason").setup({
   ui = {
     icons = {
-      server_installed = icons.get("check-circle"),
-      server_pending = icons.get("clock"),
-      server_uninstalled = icons.get("circle"),
+      package_installed = icons.get("check-circle"),
+      package_pending = icons.get("clock"),
+      package_uninstalled = icons.get("circle"),
     },
   },
 })
+
+require("mason").setup()
 
 -- }}}
 
