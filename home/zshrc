@@ -20,6 +20,7 @@ if has antigen; then
     antigen use oh-my-zsh
     antigen bundle git
     antigen bundle colored-man-pages
+    antigen bundle rsync
 
     antigen bundle zsh-users/zsh-syntax-highlighting
     antigen bundle zsh-users/zsh-autosuggestions
@@ -70,6 +71,10 @@ fi
 
 alias e=$EDITOR
 alias v=$EDITOR
+
+if has hx; then
+    alias hx="PATH=\"\$HOME/.local/share/nvim/mason/bin:\$PATH\" hx"
+fi
 
 if [ "$TERM" = "xterm-kitty" ] && has kitty; then
     alias ssh="kitty +kitten ssh"
