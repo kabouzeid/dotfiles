@@ -1,0 +1,7 @@
+theme = "fleetish"
+
+[editor]
+true-color = true
+
+[editor.cursor-shape]
+insert = "bar"

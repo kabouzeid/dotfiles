@@ -1,0 +1,18 @@
+[[language]]
+name = "python"
+language-server = { command = "pyright-langserver", args = ["--stdio"] }
+config = {} # somehow important for pyright to work
+formatter = { command = "black", args = ["--quiet", "-"] }
+
+[[language]]
+name = "toml"
+formatter = { command = "taplo", args = [
+  "fmt",
+  "--option",
+  "align_comments=false",
+  "-",
+] }
+
+[[language]]
+name = "markdown"
+language-server = { command = "zk", args = ["lsp"] }
