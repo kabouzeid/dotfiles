@@ -309,6 +309,7 @@ require("null-ls").setup({
   on_attach = on_attach,
   sources = {
     require("null-ls").builtins.formatting.stylua,
+    require("null-ls").builtins.formatting.black,
     require("null-ls").builtins.formatting.prettier.with({
       only_local = "node_modules/.bin",
     }),
