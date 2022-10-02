@@ -4,6 +4,8 @@ set commentary
 set ideajoin
 set ideastatusicon=gray
 
+set clipboard+=unnamed
+
 let mapleader = ' '
 
 nnoremap Y y$
@@ -18,8 +20,10 @@ map <leader>gs <Action>(GotoSuperMethod)
 map <leader>gd <Action>(GotoDeclaration)
 map <leader>gt <Action>(GotoTest)
 map <leader>gr <Action>(FindUsages)
-map e <Action>(ShowErrorDescription)
-map a <Action>(ShowIntentionActions)
+map <leader>e <Action>(ShowErrorDescription)
+map <leader>a <Action>(ShowIntentionActions)
+nmap <C-o> <Action>(Back)
+nmap <C-i> <Action>(Forward)
 
 map [c <Action>(VcsShowPrevChangeMarker)
 map ]c <Action>(VcsShowNextChangeMarker)

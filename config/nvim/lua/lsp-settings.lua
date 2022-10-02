@@ -280,6 +280,7 @@ local servers = {
   "intelephense",
   "jsonls",
   "ltex",
+  "kotlin_language_server",
   "pyright",
   "sumneko_lua",
   "svelte",
