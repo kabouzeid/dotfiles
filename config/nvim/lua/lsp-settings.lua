@@ -84,7 +84,7 @@ local on_attach = function(client, bufnr)
   end
 
   -- Set autocommands conditional on server_capabilities
-  if client.resolved_capabilities.document_highlight then
+  if client.server_capabilities.documentHighlightProvider then
     vim.api.nvim_exec(
       [[
     augroup lsp_document_highlight
@@ -97,7 +97,7 @@ local on_attach = function(client, bufnr)
     )
   end
 
-  if client.resolved_capabilities.code_lens then
+  if client.server_capabilities.codeLensProvider then
     vim.cmd([[
     augroup lsp_codelens
       autocmd! * <buffer>
