@@ -117,8 +117,7 @@ end
 
 -- config that activates keymaps and enables snippet support
 local function get_config(server_name)
-  local capabilities = vim.lsp.protocol.make_client_capabilities()
-  capabilities = require("cmp_nvim_lsp").update_capabilities(capabilities)
+  local capabilities = require("cmp_nvim_lsp").default_capabilities() -- would maybe be better to use make_client_capabilities() too
   capabilities.textDocument.colorProvider = { dynamicRegistration = false }
   local config = {
     -- enable snippet support
