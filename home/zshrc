@@ -101,7 +101,7 @@ if has lazygit; then
 fi
 
 if has lazydocker; then
-    alias lzd="lazydocker"
+    alias lzd="sudo $(which lazydocker)"
 fi
 
 if has swayhide; then
