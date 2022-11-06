@@ -32,7 +32,6 @@ set clipboard=unnamedplus
 set spelllang=en_us,de_de
 
 set wildmenu
-set wildoptions=pum,tagfile
 
 " }}}
 
