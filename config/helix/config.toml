@@ -2,6 +2,7 @@ theme = "fleetish"
 
 [editor]
 true-color = true
+line-number = "relative"
 
 [editor.cursor-shape]
 insert = "bar"
