@@ -1,21 +1,7 @@
 [core]
 	autocrlf = input
-	pager = delta
-[interactive]
-	diffFilter = delta --color-only
-[delta]
-	features = line-numbers decorations
-	; syntax-theme = base16 ; works well in light/dark mode
-	navigate = true
-[delta "decorations"]
-	commit-decoration-style = bold yellow box ul
-	file-style = bold yellow ul
-	file-decoration-style = none
-	hunk-header-decoration-style = yellow box
-[merge]
-	conflictstyle = diff3
 [diff]
-	colorMoved = default
+	external = difft
 [alias]
 	ignore = "!gi() { curl -L -s https://www.gitignore.io/api/$@ ;}; gi"
 [user]
@@ -29,8 +15,3 @@
 	helper = !gh auth git-credential
 [include]
   path = config.local
-[filter "lfs"]
-	clean = git-lfs clean -- %f
-	smudge = git-lfs smudge -- %f
-	process = git-lfs filter-process
-	required = true
