@@ -29,6 +29,10 @@ set updatetime=250
 set clipboard=unnamed
 set spelllang=en_us,de_de
 
+set number
+set relativenumber
+set cursorline
+
 set wildmenu
 
 " }}}

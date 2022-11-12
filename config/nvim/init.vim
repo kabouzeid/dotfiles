@@ -34,6 +34,10 @@ set updatetime=250
 set clipboard=unnamedplus
 set spelllang=en_us,de_de
 
+set number
+set relativenumber
+set cursorline
+
 " }}}
 
 " GUI {{{

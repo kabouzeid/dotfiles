@@ -42,7 +42,6 @@ hi Todo guifg=#f6c177 guibg=NONE
 hi Special guifg=#f6c177 guibg=NONE
 hi Label guifg=#f6c177 guibg=NONE
 hi Delimiter guifg=#f6c177 guibg=NONE
-hi CursorLineNR guifg=#f6c177 guibg=NONE
 hi Define guifg=#f6c177 guibg=NONE
 hi MoreMsg guifg=#f6c177 guibg=NONE
 hi Tag guifg=#f6c177 guibg=NONE
@@ -78,9 +77,10 @@ hi Title guifg=#e0def4
 hi Pmenu guifg=#e0def4 guibg=#706e86
 hi StatusLine gui=bold guifg=#e0def4 guibg=#706e86
 hi Comment guifg=#706e86 gui=italic
-hi CursorLine guibg=#706e86
+hi CursorLine guibg=#21202e gui=NONE cterm=NONE
+hi CursorLineNR guifg=#908caa guibg=NONE gui=NONE cterm=NONE
 hi TabLineFill gui=NONE guibg=#706e86
 hi VertSplit gui=NONE guifg=#706e86 guibg=NONE
 hi Visual gui=NONE guibg=#706e86
 hi TabLine guifg=#5045c1 guibg=#706e86 gui=NONE
-hi LineNr guifg=#5045c1 guibg=NONE
+hi LineNr guifg=#524f67 guibg=NONE
