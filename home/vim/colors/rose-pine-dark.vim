@@ -3,7 +3,7 @@ syntax reset
 let g:colors_name = "rose-pine-dark"
 set background=dark
 set t_Co=256
-hi Normal guifg=#e0def4 ctermbg=NONE guibg=NONE gui=NONE
+hi Normal guifg=#e0def4 ctermbg=NONE guibg=#191724 gui=NONE
 
 hi ErrorMsg guifg=#eb6f92 guibg=NONE
 hi WarningMsg guifg=#eb6f92 guibg=NONE
