@@ -61,9 +61,7 @@ if has zoxide; then
     eval "$(zoxide init zsh)"
 fi
 
-if has hx; then
-    export EDITOR='hx'
-elif has nvim; then
+if has nvim; then
     export EDITOR='nvim'
 elif has vim; then
     export EDITOR='vim'

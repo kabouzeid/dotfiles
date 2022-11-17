@@ -405,7 +405,18 @@ require("lualine").setup({
 -- zen-mode {{{
 
 require("zen-mode").setup({
-  window = { backdrop = 1, options = { signcolumn = "no" } },
+  window = {
+    backdrop = 1,
+    options = {
+      signcolumn = "no",
+      number = false,
+      relativenumber = false,
+      cursorline = false,
+      cursorcolumn = false,
+      foldcolumn = "0",
+      list = false,
+    },
+  },
   plugins = {
     tmux = { enabled = true },
     twilight = { enabled = false },

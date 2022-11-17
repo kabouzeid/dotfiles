@@ -33,10 +33,10 @@ set completeopt=menuone,noselect
 set updatetime=250
 set clipboard=unnamedplus
 set spelllang=en_us,de_de
-
 set number
 set relativenumber
 set cursorline
+set timeoutlen=250
 
 " }}}
 
@@ -82,6 +82,15 @@ if has('macunix')
 else
   nnoremap <silent> gx :execute 'silent! !xdg-open ' . shellescape(expand(expand('<cfile>')), 1)<CR>
 endif
+
+" Helix
+
+noremap ge G
+noremap gh 0
+noremap gl $
+noremap gs ^
+nnoremap U <C-r>
+noremap <Leader>w <C-w>
 
 " }}}
 

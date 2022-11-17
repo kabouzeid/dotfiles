@@ -48,4 +48,13 @@ set guifont=JetBrains\ Mono\ Symbols:h13
 let mapleader = "\<Space>"
 let maplocalleader = "\<Space>"
 
+" Helix
+
+noremap ge G
+noremap m v
+noremap gh 0
+noremap gl $
+noremap gs ^
+nnoremap U <C-r>
+
 " }}}

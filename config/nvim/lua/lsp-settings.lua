@@ -1,4 +1,6 @@
 -- vim:foldmethod=marker
+--
+require("neodev").setup()
 
 --- {{{ visual
 
@@ -129,10 +131,9 @@ local function get_config(server_name)
   if server_name == "sumneko_lua" then
     config.settings = {
       Lua = {
-        completion = { callSnippet = "Disable" },
+        completion = { callSnippet = "Replace" },
       },
     }
-    config = require("lua-dev").setup({ lspconfig = config })
   end
   if server_name == "sourcekit" then
     config.filetypes = { "swift", "objective-c", "objective-cpp" } -- we don't want c and cpp!

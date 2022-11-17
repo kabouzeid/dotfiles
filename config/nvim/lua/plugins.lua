@@ -113,7 +113,7 @@ require("packer").startup(function(use)
   use("kdheepak/lazygit.nvim")
 
   -- Lang
-  use("folke/lua-dev.nvim")
+  use("folke/neodev.nvim")
   use("lervag/vimtex")
   -- use("petRUShka/vim-gap")
   -- use("petRUShka/vim-magma")
