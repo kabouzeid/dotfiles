@@ -12,11 +12,10 @@ require("packer").startup(function(use)
       require("plugins.treesitter")
     end,
   })
-  use("nvim-treesitter/playground") -- treesitter debugging
+  -- use("nvim-treesitter/playground") -- treesitter debugging
 
   -- LSP
   use("neovim/nvim-lspconfig")
-  -- use("~/Developer/nvim-lspconfig")
   use({
     "williamboman/mason.nvim",
     config = function()
@@ -125,10 +124,10 @@ require("packer").startup(function(use)
 
   -- Color
   use("norcalli/nvim-colorizer.lua")
-  use("rktjmp/lush.nvim")
+  -- use("rktjmp/lush.nvim")
 
   -- Themes
-  use({ "rose-pine/neovim", as = "rose-pine" })
+  -- use({ "rose-pine/neovim", as = "rose-pine" })
   -- use "~/Code/rose-pine"
   use("projekt0n/github-nvim-theme")
   -- use("Pocco81/Catppuccino.nvim")
@@ -170,7 +169,7 @@ require("packer").startup(function(use)
   use("JoosepAlviste/nvim-ts-context-commentstring")
 
   -- Movement
-  use("ggandor/lightspeed.nvim")
+  -- use("ggandor/lightspeed.nvim")
 
   -- UI
   use({
@@ -261,7 +260,7 @@ require("packer").startup(function(use)
   use({
     "justinmk/vim-gtfo",
     config = function()
-      vim.g["gtfo#terminals"] = { unix = "kitty", mac = "kitty" }
+      vim.g["gtfo#terminals"] = { unix = "kitty", mac = "iterm" }
     end,
   })
   use("tpope/vim-eunuch")
@@ -279,69 +278,13 @@ require("packer").startup(function(use)
     "lewis6991/gitsigns.nvim",
     requires = "nvim-lua/plenary.nvim",
     config = function()
-      require("gitsigns").setup({
-        on_attach = function(bufnr)
-          local gs = package.loaded.gitsigns
-
-          local function map(mode, l, r, opts)
-            opts = opts or {}
-            opts.buffer = bufnr
-            vim.keymap.set(mode, l, r, opts)
-          end
-
-          -- Navigation
-          map("n", "]c", function()
-            if vim.wo.diff then
-              return "]c"
-            end
-            vim.schedule(function()
-              gs.next_hunk()
-            end)
-            return "<Ignore>"
-          end, { expr = true })
-
-          map("n", "[c", function()
-            if vim.wo.diff then
-              return "[c"
-            end
-            vim.schedule(function()
-              gs.prev_hunk()
-            end)
-            return "<Ignore>"
-          end, { expr = true })
-
-          -- Actions
-          map({ "n", "v" }, "<leader>hs", ":Gitsigns stage_hunk<CR>")
-          map({ "n", "v" }, "<leader>hr", ":Gitsigns reset_hunk<CR>")
-          map("n", "<leader>hS", gs.stage_buffer)
-          map("n", "<leader>hu", gs.undo_stage_hunk)
-          map("n", "<leader>hR", gs.reset_buffer)
-          map("n", "<leader>hp", gs.preview_hunk)
-          map("n", "<leader>hb", function()
-            gs.blame_line({ full = true })
-          end)
-          -- map("n", "<leader>tb", gs.toggle_current_line_blame)
-          map("n", "<leader>hd", gs.diffthis)
-          map("n", "<leader>hD", function()
-            gs.diffthis("~")
-          end)
-          -- map("n", "<leader>td", gs.toggle_deleted)
-
-          -- Text object
-          map({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>")
-        end,
-      })
+      require("plugins.gitsigns")
     end,
   })
   use("kdheepak/lazygit.nvim")
 
   -- Lang
-  use({
-    "folke/neodev.nvim",
-    config = function()
-      require("neodev").setup()
-    end,
-  })
+  use("folke/neodev.nvim")
   use({
     "lervag/vimtex",
     config = function()
@@ -416,7 +359,6 @@ require("packer").startup(function(use)
     end,
   })
   use("mickael-menu/zk-nvim")
-  -- use("~/Code/zk-nvim")
   use({
     "nanotee/zoxide.vim",
     config = function()
@@ -426,9 +368,6 @@ require("packer").startup(function(use)
   use("trapd00r/vidir")
   use("ojroques/vim-oscyank")
   -- use("vimpostor/vim-lumen")
-
-  -- Experimenting
-  use("danymat/neogen")
 end)
 
 vim.cmd([[

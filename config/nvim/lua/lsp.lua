@@ -1,5 +1,7 @@
 -- vim:foldmethod=marker
 
+require("neodev").setup() -- must be called before lspconfig
+
 local M = {}
 
 --- {{{ visual
@@ -91,7 +93,7 @@ function M.on_attach(client, bufnr)
   end
 
   if client.server_capabilities.colorProvider then
-    require("lsp-documentcolors").buf_attach(bufnr, { single_column = true })
+    require("document-color").buf_attach(bufnr)
   end
 end
 
