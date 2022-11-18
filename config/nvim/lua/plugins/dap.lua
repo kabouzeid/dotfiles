@@ -1,21 +1,29 @@
 local dap = require("dap")
 
-vim.cmd("nnoremap <silent> <leader>dc :lua require'dap'.continue()<CR>")
-vim.cmd("nnoremap <silent> <leader>dn :lua require'dap'.step_over()<CR>")
-vim.cmd("nnoremap <silent> <leader>dsi :lua require'dap'.step_into()<CR>")
-vim.cmd("nnoremap <silent> <leader>dsu :lua require'dap'.step_out()<CR>")
-vim.cmd("nnoremap <silent> <leader>db :lua require'dap'.toggle_breakpoint()<CR>")
-vim.cmd("nnoremap <silent> <leader>dB :lua require'dap'.set_breakpoint(vim.fn.input('Breakpoint condition: '))<CR>")
-vim.cmd(
-  "nnoremap <silent> <leader>dl :lua require'dap'.set_breakpoint(nil, nil, vim.fn.input('Log point message: '))<CR>"
+vim.keymap.set("n", "<leader>xc", require("dap").continue, { desc = "Continue" })
+vim.keymap.set("n", "<leader>xn", require("dap").step_over, { desc = "Step Over" })
+vim.keymap.set("n", "<leader>xsi", require("dap").step_into, { desc = "Step Into" })
+vim.keymap.set("n", "<leader>xso", require("dap").step_out, { desc = "Step Out" })
+vim.keymap.set("n", "<leader>xb", require("dap").toggle_breakpoint, { desc = "Breakpoint" })
+vim.keymap.set(
+  "n",
+  "<leader>xB",
+  ":lua require'dap'.set_breakpoint(vim.fn.input('Breakpoint condition: '))<CR>",
+  { desc = "Conditional Breakpoint" }
 )
-vim.cmd("nnoremap <silent> <leader>dr :lua require'dap'.repl.toggle()<CR>")
-vim.cmd("nnoremap <silent> <leader>dK :lua require'dap.ui.variables'.hover()<CR>")
-vim.cmd("nnoremap <silent> <leader>df :lua require'dap.ui.variables'.scopes()<CR>")
-vim.cmd("nnoremap <silent> <leader>du :lua require'dapui'.toggle()<CR>")
+vim.keymap.set(
+  "n",
+  "<leader>xl",
+  ":lua require'dap'.set_breakpoint(nil, nil, vim.fn.input('Log point message: '))<CR>",
+  { desc = "Logging Breakpoint" }
+)
+vim.keymap.set("n", "<leader>xr", require("dap").repl.toggle, { desc = "REPL" })
 
+---@diagnostic disable-next-line: missing-parameter
 require("nvim-dap-virtual-text").setup()
 require("dapui").setup()
+
+vim.keymap.set("n", "<leader>xu", require("dapui").toggle, { desc = "UI" })
 
 require("dap-python").setup("python")
 
@@ -44,6 +52,7 @@ dap.configurations.cpp = {
     runInTerminal = false,
     args = function()
       local args_string = vim.fn.input("Arguments: ")
+      ---@diagnostic disable-next-line: missing-parameter
       return vim.split(args_string, " +")
     end,
   }),

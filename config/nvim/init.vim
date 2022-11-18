@@ -2,7 +2,7 @@
 
 scriptencoding utf-8
 
-:lua require'plugins'
+:lua require("plugins")
 
 " options {{{
 
@@ -73,8 +73,8 @@ augroup END
 
 " mappings {{{
 
-let mapleader = "\<Space>"
-let maplocalleader = "\<Space>"
+let mapleader = " "
+let maplocalleader = ","
 
 " double expand because of environment vars
 if has('macunix')
@@ -89,21 +89,19 @@ noremap ge G
 noremap gh 0
 noremap gl $
 noremap gs ^
-nnoremap U <C-r>
-noremap <Leader>w <C-w>
+
+" Add undo break-points
+inoremap , ,<c-g>u
+inoremap . .<c-g>u
+inoremap ; ;<c-g>u
+
+" better indenting
+vnoremap < <gv
+vnoremap > >gv
 
 " }}}
 
 " utilities {{{
-
-function! s:tabterm(...) abort
-  if a:0 == 0
-    tabedit term://$SHELL
-  else
-    execute 'tabedit term://' . a:1
-  endif
-endfunction
-command! -nargs=? -complete=shellcmd Tabterm call <SID>tabterm(<f-args>) " eg `:Tabterm yarn dev` will open a new tab and run `yarn dev`
 
 function! SyntaxItem()
   return synIDattr(synID(line('.'),col('.'),1),'name')
@@ -114,4 +112,4 @@ command! Config tabnew|tcd ~/.config/nvim|edit .
 command! PackerSource source ~/.config/nvim/lua/plugins.lua
 " }}}
 
-:lua require'init'
+:lua require("init")
