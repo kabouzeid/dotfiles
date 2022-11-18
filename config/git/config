@@ -1,7 +1,5 @@
 [core]
 	autocrlf = input
-[diff]
-	external = difft
 [alias]
 	ignore = "!gi() { curl -L -s https://www.gitignore.io/api/$@ ;}; gi"
 [user]
@@ -10,7 +8,15 @@
 [pull]
 	ff = only
 [init]
-	defaultBranch = main
+  defaultBranch = main
+[diff]
+  tool = difftastic
+[difftool]
+  prompt = false
+[difftool "difftastic"]
+  cmd = difft "$LOCAL" "$REMOTE"
+[pager]
+  difftool = true
 [credential "https://github.com"]
 	helper = !gh auth git-credential
 [include]
