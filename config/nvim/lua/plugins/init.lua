@@ -358,7 +358,12 @@ require("packer").startup(function(use)
       require("plugins.which-key")
     end,
   })
-  use("mickael-menu/zk-nvim")
+  use({
+    "mickael-menu/zk-nvim",
+    config = function()
+      require("plugins.zk")
+    end,
+  })
   use({
     "nanotee/zoxide.vim",
     config = function()
