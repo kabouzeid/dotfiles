@@ -1,8 +1,15 @@
 local wk = require("which-key")
 
-wk.setup()
+wk.setup({
+  plugins = {
+    spelling = {
+      enabled = true,
+    },
+  },
+})
 
 wk.register({
+  ["?"] = { "<cmd>Telescope commands<cr>", "Commands" },
   ["w"] = {
     name = "+windows",
     ["w"] = { "<C-W>p", "other-window" },
@@ -62,7 +69,7 @@ wk.register({
   d = { "<cmd>TroubleToggle document_diagnostics<cr>", "Document Diagnostics" },
   D = { "<cmd>TroubleToggle workspace_diagnostics<cr>", "Workspace Diagnostics" },
   f = { "<cmd>Telescope find_files<cr>", "Files" },
-  ["/"] = { "<cmd>Telescope live_grep<cr>", "Search" },
+  ["/"] = { "<cmd>Telescope live_grep<cr>", "Search in Project" },
   b = { "<cmd>Telescope buffers<cr>", "Buffers" },
   g = { "<cmd>LazyGit<cr>", "Lazygit" },
   z = { name = "zk" },
