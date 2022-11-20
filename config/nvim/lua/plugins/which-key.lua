@@ -76,6 +76,10 @@ wk.register({
   x = { name = "dap" },
   h = { name = "hunk" },
   t = { "<cmd>NvimTreeToggle<cr>", "File Tree" },
+  q = {
+    c = { [[<cmd>lua require("persistence").load()<cr>]], "Restore Session for Current Directory" },
+    l = { [[<cmd>lua require("persistence").load({ last = true })<cr>]], "Restore Last Session" },
+  },
 }, { prefix = "<leader>" })
 
 wk.register({ g = { name = "goto" } })

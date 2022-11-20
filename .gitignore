@@ -1,5 +1,6 @@
 config/nvim/plugin/**
 config/nvim/spell/**
+config/nvim/sessions/**
 config/ranger/bookmarks
 config/ranger/history
 config/ranger/tagged
