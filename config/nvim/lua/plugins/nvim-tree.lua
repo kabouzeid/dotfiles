@@ -17,6 +17,9 @@ require("nvim-tree").setup({
       error = require("nvim-nonicons").get("x-circle"),
     },
   },
+  view = {
+    side = "right",
+  },
   renderer = {
     group_empty = true,
     add_trailing = true,
