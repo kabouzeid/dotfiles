@@ -24,7 +24,7 @@ require("nvim-treesitter.configs").setup({
     "latex",
     "lua",
     "make",
-    "markdown",
+    -- "markdown",
     "ninja",
     "php",
     "prisma",

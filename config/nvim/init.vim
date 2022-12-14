@@ -38,6 +38,9 @@ set relativenumber
 set cursorline
 set timeoutlen=250
 
+set splitright
+set splitbelow
+
 " }}}
 
 " GUI {{{

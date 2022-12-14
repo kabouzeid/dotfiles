@@ -170,6 +170,12 @@ require("packer").startup(function(use)
 
   -- Movement
   -- use("ggandor/lightspeed.nvim")
+  use({
+    "ggandor/leap.nvim",
+    config = function()
+      require("leap").add_default_mappings()
+    end,
+  })
 
   -- UI
   use({
