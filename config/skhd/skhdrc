@@ -65,17 +65,18 @@
 #
 #                                   an EOL character signifies the end of the bind.
 
-cmd + ctrl + alt + shift - i : open -a iTerm
-cmd + ctrl + alt + shift - g : open -a "Google Chrome"
-cmd + ctrl + alt + shift - v : open -a "Visual Studio Code"
-cmd + ctrl + alt + shift - o : open -a 1Password
-cmd + ctrl + alt + shift - f : open -a Finder
-cmd + ctrl + alt + shift - m : open -a Mail
-cmd + ctrl + alt + shift - n : open -a Neovide --args ~
-cmd + ctrl + alt + shift - a : open -a Music
-cmd + ctrl + alt + shift - c : open -a Calendar
-cmd + ctrl + alt + shift - r : open -a Rocket.Chat.app
-cmd + ctrl + alt + shift - p : open -a Preview
-cmd + ctrl + alt + shift - s : open -a "Soulver 3"
-cmd + ctrl + alt + shift - t : open -a Telegram
-cmd + ctrl + alt + shift - l : open -a Things3
+hyper - i : open -a iTerm
+hyper - b : open -a "Google Chrome"
+hyper - v : open -a "Visual Studio Code"
+hyper - o : open -a 1Password
+hyper - f : open -a Finder
+hyper - m : open -a Mail
+hyper - n : open -a Neovide --args ~
+hyper - a : open -a Music
+hyper - c : open -a Calendar
+hyper - r : open -a Rocket.Chat.app
+hyper - p : open -a Preview
+hyper - s : open -a "Soulver 3"
+hyper - t : open -a Telegram
+hyper - l : open -a Things3
+hyper - g : open -a ChatGPT
