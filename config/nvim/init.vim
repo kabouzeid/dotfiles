@@ -2,6 +2,8 @@
 
 scriptencoding utf-8
 
+let mapleader = " "
+
 :lua require("plugins")
 
 " options {{{
@@ -75,9 +77,6 @@ augroup END
 " }}}
 
 " mappings {{{
-
-let mapleader = " "
-let maplocalleader = ","
 
 " double expand because of environment vars
 if has('macunix')

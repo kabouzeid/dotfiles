@@ -1,22 +1,31 @@
-require("packer").init({
-  max_jobs = 50, -- needed for iTerm2
-})
-require("packer").startup(function(use)
-  use("wbthomason/packer.nvim")
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not vim.loop.fs_stat(lazypath) then
+  vim.fn.system({
+    "git",
+    "clone",
+    "--filter=blob:none",
+    "https://github.com/folke/lazy.nvim.git",
+    "--branch=stable", -- latest stable release
+    lazypath,
+  })
+end
+vim.opt.rtp:prepend(lazypath)
 
+require("lazy").setup({
   -- Treesitter
-  use({
+  ---@diagnostic disable-next-line: assign-type-mismatch
+  {
     "nvim-treesitter/nvim-treesitter",
-    run = ":TSUpdate",
+    build = ":TSUpdate",
     config = function()
       require("plugins.treesitter")
     end,
-  })
+  },
   -- use("nvim-treesitter/playground") -- treesitter debugging
 
   -- LSP
-  use("neovim/nvim-lspconfig")
-  use({
+  { "neovim/nvim-lspconfig" },
+  {
     "williamboman/mason.nvim",
     config = function()
       require("mason").setup({
@@ -29,21 +38,20 @@ require("packer").startup(function(use)
         },
       })
     end,
-  })
-  use({
+  },
+  {
     "williamboman/mason-lspconfig.nvim",
-    after = "mason.nvim",
     config = function()
       require("mason-lspconfig").setup()
     end,
-  })
-  use({
+  },
+  {
     "kosayoda/nvim-lightbulb",
     config = function()
       require("nvim-lightbulb").setup({ autocmd = { enabled = true } })
     end,
-  })
-  use({
+  },
+  {
     "folke/lsp-trouble.nvim",
     config = function()
       require("trouble").setup({
@@ -56,33 +64,33 @@ require("packer").startup(function(use)
         },
       })
     end,
-  })
-  use("arkav/lualine-lsp-progress")
-  use({
+  },
+  { "arkav/lualine-lsp-progress" },
+  {
     "jose-elias-alvarez/null-ls.nvim",
-    requires = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
+    dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
     config = function()
       require("plugins.null-ls")
     end,
-  })
-  use("b0o/schemastore.nvim") -- for jsonls
-  use({ "barreiroleo/ltex-extra.nvim" })
-  use({
+  },
+  { "b0o/schemastore.nvim" }, -- for jsonls
+  { "barreiroleo/ltex-extra.nvim" },
+  {
     "mrshmllow/document-color.nvim",
     config = function()
       require("document-color").setup({
         mode = "single",
       })
     end,
-  })
+  },
 
   -- Completion
-  use({
+  {
     "hrsh7th/nvim-cmp",
-    requires = {
+    dependencies = {
       {
         "hrsh7th/vim-vsnip",
-        requires = "kitagry/vs-snippets",
+        dependencies = "kitagry/vs-snippets",
         config = function()
           vim.cmd([[
   imap <expr> <Tab>   vsnip#jumpable(1)  ? '<Plug>(vsnip-jump-next)' : '<Tab>'
@@ -109,31 +117,31 @@ require("packer").startup(function(use)
     config = function()
       require("plugins.cmp")
     end,
-  })
+  },
 
   -- DAP
-  use({
+  {
     "mfussenegger/nvim-dap",
     config = function()
       require("plugins.dap")
     end,
-  })
-  use({ "theHamsta/nvim-dap-virtual-text", requires = "mfussenegger/nvim-dap" })
-  use({ "rcarriga/nvim-dap-ui", requires = "mfussenegger/nvim-dap" })
-  use({ "mfussenegger/nvim-dap-python", requires = "mfussenegger/nvim-dap" })
+  },
+  { "theHamsta/nvim-dap-virtual-text", dependencies = "mfussenegger/nvim-dap" },
+  { "rcarriga/nvim-dap-ui", dependencies = "mfussenegger/nvim-dap" },
+  { "mfussenegger/nvim-dap-python", dependencies = "mfussenegger/nvim-dap" },
 
   -- Color
-  use("norcalli/nvim-colorizer.lua")
+  { "norcalli/nvim-colorizer.lua" },
   -- use("rktjmp/lush.nvim")
 
   -- Themes
   -- use({ "rose-pine/neovim", as = "rose-pine" })
   -- use "~/Code/rose-pine"
-  use("projekt0n/github-nvim-theme")
+  { "projekt0n/github-nvim-theme" },
   -- use("Pocco81/Catppuccino.nvim")
   -- use("bluz71/vim-moonfly-colors")
-  -- use({ "kabouzeid/nvim-jellybeans", requires = "rktjmp/lush.nvim" })
-  -- use { "~/Code/nvim-jellybeans", requires = "rktjmp/lush.nvim" }
+  -- use({ "kabouzeid/nvim-jellybeans", dependencies = "rktjmp/lush.nvim" })
+  -- use { "~/Code/nvim-jellybeans", dependencies = "rktjmp/lush.nvim" }
   -- use("sainnhe/sonokai")
   -- use("sainnhe/edge")
   -- use("sainnhe/everforest")
@@ -149,42 +157,43 @@ require("packer").startup(function(use)
   -- use("crusoexia/vim-monokai")
   -- use("rakr/vim-one")
   -- use("joshdick/onedark.vim")
-  -- use({ "olimorris/onedark.nvim", requires = "rktjmp/lush.nvim" })
-  -- use({ "alaric/nortia.nvim", requires = "rktjmp/lush.nvim" })
+  -- use({ "olimorris/onedark.nvim", dependencies = "rktjmp/lush.nvim" })
+  -- use({ "alaric/nortia.nvim", dependencies = "rktjmp/lush.nvim" })
   -- use("junegunn/seoul256.vim")
   -- use("mhartington/oceanic-next")
   -- use("saltdotac/citylights.vim")
 
   -- Edit
-  use("tpope/vim-surround")
-  use("Raimondi/delimitMate")
-  use({
+  { "tpope/vim-surround" },
+  { "Raimondi/delimitMate" },
+  {
     "numToStr/Comment.nvim",
     config = function()
       require("Comment").setup({
         pre_hook = require("ts_context_commentstring.integrations.comment_nvim").create_pre_hook(),
       })
     end,
-  })
-  use("JoosepAlviste/nvim-ts-context-commentstring")
+  },
+  { "JoosepAlviste/nvim-ts-context-commentstring" },
 
   -- Movement
   -- use("ggandor/lightspeed.nvim")
-  use({
+  {
     "ggandor/leap.nvim",
     config = function()
       require("leap").add_default_mappings()
+      require("leap").opts.safe_labels = {} -- disable auto jumping
     end,
-  })
+  },
 
   -- UI
-  use({
+  {
     "nvim-lualine/lualine.nvim",
     config = function()
       require("plugins.lualine")
     end,
-  })
-  use({
+  },
+  {
     "folke/zen-mode.nvim",
     config = function()
       require("zen-mode").setup({
@@ -206,19 +215,19 @@ require("packer").startup(function(use)
         },
       })
     end,
-  })
-  use("folke/twilight.nvim")
-  use({
+  },
+  { "folke/twilight.nvim" },
+  {
     "akinsho/nvim-toggleterm.lua",
     config = function()
       require("toggleterm").setup({ open_mapping = [[<c-\>]] })
     end,
-  })
+  },
 
   -- Telescope
-  use({
+  {
     "nvim-telescope/telescope.nvim",
-    requires = { "nvim-lua/popup.nvim", "nvim-lua/plenary.nvim" },
+    dependencies = { "nvim-lua/popup.nvim", "nvim-lua/plenary.nvim" },
     config = function()
       local actions = require("telescope.actions")
       require("telescope").setup({
@@ -236,23 +245,23 @@ require("packer").startup(function(use)
         },
       })
     end,
-  })
-  use({
+  },
+  {
     "nvim-telescope/telescope-dap.nvim",
     config = function()
       require("telescope").load_extension("dap")
     end,
-  })
-  use({
+  },
+  {
     "nvim-telescope/telescope-ui-select.nvim",
     config = function()
       require("telescope").load_extension("ui-select")
     end,
-  })
+  },
   -- use { "nvim-telescope/telescope-fzf-native.nvim", run = "make" }
 
   -- Files
-  use({
+  {
     "justinmk/vim-dirvish",
     config = function()
       vim.g.loaded_netrwPlugin = 1 -- comment this out when need to download spell files
@@ -262,36 +271,36 @@ require("packer").startup(function(use)
   command! -nargs=? -complete=dir Vexplore leftabove vsplit | silent Dirvish <args>
 ]])
     end,
-  })
-  use({
+  },
+  {
     "justinmk/vim-gtfo",
     config = function()
       vim.g["gtfo#terminals"] = { unix = "kitty", mac = "iterm" }
     end,
-  })
-  use("tpope/vim-eunuch")
-  use({
+  },
+  { "tpope/vim-eunuch" },
+  {
     "kyazdani42/nvim-tree.lua",
     config = function()
       require("plugins.nvim-tree")
     end,
-  })
-  use("kyazdani42/nvim-web-devicons")
-  use("yamatsum/nvim-nonicons")
+  },
+  { "kyazdani42/nvim-web-devicons" },
+  { "yamatsum/nvim-nonicons" },
 
   -- Git
-  use({
+  {
     "lewis6991/gitsigns.nvim",
-    requires = "nvim-lua/plenary.nvim",
+    dependencies = "nvim-lua/plenary.nvim",
     config = function()
       require("plugins.gitsigns")
     end,
-  })
-  use("kdheepak/lazygit.nvim")
+  },
+  { "kdheepak/lazygit.nvim" },
 
   -- Lang
-  use("folke/neodev.nvim")
-  use({
+  { "folke/neodev.nvim" },
+  {
     "lervag/vimtex",
     config = function()
       vim.g.vimtex_view_method = (vim.fn.has("macunix") == 1) and "skim" or "zathura"
@@ -299,17 +308,17 @@ require("packer").startup(function(use)
       vim.g.vimtex_syntax_enabled = 0
       vim.g.vimtex_syntax_conceal_disable = 1
     end,
-  })
+  },
   -- use("petRUShka/vim-gap")
   -- use("petRUShka/vim-magma")
   -- use("kabouzeid/vim-singular")
   -- use("westeri/asl-vim") -- ACPI
   -- use("tikhomirov/vim-glsl")
-  use("mattn/emmet-vim")
-  use("pest-parser/pest.vim")
-  use("jwalton512/vim-blade")
-  use("pantharshit00/vim-prisma")
-  use({
+  { "mattn/emmet-vim" },
+  { "pest-parser/pest.vim" },
+  { "jwalton512/vim-blade" },
+  { "pantharshit00/vim-prisma" },
+  {
     "evanleck/vim-svelte",
     config = function()
       vim.g.svelte_preprocessor_tags = {
@@ -317,14 +326,14 @@ require("packer").startup(function(use)
       }
       vim.g.svelte_preprocessors = { "typescript", "ts" }
     end,
-  })
-  use({
+  },
+  {
     "rust-lang/rust.vim",
     config = function()
       vim.g.rust_fold = 1
     end,
-  })
-  use({
+  },
+  {
     "simrat39/rust-tools.nvim",
     config = function()
       require("rust-tools").setup({
@@ -337,10 +346,10 @@ require("packer").startup(function(use)
         },
       })
     end,
-  }) -- additional rust goodies, mostly lsp related
-  use({
+  }, -- additional rust goodies, mostly lsp related
+  {
     "iamcco/markdown-preview.nvim",
-    run = "cd app && yarn install",
+    build = "cd app && yarn install",
     config = function()
       vim.g.mkdp_preview_options = {
         hide_yaml_meta = 0,
@@ -349,49 +358,41 @@ require("packer").startup(function(use)
 
       vim.g.mkdp_page_title = "${name}"
     end,
-  })
-  use("fladson/vim-kitty")
-  use("vim-scripts/fontforge_script.vim")
+  },
+  { "fladson/vim-kitty" },
+  { "vim-scripts/fontforge_script.vim" },
 
   -- Misc
-  use("tpope/vim-sleuth")
-  use("wincent/terminus")
-  use("tpope/vim-unimpaired")
-  use("milisims/nvim-luaref")
-  use({
+  { "tpope/vim-sleuth" },
+  { "wincent/terminus" },
+  { "tpope/vim-unimpaired" },
+  { "milisims/nvim-luaref" },
+  {
     "folke/which-key.nvim",
     config = function()
       require("plugins.which-key")
     end,
-  })
-  use({
+  },
+  {
     "mickael-menu/zk-nvim",
     config = function()
       require("plugins.zk")
     end,
-  })
-  use({
+  },
+  {
     "nanotee/zoxide.vim",
     config = function()
       vim.g.zoxide_hook = "pwd"
     end,
-  })
-  use("trapd00r/vidir")
-  use("ojroques/vim-oscyank")
+  },
+  { "trapd00r/vidir" },
+  { "ojroques/vim-oscyank" },
   -- use("vimpostor/vim-lumen")
-  use({
+  {
     "folke/persistence.nvim",
     event = "BufReadPre", -- this will only start session saving when an actual file was opened
-    module = "persistence",
     config = function()
       require("persistence").setup()
     end,
-  })
-end)
-
-vim.cmd([[
-  augroup Packer
-    autocmd!
-    autocmd BufWritePost */plugins/init.lua PackerCompile
-  augroup END
-]])
+  },
+})

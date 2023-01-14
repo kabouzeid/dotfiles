@@ -80,3 +80,4 @@ hyper - s : open -a "Soulver 3"
 hyper - t : open -a Telegram
 hyper - l : open -a Things3
 hyper - g : open -a ChatGPT
+hyper - w : open -a WhatsApp
