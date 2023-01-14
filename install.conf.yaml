@@ -16,14 +16,8 @@
 
 - shell:
   -
-    description: Installing tpm and plugins.
+    description: Installing tpm.
     command: >-
       if [ ! -e ~/.tmux/plugins/tpm ]; then
       git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm;
-      fi
-  -
-    description: Installing packer.nvim
-    command: >-
-      if [ ! -e ~/.local/share/nvim/site/pack/packer/start/packer.nvim ]; then
-      git clone --depth 1 https://github.com/wbthomason/packer.nvim ~/.local/share/nvim/site/pack/packer/start/packer.nvim;
       fi

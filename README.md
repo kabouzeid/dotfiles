@@ -6,11 +6,11 @@ git clone https://github.com/kabouzeid/dotfiles ~/.dotfiles && cd ~/.dotfiles &&
 
 ## Optional
 ```bash
-# download and link some binaries such as nvim, fd, rg, ...
+# commonly used binaries such as nvim, fd, rg, ...
 ./install -vv -c install-binaries.conf.yaml
 ```
 
 ```bash
-# link patched symbol fonts
+# patched symbol fonts
 ./install -c install-fonts.conf.yaml
 ```
