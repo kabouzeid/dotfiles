@@ -66,3 +66,5 @@ vim.keymap.set("", "<leader>", "<cmd>call VSCodeNotifyVisual('whichkey.show', 1)
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
 vim.opt.clipboard:append("unnamedplus")
+
+vim.api.nvim_create_user_command("SentenceSplit", [[s/\. /.\r/g]], { range = true })
