@@ -60,8 +60,13 @@ vim.keymap.set("n", "gcc", "<Plug>VSCodeCommentaryLine")
 -- whichkey
 vim.keymap.set("", "<leader>", "<cmd>call VSCodeNotifyVisual('whichkey.show', 1)<cr>")
 
--- TODO: unimpaired
--- TODO: ]c and ]d
+-- problems
+vim.keymap.set("", "]d", "<cmd>call VSCodeNotify('editor.action.marker.next')<cr>")
+vim.keymap.set("", "[d", "<cmd>call VSCodeNotify('editor.action.marker.prev')<cr>")
+
+-- changes
+vim.keymap.set("", "]c", "<cmd>call VSCodeNotify('workbench.action.editor.nextChange')<cr>")
+vim.keymap.set("", "[c", "<cmd>call VSCodeNotify('workbench.action.editor.previousChange')<cr>")
 
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
