@@ -72,6 +72,13 @@ fi
 alias e=$EDITOR
 alias v=$EDITOR
 
+if has nvr; then
+    if [ -n "$NVIM" ]; then
+        alias e="nvr --remote-tab"
+        alias v="nvr --remote-tab"
+    fi
+fi
+
 if has hx; then
     alias hx="PATH=\"\$HOME/.local/share/nvim/mason/bin:\$PATH\" hx"
 fi
