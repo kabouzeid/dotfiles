@@ -119,11 +119,6 @@ if has difft; then
     alias gd="git difftool"
 fi
 
-if has brew; then
-    alias bubc='brew upgrade && brew cleanup'
-    alias bubo='brew update && brew outdated'
-fi
-
 if has "/Applications/Tailscale.app/Contents/MacOS/Tailscale"; then
     alias tailscale="/Applications/Tailscale.app/Contents/MacOS/Tailscale"
 fi
