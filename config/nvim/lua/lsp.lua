@@ -112,7 +112,7 @@ function M.get_config(server_name)
     on_attach = M.on_attach,
   }
 
-  if server_name == "sumneko_lua" then
+  if server_name == "lua_ls" then
     config.settings = {
       Lua = {
         completion = { callSnippet = "Replace" },
@@ -185,7 +185,7 @@ local servers = {
   "ltex",
   "kotlin_language_server",
   "pyright",
-  "sumneko_lua",
+  "lua_ls",
   "svelte",
   "tailwindcss",
   "texlab",
