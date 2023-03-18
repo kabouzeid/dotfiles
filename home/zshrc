@@ -128,6 +128,9 @@ if [ -r "$HOME"/.local/share/nvim/site/pack/packer/start/vidir/bin/vidir ]; then
     alias vidir="$HOME"/.local/share/nvim/site/pack/packer/start/vidir/bin/vidir
 fi
 
+# alias la="ls -A"
+# alias lal="ls -alh"
+
 # export BAT_THEME=base16 # works well with dark and light mode
 
 # Allow local customizations in the ~/.zshrc_local file
