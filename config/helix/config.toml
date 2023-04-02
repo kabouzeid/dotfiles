@@ -3,6 +3,7 @@ theme = "fleet_dark"
 [editor]
 true-color = true
 line-number = "relative"
+soft-wrap.enable = true
 
 [editor.cursor-shape]
 insert = "bar"
