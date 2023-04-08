@@ -105,13 +105,8 @@ vnoremap > >gv
 
 " utilities {{{
 
-function! SyntaxItem()
-  return synIDattr(synID(line('.'),col('.'),1),'name')
-endfunction
-
 command! Config tabnew|tcd ~/.config/nvim|edit .
 
-command! PackerSource source ~/.config/nvim/lua/plugins.lua
 " }}}
 
 :lua require("init")

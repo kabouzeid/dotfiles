@@ -35,7 +35,7 @@ cmp.setup({
   },
   formatting = {
     format = function(entry, vim_item)
-      vim_item.kind = completion_item_kinds[vim_item.kind] .. " " .. vim_item.kind
+      vim_item.kind = (completion_item_kinds[vim_item.kind] or "?") .. " " .. vim_item.kind
       vim_item.menu = entry.source.name
       return vim_item
     end,
