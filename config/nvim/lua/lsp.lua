@@ -51,13 +51,7 @@ vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float, { desc = "Diagnsotic
 vim.keymap.set("n", "<leader>a", vim.lsp.buf.code_action, { desc = "Code Action" })
 vim.keymap.set("x", "<leader>a", ":'<,'>lua vim.lsp.buf.range_code_action<CR>", { desc = "Code Action (Range)" })
 vim.keymap.set("n", "<leader>r", vim.lsp.buf.rename, { desc = "Rename" })
-vim.keymap.set(
-  "n",
-  "<leader>p",
-  "<cmd>lua vim.lsp.buf.formatting_seq_sync(nil, 1000, { 'html', 'php', 'null-ls' })<CR>",
-  { desc = "Format" }
-)
-vim.keymap.set("n", "<leader>P", vim.lsp.buf.formatting, { desc = "Format Picker" })
+vim.keymap.set({"n", "x"}, "<leader>p", vim.lsp.buf.format, { desc = "Format" })
 vim.keymap.set("v", "<leader>p", ":'<,'>lua vim.lsp.buf.range_formatting<CR>", { desc = "Format Selection" })
 vim.keymap.set("n", "<leader>l", vim.lsp.codelens.run, { desc = "Run Code Lens" })
 
