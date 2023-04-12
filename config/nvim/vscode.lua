@@ -14,12 +14,14 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 vim.g.mapleader = " "
-vim.g["surround_no_mappings"] = 1
 
 require("lazy").setup({
   ---@diagnostic disable-next-line: assign-type-mismatch
   {
     "tpope/vim-surround",
+    init = function ()
+      vim.g["surround_no_mappings"] = 1
+    end,
     config = function()
       vim.keymap.set("n", "ds", "<Plug>Dsurround")
       vim.keymap.set("n", "cs", "<Plug>Csurround")
@@ -30,8 +32,8 @@ require("lazy").setup({
       vim.keymap.set("n", "ySs", "<Plug>YSsurround")
       vim.keymap.set("n", "ySS", "<Plug>YSsurround")
       -- The conflicting ones.
-      vim.keymap.set("x", "gs", "<Plug>VSurround")
-      vim.keymap.set("x", "gS", "<Plug>VgSurround")
+      vim.keymap.set("x", "z", "<Plug>VSurround")
+      vim.keymap.set("x", "Z", "<Plug>VgSurround")
     end,
   },
   {
