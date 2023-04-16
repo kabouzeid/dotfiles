@@ -147,7 +147,7 @@ require("lazy").setup({
   -- Themes
   -- use({ "rose-pine/neovim", as = "rose-pine" })
   -- use "~/Code/rose-pine"
-  { "projekt0n/github-nvim-theme" },
+  { "projekt0n/github-nvim-theme", branch = "0.0.x" },
   -- use("Pocco81/Catppuccino.nvim")
   -- use("bluz71/vim-moonfly-colors")
   -- use({ "kabouzeid/nvim-jellybeans", dependencies = "rktjmp/lush.nvim" })
@@ -176,7 +176,7 @@ require("lazy").setup({
   -- Edit
   {
     "tpope/vim-surround",
-    init = function ()
+    init = function()
       vim.g["surround_no_mappings"] = 1
     end,
     config = function()
