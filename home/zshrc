@@ -7,7 +7,7 @@ if [ -z "$LANG" ]; then
 fi
 
 if has brew; then
-    source $(brew --prefix)/opt/antidote/share/antidote/antidote.zsh
+    source "$(brew --prefix)"/opt/antidote/share/antidote/antidote.zsh
 elif [ -r /usr/share/zsh-antidote/antidote.zsh ]; then
     source /usr/share/zsh-antidote/antidote.zsh
 elif [ -r "$HOME"/.local/share/zsh-antidote/antidote.zsh ]; then
@@ -37,14 +37,10 @@ if [ -r /usr/share/fzf/key-bindings.zsh ]; then
     source /usr/share/fzf/key-bindings.zsh
 elif [ -r /usr/local/opt/fzf/shell/key-bindings.zsh ]; then
     source /usr/local/opt/fzf/shell/key-bindings.zsh
-elif [ -r /opt/homebrew/opt/fzf/shell/key-bindings.zsh ]; then
-    source /opt/homebrew/opt/fzf/shell/key-bindings.zsh
+elif has brew; then
+    source "$(brew --prefix)"/opt/fzf/shell/key-bindings.zsh
 elif [ -r "$HOME"/.local/share/zsh/share/fzf-key-bindings.zsh ]; then
     source "$HOME"/.local/share/zsh/share/fzf-key-bindings.zsh
-fi
-
-if [ -r "$HOME"/.linuxbrew/bin/brew ]; then
-    eval "$("$HOME"/.linuxbrew/bin/brew shellenv)"
 fi
 
 if has zoxide; then
