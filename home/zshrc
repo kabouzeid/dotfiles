@@ -6,26 +6,16 @@ if [ -z "$LANG" ]; then
     export LANG=en_US.UTF-8
 fi
 
-if [ -r /usr/share/zsh/share/antigen.zsh ]; then
-    source /usr/share/zsh/share/antigen.zsh
-elif [ -r /usr/local/share/antigen/antigen.zsh ]; then
-    source /usr/local/share/antigen/antigen.zsh
-elif [ -r /opt/homebrew/share/antigen/antigen.zsh ]; then
-    source /opt/homebrew/share/antigen/antigen.zsh
-elif [ -r "$HOME"/.local/share/zsh/share/antigen.zsh ]; then
-    source "$HOME"/.local/share/zsh/share/antigen.zsh
+if has brew; then
+    source $(brew --prefix)/opt/antidote/share/antidote/antidote.zsh
+elif [ -r /usr/share/zsh-antidote/antidote.zsh ]; then
+    source /usr/share/zsh-antidote/antidote.zsh
+elif [ -r "$HOME"/.local/share/zsh-antidote/antidote.zsh ]; then
+    source "$HOME"/.local/share/zsh-antidote/antidote.zsh
 fi
 
-if has antigen; then
-    antigen use oh-my-zsh
-    antigen bundle git
-    antigen bundle colored-man-pages
-    antigen bundle rsync
-
-    antigen bundle zsh-users/zsh-syntax-highlighting
-    antigen bundle zsh-users/zsh-autosuggestions
-
-    antigen apply
+if has antidote; then
+    antidote load
 
     if [ "$TERM" = "xterm-kitty" ]; then
         # disable ohmyzsh titles, use kitty's shell integration instead
@@ -101,6 +91,10 @@ fi
 
 if has op; then
     eval "$(op completion zsh)"; compdef _op op
+fi
+
+if has turm; then
+    eval "$(turm completion zsh)"
 fi
 
 if has lazygit; then
