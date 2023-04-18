@@ -10,23 +10,28 @@
 
 - shell:
   -
-    description: Download Binaries
     command: >-
       cd ~/.local/share/packages || exit 1;
+      wget "https://github.com/mliszcz/fish-shell/releases/download/fish-3.6.1-x86_64/fish-3.6.1-x86_64.AppImage" && chmod +x fish-3.6.1-x86_64.AppImage;
       wget "https://github.com/neovim/neovim/releases/download/stable/nvim.appimage" && chmod +x nvim.appimage;
       wget "https://github.com/BurntSushi/ripgrep/releases/download/13.0.0/ripgrep-13.0.0-x86_64-unknown-linux-musl.tar.gz" -O - | tar -xz;
       wget "https://github.com/sharkdp/fd/releases/download/v8.3.2/fd-v8.3.2-x86_64-unknown-linux-gnu.tar.gz" -O - | tar -xz;
       wget "https://github.com/sharkdp/bat/releases/download/v0.21.0/bat-v0.21.0-x86_64-unknown-linux-gnu.tar.gz" -O - | tar -xz;
       wget "https://nodejs.org/dist/v17.5.0/node-v17.5.0-linux-x64.tar.xz" -O - | tar -xJ;
-      wget "https://github.com/cli/cli/releases/download/v2.5.1/gh_2.5.1_linux_amd64.tar.gz" -O - | tar -xz;
+      wget "https://github.com/cli/cli/releases/download/v2.27.0/gh_2.27.0_linux_amd64.tar.gz" -O - | tar -xz;
       wget "https://github.com/dandavison/delta/releases/download/0.12.0/delta-0.12.0-x86_64-unknown-linux-gnu.tar.gz" -O - | tar -xz;
       wget "https://github.com/Wilfred/difftastic/releases/download/0.37.0/difft-x86_64-unknown-linux-gnu.tar.gz" -O - | tar -xz difft;
       wget "https://github.com/jesseduffield/lazygit/releases/download/v0.33.0/lazygit_0.33.0_Linux_x86_64.tar.gz" -O - | tar -xz lazygit;
-      wget "https://github.com/starship/starship/releases/download/v1.11.0/starship-x86_64-unknown-linux-gnu.tar.gz" -O - | tar -xz starship;
-      wget "https://github.com/ajeetdsouza/zoxide/releases/download/v0.8.1/zoxide-v0.8.1-x86_64-unknown-linux-musl.tar.gz" -O - | tar -xz zoxide;
+      wget "https://github.com/starship/starship/releases/download/v1.14.2/starship-x86_64-unknown-linux-gnu.tar.gz" -O - | tar -xz starship;
+      wget "https://github.com/ajeetdsouza/zoxide/releases/download/v0.9.0/zoxide-v0.9.0-x86_64-unknown-linux-musl.tar.gz" -O - | tar -xz zoxide;
       wget "https://github.com/junegunn/fzf/releases/download/0.29.0/fzf-0.29.0-linux_amd64.tar.gz" -O - | tar -xz fzf;
       wget "https://raw.githubusercontent.com/junegunn/fzf/0.29.0/shell/key-bindings.zsh" -O fzf-key-bindings.zsh;
       wget "https://github.com/mattmc3/antidote/archive/refs/tags/v1.8.4.tar.gz" -O - | tar -xz;
+    description: Download Binaries
+
+- link:
+    ~/.local/bin/fish:
+      path: ~/.local/share/packages/fish-3.6.1-x86_64.AppImage
 
 - link:
     ~/.local/bin/nvim:
@@ -59,10 +64,10 @@
 
 - link:
     ~/.local/bin/gh:
-      path: ~/.local/share/packages/gh_2.5.1_linux_amd64/bin/gh
+      path: ~/.local/share/packages/gh_2.27.0_linux_amd64/bin/gh
     ~/.local/share/man/man1:
       glob: true
-      path: ~/.local/share/packages/gh_2.5.1_linux_amd64/share/man/man1/*
+      path: ~/.local/share/packages/gh_2.27.0_linux_amd64/share/man/man1/*
 
 - link:
     ~/.local/bin/delta:
