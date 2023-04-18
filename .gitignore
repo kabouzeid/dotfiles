@@ -6,3 +6,6 @@ config/ranger/history
 config/ranger/tagged
 config/helix/runtime
 *.local*
+fishd.*
+fish_history
+fish_variables
