@@ -3,6 +3,23 @@
       create: true
       relink: true
 
+- shell:
+  -
+    command: >-
+      if [ ! -e ~/.tmux/plugins/tpm ]; then
+      git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm;
+      fi
+    description: Installing tpm.
+
+- shell:
+  -
+    command: >-
+      if ! type asdf &>/dev/null; then;
+      git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.11.3
+      fi;
+      asdf plugin-list | grep --quiet --word-regexp direnv && asdf plugin-add direnv && asdf direnv setup --shell fish --version latest;
+    description: Installing asdf-direnv.
+
 - clean: [~/.local/bin, ~/.local/share/man/man1]
 
 - create:
