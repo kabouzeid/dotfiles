@@ -8,6 +8,3 @@ symbol = " "
 [conda]
 symbol = "🐉 "
 ignore_base = false
-
-[python]
-pyenv_version_name = true
