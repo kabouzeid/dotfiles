@@ -11,6 +11,8 @@ if status is-login
 
     set fish_greeting
     set -gx VIRTUAL_ENV_DISABLE_PROMPT 1
+
+    ! set -q LANG; and set -gx LANG "en_US.UTF-8"
 end
 
 if type -q pyenv
