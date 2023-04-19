@@ -2,7 +2,7 @@ test -e "$HOME/.config/fish/config.local.pre.fish"; and source "$HOME/.config/fi
 
 if type -q pyenv
     set -gx PYENV_ROOT "$HOME/.pyenv"
-    set -gx PYENV_VIRTUALENV_DISABLE_PROMPT=1
+    set -gx PYENV_VIRTUALENV_DISABLE_PROMPT 1
     pyenv init - | source
     pyenv virtualenv-init - | source
 end
