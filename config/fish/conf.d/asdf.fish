@@ -11,4 +11,4 @@ if test -n "$ASDF_DATA_DIR"
 else
     set -l SHIMS_DIR "$HOME/.asdf/shims"
 end
-set fish_user_paths (string match --invert $fish_user_paths)
+set fish_user_paths (string match --invert $SHIMS_DIR $fish_user_paths)
