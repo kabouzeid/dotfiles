@@ -9,5 +9,5 @@ symbol = " "
 symbol = "🐉 "
 ignore_base = false
 
-# [cmd_duration]
-# show_notifications = true
+[python]
+pyenv_version_name = true

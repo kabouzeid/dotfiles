@@ -1,13 +1,16 @@
 test -e "$HOME/.config/fish/config.local.pre.fish"; and source "$HOME/.config/fish/config.local.pre.fish"
 
-set -gx PYENV_ROOT "$HOME/.pyenv"
-pyenv init - | source
-pyenv virtualenv-init - | source
+if type -q pyenv
+    set -gx PYENV_ROOT "$HOME/.pyenv"
+    pyenv init - | source
+    pyenv virtualenv-init - | source
+end
 
 set -gx PATH "$HOME/.local/bin" "$HOME/.cargo/bin" $PATH
 
 if status is-interactive
-    set fish_greeting # disable fish greeting
+    set fish_greeting
+    set -gx VIRTUAL_ENV_DISABLE_PROMPT 1
 
     if type -q nvim
         set -gx EDITOR nvim
