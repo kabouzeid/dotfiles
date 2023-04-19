@@ -1,5 +1,18 @@
 test -e "$HOME/.config/fish/config.local.pre.fish"; and source "$HOME/.config/fish/config.local.pre.fish"
 
+if status is-login
+    set -gx PATH "$HOME/.local/bin" "$HOME/.cargo/bin" $PATH
+
+    if type -q nvim
+        set -gx EDITOR nvim
+    else
+        set -gx EDITOR vim
+    end
+
+    set fish_greeting
+    set -gx VIRTUAL_ENV_DISABLE_PROMPT 1
+end
+
 if type -q pyenv
     set -gx PYENV_ROOT "$HOME/.pyenv"
     set -gx PYENV_VIRTUALENV_DISABLE_PROMPT 1
@@ -7,17 +20,7 @@ if type -q pyenv
     pyenv virtualenv-init - | source
 end
 
-set -gx PATH "$HOME/.local/bin" "$HOME/.cargo/bin" $PATH
-
 if status is-interactive
-    set fish_greeting
-    set -gx VIRTUAL_ENV_DISABLE_PROMPT 1
-
-    if type -q nvim
-        set -gx EDITOR nvim
-    else
-        set -gx EDITOR vim
-    end
     alias v $EDITOR
 
     test -e "$HOME/.iterm2_shell_integration.fish" ; and source "$HOME/.iterm2_shell_integration.fish"
