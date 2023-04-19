@@ -22,6 +22,7 @@ if status is-interactive
     type -q nvr; and set -q NVIM; and alias v "nvr --remote-tab --nostart"
     type -q xdg-open; and type -q setsid; and alias open="setsid xdg-open"
     type -q lazygit; and alias lzg lazygit
+    set -q ASDF_DIRENV_BIN; and alias direnv $ASDF_DIRENV_BIN
 
     type -q hx; and function hx
         PATH="$HOME/.local/share/nvim/mason/bin:$PATH" command hx $argv
