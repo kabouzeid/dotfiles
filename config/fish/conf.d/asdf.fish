@@ -1,6 +1,6 @@
 # source asdf if it's installed
 if type -q brew
-  source /opt/homebrew/opt/asdf/libexec/asdf.fish
+  source "$(brew --prefix asdf)"/libexec/asdf.fish
 else if test -d "$HOME/.asdf"
   source "$HOME/.asdf/asdf.fish"
 end
