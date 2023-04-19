@@ -1,7 +1,7 @@
 test -e "$HOME/.config/fish/config.local.pre.fish"; and source "$HOME/.config/fish/config.local.pre.fish"
 
 if status is-login
-    set -gx PATH "$HOME/.local/bin" "$HOME/.cargo/bin" $PATH
+    fish_add_path --global "$HOME/.local/bin" "$HOME/.cargo/bin"
 
     if type -q nvim
         set -gx EDITOR nvim
@@ -13,13 +13,6 @@ if status is-login
     set -gx VIRTUAL_ENV_DISABLE_PROMPT 1
 
     ! set -q LANG; and set -gx LANG "en_US.UTF-8"
-end
-
-if type -q pyenv
-    set -gx PYENV_ROOT "$HOME/.pyenv"
-    set -gx PYENV_VIRTUALENV_DISABLE_PROMPT 1
-    pyenv init - | source
-    pyenv virtualenv-init - | source
 end
 
 if status is-interactive
