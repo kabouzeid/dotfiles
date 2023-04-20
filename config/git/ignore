@@ -90,3 +90,10 @@ compile_flags.txt
 .python-version
 
 .vercel
+
+# direnv
+.envrc
+.direnv/
+
+# asdf
+.tool-versions
