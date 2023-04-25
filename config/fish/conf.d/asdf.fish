@@ -23,8 +23,12 @@ if type -q asdf
   function usaspy
     echo "\
     use asdf
-    layout python
-    " >? .envrc
+    layout python" \
+      >? .envrc
     direnv allow
+  end
+
+  function pyinit
+    asdf local python $argv; and usaspy
   end
 end
