@@ -3,7 +3,9 @@
 fish_add_path --global "$HOME/.local/bin" "$HOME/.cargo/bin"
 
 if status is-login
-    if type -q nvim
+    if type -q hx
+        set -gx EDITOR hx
+    else if type -q nvim
         set -gx EDITOR nvim
     else
         set -gx EDITOR vim

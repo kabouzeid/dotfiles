@@ -1,4 +1,4 @@
-theme = "fleet_dark"
+theme = "github_dark"
 
 [editor]
 true-color = true
