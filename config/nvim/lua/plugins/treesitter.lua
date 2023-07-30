@@ -9,6 +9,7 @@ require("nvim-treesitter.configs").setup({
     "css",
     "cuda",
     "dockerfile",
+    "fish",
     -- "fennel",
     -- "glsl",
     -- "go",
