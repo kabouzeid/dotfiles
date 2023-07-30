@@ -60,7 +60,7 @@ vim.keymap.set({ "x", "n", "o" }, "gc", "<Plug>VSCodeCommentary")
 vim.keymap.set("n", "gcc", "<Plug>VSCodeCommentaryLine")
 
 -- whichkey
-vim.keymap.set("", "<leader>", "<cmd>call VSCodeNotifyVisual('whichkey.show', 1)<cr>")
+vim.keymap.set("", "<leader>", "<cmd>call VSCodeNotify('whichkey.show', 1)<cr>")
 
 -- problems
 vim.keymap.set("", "]d", "<cmd>call VSCodeNotify('editor.action.marker.next')<cr>")
