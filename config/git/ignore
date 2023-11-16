@@ -97,3 +97,9 @@ compile_flags.txt
 
 # asdf
 .tool-versions
+
+# rtx
+.rtx.toml
+
+# python
+.venv
