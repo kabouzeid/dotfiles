@@ -35,8 +35,8 @@ set completeopt=menuone,noselect
 set updatetime=250
 set clipboard=unnamedplus
 set spelllang=en_us,de_de
-set number
-set relativenumber
+" set number
+" set relativenumber
 set cursorline
 set timeoutlen=250
 
