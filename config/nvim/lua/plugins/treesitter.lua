@@ -44,5 +44,5 @@ require("nvim-treesitter.configs").setup({
   },
   highlight = { enable = true },
   indent = { enable = true },
-  context_commentstring = { enable = true },
+  ts_context_commentstring = { enable = true },
 })
