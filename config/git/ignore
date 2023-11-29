@@ -103,3 +103,5 @@ compile_flags.txt
 
 # python
 .venv
+
+.git_old
