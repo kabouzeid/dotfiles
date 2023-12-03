@@ -118,9 +118,8 @@
 - link:
     ~/.local/bin/rtx:
       path: ~/.local/share/packages/rtx/bin/rtx
-    ~/.local/share/man/man1:
-      glob: true
-      path: ~/.local/share/packages/rtx/man/man1/*
+    ~/.local/share/man/man1/rtx.1:
+      path: ~/.local/share/packages/rtx/man/man1/rtx.1
 
 - shell:
   -
