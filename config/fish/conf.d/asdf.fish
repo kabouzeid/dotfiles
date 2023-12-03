@@ -22,13 +22,13 @@ if type -q asdf
 
   function usaspy
     echo "\
-    use asdf
-    layout python" \
+use asdf
+layout python" \
       >? .envrc
     direnv allow
   end
 
   function pyinit
-    asdf local python $argv; and usaspy
+    asdf local python $argv; and usaspy; and pip install -U pip wheel
   end
 end
