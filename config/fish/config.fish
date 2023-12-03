@@ -23,7 +23,7 @@ if status is-interactive
     type -q xdg-open; and type -q setsid; and alias open="setsid xdg-open"
     type -q lazygit; and alias lzg lazygit
     type -q joshuto; and alias josh joshuto
-    set -q ASDF_DIRENV_BIN; and alias direnv $ASDF_DIRENV_BIN
+    set -q RTX_DIRENV_BIN; and alias direnv $RTX_DIRENV_BIN
 
     type -q hx; and function hx
         PATH="$HOME/.local/share/nvim/mason/bin:$PATH" command hx $argv

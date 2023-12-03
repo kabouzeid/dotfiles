@@ -11,23 +11,6 @@
       fi;
     description: Installing tpm.
 
-- shell:
-  -
-    command: >-
-      if ! type asdf &>/dev/null; then
-      if [ ! -e ~/.asdf ]; then
-      git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.11.3;
-      TARGET="${XDG_DATA_HOME:-$HOME/.local/share}/fish/vendor_completions.d";
-      mkdir -p "$TARGET" && ln -sf ~/.asdf/completions/asdf.fish "$TARGET";
-      fi;
-      . ~/.asdf/asdf.sh;
-      fi;
-      if ! $(asdf plugin-list | grep --quiet --word-regexp direnv); then
-      asdf plugin-add direnv;
-      fi;
-      asdf direnv setup --shell fish --version latest;
-    description: Installing asdf-direnv.
-
 - clean: [~/.local/bin, ~/.local/share/man/man1]
 
 - create:
@@ -53,6 +36,7 @@
       wget "https://raw.githubusercontent.com/junegunn/fzf/0.29.0/shell/key-bindings.zsh" -O fzf-key-bindings.zsh;
       wget "https://github.com/mattmc3/antidote/archive/refs/tags/v1.8.4.tar.gz" -O - | tar -xz;
       wget "https://github.com/ellie/atuin/releases/download/v14.0.1/atuin-v14.0.1-x86_64-unknown-linux-musl.tar.gz" -O - | tar -xz;
+      wget "https://github.com/jdx/rtx/releases/download/v2023.12.5/rtx-v2023.12.5-linux-x64.tar.gz" -O - | tar -xz;
     description: Download Binaries
 
 - link:
@@ -130,3 +114,16 @@
       path: ~/.local/share/packages/atuin-v14.0.1-x86_64-unknown-linux-musl/atuin
     ~/.local/share/fish/vendor_completions.d/atuin.fish:
       path: ~/.local/share/packages/atuin-v14.0.1-x86_64-unknown-linux-musl/completions/atuin.fish
+
+- link:
+    ~/.local/bin/rtx:
+      path: ~/.local/share/packages/rtx/bin/rtx
+    ~/.local/share/man/man1:
+      glob: true
+      path: ~/.local/share/packages/rtx/man/man1/*
+
+- shell:
+  -
+    command: >-
+      rtx completion fish > ~/.local/share/fish/vendor_completions.d/rtx.fish
+    description: Rtx completions.
