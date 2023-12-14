@@ -6,6 +6,6 @@ if type -q rtx
 [tools]
 python = {version=\"$argv\", virtualenv=\".venv\"}
     " \
-      >? .rtx.toml
+      >? .rtx.toml; and rtx install
   end
 end
