@@ -36,7 +36,7 @@
       wget "https://raw.githubusercontent.com/junegunn/fzf/0.29.0/shell/key-bindings.zsh" -O fzf-key-bindings.zsh;
       wget "https://github.com/mattmc3/antidote/archive/refs/tags/v1.8.4.tar.gz" -O - | tar -xz;
       wget "https://github.com/ellie/atuin/releases/download/v14.0.1/atuin-v14.0.1-x86_64-unknown-linux-musl.tar.gz" -O - | tar -xz;
-      wget "https://github.com/jdx/rtx/releases/download/v2023.12.5/rtx-v2023.12.5-linux-x64.tar.gz" -O - | tar -xz;
+      wget "https://github.com/jdx/mise/releases/download/v2024.1.7/mise-v2024.1.7-linux-x64.tar.gz" -O - | tar -xz;
     description: Download Binaries
 
 - link:
@@ -116,13 +116,13 @@
       path: ~/.local/share/packages/atuin-v14.0.1-x86_64-unknown-linux-musl/completions/atuin.fish
 
 - link:
-    ~/.local/bin/rtx:
-      path: ~/.local/share/packages/rtx/bin/rtx
-    ~/.local/share/man/man1/rtx.1:
-      path: ~/.local/share/packages/rtx/man/man1/rtx.1
+    ~/.local/bin/mise:
+      path: ~/.local/share/packages/mise/bin/mise
+    ~/.local/share/man/man1/mise.1:
+      path: ~/.local/share/packages/mise/man/man1/mise.1
 
 - shell:
   -
     command: >-
-      rtx completion fish > ~/.local/share/fish/vendor_completions.d/rtx.fish
-    description: Rtx completions.
+      mise completion fish > ~/.local/share/fish/vendor_completions.d/mise.fish
+    description: Mise completions.

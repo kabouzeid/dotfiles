@@ -98,8 +98,8 @@ compile_flags.txt
 # asdf
 .tool-versions
 
-# rtx
-.rtx.toml
+# mise
+.mise.toml
 
 # python
 .venv

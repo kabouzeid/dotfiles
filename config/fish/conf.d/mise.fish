@@ -1,11 +1,11 @@
-if type -q rtx
-  rtx activate fish | source
+if type -q mise
+  mise activate fish | source
 
   function pyinit
     echo "\
 [tools]
 python = {version=\"$argv\", virtualenv=\".venv\"}
     " \
-      >? .rtx.toml; and rtx install
+      >? .mise.toml; and mise install
   end
 end
