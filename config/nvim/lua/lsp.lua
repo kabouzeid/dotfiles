@@ -170,6 +170,7 @@ local servers = {
   "cmake",
   "cssls",
   "dockerls",
+  "docker_compose_language_service",
   "eslint",
   "gopls",
   "hls",
