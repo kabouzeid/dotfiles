@@ -39,7 +39,8 @@ set wildmenu
 
 " GUI {{{
 
-set guifont=JetBrains\ Mono\ Symbols:h13
+" set guifont=JetBrains\ Mono\ Symbols:h13
+set guifont=MonaspaceNeon-Regular:h13
 
 " }}}
 
