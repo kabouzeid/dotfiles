@@ -6,28 +6,6 @@ if [ -z "$LANG" ]; then
     export LANG=en_US.UTF-8
 fi
 
-if has brew; then
-    source "$(brew --prefix)"/opt/antidote/share/antidote/antidote.zsh
-elif [ -r /usr/share/zsh-antidote/antidote.zsh ]; then
-    source /usr/share/zsh-antidote/antidote.zsh
-elif [ -r "$HOME"/.local/share/zsh-antidote/antidote.zsh ]; then
-    source "$HOME"/.local/share/zsh-antidote/antidote.zsh
-fi
-
-if has antidote; then
-    antidote load
-
-    if [ "$TERM" = "xterm-kitty" ]; then
-        # disable ohmyzsh titles, use kitty's shell integration instead
-        export DISABLE_AUTO_TITLE=true
-    fi
-fi
-
-# set PATH so it includes user's private bin if it exists
-if [ -d "$HOME"/bin ] ; then
-    export PATH="$HOME"/bin:$PATH
-fi
-
 # set PATH so it includes user's private bin if it exists
 if [ -d "$HOME"/.local/bin ] ; then
     export PATH="$HOME"/.local/bin:$PATH
