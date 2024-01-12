@@ -11,16 +11,6 @@ if [ -d "$HOME"/.local/bin ] ; then
     export PATH="$HOME"/.local/bin:$PATH
 fi
 
-if [ -r /usr/share/fzf/key-bindings.zsh ]; then
-    source /usr/share/fzf/key-bindings.zsh
-elif [ -r /usr/local/opt/fzf/shell/key-bindings.zsh ]; then
-    source /usr/local/opt/fzf/shell/key-bindings.zsh
-elif has brew; then
-    source "$(brew --prefix)"/opt/fzf/shell/key-bindings.zsh
-elif [ -r "$HOME"/.local/share/zsh/share/fzf-key-bindings.zsh ]; then
-    source "$HOME"/.local/share/zsh/share/fzf-key-bindings.zsh
-fi
-
 if has zoxide; then
     eval "$(zoxide init zsh)"
 fi
@@ -36,74 +26,9 @@ fi
 alias e=$EDITOR
 alias v=$EDITOR
 
-if has nvr; then
-    if [ -n "$NVIM" ]; then
-        alias e="nvr --remote-tab"
-        alias v="nvr --remote-tab"
-    fi
-fi
-
-if has hx; then
-    alias hx="PATH=\"\$HOME/.local/share/nvim/mason/bin:\$PATH\" hx"
-fi
-
-if [ "$TERM" = "xterm-kitty" ] && has kitty; then
-    alias ssh="kitty +kitten ssh"
-    alias icat="kitty +kitten icat"
-    alias diff="kitty +kitten diff"
-elif [ "$TERM" = "foot" ]; then
-    alias ssh="TERM=xterm-256color ssh"
-fi
-
 if [ -r "$HOME"/.iterm2_shell_integration.zsh ]; then
     source "$HOME"/.iterm2_shell_integration.zsh
 fi
-
-if has xdg-open && has setsid; then
-    alias open="setsid xdg-open"
-fi
-
-if has op; then
-    eval "$(op completion zsh)"; compdef _op op
-fi
-
-if has turm; then
-    eval "$(turm completion zsh)"
-fi
-
-if has lazygit; then
-    alias lzg="lazygit"
-fi
-
-if has lazydocker; then
-    alias lzd="sudo $(which lazydocker)"
-fi
-
-if has swayhide; then
-    alias hide="swayhide"
-fi
-
-if has difft; then
-    alias gd="git difftool"
-fi
-
-if has "/Applications/Tailscale.app/Contents/MacOS/Tailscale"; then
-    alias tailscale="/Applications/Tailscale.app/Contents/MacOS/Tailscale"
-fi
-
-if has github-copilot-cli; then
-    eval "$(github-copilot-cli alias -- "$0")"
-fi
-
-export VIDIR_EDITOR_ARGS='-c :set nolist | :set ft=vidir'
-if [ -r "$HOME"/.local/share/nvim/site/pack/packer/start/vidir/bin/vidir ]; then
-    alias vidir="$HOME"/.local/share/nvim/site/pack/packer/start/vidir/bin/vidir
-fi
-
-# alias la="ls -A"
-# alias lal="ls -alh"
-
-# export BAT_THEME=base16 # works well with dark and light mode
 
 # Allow local customizations in the ~/.zshrc_local file
 if [ -r "$HOME"/.zshrc.local ]; then
