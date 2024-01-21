@@ -22,11 +22,11 @@
       cd ~/.local/share/packages || exit 1;
       wget "https://github.com/mliszcz/fish-shell/releases/download/fish-3.6.1-x86_64/fish-3.6.1-x86_64.AppImage" -O fish.appimage && chmod +x fish.appimage;
       wget "https://github.com/neovim/neovim/releases/download/stable/nvim.appimage" -O nvim.appimage && chmod +x nvim.appimage;
-      wget "https://github.com/BurntSushi/ripgrep/releases/download/13.0.0/ripgrep-13.0.0-x86_64-unknown-linux-musl.tar.gz" -O - | tar -xz;
-      wget "https://github.com/sharkdp/fd/releases/download/v8.3.2/fd-v8.3.2-x86_64-unknown-linux-gnu.tar.gz" -O - | tar -xz;
+      wget "https://github.com/BurntSushi/ripgrep/releases/download/14.1.0/ripgrep-14.1.0-x86_64-unknown-linux-musl.tar.gz" -O - | tar -xz;
+      wget "https://github.com/sharkdp/fd/releases/download/v9.0.0/fd-v9.0.0-x86_64-unknown-linux-gnu.tar.gz" -O - | tar -xz;
       wget "https://github.com/sharkdp/bat/releases/download/v0.23.0/bat-v0.23.0-x86_64-unknown-linux-gnu.tar.gz" -O - | tar -xz;
       wget "https://nodejs.org/dist/v17.5.0/node-v17.5.0-linux-x64.tar.xz" -O - | tar -xJ;
-      wget "https://github.com/cli/cli/releases/download/v2.27.0/gh_2.27.0_linux_amd64.tar.gz" -O - | tar -xz;
+      wget "https://github.com/cli/cli/releases/download/v2.42.1/gh_2.42.1_linux_amd64.tar.gz" -O - | tar -xz;
       wget "https://github.com/dandavison/delta/releases/download/0.12.0/delta-0.12.0-x86_64-unknown-linux-gnu.tar.gz" -O - | tar -xz;
       wget "https://github.com/Wilfred/difftastic/releases/download/0.37.0/difft-x86_64-unknown-linux-gnu.tar.gz" -O - | tar -xz difft;
       wget "https://github.com/jesseduffield/lazygit/releases/download/v0.33.0/lazygit_0.33.0_Linux_x86_64.tar.gz" -O - | tar -xz lazygit;
@@ -34,9 +34,9 @@
       wget "https://github.com/ajeetdsouza/zoxide/releases/download/v0.9.0/zoxide-v0.9.0-x86_64-unknown-linux-musl.tar.gz" -O - | tar -xz zoxide;
       wget "https://github.com/junegunn/fzf/releases/download/0.29.0/fzf-0.29.0-linux_amd64.tar.gz" -O - | tar -xz fzf;
       wget "https://raw.githubusercontent.com/junegunn/fzf/0.29.0/shell/key-bindings.zsh" -O fzf-key-bindings.zsh;
-      wget "https://github.com/mattmc3/antidote/archive/refs/tags/v1.8.4.tar.gz" -O - | tar -xz;
       wget "https://github.com/ellie/atuin/releases/download/v14.0.1/atuin-v14.0.1-x86_64-unknown-linux-musl.tar.gz" -O - | tar -xz;
-      wget "https://github.com/jdx/mise/releases/download/v2024.1.14/mise-v2024.1.14-linux-x64.tar.gz" -O - | tar -xz;
+      wget "https://github.com/jdx/mise/releases/download/v2024.1.24/mise-v2024.1.24-linux-x64.tar.gz" -O - | tar -xz;
+      wget "https://github.com/direnv/direnv/releases/download/v2.33.0/direnv.linux-amd64" -O direnv && chmod +x direnv;
     description: Download Binaries
 
 - link:
@@ -49,15 +49,15 @@
 
 - link:
     ~/.local/bin/rg:
-      path: ~/.local/share/packages/ripgrep-13.0.0-x86_64-unknown-linux-musl/rg
+      path: ~/.local/share/packages/ripgrep-14.1.0-x86_64-unknown-linux-musl/rg
     ~/.local/share/man/man1/rg.1:
-      path: ~/.local/share/packages/ripgrep-13.0.0-x86_64-unknown-linux-musl/doc/rg.1
+      path: ~/.local/share/packages/ripgrep-14.1.0-x86_64-unknown-linux-musl/doc/rg.1
 
 - link:
     ~/.local/bin/fd:
-      path: ~/.local/share/packages/fd-v8.3.2-x86_64-unknown-linux-gnu/fd
+      path: ~/.local/share/packages/fd-v9.0.0-x86_64-unknown-linux-gnu/fd
     ~/.local/share/man/man1/fd.1:
-      path: ~/.local/share/packages/fd-v8.3.2-x86_64-unknown-linux-gnu/fd.1
+      path: ~/.local/share/packages/fd-v9.0.0-x86_64-unknown-linux-gnu/fd.1
 
 - link:
     ~/.local/bin/bat:
@@ -74,10 +74,10 @@
 
 - link:
     ~/.local/bin/gh:
-      path: ~/.local/share/packages/gh_2.27.0_linux_amd64/bin/gh
+      path: ~/.local/share/packages/gh_2.42.1_linux_amd64/bin/gh
     ~/.local/share/man/man1:
       glob: true
-      path: ~/.local/share/packages/gh_2.27.0_linux_amd64/share/man/man1/*
+      path: ~/.local/share/packages/gh_2.42.1_linux_amd64/share/man/man1/*
 
 - link:
     ~/.local/bin/delta:
@@ -106,10 +106,6 @@
       path: ~/.local/share/packages/fzf-key-bindings.zsh
 
 - link:
-    ~/.local/share/zsh-antidote:
-      path: ~/.local/share/packages/antidote-1.8.4
-
-- link:
     ~/.local/bin/atuin:
       path: ~/.local/share/packages/atuin-v14.0.1-x86_64-unknown-linux-musl/atuin
     ~/.local/share/fish/vendor_completions.d/atuin.fish:
@@ -120,6 +116,10 @@
       path: ~/.local/share/packages/mise/bin/mise
     ~/.local/share/man/man1/mise.1:
       path: ~/.local/share/packages/mise/man/man1/mise.1
+
+- link:
+    ~/.local/bin/direnv:
+      path: ~/.local/share/packages/direnv
 
 - shell:
   -
