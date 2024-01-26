@@ -93,7 +93,7 @@ require("lazy").setup({
         dependencies = "kitagry/vs-snippets",
         config = function()
           vim.cmd([[
-  imap <expr> <Tab>   vsnip#jumpable(1)  ? '<Plug>(vsnip-jump-next)' : '<cmd>lua require("copilot.suggestion").accept()<CR>'
+  imap <expr> <Tab>   vsnip#jumpable(1)  ? '<Plug>(vsnip-jump-next)' : luaeval('require("copilot.suggestion").is_visible()') ? '<cmd>lua require("copilot.suggestion").accept()<CR>' : '<Tab>'
   smap <expr> <Tab>   vsnip#jumpable(1)  ? '<Plug>(vsnip-jump-next)' : '<Tab>'
   imap <expr> <S-Tab> vsnip#jumpable(-1) ? '<Plug>(vsnip-jump-prev)' : '<S-Tab>'
   smap <expr> <S-Tab> vsnip#jumpable(-1) ? '<Plug>(vsnip-jump-prev)' : '<S-Tab>'
