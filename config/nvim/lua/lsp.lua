@@ -180,6 +180,7 @@ local servers = {
   "ltex",
   "kotlin_language_server",
   "pyright",
+  "ruff_lsp",
   "lua_ls",
   "svelte",
   "tailwindcss",

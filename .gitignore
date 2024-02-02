@@ -9,3 +9,4 @@ config/fish/fishd.*
 config/fish/fish_variables
 config/fish/conf.d/asdf_direnv.fish
 *.local*
+config/mise/config.toml
