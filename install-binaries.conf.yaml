@@ -20,21 +20,21 @@
   -
     command: >-
       cd ~/.local/share/packages || exit 1;
-      wget "https://github.com/mliszcz/fish-shell/releases/download/fish-3.6.1-x86_64/fish-3.6.1-x86_64.AppImage" -O fish.appimage && chmod +x fish.appimage;
+      wget "https://github.com/mliszcz/fish-shell/releases/download/fish-3.7.0-x86_64/fish-3.7.0-x86_64.AppImage" -O fish.appimage && chmod +x fish.appimage;
       wget "https://github.com/neovim/neovim/releases/download/stable/nvim.appimage" -O nvim.appimage && chmod +x nvim.appimage;
       wget "https://github.com/BurntSushi/ripgrep/releases/download/14.1.0/ripgrep-14.1.0-x86_64-unknown-linux-musl.tar.gz" -O - | tar -xz;
       wget "https://github.com/sharkdp/fd/releases/download/v9.0.0/fd-v9.0.0-x86_64-unknown-linux-gnu.tar.gz" -O - | tar -xz;
       wget "https://github.com/sharkdp/bat/releases/download/v0.23.0/bat-v0.23.0-x86_64-unknown-linux-gnu.tar.gz" -O - | tar -xz;
       wget "https://nodejs.org/dist/v17.5.0/node-v17.5.0-linux-x64.tar.xz" -O - | tar -xJ;
-      wget "https://github.com/cli/cli/releases/download/v2.42.1/gh_2.42.1_linux_amd64.tar.gz" -O - | tar -xz;
+      wget "https://github.com/cli/cli/releases/download/v2.43.1/gh_2.43.1_linux_amd64.tar.gz" -O - | tar -xz;
       wget "https://github.com/dandavison/delta/releases/download/0.12.0/delta-0.12.0-x86_64-unknown-linux-gnu.tar.gz" -O - | tar -xz;
       wget "https://github.com/Wilfred/difftastic/releases/download/0.37.0/difft-x86_64-unknown-linux-gnu.tar.gz" -O - | tar -xz difft;
       wget "https://github.com/jesseduffield/lazygit/releases/download/v0.33.0/lazygit_0.33.0_Linux_x86_64.tar.gz" -O - | tar -xz lazygit;
       wget "https://github.com/starship/starship/releases/download/v1.14.2/starship-x86_64-unknown-linux-gnu.tar.gz" -O - | tar -xz starship;
-      wget "https://github.com/ajeetdsouza/zoxide/releases/download/v0.9.0/zoxide-v0.9.0-x86_64-unknown-linux-musl.tar.gz" -O - | tar -xz zoxide;
+      wget "https://github.com/ajeetdsouza/zoxide/releases/download/v0.9.2/zoxide-v0.9.2-x86_64-unknown-linux-musl.tar.gz" -O - | tar -xz zoxide;
       wget "https://github.com/junegunn/fzf/releases/download/0.29.0/fzf-0.29.0-linux_amd64.tar.gz" -O - | tar -xz fzf;
       wget "https://raw.githubusercontent.com/junegunn/fzf/0.29.0/shell/key-bindings.zsh" -O fzf-key-bindings.zsh;
-      wget "https://github.com/ellie/atuin/releases/download/v14.0.1/atuin-v14.0.1-x86_64-unknown-linux-musl.tar.gz" -O - | tar -xz;
+      wget "https://github.com/ellie/atuin/releases/download/v18.0.1/atuin-v18.0.1-x86_64-unknown-linux-musl.tar.gz" -O - | tar -xz;
       wget "https://github.com/jdx/mise/releases/download/v2024.1.24/mise-v2024.1.24-linux-x64.tar.gz" -O - | tar -xz;
       wget "https://github.com/direnv/direnv/releases/download/v2.33.0/direnv.linux-amd64" -O direnv && chmod +x direnv;
     description: Download Binaries
@@ -74,10 +74,10 @@
 
 - link:
     ~/.local/bin/gh:
-      path: ~/.local/share/packages/gh_2.42.1_linux_amd64/bin/gh
+      path: ~/.local/share/packages/gh_2.43.1_linux_amd64/bin/gh
     ~/.local/share/man/man1:
       glob: true
-      path: ~/.local/share/packages/gh_2.42.1_linux_amd64/share/man/man1/*
+      path: ~/.local/share/packages/gh_2.43.1_linux_amd64/share/man/man1/*
 
 - link:
     ~/.local/bin/delta:
@@ -107,9 +107,9 @@
 
 - link:
     ~/.local/bin/atuin:
-      path: ~/.local/share/packages/atuin-v14.0.1-x86_64-unknown-linux-musl/atuin
+      path: ~/.local/share/packages/atuin-v18.0.1-x86_64-unknown-linux-musl/atuin
     ~/.local/share/fish/vendor_completions.d/atuin.fish:
-      path: ~/.local/share/packages/atuin-v14.0.1-x86_64-unknown-linux-musl/completions/atuin.fish
+      path: ~/.local/share/packages/atuin-v18.0.1-x86_64-unknown-linux-musl/completions/atuin.fish
 
 - link:
     ~/.local/bin/mise:
