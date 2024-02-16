@@ -37,6 +37,7 @@
       wget "https://github.com/ellie/atuin/releases/download/v18.0.1/atuin-v18.0.1-x86_64-unknown-linux-musl.tar.gz" -O - | tar -xz;
       wget "https://github.com/jdx/mise/releases/download/v2024.1.24/mise-v2024.1.24-linux-x64.tar.gz" -O - | tar -xz;
       wget "https://github.com/direnv/direnv/releases/download/v2.33.0/direnv.linux-amd64" -O direnv && chmod +x direnv;
+      wget "https://github.com/astral-sh/uv/releases/latest/download/uv-x86_64-unknown-linux-gnu.tar.gz" -O - | tar -xz;
     description: Download Binaries
 
 - link:
@@ -116,6 +117,10 @@
       path: ~/.local/share/packages/mise/bin/mise
     ~/.local/share/man/man1/mise.1:
       path: ~/.local/share/packages/mise/man/man1/mise.1
+
+- link:
+    ~/.local/bin/uv:
+      path: ~/.local/share/packages/uv-x86_64-unknown-linux-gnu/uv
 
 - link:
     ~/.local/bin/direnv:
