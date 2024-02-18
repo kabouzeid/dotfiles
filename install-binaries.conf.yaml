@@ -38,6 +38,7 @@
       wget "https://github.com/jdx/mise/releases/download/v2024.1.24/mise-v2024.1.24-linux-x64.tar.gz" -O - | tar -xz;
       wget "https://github.com/direnv/direnv/releases/download/v2.33.0/direnv.linux-amd64" -O direnv && chmod +x direnv;
       wget "https://github.com/astral-sh/uv/releases/latest/download/uv-x86_64-unknown-linux-gnu.tar.gz" -O - | tar -xz;
+      wget "https://github.com/chmln/sd/releases/download/v1.0.0/sd-v1.0.0-x86_64-unknown-linux-gnu.tar.gz" -O - | tar -xz;
     description: Download Binaries
 
 - link:
@@ -125,6 +126,14 @@
 - link:
     ~/.local/bin/direnv:
       path: ~/.local/share/packages/direnv
+
+- link:
+    ~/.local/bin/sd:
+      path: ~/.local/share/packages/sd-v1.0.0-x86_64-unknown-linux-gnu/sd
+    ~/.local/share/fish/vendor_completions.d/sd.fish:
+      path: ~/.local/share/packages/sd-v1.0.0-x86_64-unknown-linux-gnu/completions/sd.fish
+    ~/.local/share/man/man1/sd.1:
+      path: ~/.local/share/packages/sd-v1.0.0-x86_64-unknown-linux-gnu/sd.1
 
 - shell:
   -
