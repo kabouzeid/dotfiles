@@ -345,7 +345,6 @@ require("lazy").setup({
   { "mattn/emmet-vim" },
   { "pest-parser/pest.vim" },
   { "jwalton512/vim-blade" },
-  { "pantharshit00/vim-prisma" },
   {
     "evanleck/vim-svelte",
     config = function()
