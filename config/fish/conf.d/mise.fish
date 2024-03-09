@@ -8,8 +8,19 @@ if type -q mise
   if type -q uv; and type -q sd
     function venv
       mise use python@$argv
+
+      if not test -e .mise.toml
+        echo ".mise.toml not found, exiting."
+        exit 1
+      end
+
+      sd '_.python.venv.*\n' "" .mise.toml
+
       mise x -- uv venv
-      sd 'python = "(.*)"' 'python = {version="$1", virtualenv=".venv"}' .mise.toml
+
+      set placeholder __PYTHON_VENV_PLACEHOLDER
+      mise set "$placeholder"=PLACEHOLDER
+      sd "$placeholder.*" '_.python.venv = ".venv"' .mise.toml
     end
   end
 end
