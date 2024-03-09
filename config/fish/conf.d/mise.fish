@@ -21,6 +21,8 @@ if type -q mise
       set placeholder __PYTHON_VENV_PLACEHOLDER
       mise set "$placeholder"=PLACEHOLDER
       sd "$placeholder.*" '_.python.venv = ".venv"' .mise.toml
+
+      mise trust
     end
   end
 end
