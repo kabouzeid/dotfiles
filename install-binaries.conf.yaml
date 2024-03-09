@@ -38,6 +38,8 @@
       wget "https://github.com/direnv/direnv/releases/download/v2.33.0/direnv.linux-amd64" -O direnv && chmod +x direnv;
       wget "https://github.com/astral-sh/uv/releases/latest/download/uv-x86_64-unknown-linux-gnu.tar.gz" -O - | tar -xz;
       wget "https://github.com/chmln/sd/releases/download/v1.0.0/sd-v1.0.0-x86_64-unknown-linux-gnu.tar.gz" -O - | tar -xz;
+      wget "https://github.com/eza-community/eza/releases/download/v0.18.6/eza_x86_64-unknown-linux-gnu.tar.gz" -O - | tar -xz;
+      wget "https://github.com/zyedidia/eget/releases/download/v1.3.3/eget-1.3.3-linux_amd64.tar.gz" -O - | tar -xz;
     description: Download Binaries
 
 - link:
@@ -120,12 +122,22 @@
       path: ~/.local/share/packages/direnv
 
 - link:
+    ~/.local/bin/eza:
+      path: ~/.local/share/packages/eza
+
+- link:
     ~/.local/bin/sd:
       path: ~/.local/share/packages/sd-v1.0.0-x86_64-unknown-linux-gnu/sd
     ~/.local/share/fish/vendor_completions.d/sd.fish:
       path: ~/.local/share/packages/sd-v1.0.0-x86_64-unknown-linux-gnu/completions/sd.fish
     ~/.local/share/man/man1/sd.1:
       path: ~/.local/share/packages/sd-v1.0.0-x86_64-unknown-linux-gnu/sd.1
+
+- link:
+    ~/.local/bin/eget:
+      path: ~/.local/share/packages/eget-1.3.3-linux_amd64/eget
+    ~/.local/share/man/man1/eget.1:
+      path: ~/.local/share/packages/eget-1.3.3-linux_amd64/eget.1
 
 - shell:
   -
