@@ -136,6 +136,6 @@
 - shell:
   -
     command: >-
-      ~/.local/share/packages/mise/bin/mise use -g python@latest
-      ~/.local/share/packages/mise/bin/mise use -g node@lts
+      ~/.local/share/packages/mise/bin/mise use -g python@latest;
+      ~/.local/share/packages/mise/bin/mise use -g node@lts;
     description: Mise installs.
