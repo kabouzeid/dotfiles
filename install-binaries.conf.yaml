@@ -28,7 +28,7 @@
       wget "https://github.com/cli/cli/releases/download/v2.43.1/gh_2.43.1_linux_amd64.tar.gz" -O - | tar -xz;
       wget "https://github.com/dandavison/delta/releases/download/0.12.0/delta-0.12.0-x86_64-unknown-linux-gnu.tar.gz" -O - | tar -xz;
       wget "https://github.com/Wilfred/difftastic/releases/download/0.37.0/difft-x86_64-unknown-linux-gnu.tar.gz" -O - | tar -xz difft;
-      wget "https://github.com/jesseduffield/lazygit/releases/download/v0.40.2/lazygit_0.40.2_Linux_x86_64.tar.gz" -O - | tar -xz lazygit;
+      wget "https://github.com/jesseduffield/lazygit/releases/download/v0.41.0/lazygit_0.41.0_Linux_x86_64.tar.gz" -O - | tar -xz lazygit;
       wget "https://github.com/starship/starship/releases/download/v1.14.2/starship-x86_64-unknown-linux-gnu.tar.gz" -O - | tar -xz starship;
       wget "https://github.com/ajeetdsouza/zoxide/releases/download/v0.9.3/zoxide-0.9.3-x86_64-unknown-linux-musl.tar.gz" -O - | tar -xz zoxide;
       wget "https://github.com/junegunn/fzf/releases/download/0.29.0/fzf-0.29.0-linux_amd64.tar.gz" -O - | tar -xz fzf;
