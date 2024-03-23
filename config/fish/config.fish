@@ -23,8 +23,6 @@ if status is-interactive
     type -q xdg-open; and type -q setsid; and alias open="setsid xdg-open"
     type -q lazygit; and alias lzg lazygit
     type -q joshuto; and alias josh joshuto
-    type -q uv; and abbr pip 'uv pip'
-    type -q eza; and abbr ls 'eza'; and abbr ll 'eza -l'
     set -q MISE_DIRENV_BIN; and alias direnv $MISE_DIRENV_BIN
 
     type -q hx; and function hx
