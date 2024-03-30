@@ -137,8 +137,8 @@ require("lazy").setup({
     end,
   },
   { "theHamsta/nvim-dap-virtual-text", dependencies = "mfussenegger/nvim-dap" },
-  { "rcarriga/nvim-dap-ui",            dependencies = "mfussenegger/nvim-dap" },
-  { "mfussenegger/nvim-dap-python",    dependencies = "mfussenegger/nvim-dap" },
+  { "rcarriga/nvim-dap-ui", dependencies = { "mfussenegger/nvim-dap", "nvim-neotest/nvim-nio" } },
+  { "mfussenegger/nvim-dap-python", dependencies = "mfussenegger/nvim-dap" },
 
   -- Color
   { "norcalli/nvim-colorizer.lua" },
@@ -147,7 +147,7 @@ require("lazy").setup({
   -- Themes
   -- use({ "rose-pine/neovim", as = "rose-pine" })
   -- use "~/Code/rose-pine"
-  { "projekt0n/github-nvim-theme",     branch = "0.0.x" },
+  { "projekt0n/github-nvim-theme", branch = "0.0.x" },
   -- use("Pocco81/Catppuccino.nvim")
   -- use("bluz71/vim-moonfly-colors")
   -- use({ "kabouzeid/nvim-jellybeans", dependencies = "rktjmp/lush.nvim" })
