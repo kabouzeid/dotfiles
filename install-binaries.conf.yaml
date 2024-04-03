@@ -40,7 +40,7 @@
       wget "https://github.com/chmln/sd/releases/download/v1.0.0/sd-v1.0.0-x86_64-unknown-linux-gnu.tar.gz" -O - | tar -xz;
       wget "https://github.com/eza-community/eza/releases/download/v0.18.6/eza_x86_64-unknown-linux-gnu.tar.gz" -O - | tar -xz;
       wget "https://github.com/zyedidia/eget/releases/download/v1.3.3/eget-1.3.3-linux_amd64.tar.gz" -O - | tar -xz;
-      wget "https://github.com/sxyazi/yazi/releases/download/v0.2.4/yazi-x86_64-unknown-linux-gnu.zip" -O - | tar -xz;
+      export TMPFILE=$(mktemp); wget "https://github.com/sxyazi/yazi/releases/download/v0.2.4/yazi-x86_64-unknown-linux-gnu.zip" -O $TMPFILE && unzip $TMPFILE;
     description: Download Binaries
 
 - link:
