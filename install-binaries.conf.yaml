@@ -23,24 +23,24 @@
       wget "https://github.com/mliszcz/fish-shell/releases/download/fish-3.7.1-x86_64/fish-3.7.1-x86_64.AppImage" -O fish.appimage && chmod +x fish.appimage;
       wget "https://github.com/neovim/neovim/releases/download/stable/nvim.appimage" -O nvim.appimage && chmod +x nvim.appimage;
       wget "https://github.com/BurntSushi/ripgrep/releases/download/14.1.0/ripgrep-14.1.0-x86_64-unknown-linux-musl.tar.gz" -O - | tar -xz;
-      wget "https://github.com/sharkdp/fd/releases/download/v9.0.0/fd-v9.0.0-x86_64-unknown-linux-gnu.tar.gz" -O - | tar -xz;
-      wget "https://github.com/sharkdp/bat/releases/download/v0.23.0/bat-v0.23.0-x86_64-unknown-linux-gnu.tar.gz" -O - | tar -xz;
+      wget "https://github.com/sharkdp/fd/releases/download/v9.0.0/fd-v9.0.0-x86_64-unknown-linux-musl.tar.gz" -O - | tar -xz;
+      wget "https://github.com/sharkdp/bat/releases/download/v0.23.0/bat-v0.23.0-x86_64-unknown-linux-musl.tar.gz" -O - | tar -xz;
       wget "https://github.com/cli/cli/releases/download/v2.43.1/gh_2.43.1_linux_amd64.tar.gz" -O - | tar -xz;
-      wget "https://github.com/dandavison/delta/releases/download/0.12.0/delta-0.12.0-x86_64-unknown-linux-gnu.tar.gz" -O - | tar -xz;
-      wget "https://github.com/Wilfred/difftastic/releases/download/0.37.0/difft-x86_64-unknown-linux-gnu.tar.gz" -O - | tar -xz difft;
+      wget "https://github.com/dandavison/delta/releases/download/0.12.0/delta-0.12.0-x86_64-unknown-linux-musl.tar.gz" -O - | tar -xz;
+      wget "https://github.com/Wilfred/difftastic/releases/download/0.37.0/difft-x86_64-unknown-linux-musl.tar.gz" -O - | tar -xz difft;
       wget "https://github.com/jesseduffield/lazygit/releases/download/v0.41.0/lazygit_0.41.0_Linux_x86_64.tar.gz" -O - | tar -xz lazygit;
-      wget "https://github.com/starship/starship/releases/download/v1.14.2/starship-x86_64-unknown-linux-gnu.tar.gz" -O - | tar -xz starship;
+      wget "https://github.com/starship/starship/releases/download/v1.14.2/starship-x86_64-unknown-linux-musl.tar.gz" -O - | tar -xz starship;
       wget "https://github.com/ajeetdsouza/zoxide/releases/download/v0.9.3/zoxide-0.9.3-x86_64-unknown-linux-musl.tar.gz" -O - | tar -xz zoxide;
       wget "https://github.com/junegunn/fzf/releases/download/0.29.0/fzf-0.29.0-linux_amd64.tar.gz" -O - | tar -xz fzf;
       wget "https://raw.githubusercontent.com/junegunn/fzf/0.29.0/shell/key-bindings.zsh" -O fzf-key-bindings.zsh;
       wget "https://github.com/ellie/atuin/releases/download/v18.1.0/atuin-v18.1.0-x86_64-unknown-linux-musl.tar.gz" -O - | tar -xz;
       wget "https://github.com/jdx/mise/releases/download/v2024.3.1/mise-v2024.3.1-linux-x64.tar.gz" -O - | tar -xz;
       wget "https://github.com/direnv/direnv/releases/download/v2.33.0/direnv.linux-amd64" -O direnv && chmod +x direnv;
-      wget "https://github.com/astral-sh/uv/releases/latest/download/uv-x86_64-unknown-linux-gnu.tar.gz" -O - | tar -xz;
-      wget "https://github.com/chmln/sd/releases/download/v1.0.0/sd-v1.0.0-x86_64-unknown-linux-gnu.tar.gz" -O - | tar -xz;
-      wget "https://github.com/eza-community/eza/releases/download/v0.18.6/eza_x86_64-unknown-linux-gnu.tar.gz" -O - | tar -xz;
+      wget "https://github.com/astral-sh/uv/releases/latest/download/uv-x86_64-unknown-linux-musl.tar.gz" -O - | tar -xz;
+      wget "https://github.com/chmln/sd/releases/download/v1.0.0/sd-v1.0.0-x86_64-unknown-linux-musl.tar.gz" -O - | tar -xz;
+      wget "https://github.com/eza-community/eza/releases/download/v0.18.6/eza_x86_64-unknown-linux-musl.tar.gz" -O - | tar -xz;
       wget "https://github.com/zyedidia/eget/releases/download/v1.3.3/eget-1.3.3-linux_amd64.tar.gz" -O - | tar -xz;
-      export TMPFILE=$(mktemp); wget "https://github.com/sxyazi/yazi/releases/download/v0.2.4/yazi-x86_64-unknown-linux-gnu.zip" -O $TMPFILE && unzip $TMPFILE;
+      export TMPFILE=$(mktemp); wget "https://github.com/sxyazi/yazi/releases/download/v0.2.4/yazi-x86_64-unknown-linux-musl.zip" -O $TMPFILE && unzip $TMPFILE;
     description: Download Binaries
 
 - link:
@@ -59,15 +59,15 @@
 
 - link:
     ~/.local/bin/fd:
-      path: ~/.local/share/packages/fd-v9.0.0-x86_64-unknown-linux-gnu/fd
+      path: ~/.local/share/packages/fd-v9.0.0-x86_64-unknown-linux-musl/fd
     ~/.local/share/man/man1/fd.1:
-      path: ~/.local/share/packages/fd-v9.0.0-x86_64-unknown-linux-gnu/fd.1
+      path: ~/.local/share/packages/fd-v9.0.0-x86_64-unknown-linux-musl/fd.1
 
 - link:
     ~/.local/bin/bat:
-      path: ~/.local/share/packages/bat-v0.23.0-x86_64-unknown-linux-gnu/bat
+      path: ~/.local/share/packages/bat-v0.23.0-x86_64-unknown-linux-musl/bat
     ~/.local/share/man/man1/bat.1:
-      path: ~/.local/share/packages/bat-v0.23.0-x86_64-unknown-linux-gnu/bat.1
+      path: ~/.local/share/packages/bat-v0.23.0-x86_64-unknown-linux-musl/bat.1
 
 - link:
     ~/.local/bin/gh:
@@ -78,7 +78,7 @@
 
 - link:
     ~/.local/bin/delta:
-      path: ~/.local/share/packages/delta-0.12.0-x86_64-unknown-linux-gnu/delta
+      path: ~/.local/share/packages/delta-0.12.0-x86_64-unknown-linux-musl/delta
 
 - link:
     ~/.local/bin/difft:
@@ -116,7 +116,7 @@
 
 - link:
     ~/.local/bin/uv:
-      path: ~/.local/share/packages/uv-x86_64-unknown-linux-gnu/uv
+      path: ~/.local/share/packages/uv-x86_64-unknown-linux-musl/uv
 
 - link:
     ~/.local/bin/direnv:
@@ -128,11 +128,11 @@
 
 - link:
     ~/.local/bin/sd:
-      path: ~/.local/share/packages/sd-v1.0.0-x86_64-unknown-linux-gnu/sd
+      path: ~/.local/share/packages/sd-v1.0.0-x86_64-unknown-linux-musl/sd
     ~/.local/share/fish/vendor_completions.d/sd.fish:
-      path: ~/.local/share/packages/sd-v1.0.0-x86_64-unknown-linux-gnu/completions/sd.fish
+      path: ~/.local/share/packages/sd-v1.0.0-x86_64-unknown-linux-musl/completions/sd.fish
     ~/.local/share/man/man1/sd.1:
-      path: ~/.local/share/packages/sd-v1.0.0-x86_64-unknown-linux-gnu/sd.1
+      path: ~/.local/share/packages/sd-v1.0.0-x86_64-unknown-linux-musl/sd.1
 
 - link:
     ~/.local/bin/eget:
@@ -148,9 +148,9 @@
 
 - link:
     ~/.local/bin/yazi:
-      path: ~/.local/share/packages/yazi-x86_64-unknown-linux-gnu/yazi
+      path: ~/.local/share/packages/yazi-x86_64-unknown-linux-musl/yazi
     ~/.local/share/fish/vendor_completions.d/yazi.fish:
-      path: ~/.local/share/packages/yazi-x86_64-unknown-linux-gnu/completions/yazi.fish
+      path: ~/.local/share/packages/yazi-x86_64-unknown-linux-musl/completions/yazi.fish
 
 - shell:
   -
