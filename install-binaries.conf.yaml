@@ -20,7 +20,7 @@
   -
     command: >-
       cd ~/.local/share/packages || exit 1;
-      wget "https://github.com/mliszcz/fish-shell/releases/download/fish-3.7.0-x86_64/fish-3.7.0-x86_64.AppImage" -O fish.appimage && chmod +x fish.appimage;
+      wget "https://github.com/mliszcz/fish-shell/releases/download/fish-3.7.1-x86_64/fish-3.7.1-x86_64.AppImage" -O fish.appimage && chmod +x fish.appimage;
       wget "https://github.com/neovim/neovim/releases/download/stable/nvim.appimage" -O nvim.appimage && chmod +x nvim.appimage;
       wget "https://github.com/BurntSushi/ripgrep/releases/download/14.1.0/ripgrep-14.1.0-x86_64-unknown-linux-musl.tar.gz" -O - | tar -xz;
       wget "https://github.com/sharkdp/fd/releases/download/v9.0.0/fd-v9.0.0-x86_64-unknown-linux-gnu.tar.gz" -O - | tar -xz;
