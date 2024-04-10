@@ -1,6 +1,4 @@
-# put your local config in ./conf.d/0.local.fish
-
-fish_add_path --global "$HOME/.local/bin" "$HOME/.cargo/bin"
+# put your local config in ./conf.d/0-.local.fish
 
 if status is-login
     if type -q nvim
