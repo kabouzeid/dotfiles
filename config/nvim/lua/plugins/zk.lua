@@ -47,10 +47,11 @@ vim.keymap.set("x", "<leader>zn", ":'<,'>ZkNewFromTitleSelection<CR>", { noremap
 vim.keymap.set("x", "<leader>zn", ":'<,'>ZkNewFromContentSelection<CR>", { noremap = true })
 vim.keymap.set("n", "<leader>ze", "<cmd>ZkNotes { sort = { 'modified' } }<CR>", { noremap = true })
 vim.keymap.set("n", "<leader>z/", "<cmd>ZkLiveGrep<CR>", { noremap = true })
+vim.keymap.set("n", "<leader>zt", "<cmd>ZkTags<CR>", { noremap = true })
 vim.keymap.set(
   "n",
   "<leader>zs",
-  "<cmd>ZkNotes { sort = { 'modified' }, match = vim.fn.input('Search: ') }<CR>",
+  "<cmd>ZkNotes { sort = { 'modified' }, match = { vim.fn.input('Search: ') } }<CR>",
   { noremap = true }
 )
 vim.keymap.set("n", "<leader>zb", "<cmd>ZkBacklinks<CR>", { noremap = true })
