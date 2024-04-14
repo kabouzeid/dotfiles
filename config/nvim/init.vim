@@ -72,6 +72,8 @@ augroup auto_filetypes
   autocmd Filetype NvimTree setlocal cursorline
 
   autocmd BufRead,BufNewFile *.ff set filetype=fontforge_script
+
+  autocmd BufRead,BufNewFile *.typ set filetype=typst
 augroup END
 
 " }}}

@@ -186,6 +186,7 @@ local servers = {
   "tailwindcss",
   "texlab",
   "tsserver",
+  "typst_lsp",
   "vimls",
   "volar",
   "yamlls",
