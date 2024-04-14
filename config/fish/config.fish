@@ -30,4 +30,6 @@ if status is-interactive
     type -q zoxide; and zoxide init fish | source
     type -q starship; and starship init fish | source
     type -q atuin; and atuin init fish --disable-up-arrow | source
+
+    abbr fishc "$EDITOR $__fish_config_dir/conf.d/0-.local.fish"
 end
