@@ -70,6 +70,9 @@ vim.keymap.set("", "[d", "<cmd>call VSCodeNotify('editor.action.marker.prev')<cr
 vim.keymap.set("", "]c", "<cmd>call VSCodeNotify('workbench.action.editor.nextChange')<cr>")
 vim.keymap.set("", "[c", "<cmd>call VSCodeNotify('workbench.action.editor.previousChange')<cr>")
 
+-- search
+vim.keymap.set("n", "/", "<cmd>call VSCodeNotify('actions.find')<cr>")
+
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
 vim.opt.clipboard:append("unnamedplus")
