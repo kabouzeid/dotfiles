@@ -144,7 +144,8 @@
 - shell:
   -
     command: >-
-      ~/.local/share/packages/mise/bin/mise completion fish > ~/.local/share/fish/vendor_completions.d/mise.fish
+      ~/.local/share/packages/mise/bin/mise use -g usage;
+      ~/.local/share/packages/mise/bin/mise completion fish > ~/.local/share/fish/vendor_completions.d/mise.fish;
     description: Mise completions.
 
 - link:
