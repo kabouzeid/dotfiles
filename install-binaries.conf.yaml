@@ -29,16 +29,16 @@
       wget "https://github.com/dandavison/delta/releases/download/0.12.0/delta-0.12.0-x86_64-unknown-linux-musl.tar.gz" -O - | tar -xz;
       wget "https://github.com/Wilfred/difftastic/releases/download/0.37.0/difft-x86_64-unknown-linux-musl.tar.gz" -O - | tar -xz difft;
       wget "https://github.com/jesseduffield/lazygit/releases/download/v0.41.0/lazygit_0.41.0_Linux_x86_64.tar.gz" -O - | tar -xz lazygit;
-      wget "https://github.com/starship/starship/releases/download/v1.14.2/starship-x86_64-unknown-linux-musl.tar.gz" -O - | tar -xz starship;
+      wget "https://github.com/starship/starship/releases/download/v1.18.2/starship-x86_64-unknown-linux-musl.tar.gz" -O - | tar -xz starship;
       wget "https://github.com/ajeetdsouza/zoxide/releases/download/v0.9.4/zoxide-0.9.4-x86_64-unknown-linux-musl.tar.gz" -O - | tar -xz zoxide;
       wget "https://github.com/junegunn/fzf/releases/download/0.29.0/fzf-0.29.0-linux_amd64.tar.gz" -O - | tar -xz fzf;
       wget "https://raw.githubusercontent.com/junegunn/fzf/0.29.0/shell/key-bindings.zsh" -O fzf-key-bindings.zsh;
-      wget "https://github.com/ellie/atuin/releases/download/v18.1.0/atuin-v18.1.0-x86_64-unknown-linux-musl.tar.gz" -O - | tar -xz;
-      wget "https://github.com/jdx/mise/releases/download/v2024.3.1/mise-v2024.3.1-linux-x64.tar.gz" -O - | tar -xz;
+      wget "https://github.com/ellie/atuin/releases/download/v18.2.0/atuin-v18.2.0-x86_64-unknown-linux-musl.tar.gz" -O - | tar -xz;
+      wget "https://github.com/jdx/mise/releases/download/v2024.5.16/mise-v2024.5.16-linux-x64.tar.gz" -O - | tar -xz;
       wget "https://github.com/direnv/direnv/releases/download/v2.33.0/direnv.linux-amd64" -O direnv && chmod +x direnv;
       wget "https://github.com/astral-sh/uv/releases/latest/download/uv-x86_64-unknown-linux-musl.tar.gz" -O - | tar -xz;
       wget "https://github.com/chmln/sd/releases/download/v1.0.0/sd-v1.0.0-x86_64-unknown-linux-musl.tar.gz" -O - | tar -xz;
-      wget "https://github.com/eza-community/eza/releases/download/v0.18.6/eza_x86_64-unknown-linux-musl.tar.gz" -O - | tar -xz;
+      wget "https://github.com/eza-community/eza/releases/download/v0.18.15/eza_x86_64-unknown-linux-musl.tar.gz" -O - | tar -xz;
       wget "https://github.com/zyedidia/eget/releases/download/v1.3.3/eget-1.3.3-linux_amd64.tar.gz" -O - | tar -xz;
       wget "https://github.com/Byron/dua-cli/releases/download/v2.29.0/dua-v2.29.0-x86_64-unknown-linux-musl.tar.gz" -O - | tar -xz;
       export TMPFILE=$(mktemp); wget "https://github.com/sxyazi/yazi/releases/download/v0.2.4/yazi-x86_64-unknown-linux-musl.zip" -O $TMPFILE && unzip -o $TMPFILE;
@@ -105,9 +105,9 @@
 
 - link:
     ~/.local/bin/atuin:
-      path: ~/.local/share/packages/atuin-v18.1.0-x86_64-unknown-linux-musl/atuin
+      path: ~/.local/share/packages/atuin-v18.2.0-x86_64-unknown-linux-musl/atuin
     ~/.local/share/fish/vendor_completions.d/atuin.fish:
-      path: ~/.local/share/packages/atuin-v18.1.0-x86_64-unknown-linux-musl/completions/atuin.fish
+      path: ~/.local/share/packages/atuin-v18.2.0-x86_64-unknown-linux-musl/completions/atuin.fish
 
 - link:
     ~/.local/bin/mise:
