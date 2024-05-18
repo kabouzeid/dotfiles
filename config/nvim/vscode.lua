@@ -71,7 +71,7 @@ vim.keymap.set("", "]c", "<cmd>call VSCodeNotify('workbench.action.editor.nextCh
 vim.keymap.set("", "[c", "<cmd>call VSCodeNotify('workbench.action.editor.previousChange')<cr>")
 
 -- search
-vim.keymap.set("n", "/", "<cmd>call VSCodeNotify('actions.find')<cr>")
+-- vim.keymap.set("n", "/", "<cmd>call VSCodeNotify('actions.find')<cr>")
 
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
