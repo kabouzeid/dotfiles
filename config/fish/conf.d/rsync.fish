@@ -1,4 +1,4 @@
-alias rsync-copy="rsync -avz --progress -h"
-alias rsync-move="rsync -avz --progress -h --remove-source-files"
-alias rsync-update="rsync -avzu --progress -h"
-alias rsync-synchronize="rsync -avzu --delete --progress -h"
+ abbr rsync-cp "rsync -avz --progress -h"
+ abbr rsync-mv "rsync -avz --progress -h --remove-source-files"
+ abbr rsync-update "rsync -avzu --progress -h"
+ abbr rsync-sync "rsync -avzu --delete --progress -h"
