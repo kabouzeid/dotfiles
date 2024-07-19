@@ -22,11 +22,11 @@
       cd ~/.local/share/packages || exit 1;
       wget "https://github.com/mliszcz/fish-shell/releases/download/fish-3.7.1-x86_64/fish-3.7.1-x86_64.AppImage" -O fish.appimage && chmod +x fish.appimage;
       wget "https://github.com/neovim/neovim/releases/download/stable/nvim.appimage" -O nvim.appimage && chmod +x nvim.appimage;
-      wget "https://github.com/helix-editor/helix/releases/download/24.03/helix-24.03-x86_64.AppImage" -O helix.appimage && chmod +x helix.appimage;
+      wget "https://github.com/helix-editor/helix/releases/download/24.07/helix-24.07-x86_64.AppImage" -O helix.appimage && chmod +x helix.appimage;
       wget "https://github.com/BurntSushi/ripgrep/releases/download/14.1.0/ripgrep-14.1.0-x86_64-unknown-linux-musl.tar.gz" -O - | tar -xz;
       wget "https://github.com/sharkdp/fd/releases/download/v9.0.0/fd-v9.0.0-x86_64-unknown-linux-musl.tar.gz" -O - | tar -xz;
       wget "https://github.com/sharkdp/bat/releases/download/v0.23.0/bat-v0.23.0-x86_64-unknown-linux-musl.tar.gz" -O - | tar -xz;
-      wget "https://github.com/cli/cli/releases/download/v2.43.1/gh_2.43.1_linux_amd64.tar.gz" -O - | tar -xz;
+      wget "https://github.com/cli/cli/releases/download/v2.52.0/gh_2.52.0_linux_amd64.tar.gz" -O - | tar -xz;
       wget "https://github.com/dandavison/delta/releases/download/0.12.0/delta-0.12.0-x86_64-unknown-linux-musl.tar.gz" -O - | tar -xz;
       wget "https://github.com/Wilfred/difftastic/releases/download/0.37.0/difft-x86_64-unknown-linux-musl.tar.gz" -O - | tar -xz difft;
       wget "https://github.com/jesseduffield/lazygit/releases/download/v0.42.0/lazygit_0.42.0_Linux_x86_64.tar.gz" -O - | tar -xz lazygit;
@@ -35,7 +35,7 @@
       wget "https://github.com/junegunn/fzf/releases/download/0.29.0/fzf-0.29.0-linux_amd64.tar.gz" -O - | tar -xz fzf;
       wget "https://raw.githubusercontent.com/junegunn/fzf/0.29.0/shell/key-bindings.zsh" -O fzf-key-bindings.zsh;
       wget "https://github.com/ellie/atuin/releases/download/v18.2.0/atuin-v18.2.0-x86_64-unknown-linux-musl.tar.gz" -O - | tar -xz;
-      wget "https://github.com/jdx/mise/releases/download/v2024.5.16/mise-v2024.5.16-linux-x64.tar.gz" -O - | tar -xz;
+      wget "https://github.com/jdx/mise/releases/download/v2024.7.3/mise-v2024.7.3-linux-x64.tar.gz" -O - | tar -xz;
       wget "https://github.com/direnv/direnv/releases/download/v2.33.0/direnv.linux-amd64" -O direnv && chmod +x direnv;
       wget "https://github.com/astral-sh/uv/releases/latest/download/uv-x86_64-unknown-linux-musl.tar.gz" -O - | tar -xz;
       wget "https://github.com/chmln/sd/releases/download/v1.0.0/sd-v1.0.0-x86_64-unknown-linux-musl.tar.gz" -O - | tar -xz;
@@ -43,6 +43,7 @@
       wget "https://github.com/zyedidia/eget/releases/download/v1.3.3/eget-1.3.3-linux_amd64.tar.gz" -O - | tar -xz;
       wget "https://github.com/Byron/dua-cli/releases/download/v2.29.0/dua-v2.29.0-x86_64-unknown-linux-musl.tar.gz" -O - | tar -xz;
       export TMPFILE=$(mktemp); wget "https://github.com/sxyazi/yazi/releases/download/v0.2.4/yazi-x86_64-unknown-linux-musl.zip" -O $TMPFILE && unzip -o $TMPFILE;
+      export TMPFILE=$(mktemp); wget "https://github.com/ast-grep/ast-grep/releases/download/0.25.2/app-x86_64-unknown-linux-gnu.zip" -O $TMPFILE && unzip -o $TMPFILE;
     description: Download Binaries
 
 - link:
@@ -77,10 +78,10 @@
 
 - link:
     ~/.local/bin/gh:
-      path: ~/.local/share/packages/gh_2.43.1_linux_amd64/bin/gh
+      path: ~/.local/share/packages/gh_2.52.0_linux_amd64/bin/gh
     ~/.local/share/man/man1:
       glob: true
-      path: ~/.local/share/packages/gh_2.43.1_linux_amd64/share/man/man1/*
+      path: ~/.local/share/packages/gh_2.52.0_linux_amd64/share/man/man1/*
 
 - link:
     ~/.local/bin/delta:
@@ -158,6 +159,12 @@
       path: ~/.local/share/packages/yazi-x86_64-unknown-linux-musl/yazi
     ~/.local/share/fish/vendor_completions.d/yazi.fish:
       path: ~/.local/share/packages/yazi-x86_64-unknown-linux-musl/completions/yazi.fish
+
+- link:
+    ~/.local/bin/sg:
+      path: ~/.local/share/packages/sg
+    ~/.local/bin/ast-grep:
+      path: ~/.local/share/packages/ast-grep
 
 - link:
     ~/.local/bin/dua:
