@@ -107,3 +107,5 @@ compile_flags.txt
 .git_old
 
 slurm-*.out
+
+pyrightconfig.json
