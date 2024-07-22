@@ -1,1 +1,1 @@
-fish_add_path --global "$HOME/.local/bin" "$HOME/.cargo/bin"
+fish_add_path --global "$HOME/.cargo/bin" "$HOME/.local/bin"
