@@ -1,7 +1,9 @@
 # put your local config in ./conf.d/0-.local.fish
 
 if status is-login
-    if type -q nvim
+    if type -q hx
+        set -gx EDITOR hx
+    else if type -q nvim
         set -gx EDITOR nvim
     else
         set -gx EDITOR vim
@@ -14,7 +16,7 @@ if status is-login
 end
 
 if status is-interactive
-    test -e "$HOME/.iterm2_shell_integration.fish" ; and source "$HOME/.iterm2_shell_integration.fish"
+    test -e "$HOME/.iterm2_shell_integration.fish"; and source "$HOME/.iterm2_shell_integration.fish"
 
     alias v $EDITOR
     type -q nvr; and set -q NVIM; and alias v "nvr --remote-tab --nostart"
@@ -31,5 +33,7 @@ if status is-interactive
     type -q starship; and starship init fish | source
     type -q atuin; and atuin init fish --disable-up-arrow | source
 
-    abbr fishc "$EDITOR $__fish_config_dir/conf.d/0-.local.fish"
+    function fishc
+        cd $__fish_config_dir; and $EDITOR conf.d/0-.local.fish; and cd -
+    end
 end
