@@ -1,0 +1,7 @@
+[manager]
+append_keymap = [
+  { on = [
+    "g",
+    "e",
+  ], run = "arrow 99999999", desc = "Move cursor to the bottom" },
+]
