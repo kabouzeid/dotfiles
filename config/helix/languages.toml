@@ -3,14 +3,17 @@ command = "pyright-langserver"
 args = ["--stdio"]
 config = {} # somehow important for pyright to work
 
+[language-server.ruff]
+command = "ruff"
+args = ["server"]
+
 [language-server.zk]
 command = "zk"
 args = ["lsp"]
 
 [[language]]
 name = "python"
-formatter = { command = "black", args = ["--quiet", "-"] }
-language-servers = ["pyright"]
+language-servers = ["ruff", "pyright"]
 
 [[language]]
 name = "toml"
