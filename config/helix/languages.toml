@@ -1,9 +1,10 @@
 [language-server.basedpyright.config.basedpyright.analysis]
-# typeCheckingMode = "basic"
+typeCheckingMode = "standard" # off, basic, standard, strict, all
 
 [language-server.basedpyright.config.basedpyright.analysis.diagnosticSeverityOverrides]
 reportUnusedImport = false # ruff
- 
+reportUnusedVariable = false # ruff
+  
 [language-server.ruff]
 command = "ruff"
 args = ["server"]
