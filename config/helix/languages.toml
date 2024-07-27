@@ -1,8 +1,9 @@
-[language-server.pyright]
-command = "pyright-langserver"
-args = ["--stdio"]
-config = {} # somehow important for pyright to work
+[language-server.basedpyright.config.basedpyright.analysis]
+# typeCheckingMode = "basic"
 
+[language-server.basedpyright.config.basedpyright.analysis.diagnosticSeverityOverrides]
+reportUnusedImport = false # ruff
+ 
 [language-server.ruff]
 command = "ruff"
 args = ["server"]
@@ -13,7 +14,8 @@ args = ["lsp"]
 
 [[language]]
 name = "python"
-language-servers = ["ruff", "pyright"]
+auto-format = true
+language-servers = ["basedpyright", "ruff"]
 
 [[language]]
 name = "toml"
