@@ -6,6 +6,7 @@ wk.setup({
       enabled = true,
     },
   },
+  notify=false,
 })
 
 wk.register({
