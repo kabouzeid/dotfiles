@@ -152,6 +152,11 @@
       ~/.local/share/packages/mise/bin/mise completion fish > ~/.local/share/fish/vendor_completions.d/mise.fish;
     description: Mise completions.
 
+  -
+    command: >-
+      ~/.local/share/packages/uv-x86_64-unknown-linux-musl/uv generate-shell-completion fish > ~/.local/share/fish/vendor_completions.d/uv.fish;
+    description: uv completions.
+
 - link:
     ~/.local/bin/yazi:
       path: ~/.local/share/packages/yazi-x86_64-unknown-linux-musl/yazi
