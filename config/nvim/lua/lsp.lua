@@ -184,6 +184,7 @@ local servers = {
   "lua_ls",
   "svelte",
   "tailwindcss",
+  "taplo",
   "texlab",
   "tsserver",
   "typst_lsp",

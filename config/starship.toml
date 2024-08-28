@@ -12,3 +12,6 @@ ignore_base = false
 # https://github.com/starship/starship/issues/5350
 [battery]
 disabled = true
+
+[python]
+python_binary = "_starship_python.sh"
