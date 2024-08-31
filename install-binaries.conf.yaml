@@ -30,18 +30,18 @@
       wget "https://github.com/dandavison/delta/releases/download/0.17.0/delta-0.17.0-x86_64-unknown-linux-musl.tar.gz" -O - | tar -xz;
       wget "https://github.com/Wilfred/difftastic/releases/download/0.37.0/difft-x86_64-unknown-linux-musl.tar.gz" -O - | tar -xz difft;
       wget "https://github.com/jesseduffield/lazygit/releases/download/v0.43.1/lazygit_0.43.1_Linux_x86_64.tar.gz" -O - | tar -xz lazygit;
-      wget "https://github.com/starship/starship/releases/download/v1.19.0/starship-x86_64-unknown-linux-musl.tar.gz" -O - | tar -xz starship;
+      wget "https://github.com/starship/starship/releases/download/v1.20.1/starship-x86_64-unknown-linux-musl.tar.gz" -O - | tar -xz starship;
       wget "https://github.com/ajeetdsouza/zoxide/releases/download/v0.9.4/zoxide-0.9.4-x86_64-unknown-linux-musl.tar.gz" -O - | tar -xz zoxide;
       wget "https://github.com/junegunn/fzf/releases/download/0.29.0/fzf-0.29.0-linux_amd64.tar.gz" -O - | tar -xz fzf;
       wget "https://raw.githubusercontent.com/junegunn/fzf/0.29.0/shell/key-bindings.zsh" -O fzf-key-bindings.zsh;
       wget "https://github.com/ellie/atuin/releases/latest/download/atuin-x86_64-unknown-linux-musl.tar.gz" -O - | tar -xz;
-      wget "https://github.com/jdx/mise/releases/download/v2024.7.4/mise-v2024.7.4-linux-x64.tar.gz" -O - | tar -xz;
+      wget "https://github.com/jdx/mise/releases/download/v2024.8.15/mise-v2024.8.15-linux-x64.tar.gz" -O - | tar -xz;
       wget "https://github.com/astral-sh/uv/releases/latest/download/uv-x86_64-unknown-linux-musl.tar.gz" -O - | tar -xz;
       wget "https://github.com/chmln/sd/releases/download/v1.0.0/sd-v1.0.0-x86_64-unknown-linux-musl.tar.gz" -O - | tar -xz;
       wget "https://github.com/eza-community/eza/releases/download/v0.18.22/eza_x86_64-unknown-linux-musl.tar.gz" -O - | tar -xz;
       wget "https://github.com/zyedidia/eget/releases/download/v1.3.4/eget-1.3.4-linux_amd64.tar.gz" -O - | tar -xz;
       wget "https://github.com/Byron/dua-cli/releases/download/v2.29.0/dua-v2.29.0-x86_64-unknown-linux-musl.tar.gz" -O - | tar -xz;
-      export TMPFILE=$(mktemp); wget "https://github.com/sxyazi/yazi/releases/download/v0.2.5/yazi-x86_64-unknown-linux-musl.zip" -O $TMPFILE && unzip -o $TMPFILE;
+      export TMPFILE=$(mktemp); wget "https://github.com/sxyazi/yazi/releases/download/v0.3.2/yazi-x86_64-unknown-linux-musl.zip" -O $TMPFILE && unzip -o $TMPFILE;
       export TMPFILE=$(mktemp); wget "https://github.com/ast-grep/ast-grep/releases/download/0.25.3/app-x86_64-unknown-linux-gnu.zip" -O $TMPFILE && unzip -o $TMPFILE;
     description: Download Binaries
 
