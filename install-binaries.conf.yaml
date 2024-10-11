@@ -131,6 +131,8 @@
 - link:
     ~/.local/bin/uv:
       path: ~/.local/share/packages/uv-x86_64-unknown-linux-musl/uv
+    ~/.local/bin/uvx:
+      path: ~/.local/share/packages/uv-x86_64-unknown-linux-musl/uvx
 - shell:
   -
     command: >-
