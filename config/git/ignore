@@ -109,3 +109,7 @@ compile_flags.txt
 slurm-*.out
 
 pyrightconfig.json
+
+output_*.txt
+
+justfile

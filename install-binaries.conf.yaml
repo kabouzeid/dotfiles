@@ -41,6 +41,7 @@
       wget "https://github.com/eza-community/eza/releases/download/v0.18.22/eza_x86_64-unknown-linux-musl.tar.gz" -O - | tar -xz;
       wget "https://github.com/zyedidia/eget/releases/download/v1.3.4/eget-1.3.4-linux_amd64.tar.gz" -O - | tar -xz;
       wget "https://github.com/Byron/dua-cli/releases/download/v2.29.0/dua-v2.29.0-x86_64-unknown-linux-musl.tar.gz" -O - | tar -xz;
+      mkdir -p just; wget "https://github.com/casey/just/releases/download/1.36.0/just-1.36.0-x86_64-unknown-linux-musl.tar.gz" -O - | tar -xz -C just;
       export TMPFILE=$(mktemp); wget "https://github.com/sxyazi/yazi/releases/download/v0.3.2/yazi-x86_64-unknown-linux-musl.zip" -O $TMPFILE && unzip -o $TMPFILE;
       export TMPFILE=$(mktemp); wget "https://github.com/ast-grep/ast-grep/releases/download/0.25.3/app-x86_64-unknown-linux-gnu.zip" -O $TMPFILE && unzip -o $TMPFILE;
     description: Download Binaries
@@ -172,3 +173,11 @@
 - link:
     ~/.local/bin/dua:
       path: ~/.local/share/packages/dua-v2.29.0-x86_64-unknown-linux-musl/dua
+
+- link:
+    ~/.local/bin/just:
+      path: ~/.local/share/packages/just/just
+    ~/.local/share/fish/vendor_completions.d/just.fish:
+      path: ~/.local/share/packages/just/completions/just.fish
+    ~/.local/share/man/man1/just.1:
+      path: ~/.local/share/packages/just/just.1
