@@ -193,7 +193,7 @@ local servers = {
   "tailwindcss",
   "taplo",
   "texlab",
-  "tsserver",
+  "ts_ls",
   "typst_lsp",
   "vimls",
   "volar",

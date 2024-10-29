@@ -20,6 +20,7 @@ require("nvim-treesitter.configs").setup({
     "html",
     "javascript",
     -- "jsdoc",
+    "just",
     "json",
     "jsonc",
     "latex",

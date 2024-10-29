@@ -34,4 +34,8 @@ if status is-interactive
     function fishc
         cd $__fish_config_dir; and $EDITOR conf.d/0-.local.fish; and cd -
     end
+
+    type -q pip; and function gpip
+       PIP_REQUIRE_VIRTUALENV="false" pip "$argv"
+    end
 end
