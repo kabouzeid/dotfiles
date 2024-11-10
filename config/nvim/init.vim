@@ -65,7 +65,7 @@ augroup auto_filetypes
   autocmd BufRead,BufNewFile *.cls set filetype=tex
   " autocmd Filetype tex set conceallevel=1
 
-  autocmd FileType markdown setlocal conceallevel=2
+  " autocmd FileType markdown setlocal conceallevel=2
 
   autocmd Filetype lspinfo setlocal nowrap
 
