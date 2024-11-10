@@ -15,3 +15,6 @@ disabled = true
 
 [python]
 python_binary = "_starship_python.sh"
+
+[gcloud]
+detect_env_vars = ['CLOUDSDK_CONFIG']
