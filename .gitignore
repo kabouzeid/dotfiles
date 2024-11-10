@@ -9,3 +9,4 @@ config/fish/fishd.*
 config/fish/fish_variables
 *.local*
 config/mise/config.toml
+config/lazygit/state.yml

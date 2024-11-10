@@ -1,5 +1,6 @@
 [core]
 	autocrlf = input
+	pager = delta
 [alias]
 	ignore = "!gi() { curl -L -s https://www.gitignore.io/api/$@ ;}; gi"
 [user]
@@ -28,3 +29,13 @@
 	required = true
 [credential "https://gist.github.com"]
 	helper = !gh auth git-credential
+
+[interactive]
+    diffFilter = delta --color-only
+
+[delta]
+    navigate = true    # use n and N to move between diff sections
+    side-by-side = true
+
+[merge]
+    conflictstyle = zdiff3
