@@ -408,12 +408,12 @@ require("lazy").setup({
       require("plugins.which-key")
     end,
   },
-  {
-    "mickael-menu/zk-nvim",
-    config = function()
-      require("plugins.zk")
-    end,
-  },
+  -- {
+  --   "mickael-menu/zk-nvim",
+  --   config = function()
+  --     require("plugins.zk")
+  --   end,
+  -- },
   {
     "nanotee/zoxide.vim",
     config = function()
