@@ -7,3 +7,12 @@ color-modes = true
 
 [editor.cursor-shape]
 insert = "bar"
+
+[keys.normal]
+Cmd-s = ":write"   
+
+[keys.insert]
+Cmd-s = ":write"    
+
+[keys.select]
+Cmd-s = ":write"    
