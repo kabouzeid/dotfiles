@@ -35,6 +35,8 @@ set cursorline
 
 set wildmenu
 
+set belloff=all
+
 " }}}
 
 " GUI {{{
