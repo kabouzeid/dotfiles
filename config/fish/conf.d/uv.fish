@@ -7,5 +7,7 @@ if type -q uv
     abbr uva 'uv add'
     abbr uvar 'uv add -r requirements.txt'
 
+    abbr uvs 'uv run $SHELL'
+
     abbr python 'uv run python'
 end

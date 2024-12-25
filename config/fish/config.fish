@@ -29,6 +29,10 @@ if status is-interactive
         PATH="$HOME/.local/share/nvim/mason/bin:$PATH" command hx $argv
     end
 
+    function uve --wraps $EDITOR
+        PATH="$HOME/.local/share/nvim/mason/bin:$PATH" uv run $EDITOR $argv
+    end
+
     type -q zoxide; and zoxide init fish | source
     type -q starship; and starship init fish | source
     type -q atuin; and atuin init fish --disable-up-arrow | source
@@ -38,6 +42,6 @@ if status is-interactive
     end
 
     type -q pip; and function gpip
-       PIP_REQUIRE_VIRTUALENV="false" pip "$argv"
+        PIP_REQUIRE_VIRTUALENV="false" pip "$argv"
     end
 end
