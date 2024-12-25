@@ -1,9 +1,9 @@
 theme = "github_dark_fixed"
 
 [editor]
-true-color = true
 line-number = "relative"
 soft-wrap.enable = true
+color-modes = true
 
 [editor.cursor-shape]
 insert = "bar"
