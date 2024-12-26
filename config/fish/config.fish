@@ -44,4 +44,11 @@ if status is-interactive
     type -q pip; and function gpip
         PIP_REQUIRE_VIRTUALENV="false" pip "$argv"
     end
+
+    function pycfg
+        echo '{
+    "exclude": ["**/__pycache__", "**/.*", "data", "exp", "wandb", "vis"],
+    "typeCheckingMode": "standard",
+}' >pyrightconfig.json
+    end
 end
