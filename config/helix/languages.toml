@@ -1,3 +1,6 @@
+[language-server.basedpyright.config.python]
+pythonPath = ".venv/bin/python"
+
 [language-server.basedpyright.config.basedpyright.analysis]
 typeCheckingMode = "basic" # off, basic, standard, strict, all
 
