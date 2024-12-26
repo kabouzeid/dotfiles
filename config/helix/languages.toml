@@ -1,5 +1,5 @@
 [language-server.basedpyright.config.basedpyright.analysis]
-typeCheckingMode = "standard" # off, basic, standard, strict, all
+typeCheckingMode = "basic" # off, basic, standard, strict, all
 
 [language-server.basedpyright.config.basedpyright.analysis.diagnosticSeverityOverrides]
 reportUnusedImport = false # ruff
@@ -12,6 +12,9 @@ args = ["server"]
 [language-server.zk]
 command = "zk"
 args = ["lsp"]
+
+[language-server.tinymist]
+config = { exportPdf = "onType", formatterMode = "typstyle" }
 
 [[language]]
 name = "python"
