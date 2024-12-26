@@ -1,32 +1,41 @@
 [core]
 	autocrlf = input
 	pager = delta
+
 [alias]
 	ignore = "!gi() { curl -L -s https://www.gitignore.io/api/$@ ;}; gi"
+
 [user]
 	name = Karim Abou Zeid
 	email = 7303830+kabouzeid@users.noreply.github.com
+
 [pull]
 	ff = only
+
 [init]
   defaultBranch = main
+
 [diff]
   tool = difftastic
+
 [difftool]
   prompt = false
+
 [difftool "difftastic"]
   cmd = difft "$LOCAL" "$REMOTE"
+
 [pager]
   difftool = true
+
 [credential "https://github.com"]
 	helper = !gh auth git-credential
-[include]
-  path = config.local
+
 [filter "lfs"]
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
 	process = git-lfs filter-process
 	required = true
+
 [credential "https://gist.github.com"]
 	helper = !gh auth git-credential
 
@@ -39,3 +48,6 @@
 
 [merge]
     conflictstyle = zdiff3
+
+[include]
+  path = config.local
