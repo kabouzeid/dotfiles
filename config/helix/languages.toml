@@ -2,7 +2,7 @@
 pythonPath = ".venv/bin/python"
 
 [language-server.basedpyright.config.basedpyright.analysis]
-typeCheckingMode = "basic" # off, basic, standard, strict, all
+typeCheckingMode = "standard" # off, basic, standard, strict, all
 
 [language-server.basedpyright.config.basedpyright.analysis.diagnosticSeverityOverrides]
 reportUnusedImport = false # ruff
