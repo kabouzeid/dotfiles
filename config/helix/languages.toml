@@ -7,7 +7,7 @@ typeCheckingMode = "standard" # off, basic, standard, strict, all
 [language-server.basedpyright.config.basedpyright.analysis.diagnosticSeverityOverrides]
 reportUnusedImport = false # ruff
 reportUnusedVariable = false # ruff
-  
+
 [language-server.ruff]
 command = "ruff"
 args = ["server"]
@@ -36,3 +36,15 @@ formatter = { command = "taplo", args = [
 [[language]]
 name = "markdown"
 language-servers = ["zk"]
+
+[[language]]
+name = "ghostty"
+scope = "source.ghostty"
+injection-regex = "ghostty"
+file-types = [{ glob = "*ghostty/config" }]
+grammar = "ghostty"
+comment-tokens = "#"
+
+[[grammar]]
+name = "ghostty"
+source = { git = "https://github.com/bezhermoso/tree-sitter-ghostty", rev = "main" }
