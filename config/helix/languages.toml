@@ -48,3 +48,7 @@ comment-tokens = "#"
 [[grammar]]
 name = "ghostty"
 source = { git = "https://github.com/bezhermoso/tree-sitter-ghostty", rev = "main" }
+
+[[language]]
+name = "python"
+shebangs = ["python", "uv"]
