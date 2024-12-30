@@ -34,10 +34,6 @@ formatter = { command = "taplo", args = [
 ] }
 
 [[language]]
-name = "markdown"
-language-servers = ["zk"]
-
-[[language]]
 name = "ghostty"
 scope = "source.ghostty"
 injection-regex = "ghostty"
