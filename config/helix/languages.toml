@@ -43,4 +43,4 @@ comment-tokens = "#"
 
 [[grammar]]
 name = "ghostty"
-source = { git = "https://github.com/bezhermoso/tree-sitter-ghostty", rev = "main" }
+source = { git = "https://github.com/bezhermoso/tree-sitter-ghostty", rev = "e1a73c6231b9d760cd01204f9467d82a9d46bcb9" }
