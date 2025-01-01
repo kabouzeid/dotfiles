@@ -37,7 +37,7 @@ formatter = { command = "taplo", args = [
 name = "ghostty"
 scope = "source.ghostty"
 injection-regex = "ghostty"
-file-types = [{ glob = "*ghostty/config" }]
+file-types = [{ glob = "*ghostty/config*" }, { glob = "*ghostty/themes/*" }]
 grammar = "ghostty"
 comment-tokens = "#"
 
