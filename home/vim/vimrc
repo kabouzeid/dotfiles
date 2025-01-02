@@ -61,3 +61,7 @@ noremap gs ^
 nnoremap U <C-r>
 
 " }}}
+
+if filereadable(expand('~/.vim/local.vim'))
+  source ~/.vim/local.vim
+endif
