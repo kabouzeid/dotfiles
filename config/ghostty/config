@@ -14,3 +14,5 @@ macos-icon-screen-color = #101216
 keybind = global:cmd+shift+.=toggle_quick_terminal
 keybind = cmd+left_bracket=previous_tab
 keybind = cmd+right_bracket=next_tab
+
+config-file = ?config.local
