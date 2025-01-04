@@ -5,9 +5,10 @@ true-color = true
 line-number = "relative"
 soft-wrap.enable = true
 color-modes = true
+end-of-line-diagnostics = "hint"
 
-[editor.cursor-shape]
-insert = "bar"
+[editor.inline-diagnostics]
+cursor-line = "warning" # show warnings and errors on the cursorline inline
 
 [keys.normal]
 Cmd-s = ":write"   

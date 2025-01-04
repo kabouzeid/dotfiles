@@ -1,5 +1,7 @@
 inherits = "github_dark"
 
+"variable.other.member" = ""  # json keys, and self.member
+
 "markup.list" = "scale.red.3"
 "markup.quote" = "scale.blue.1"
 "markup.raw" = "scale.blue.1"

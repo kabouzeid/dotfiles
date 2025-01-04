@@ -1,3 +1,5 @@
+use-grammars = { only = [ "ghostty" ] }
+
 [language-server.basedpyright.config.python]
 pythonPath = ".venv/bin/python"
 
