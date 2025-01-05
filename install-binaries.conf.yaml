@@ -28,7 +28,7 @@
   -
     command: >-
       if ! command -v ubi; then
-        curl --silent --location "https://raw.githubusercontent.com/houseabsolute/ubi/master/bootstrap/bootstrap-ubi.sh" | TARGET=$HOME/.local/bin sh;
+        curl --silent --location "https://raw.githubusercontent.com/houseabsolute/ubi/master/bootstrap/bootstrap-ubi.sh" | TARGET="$HOME"/.local/bin sh;
       fi;
     description: Install ubi
     stdout: true
@@ -38,7 +38,7 @@
     command: >-
       set -euo pipefail;
 
-      PKG_DIR=~/.local/share/packages;
+      PKG_DIR="$HOME"/.local/share/packages;
 
       pkgs=(
         "neovim neovim"
@@ -72,7 +72,7 @@
           rm -rf $pkg_backup_dir;
           mv $pkg_install_dir $pkg_backup_dir;
         fi;
-        ubi --verbose --project "${user}/${repo}" --extract-all --in $pkg_install_dir;
+        "$HOME"/.local/bin/ubi --verbose --project "${user}/${repo}" --extract-all --in $pkg_install_dir;
       done;
     description: Install ubi packages
     stdout: true
@@ -143,7 +143,8 @@
       path: ~/.local/share/packages/atuin/atuin
 - shell:
   -
-    command: atuin gen-completions --shell fish > ~/.local/share/fish/vendor_completions.d/atuin.fish
+    command: >-
+      "$HOME"/.local/bin/atuin gen-completions --shell fish > ~/.local/share/fish/vendor_completions.d/atuin.fish
     description: atuin completions
 
 - link:
@@ -154,8 +155,8 @@
 - shell:
   -
     command: >-
-      mise use -g usage;
-      mise completion fish > ~/.local/share/fish/vendor_completions.d/mise.fish;
+      "$HOME"/.local/bin/mise use -g usage;
+      "$HOME"/.local/bin/mise completion fish > ~/.local/share/fish/vendor_completions.d/mise.fish;
     description: mise completions
 
 - link:
@@ -165,7 +166,8 @@
       path: ~/.local/share/packages/uv/uvx
 - shell:
   -
-    command: uv generate-shell-completion fish > ~/.local/share/fish/vendor_completions.d/uv.fish
+    command: >-
+      "$HOME"/.local/bin/uv generate-shell-completion fish > ~/.local/share/fish/vendor_completions.d/uv.fish
     description: uv completions
 
 - link:
@@ -199,7 +201,8 @@
       path: ~/.local/share/packages/ast-grep/ast-grep
 - shell:
   -
-    command: sg completions fish > ~/.local/share/fish/vendor_completions.d/sg.fish
+    command: >-
+      "$HOME"/.local/bin/sg completions fish > ~/.local/share/fish/vendor_completions.d/sg.fish
     description: ast-grep completions
 
 - link:
@@ -224,7 +227,7 @@
       );
       for tuple in "${pkgs[@]}"; do
         set -- $tuple; user=$1; repo=$2; bin_name=$3;
-        eget $user/$repo --to ~/.local/bin/$bin_name;
+        "$HOME"/.local/bin/eget $user/$repo --to ~/.local/bin/$bin_name;
       done;
     description: Install eget packages
     stdout: true
