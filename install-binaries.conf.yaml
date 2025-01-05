@@ -7,115 +7,136 @@
   -
     command: >-
       if [ ! -e ~/.tmux/plugins/tpm ]; then
-      git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm;
+        git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm;
       fi;
-    description: Installing tpm.
+    description: Install tpm
+    stdout: true
+    stderr: true
+    quiet: true
 
-- clean: [~/.local/bin, ~/.local/share/man/man1]
+- clean:
+  - ~/.local/bin
+  - ~/.local/share/man/man1
+  - ~/.local/share/fish/vendor_completions.d
 
 - create:
+  - ~/.local/bin
   - ~/.local/share/packages
 
 - shell:
   -
     command: >-
-      cd ~/.local/share/packages || exit 1;
-      wget "https://github.com/mliszcz/fish-shell/releases/download/fish-3.7.1-x86_64/fish-3.7.1-x86_64.AppImage" -O fish.appimage && chmod +x fish.appimage;
-      wget "https://github.com/neovim/neovim-releases/releases/download/stable/nvim.appimage" -O nvim.appimage && chmod +x nvim.appimage;
-      wget "https://github.com/helix-editor/helix/releases/download/24.07/helix-24.07-x86_64.AppImage" -O helix.appimage && chmod +x helix.appimage;
-      wget "https://github.com/BurntSushi/ripgrep/releases/download/14.1.0/ripgrep-14.1.0-x86_64-unknown-linux-musl.tar.gz" -O - | tar -xz;
-      wget "https://github.com/sharkdp/fd/releases/download/v10.1.0/fd-v10.1.0-x86_64-unknown-linux-musl.tar.gz" -O - | tar -xz;
-      wget "https://github.com/sharkdp/bat/releases/download/v0.24.0/bat-v0.24.0-x86_64-unknown-linux-musl.tar.gz" -O - | tar -xz;
-      wget "https://github.com/cli/cli/releases/download/v2.53.0/gh_2.53.0_linux_amd64.tar.gz" -O - | tar -xz;
-      wget "https://github.com/dandavison/delta/releases/download/0.17.0/delta-0.17.0-x86_64-unknown-linux-musl.tar.gz" -O - | tar -xz;
-      wget "https://github.com/Wilfred/difftastic/releases/download/0.37.0/difft-x86_64-unknown-linux-musl.tar.gz" -O - | tar -xz difft;
-      wget "https://github.com/jesseduffield/lazygit/releases/download/v0.43.1/lazygit_0.43.1_Linux_x86_64.tar.gz" -O - | tar -xz lazygit;
-      wget "https://github.com/starship/starship/releases/download/v1.20.1/starship-x86_64-unknown-linux-musl.tar.gz" -O - | tar -xz starship;
-      wget "https://github.com/ajeetdsouza/zoxide/releases/download/v0.9.4/zoxide-0.9.4-x86_64-unknown-linux-musl.tar.gz" -O - | tar -xz zoxide;
-      wget "https://github.com/junegunn/fzf/releases/download/0.29.0/fzf-0.29.0-linux_amd64.tar.gz" -O - | tar -xz fzf;
-      wget "https://raw.githubusercontent.com/junegunn/fzf/0.29.0/shell/key-bindings.zsh" -O fzf-key-bindings.zsh;
-      wget "https://github.com/ellie/atuin/releases/latest/download/atuin-x86_64-unknown-linux-musl.tar.gz" -O - | tar -xz;
-      wget "https://github.com/jdx/mise/releases/download/v2024.8.15/mise-v2024.8.15-linux-x64.tar.gz" -O - | tar -xz;
-      wget "https://github.com/astral-sh/uv/releases/latest/download/uv-x86_64-unknown-linux-musl.tar.gz" -O - | tar -xz;
-      wget "https://github.com/chmln/sd/releases/download/v1.0.0/sd-v1.0.0-x86_64-unknown-linux-musl.tar.gz" -O - | tar -xz;
-      wget "https://github.com/eza-community/eza/releases/download/v0.18.22/eza_x86_64-unknown-linux-musl.tar.gz" -O - | tar -xz;
-      wget "https://github.com/zyedidia/eget/releases/download/v1.3.4/eget-1.3.4-linux_amd64.tar.gz" -O - | tar -xz;
-      wget "https://github.com/Byron/dua-cli/releases/download/v2.29.0/dua-v2.29.0-x86_64-unknown-linux-musl.tar.gz" -O - | tar -xz;
-      mkdir -p just; wget "https://github.com/casey/just/releases/download/1.36.0/just-1.36.0-x86_64-unknown-linux-musl.tar.gz" -O - | tar -xz -C just;
-      export TMPFILE=$(mktemp); wget "https://github.com/sxyazi/yazi/releases/download/v0.3.2/yazi-x86_64-unknown-linux-musl.zip" -O $TMPFILE && unzip -o $TMPFILE;
-      export TMPFILE=$(mktemp); wget "https://github.com/ast-grep/ast-grep/releases/download/0.25.3/app-x86_64-unknown-linux-gnu.zip" -O $TMPFILE && unzip -o $TMPFILE;
-    description: Download Binaries
+      if ! command -v ubi; then
+        curl --silent --location "https://raw.githubusercontent.com/houseabsolute/ubi/master/bootstrap/bootstrap-ubi.sh" | TARGET=$HOME/.local/bin sh;
+      fi;
+    description: Install ubi
+    stdout: true
+    stderr: true
+    quiet: true
+  -
+    command: >-
+      PKG_DIR=~/.local/share/packages;
 
-- link:
-    ~/.local/bin/fish:
-      path: ~/.local/share/packages/fish.appimage
-
+      pkgs=(
+        "neovim neovim"
+        "helix-editor helix"
+        "BurntSushi ripgrep"
+        "sharkdp fd"
+        "sharkdp bat"
+        "cli cli"
+        "dandavison delta"
+        "Wilfred difftastic"
+        "jesseduffield lazygit"
+        "starship starship"
+        "ajeetdsouza zoxide"
+        "junegunn fzf"
+        "ellie atuin"
+        "jdx mise"
+        "astral-sh uv"
+        "chmln sd"
+        "eza-community eza"
+        "zyedidia eget"
+        "Byron dua-cli"
+        "casey just"
+        "sxyazi yazi"
+        "ast-grep ast-grep"
+      );
+      for tuple in "${pkgs[@]}"; do
+        set -- $tuple; user=$1; repo=$2;
+        rm -rf $PKG_DIR/$repo;
+        ubi --verbose --project $user/$repo --extract-all --in $PKG_DIR/$repo;
+      done
+    description: Install ubi packages
+    stdout: true
+    stderr: true
+    quiet: true
+    
 - link:
     ~/.local/bin/nvim:
-      path: ~/.local/share/packages/nvim.appimage
+      path: ~/.local/share/packages/neovim/bin/nvim
+    ~/.local/share/man/man1/nvim.1:
+      path: ~/.local/share/packages/neovim/share/man/man1/nvim.1
 
 - link:
     ~/.local/bin/hx:
-      path: ~/.local/share/packages/helix.appimage
+      path: ~/.local/share/packages/helix/hx
 
 - link:
     ~/.local/bin/rg:
-      path: ~/.local/share/packages/ripgrep-14.1.0-x86_64-unknown-linux-musl/rg
+      path: ~/.local/share/packages/ripgrep/rg
     ~/.local/share/man/man1/rg.1:
-      path: ~/.local/share/packages/ripgrep-14.1.0-x86_64-unknown-linux-musl/doc/rg.1
+      path: ~/.local/share/packages/ripgrep/doc/rg.1
 
 - link:
     ~/.local/bin/fd:
-      path: ~/.local/share/packages/fd-v10.1.0-x86_64-unknown-linux-musl/fd
+      path: ~/.local/share/packages/fd/fd
     ~/.local/share/man/man1/fd.1:
-      path: ~/.local/share/packages/fd-v10.1.0-x86_64-unknown-linux-musl/fd.1
+      path: ~/.local/share/packages/fd/fd.1
 
 - link:
     ~/.local/bin/bat:
-      path: ~/.local/share/packages/bat-v0.24.0-x86_64-unknown-linux-musl/bat
+      path: ~/.local/share/packages/bat/bat
     ~/.local/share/man/man1/bat.1:
-      path: ~/.local/share/packages/bat-v0.24.0-x86_64-unknown-linux-musl/bat.1
+      path: ~/.local/share/packages/bat/bat.1
 
 - link:
     ~/.local/bin/gh:
-      path: ~/.local/share/packages/gh_2.53.0_linux_amd64/bin/gh
-    ~/.local/share/man/man1:
-      glob: true
-      path: ~/.local/share/packages/gh_2.53.0_linux_amd64/share/man/man1/*
+      path: ~/.local/share/packages/cli/bin/gh
+    # ~/.local/share/man/man1:
+    #   glob: true
+    #   path: ~/.local/share/packages/cli/share/man/man1/*.1
 
 - link:
     ~/.local/bin/delta:
-      path: ~/.local/share/packages/delta-0.17.0-x86_64-unknown-linux-musl/delta
+      path: ~/.local/share/packages/delta/delta
 
 - link:
     ~/.local/bin/difft:
-      path: ~/.local/share/packages/difft
+      path: ~/.local/share/packages/difftastic/difft
 
 - link:
     ~/.local/bin/lazygit:
-      path: ~/.local/share/packages/lazygit
+      path: ~/.local/share/packages/lazygit/lazygit
 
 - link:
     ~/.local/bin/starship:
-      path: ~/.local/share/packages/starship
+      path: ~/.local/share/packages/starship/starship
 
 - link:
     ~/.local/bin/zoxide:
-      path: ~/.local/share/packages/zoxide
+      path: ~/.local/share/packages/zoxide/zoxide
 
 - link:
     ~/.local/bin/fzf:
-      path: ~/.local/share/packages/fzf
-    ~/.local/share/zsh/share/fzf-key-bindings.zsh:
-      path: ~/.local/share/packages/fzf-key-bindings.zsh
+      path: ~/.local/share/packages/fzf/fzf
 
 - link:
     ~/.local/bin/atuin:
-      path: ~/.local/share/packages/atuin-x86_64-unknown-linux-musl/atuin
+      path: ~/.local/share/packages/atuin/atuin
 - shell:
   -
     command: echo "atuin gen-completions --shell fish | source" > ~/.local/share/fish/vendor_completions.d/atuin.fish
-    description: Atuin completions.
+    description: atuin completions
 
 - link:
     ~/.local/bin/mise:
@@ -125,54 +146,59 @@
 - shell:
   -
     command: >-
-      ~/.local/share/packages/mise/bin/mise use -g usage;
-      ~/.local/share/packages/mise/bin/mise completion fish > ~/.local/share/fish/vendor_completions.d/mise.fish;
-    description: Mise completions.
+      mise use -g usage;
+      mise completion fish > ~/.local/share/fish/vendor_completions.d/mise.fish;
+    description: mise completions
 
 - link:
     ~/.local/bin/uv:
-      path: ~/.local/share/packages/uv-x86_64-unknown-linux-musl/uv
+      path: ~/.local/share/packages/uv/uv
     ~/.local/bin/uvx:
-      path: ~/.local/share/packages/uv-x86_64-unknown-linux-musl/uvx
+      path: ~/.local/share/packages/uv/uvx
 - shell:
   -
     command: >-
-      ~/.local/share/packages/uv-x86_64-unknown-linux-musl/uv generate-shell-completion fish > ~/.local/share/fish/vendor_completions.d/uv.fish;
-    description: uv completions.
+      uv generate-shell-completion fish > ~/.local/share/fish/vendor_completions.d/uv.fish;
+    description: uv completions
 
 - link:
     ~/.local/bin/eza:
-      path: ~/.local/share/packages/eza
+      path: ~/.local/share/packages/eza/eza
 
 - link:
     ~/.local/bin/sd:
-      path: ~/.local/share/packages/sd-v1.0.0-x86_64-unknown-linux-musl/sd
+      path: ~/.local/share/packages/sd/sd
     ~/.local/share/fish/vendor_completions.d/sd.fish:
-      path: ~/.local/share/packages/sd-v1.0.0-x86_64-unknown-linux-musl/completions/sd.fish
+      path: ~/.local/share/packages/sd/completions/sd.fish
     ~/.local/share/man/man1/sd.1:
-      path: ~/.local/share/packages/sd-v1.0.0-x86_64-unknown-linux-musl/sd.1
+      path: ~/.local/share/packages/sd/sd.1
 
 - link:
     ~/.local/bin/eget:
-      path: ~/.local/share/packages/eget-1.3.4-linux_amd64/eget
+      path: ~/.local/share/packages/eget/eget
     ~/.local/share/man/man1/eget.1:
-      path: ~/.local/share/packages/eget-1.3.4-linux_amd64/eget.1
+      path: ~/.local/share/packages/eget/eget.1
 
 - link:
     ~/.local/bin/yazi:
-      path: ~/.local/share/packages/yazi-x86_64-unknown-linux-musl/yazi
+      path: ~/.local/share/packages/yazi/yazi
     ~/.local/share/fish/vendor_completions.d/yazi.fish:
-      path: ~/.local/share/packages/yazi-x86_64-unknown-linux-musl/completions/yazi.fish
+      path: ~/.local/share/packages/yazi/completions/yazi.fish
 
 - link:
     ~/.local/bin/sg:
-      path: ~/.local/share/packages/sg
+      path: ~/.local/share/packages/ast-grep/sg
     ~/.local/bin/ast-grep:
-      path: ~/.local/share/packages/ast-grep
+      path: ~/.local/share/packages/ast-grep/ast-grep
+- shell:
+  -
+    command: >-
+      sg completions fish > ~/.local/share/fish/vendor_completions.d/sg.fish;
+    description: ast-grep completions
 
 - link:
     ~/.local/bin/dua:
-      path: ~/.local/share/packages/dua-v2.29.0-x86_64-unknown-linux-musl/dua
+      path: ~/.local/share/packages/dua-cli/dua
 
 - link:
     ~/.local/bin/just:
@@ -181,3 +207,18 @@
       path: ~/.local/share/packages/just/completions/just.fish
     ~/.local/share/man/man1/just.1:
       path: ~/.local/share/packages/just/just.1
+
+- shell:
+  -
+    command: >-
+      pkgs=(
+        "mliszcz fish-shell fish"
+      );
+      for tuple in "${pkgs[@]}"; do
+        set -- $tuple; user=$1; repo=$2; bin_name=$3;
+        eget $user/$repo --to ~/.local/bin/$bin_name;
+      done
+    description: Install eget packages
+    stdout: true
+    stderr: true
+    quiet: true
