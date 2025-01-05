@@ -22,6 +22,7 @@
 - create:
   - ~/.local/bin
   - ~/.local/share/packages
+  - ~/.local/share/packages/.backup
 
 - shell:
   -
@@ -35,6 +36,8 @@
     quiet: true
   -
     command: >-
+      set -euo pipefail;
+
       PKG_DIR=~/.local/share/packages;
 
       pkgs=(
@@ -63,9 +66,14 @@
       );
       for tuple in "${pkgs[@]}"; do
         set -- $tuple; user=$1; repo=$2;
-        rm -rf $PKG_DIR/$repo;
-        ubi --verbose --project $user/$repo --extract-all --in $PKG_DIR/$repo;
-      done
+        pkg_install_dir="${PKG_DIR}/${repo}";
+        if [ -e $pkg_install_dir ]; then
+          pkg_backup_dir="${PKG_DIR}/.backup/${repo}";
+          rm -rf $pkg_backup_dir;
+          mv $pkg_install_dir $pkg_backup_dir;
+        fi;
+        ubi --verbose --project "${user}/${repo}" --extract-all --in $pkg_install_dir;
+      done;
     description: Install ubi packages
     stdout: true
     stderr: true
@@ -135,7 +143,7 @@
       path: ~/.local/share/packages/atuin/atuin
 - shell:
   -
-    command: echo "atuin gen-completions --shell fish | source" > ~/.local/share/fish/vendor_completions.d/atuin.fish
+    command: atuin gen-completions --shell fish > ~/.local/share/fish/vendor_completions.d/atuin.fish
     description: atuin completions
 
 - link:
@@ -157,8 +165,7 @@
       path: ~/.local/share/packages/uv/uvx
 - shell:
   -
-    command: >-
-      uv generate-shell-completion fish > ~/.local/share/fish/vendor_completions.d/uv.fish;
+    command: uv generate-shell-completion fish > ~/.local/share/fish/vendor_completions.d/uv.fish
     description: uv completions
 
 - link:
@@ -192,8 +199,7 @@
       path: ~/.local/share/packages/ast-grep/ast-grep
 - shell:
   -
-    command: >-
-      sg completions fish > ~/.local/share/fish/vendor_completions.d/sg.fish;
+    command: sg completions fish > ~/.local/share/fish/vendor_completions.d/sg.fish
     description: ast-grep completions
 
 - link:
@@ -211,13 +217,15 @@
 - shell:
   -
     command: >-
+      set -euo pipefail;
+
       pkgs=(
         "mliszcz fish-shell fish"
       );
       for tuple in "${pkgs[@]}"; do
         set -- $tuple; user=$1; repo=$2; bin_name=$3;
         eget $user/$repo --to ~/.local/bin/$bin_name;
-      done
+      done;
     description: Install eget packages
     stdout: true
     stderr: true
