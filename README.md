@@ -7,7 +7,7 @@ git clone https://github.com/kabouzeid/dotfiles ~/.dotfiles && cd ~/.dotfiles &&
 ## Optional
 ```bash
 # commonly used binaries such as nvim, fd, rg, ...
-SHELL=bash ./install -vv -c install-binaries.conf.yaml
+SHELL=bash ./install -c install-binaries.conf.yaml
 ```
 
 ```bash
