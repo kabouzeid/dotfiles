@@ -6,3 +6,6 @@ install-binaries:
 
 install-fonts:
   ./install -c install-fonts.conf.yaml
+
+update-dotbot:
+  git submodule update --remote dotbot
