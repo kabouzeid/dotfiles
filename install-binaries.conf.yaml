@@ -226,8 +226,8 @@
         "mliszcz fish-shell fish"
       );
       for tuple in "${pkgs[@]}"; do
-        set -- $tuple; user=$1; repo=$2; bin_name=$3;
-        "$HOME"/.local/bin/eget $user/$repo --to ~/.local/bin/$bin_name;
+        set -- $tuple; user=$1; repo=$2; bin_name=$3; eget_args=${4:-};
+        "$HOME"/.local/bin/eget $user/$repo --to ~/.local/bin/$bin_name $eget_args;
       done;
     description: Install eget packages
     stdout: true
