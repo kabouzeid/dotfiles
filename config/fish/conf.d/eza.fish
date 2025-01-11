@@ -3,4 +3,5 @@ if type -q eza
     abbr ll 'eza -l'
     abbr la 'eza -la'
     abbr l@ 'eza -l@'
+    abbr tree 'eza -T'
 end
