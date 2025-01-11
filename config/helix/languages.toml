@@ -21,6 +21,9 @@ args = ["lsp"]
 [language-server.tinymist]
 config = { exportPdf = "onType", formatterMode = "typstyle" }
 
+[language-server.ghostty-ls]
+command = "ghostty-ls"
+
 [[language]]
 name = "python"
 auto-format = true
@@ -42,6 +45,7 @@ injection-regex = "ghostty"
 file-types = [{ glob = "*ghostty/config*" }, { glob = "*ghostty/themes/*" }]
 grammar = "ghostty"
 comment-tokens = "#"
+language-servers = ["ghostty-ls"]
 
 [[grammar]]
 name = "ghostty"
