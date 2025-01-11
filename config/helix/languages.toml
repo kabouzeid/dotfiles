@@ -49,4 +49,4 @@ language-servers = ["ghostty-ls"]
 
 [[grammar]]
 name = "ghostty"
-source = { git = "https://github.com/bezhermoso/tree-sitter-ghostty", rev = "c4281fda2581ffd7e7e96acfd04a50e3c563620d" }
+source = { git = "https://github.com/bezhermoso/tree-sitter-ghostty", rev = "85313191668ad80f9ceb7902e59a8de64126deb1" }
