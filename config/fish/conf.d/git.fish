@@ -3,7 +3,7 @@
 function __git.create_abbr -d "Create Git plugin abbreviation"
     set -l name $argv[1]
     set -l body $argv[2..-1]
-    abbr -a -g $name $body
+    abbr --set-cursor="%%" -a -g $name $body
 end
 
 # git abbreviations
@@ -18,8 +18,8 @@ __git.create_abbr gcn! git commit -v --no-edit --amend
 __git.create_abbr gca git commit -v -a
 __git.create_abbr gca! git commit -v -a --amend
 __git.create_abbr gcan! git commit -v -a --no-edit --amend
-__git.create_abbr gcm git commit -m
-__git.create_abbr gcam git commit -a -m
+__git.create_abbr gcm git commit -m \"%%\"
+__git.create_abbr gcam git commit -a -m \"%%\"
 __git.create_abbr gcl git clone --recurse-submodules
 __git.create_abbr gclean git clean -di
 __git.create_abbr gclean! git clean -dfx
