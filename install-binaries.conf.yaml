@@ -29,6 +29,8 @@
     command: >-
       if ! command -v ubi; then
         curl --silent --location "https://raw.githubusercontent.com/houseabsolute/ubi/master/bootstrap/bootstrap-ubi.sh" | TARGET="$HOME"/.local/bin sh;
+      else
+        ubi --self-upgrade
       fi;
     description: Install ubi
     stdout: true
