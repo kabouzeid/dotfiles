@@ -155,7 +155,7 @@
 - shell:
   -
     command: >-
-      "$HOME"/.local/bin/mise use -g usage;
+      "$HOME"/.local/bin/mise use -g usage@latest;
       "$HOME"/.local/bin/mise completion fish > ~/.local/share/fish/vendor_completions.d/mise.fish;
     description: mise completions
 
