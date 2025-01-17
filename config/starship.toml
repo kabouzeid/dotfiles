@@ -18,3 +18,5 @@ python_binary = "_starship_python.sh"
 
 [gcloud]
 detect_env_vars = ['CLOUDSDK_CONFIG']
+
+[env_var.CUDA_HOME]
