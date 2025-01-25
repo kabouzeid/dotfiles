@@ -58,6 +58,8 @@ vim.keymap.set("n", "<leader>l", vim.lsp.codelens.run, { desc = "Run Code Lens" 
 vim.keymap.set("n", "K", vim.lsp.buf.hover, { desc = "Hover" })
 vim.keymap.set("n", "<C-k>", vim.lsp.buf.signature_help, { desc = "Signature Help" })
 
+vim.keymap.set({ "i", "x", "n", "s" }, "<D-s>", "<cmd>w<cr><esc>", { desc = "Save file" })
+
 -- }}}
 
 --- {{{ attach
