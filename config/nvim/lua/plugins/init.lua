@@ -430,4 +430,8 @@ require("lazy").setup({
       require("persistence").setup()
     end,
   },
+  {
+    "bezhermoso/tree-sitter-ghostty",
+    build = "make nvim_install",
+  },
 })
