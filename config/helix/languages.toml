@@ -1,5 +1,3 @@
-use-grammars = { only = [ "ghostty" ] }
-
 [language-server.basedpyright.config.python]
 pythonPath = ".venv/bin/python"
 
@@ -17,6 +15,10 @@ args = ["server"]
 [language-server.zk]
 command = "zk"
 args = ["lsp"]
+
+[[language]]
+name = "markdown"
+language-servers = ["zk"]
 
 [language-server.tinymist]
 config = { exportPdf = "onType", formatterMode = "typstyle" }
@@ -40,13 +42,5 @@ formatter = { command = "taplo", args = [
 
 [[language]]
 name = "ghostty"
-scope = "source.ghostty"
-injection-regex = "ghostty"
 file-types = [{ glob = "*ghostty/config*" }, { glob = "*ghostty/themes/*" }]
-grammar = "ghostty"
-comment-tokens = "#"
 language-servers = ["ghostty-ls"]
-
-[[grammar]]
-name = "ghostty"
-source = { git = "https://github.com/bezhermoso/tree-sitter-ghostty", rev = "85313191668ad80f9ceb7902e59a8de64126deb1" }
