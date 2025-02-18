@@ -19,10 +19,9 @@ if status is-interactive
     test -e "$HOME/.iterm2_shell_integration.fish"; and source "$HOME/.iterm2_shell_integration.fish"
 
     alias v $EDITOR
-    type -q nvr; and set -q NVIM; and alias v "nvr --remote-tab --nostart"
     type -q xdg-open; and type -q setsid; and alias open="setsid xdg-open"
     type -q lazygit; and alias lzg lazygit
-    type -q joshuto; and alias josh joshuto
+    type -q eget; and abbr egeti 'eget --to=~/.local/bin'
     set -q MISE_DIRENV_BIN; and alias direnv $MISE_DIRENV_BIN
 
     type -q hx; and function hx
