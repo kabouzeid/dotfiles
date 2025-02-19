@@ -15,6 +15,7 @@ unfocused-split-opacity = 1
 # macos-icon = custom-style
 macos-icon-ghost-color = #6ca4f8
 macos-icon-screen-color = #101216
+macos-option-as-alt = right
 
 keybind = global:cmd+shift+.=toggle_quick_terminal
 keybind = cmd+left_bracket=previous_tab
