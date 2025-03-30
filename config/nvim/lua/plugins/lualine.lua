@@ -60,8 +60,6 @@ return {
             },
             spinner_symbols = { "⣾", "⣽", "⣻", "⢿", "⡿", "⣟", "⣯", "⣷" },
           },
-        },
-        lualine_y = {
           {
             "diagnostics",
             symbols = {
@@ -72,6 +70,8 @@ return {
             },
             sources = { "nvim_diagnostic" },
           },
+        },
+        lualine_y = {
         },
         lualine_z = { lsp_servers_status },
       },
