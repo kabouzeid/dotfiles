@@ -14,4 +14,7 @@ return {
       }
     },
   },
+  keys = {
+    { "<leader>g", function() Snacks.lazygit.open() end, desc = "LazyGit" }
+  }
 }
