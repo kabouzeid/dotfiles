@@ -1,10 +1,10 @@
 # put your local config in ./conf.d/0-.local.fish
 
 if status is-login
-    if type -q hx
-        set -gx EDITOR hx
-    else if type -q nvim
+    if type -q nvim
         set -gx EDITOR nvim
+    else if type -q hx
+        set -gx EDITOR hx
     else
         set -gx EDITOR vim
     end
@@ -38,6 +38,10 @@ if status is-interactive
 
     function fishc
         cd $__fish_config_dir; and $EDITOR conf.d/0-.local.fish; and cd -
+    end
+
+    function nvimc
+        cd ~/.config/nvim; and $EDITOR init.lua; and cd -
     end
 
     type -q pip; and function gpip

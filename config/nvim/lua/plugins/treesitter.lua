@@ -1,49 +1,15 @@
-require("nvim-treesitter.configs").setup({
-  ensure_installed = {
-    "bash",
-    "bibtex",
-    "c",
-    "cmake",
-    "comment",
-    "cpp",
-    "css",
-    "cuda",
-    "dockerfile",
-    "fish",
-    -- "fennel",
-    -- "glsl",
-    -- "go",
-    -- "gomod",
-    -- "graphql",
-    -- "haskell",
-    -- "help",
-    "html",
-    "javascript",
-    -- "jsdoc",
-    "just",
-    "json",
-    "jsonc",
-    "latex",
-    "lua",
-    "make",
-    "markdown",
-    -- "ninja",
-    -- "php",
-    -- "prisma",
-    "python",
-    -- "regex",
-    "rust",
-    -- "svelte",
-    -- "swift", -- needs tree-sitter CLI to be installed
-    "toml",
-    "tsx",
-    "typescript",
-    "vim",
-    -- "vue",
-    "yaml",
-    -- "zig",
-  },
-  highlight = { enable = true },
-  indent = { enable = true },
-  ts_context_commentstring = { enable = true },
-})
+return {
+    "nvim-treesitter/nvim-treesitter",
+    build = ":TSUpdate",
+    config = function()
+        require 'nvim-treesitter.configs'.setup {
+            auto_install = true,
+            highlight = {
+                enable = true,
+            },
+            indent = {
+                enable = true,
+            }
+        }
+    end,
+}
