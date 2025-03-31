@@ -10,4 +10,5 @@ if type -q uv
     abbr uvs 'uv run $SHELL'
 
     abbr python 'uv run python'
+    abbr debugpy 'uv run debugpy'
 end
