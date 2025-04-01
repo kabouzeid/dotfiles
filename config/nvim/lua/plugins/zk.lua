@@ -36,6 +36,18 @@ return {
       end
     end)
 
+    vim.api.nvim_create_user_command("ZkNewMeeting", function(params)
+      zk.new({ dir = "meetings", title = params.args })
+    end, { nargs = 1 })
+
+    vim.api.nvim_create_user_command("ZkNewNote", function(params)
+      zk.new({ dir = "notes", title = params.args })
+    end, { nargs = 1 })
+
+    vim.api.nvim_create_user_command("ZkNewZettel", function(params)
+      zk.new({ dir = "zettel", title = params.args })
+    end, { nargs = 1 })
+
     commands.add("ZkNewDaily", make_new_fn({ dir = "journal/daily" }))
     commands.add("ZkNewHealth", make_new_fn({ dir = "journal/health" }))
 

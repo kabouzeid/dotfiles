@@ -4,11 +4,13 @@ local M = {}
 local H = {}
 local snacks_picker = require("snacks.picker")
 
-M.note_picker_list_api_selection = { "path", "absPath" }
+M.note_picker_list_api_selection = { "metadata", "path", "absPath" }
 
 M.show_note_picker = function(notes, opts, cb)
   notes = vim.tbl_map(function(note)
-    local title = note.path:match("^(.*)%..+$") -- strip extension
+    -- use metadata.title if available, otherwise use the filename without extension
+    local title = note.metadata and note.metadata.title
+    title = title or note.path:match("^(.*)%..+$") -- strip extension
     return { text = title, file = note.absPath, value = note }
   end, notes)
   H.item_picker(notes, opts, cb)
