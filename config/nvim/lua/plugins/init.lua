@@ -107,4 +107,6 @@ return {
       require("plugins.lualine")
     end,
   },
+  { "kana/vim-textobj-entire", dependencies = { "kana/vim-textobj-user" } },
+  { "wellle/targets.vim" }
 }
