@@ -30,7 +30,10 @@ return {
       local notebook_path = options.notebook_path or util.resolve_notebook_path(0)
       local notebook_root = util.notebook_root(notebook_path)
       if notebook_root then
-        require("telescope.builtin").live_grep({ cwd = notebook_root, prompt_title = "Zk Live Grep" })
+        require("snacks").picker.grep({
+          cwd = notebook_root,
+          title = "Zk Live Grep",
+        })
       else
         vim.notify("No notebook found", vim.log.levels.ERROR)
       end
