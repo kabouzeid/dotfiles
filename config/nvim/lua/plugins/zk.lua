@@ -6,7 +6,7 @@ return {
     local commands = require("zk.commands")
 
     zk.setup({
-      picker = "snacks_picker",
+      picker = "custom_snacks_picker",
     })
 
     local function make_edit_fn(defaults, picker_options)
