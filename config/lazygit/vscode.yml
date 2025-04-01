@@ -1,0 +1,8 @@
+git:
+  paging:
+    colorArg: always
+    pager: delta --dark --paging=never --no-gitconfig
+
+os:
+  editPreset: "vscode"
+promptToReturnFromSubprocess: false # removes "press enter to return to lazygit" popup
