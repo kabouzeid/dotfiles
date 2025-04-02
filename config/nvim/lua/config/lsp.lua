@@ -13,7 +13,6 @@ vim.keymap.set({ "n", "x" }, "<leader>p", vim.lsp.buf.format, { desc = "Format" 
 vim.keymap.set("v", "<leader>p", ":'<,'>lua vim.lsp.buf.range_formatting<CR>", { desc = "Format Selection" })
 vim.keymap.set("n", "<leader>l", vim.lsp.codelens.run, { desc = "Run Code Lens" })
 
-vim.keymap.set("n", "K", vim.lsp.buf.hover, { desc = "Hover" })
 vim.keymap.set("n", "<leader>k", vim.lsp.buf.hover, { desc = "Hover" })
 vim.keymap.set("n", "<C-k>", vim.lsp.buf.signature_help, { desc = "Signature Help" })
 

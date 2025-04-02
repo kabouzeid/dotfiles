@@ -87,7 +87,6 @@ return {
     end,
   },
   { "tpope/vim-eunuch" },
-  { "kdheepak/lazygit.nvim" },
   { "tpope/vim-sleuth" },
   { "tpope/vim-unimpaired" },
   {

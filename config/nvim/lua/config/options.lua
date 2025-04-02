@@ -16,5 +16,6 @@ vim.opt.signcolumn = "yes"
 vim.opt.showcmd = true
 vim.opt.termguicolors = true
 -- vim.opt.cursorline = true
+vim.opt.scrolloff = 3
 
 vim.cmd "colorscheme github_dark_default"
