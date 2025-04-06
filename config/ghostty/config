@@ -22,4 +22,9 @@ keybind = global:cmd+shift+.=toggle_quick_terminal
 keybind = cmd+left_bracket=previous_tab
 keybind = cmd+right_bracket=next_tab
 
+window-width = 160
+window-height = 60
+window-position-x = 400
+window-position-y = 100
+
 config-file = ?config.local
