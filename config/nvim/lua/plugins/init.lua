@@ -83,7 +83,7 @@ return {
   {
     "justinmk/vim-gtfo",
     config = function()
-      vim.g["gtfo#terminals"] = { unix = "kitty", mac = "iterm" }
+      vim.g["gtfo#terminals"] = { unix = "ghostty", mac = "ghostty" }
     end,
   },
   { "tpope/vim-eunuch" },

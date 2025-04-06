@@ -45,5 +45,6 @@ return {
     { "<leader>t", function() Snacks.explorer() end,                     desc = "File Explorer" },
     { "<leader>d", function() Snacks.picker.diagnostics_buffer() end,    desc = "Diagnostics Buffer" },
     { "<leader>D", function() Snacks.picker.diagnostics() end,           desc = "Diagnostics" },
+    { "<C-\\>",    function() Snacks.terminal.toggle() end,              desc = "Toggle Terminal",   mode = { "n", "t" } },
   }
 }
