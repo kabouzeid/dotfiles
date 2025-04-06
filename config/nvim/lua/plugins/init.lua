@@ -100,12 +100,6 @@ return {
     "bezhermoso/tree-sitter-ghostty",
     build = "make nvim_install",
   },
-  {
-    "nvim-lualine/lualine.nvim",
-    config = function()
-      require("plugins.lualine")
-    end,
-  },
   { "kana/vim-textobj-entire", dependencies = { "kana/vim-textobj-user" } },
   { "wellle/targets.vim" }
 }
