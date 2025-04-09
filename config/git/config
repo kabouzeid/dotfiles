@@ -28,6 +28,11 @@
   difftool = true
 
 [credential "https://github.com"]
+	helper = 
+	helper = !gh auth git-credential
+
+[credential "https://gist.github.com"]
+	helper = 
 	helper = !gh auth git-credential
 
 [filter "lfs"]
@@ -35,9 +40,6 @@
 	smudge = git-lfs smudge -- %f
 	process = git-lfs filter-process
 	required = true
-
-[credential "https://gist.github.com"]
-	helper = !gh auth git-credential
 
 [interactive]
     diffFilter = delta --color-only
