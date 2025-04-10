@@ -26,10 +26,6 @@ fi
 alias e=$EDITOR
 alias v=$EDITOR
 
-if [ -r "$HOME"/.iterm2_shell_integration.zsh ]; then
-    source "$HOME"/.iterm2_shell_integration.zsh
-fi
-
 # Allow local customizations in the ~/.zshrc_local file
 if [ -r "$HOME"/.zshrc.local ]; then
     source "$HOME"/.zshrc.local

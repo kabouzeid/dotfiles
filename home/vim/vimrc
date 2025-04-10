@@ -26,7 +26,7 @@ set showcmd
 set ignorecase
 set smartcase
 set diffopt+=iwhite
-set scrolloff=5
+set scrolloff=3
 set undofile
 set completeopt=menuone,noselect
 set updatetime=250
@@ -62,7 +62,7 @@ noremap m v
 noremap gh 0
 noremap gl $
 noremap gs ^
-nnoremap U <C-r>
+"nnoremap U <C-r>
 
 " }}}
 

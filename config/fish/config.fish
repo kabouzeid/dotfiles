@@ -16,8 +16,6 @@ if status is-login
 end
 
 if status is-interactive
-    test -e "$HOME/.iterm2_shell_integration.fish"; and source "$HOME/.iterm2_shell_integration.fish"
-
     alias v $EDITOR
     type -q xdg-open; and type -q setsid; and alias open="setsid xdg-open"
     type -q lazygit; and alias lzg lazygit
