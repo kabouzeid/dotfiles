@@ -63,18 +63,18 @@
         "zyedidia eget"
         "Byron dua-cli"
         "casey just"
-        "sxyazi yazi"
+        "sxyazi yazi --matching=musl"
         "ast-grep ast-grep"
       );
       for tuple in "${pkgs[@]}"; do
-        set -- $tuple; user=$1; repo=$2;
+        set -- $tuple; user=$1; repo=$2; ubi_args=${@:3};
         pkg_install_dir="${PKG_DIR}/${repo}";
         if [ -e $pkg_install_dir ]; then
           pkg_backup_dir="${PKG_DIR}/.backup/${repo}";
           rm -rf $pkg_backup_dir;
           mv $pkg_install_dir $pkg_backup_dir;
         fi;
-        "$HOME"/.local/bin/ubi --verbose --project "${user}/${repo}" --extract-all --in $pkg_install_dir;
+        "$HOME"/.local/bin/ubi --verbose --project "${user}/${repo}" --extract-all --in $pkg_install_dir $ubi_args;
       done;
     description: Install ubi packages
     stdout: true
@@ -225,7 +225,7 @@
       set -euo pipefail;
 
       pkgs=(
-        "fish-shell fish-shell fish --file=fish --asset=static-x86_64"
+        "fish-shell fish-shell . --all --asset=static-x86_64"
       );
       for tuple in "${pkgs[@]}"; do
         set -- $tuple; user=$1; repo=$2; bin_name=$3; eget_args=${@:4};
