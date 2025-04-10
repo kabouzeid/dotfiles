@@ -225,10 +225,10 @@
       set -euo pipefail;
 
       pkgs=(
-        "mliszcz fish-shell fish"
+        "fish-shell fish-shell fish --file=fish --asset=static-x86_64"
       );
       for tuple in "${pkgs[@]}"; do
-        set -- $tuple; user=$1; repo=$2; bin_name=$3; eget_args=${4:-};
+        set -- $tuple; user=$1; repo=$2; bin_name=$3; eget_args=${@:4};
         "$HOME"/.local/bin/eget $user/$repo --to ~/.local/bin/$bin_name $eget_args;
       done;
     description: Install eget packages
