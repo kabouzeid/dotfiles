@@ -1,0 +1,3 @@
+[[plugin.prepend_previewers]]
+name = "*.safetensors"
+run  = 'piper -- safetensors-cli.py --color "$1"'
