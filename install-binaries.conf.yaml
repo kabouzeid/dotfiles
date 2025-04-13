@@ -194,6 +194,10 @@
 - link:
     ~/.local/bin/yazi:
       path: ~/.local/share/packages/yazi/yazi
+    ~/.local/bin/ya:
+      path: ~/.local/share/packages/yazi/ya
+    ~/.local/share/fish/vendor_completions.d/ya.fish:
+      path: ~/.local/share/packages/yazi/completions/ya.fish
     ~/.local/share/fish/vendor_completions.d/yazi.fish:
       path: ~/.local/share/packages/yazi/completions/yazi.fish
 
