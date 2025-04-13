@@ -11,4 +11,5 @@ if type -q uv
 
     abbr python 'uv run python'
     abbr debugpy 'uv run debugpy'
+    abbr rerun 'uv run rerun'
 end

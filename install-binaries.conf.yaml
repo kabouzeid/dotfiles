@@ -65,6 +65,7 @@
         "casey just"
         "sxyazi yazi --matching=musl"
         "ast-grep ast-grep"
+        "bootandy dust"
       );
       for tuple in "${pkgs[@]}"; do
         set -- $tuple; user=$1; repo=$2; ubi_args=${@:3};
@@ -210,6 +211,10 @@
 - link:
     ~/.local/bin/dua:
       path: ~/.local/share/packages/dua-cli/dua
+
+- link:
+    ~/.local/bin/dust:
+      path: ~/.local/share/packages/dust/dust
 
 - link:
     ~/.local/bin/just:
