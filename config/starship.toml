@@ -14,7 +14,7 @@ ignore_base = false
 disabled = true
 
 [python]
-python_binary = "_starship_python.sh"
+python_binary = [["uv", "run", "--no-python-downloads", "python"]]
 
 [gcloud]
 detect_env_vars = ['CLOUDSDK_CONFIG']
