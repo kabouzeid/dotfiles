@@ -9,10 +9,6 @@ symbol = " "
 symbol = "🐉 "
 ignore_base = false
 
-# https://github.com/starship/starship/issues/5350
-[battery]
-disabled = true
-
 [python]
 python_binary = [["uv", "run", "--no-python-downloads", "python"]]
 
