@@ -106,5 +106,6 @@ return {
     build = "make nvim_install",
   },
   { "kana/vim-textobj-entire", dependencies = { "kana/vim-textobj-user" } },
-  { "wellle/targets.vim" }
+  { "wellle/targets.vim" },
+  { "justinmk/vim-sneak" }
 }
