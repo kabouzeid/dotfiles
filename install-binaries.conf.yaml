@@ -57,6 +57,7 @@
         "junegunn fzf"
         "ellie atuin"
         "jdx mise"
+        "jdx usage"
         "astral-sh uv"
         "chmln sd"
         "eza-community eza"
@@ -158,9 +159,12 @@
 - shell:
   -
     command: >-
-      "$HOME"/.local/bin/mise use -g usage@latest;
       "$HOME"/.local/bin/mise completion fish > ~/.local/share/fish/vendor_completions.d/mise.fish;
     description: mise completions
+
+- link:
+    ~/.local/bin/usage:
+      path: ~/.local/share/packages/usage/usage
 
 - link:
     ~/.local/bin/uv:
@@ -234,7 +238,7 @@
       set -euo pipefail;
 
       pkgs=(
-        "fish-shell fish-shell . --all --asset=static-x86_64"
+        "fish-shell fish-shell . --all --asset=static-amd64"
       );
       for tuple in "${pkgs[@]}"; do
         set -- $tuple; user=$1; repo=$2; bin_name=$3; eget_args=${@:4};
