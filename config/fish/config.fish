@@ -20,7 +20,6 @@ if status is-interactive
     type -q xdg-open; and type -q setsid; and alias open="setsid xdg-open"
     type -q lazygit; and alias lzg lazygit
     type -q eget; and abbr egeti 'eget --to=~/.local/bin'
-    set -q MISE_DIRENV_BIN; and alias direnv $MISE_DIRENV_BIN
 
     type -q hx; and function hx
         PATH="$HOME/.local/share/nvim/mason/bin:$PATH" command hx $argv
