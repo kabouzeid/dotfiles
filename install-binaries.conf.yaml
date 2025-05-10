@@ -82,7 +82,7 @@
     stdout: true
     stderr: true
     quiet: true
-    
+
 - link:
     ~/.local/bin/nvim:
       path: ~/.local/share/packages/neovim/bin/nvim
@@ -239,6 +239,7 @@
 
       pkgs=(
         "fish-shell fish-shell . --all --asset=static-amd64"
+        "oven-sh bun bun --asset=linux-x64.zip"
       );
       for tuple in "${pkgs[@]}"; do
         set -- $tuple; user=$1; repo=$2; bin_name=$3; eget_args=${@:4};
@@ -248,3 +249,10 @@
     stdout: true
     stderr: true
     quiet: true
+
+- shell:
+  -
+    command: >-
+      SHELL=fish "$HOME"/.local/bin/bun completions > ~/.local/share/fish/vendor_completions.d/bun.fish;
+    description: bun completions
+
