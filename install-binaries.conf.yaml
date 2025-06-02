@@ -239,7 +239,8 @@
 
       pkgs=(
         "fish-shell fish-shell . --all --asset=static-amd64"
-        "oven-sh bun bun --asset=linux-x64.zip"
+        "oven-sh bun . --asset=linux-x64.zip"
+        "ouch-org ouch . --asset=musl"
       );
       for tuple in "${pkgs[@]}"; do
         set -- $tuple; user=$1; repo=$2; bin_name=$3; eget_args=${@:4};
