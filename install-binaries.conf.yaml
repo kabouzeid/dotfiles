@@ -67,6 +67,7 @@
         "sxyazi yazi --matching=musl"
         "ast-grep ast-grep"
         "bootandy dust"
+        "ouch-org ouch"
       );
       for tuple in "${pkgs[@]}"; do
         set -- $tuple; user=$1; repo=$2; ubi_args=${@:3};
@@ -232,6 +233,15 @@
     ~/.local/share/man/man1/just.1:
       path: ~/.local/share/packages/just/just.1
 
+- link:
+    ~/.local/bin/ouch:
+      path: ~/.local/share/packages/ouch/ouch
+    ~/.local/share/fish/vendor_completions.d/ouch.fish:
+      path: ~/.local/share/packages/ouch/completions/ouch.fish
+    ~/.local/share/man/man1:
+      glob: true
+      path: ~/.local/share/packages/ouch/man/*.1
+
 - shell:
   -
     command: >-
@@ -240,7 +250,6 @@
       pkgs=(
         "fish-shell fish-shell . --all --asset=static-amd64"
         "oven-sh bun . --asset=linux-x64.zip"
-        "ouch-org ouch . --asset=musl"
       );
       for tuple in "${pkgs[@]}"; do
         set -- $tuple; user=$1; repo=$2; bin_name=$3; eget_args=${@:4};
