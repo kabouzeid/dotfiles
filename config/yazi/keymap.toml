@@ -1,4 +1,4 @@
-[manager]
+[mgr]
 append_keymap = [
   { on = [
     "g",
