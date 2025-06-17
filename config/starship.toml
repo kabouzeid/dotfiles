@@ -10,7 +10,7 @@ symbol = "🐉 "
 ignore_base = false
 
 [python]
-python_binary = [["uv", "run", "--no-python-downloads", "python"]]
+python_binary = [["uv", "run", "--no-python-downloads", "--no-sync", "python"]]
 
 [gcloud]
 detect_env_vars = ['CLOUDSDK_CONFIG']
