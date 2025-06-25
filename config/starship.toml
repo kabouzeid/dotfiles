@@ -10,7 +10,16 @@ symbol = "🐉 "
 ignore_base = false
 
 [python]
-python_binary = [["uv", "run", "--no-python-downloads", "--no-sync", "python"]]
+# python_binary = [["uv", "run", "--no-python-downloads", "--no-sync", "python"]]
+disabled = true
+
+[custom.uv_python]
+command = 'uv python find --show-version'
+format = 'via [${symbol}(${output} )]($style)'
+symbol = "uv "
+detect_extensions = ['py', 'ipynb']
+detect_files = ['.python-version', 'Pipfile', '__init__.py', 'pyproject.toml', 'requirements.txt', 'setup.py', 'tox.ini', 'uv.lock', 'pylock.toml']
+style = "bold purple"
 
 [gcloud]
 detect_env_vars = ['CLOUDSDK_CONFIG']
