@@ -1,12 +1,12 @@
 # put your local config in ./conf.d/0-.local.fish
 
 if status is-login
-    if type -q hx
-        set -gx EDITOR hx
-    else if type -q nvim
+    if type -q nvim
         set -gx EDITOR nvim
-    else
+    else if type -q vim
         set -gx EDITOR vim
+    else
+        set -gx EDITOR hx
     end
 
     set -gx fish_greeting
