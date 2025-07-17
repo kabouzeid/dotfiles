@@ -46,6 +46,7 @@ return {
         },
       })
     end,
+    enabled=vim.fn.executable("node") == 1,
   },
   { "norcalli/nvim-colorizer.lua" },
   {
