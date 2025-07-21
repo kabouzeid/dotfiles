@@ -1,4 +1,4 @@
-# put your local config in ./conf.d/0-.local.fish
+# put your local config in ./conf.d/2-.local.fish
 
 if status is-login
     if type -q nvim
@@ -34,7 +34,7 @@ if status is-interactive
     type -q atuin; and atuin init fish --disable-up-arrow | source
 
     function fishc
-        cd $__fish_config_dir; and $EDITOR conf.d/0-.local.fish; and cd -
+        cd $__fish_config_dir; and $EDITOR conf.d/2-.local.fish; and cd -
     end
 
     function nvimc
