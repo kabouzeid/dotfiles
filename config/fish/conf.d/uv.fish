@@ -12,5 +12,5 @@ if type -q uv
     abbr python 'uv run python'
     abbr debugpy 'uv run debugpy'
     abbr pytest 'uv run pytest'
-    abbr rerun 'uv run rerun'
+    abbr rerun 'WAYLAND_DISPLAY= uv run rerun'
 end
