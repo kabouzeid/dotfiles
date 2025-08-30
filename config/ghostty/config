@@ -12,7 +12,7 @@ mouse-hide-while-typing = true
 
 unfocused-split-opacity = 1
 
-macos-icon = xray
+# macos-icon = xray
 # macos-icon = custom-style
 # macos-icon-ghost-color = #6ca4f8
 # macos-icon-screen-color = #101216
