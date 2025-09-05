@@ -1,12 +1,13 @@
 set selection-clipboard clipboard
-set sandbox none
 
-set font "JetBrains Mono 11"
+set font "JetBrains Mono 13"
 
 set default-fg "#e0def4"
 set default-bg "#232136"
 set statusbar-fg "#e0def4"
 set statusbar-bg "#393552"
+
+set highlight-fg "#000000"
 
 set recolor-darkcolor "#e0def4"
 set recolor-lightcolor "#232136"
