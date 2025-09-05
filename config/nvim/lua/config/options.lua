@@ -5,6 +5,7 @@ vim.opt.clipboard = "unnamedplus"
 vim.opt.splitright = true
 vim.opt.splitbelow = true
 
+vim.opt.shortmess:append("I")
 vim.opt.winborder = 'rounded'
 
 vim.opt.undofile = true
