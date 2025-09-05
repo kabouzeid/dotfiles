@@ -16,8 +16,9 @@ vim.keymap.set("n", "<leader>l", vim.lsp.codelens.run, { desc = "Run Code Lens" 
 vim.keymap.set("n", "<leader>k", vim.lsp.buf.hover, { desc = "Hover" })
 vim.keymap.set("n", "<C-k>", vim.lsp.buf.signature_help, { desc = "Signature Help" })
 
+local _has_copilot, _ = pcall(require, "copilot") -- check if is installed
 vim.keymap.set("i", '<Tab>', function()
-  if require("copilot.suggestion").is_visible() then
+  if _has_copilot and require("copilot.suggestion").is_visible() then
     require("copilot.suggestion").accept()
   else
     vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Tab>", true, false, true), "n", false)
