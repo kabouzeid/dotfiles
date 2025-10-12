@@ -1,16 +1,10 @@
 font-family = JetBrains Mono
 font-family = nonicons
-font-family-bold = nonicons
-font-family-italic = nonicons
-font-family-bold-italic = nonicons
-
-# fix for now. force git symbol   to nonicons when bold
-font-codepoint-map = U+F157=nonicons
 
 theme = GitHub Dark Default
 mouse-hide-while-typing = true
 
-unfocused-split-opacity = 1
+# unfocused-split-opacity = 1
 
 # macos-icon = xray
 # macos-icon = custom-style
@@ -22,9 +16,9 @@ keybind = global:cmd+shift+.=toggle_quick_terminal
 keybind = cmd+left_bracket=previous_tab
 keybind = cmd+right_bracket=next_tab
 
-window-width = 160
-window-height = 60
-window-position-x = 400
-window-position-y = 100
+# window-width = 160
+# window-height = 60
+# window-position-x = 400
+# window-position-y = 100
 
 config-file = ?config.local
