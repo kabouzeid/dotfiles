@@ -1,13 +1,5 @@
-[language-server.basedpyright.config.basedpyright.analysis]
-typeCheckingMode = "standard" # off, basic, standard, strict, all
-
-[language-server.basedpyright.config.basedpyright.analysis.diagnosticSeverityOverrides]
-reportUnusedImport = false # ruff
-reportUnusedVariable = false # ruff
-
-[language-server.ruff]
-command = "ruff"
-args = ["server"]
+[language-server.ty.config.ty.experimental]
+rename = true
 
 [language-server.zk]
 command = "zk"
@@ -22,11 +14,6 @@ config = { exportPdf = "onType", formatterMode = "typstyle" }
 
 [language-server.ghostty-ls]
 command = "ghostty-ls"
-
-[[language]]
-name = "python"
-auto-format = true
-language-servers = ["basedpyright", "ruff"]
 
 [[language]]
 name = "toml"
