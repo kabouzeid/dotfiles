@@ -14,7 +14,7 @@ insert = "bar"
 cursor-line = "warning" # show warnings and errors on the cursorline inline
 
 [keys.normal]
-Cmd-s = ":write"   
+Cmd-s = ":write"
 - = [
   ':sh rm -f /tmp/yazi-file-selection',
   ':insert-output yazi %{buffer_name} --chooser-file=/tmp/yazi-file-selection',
@@ -31,7 +31,7 @@ l = [
 ]
 
 [keys.insert]
-Cmd-s = ":write"    
+Cmd-s = ":write"
 
 [keys.select]
-Cmd-s = ":write"    
+Cmd-s = ":write"
