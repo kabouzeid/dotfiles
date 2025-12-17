@@ -1,0 +1,1 @@
+codex completion fish | source
