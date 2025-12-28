@@ -15,10 +15,21 @@ disabled = true
 
 [custom.uv_python]
 command = 'uv python find --show-version'
+shell = "sh" # much faster
 format = 'via [${symbol}(${output} )]($style)'
 symbol = "uv "
 detect_extensions = ['py', 'ipynb']
-detect_files = ['.python-version', 'Pipfile', '__init__.py', 'pyproject.toml', 'requirements.txt', 'setup.py', 'tox.ini', 'uv.lock', 'pylock.toml']
+detect_files = [
+  '.python-version',
+  'Pipfile',
+  '__init__.py',
+  'pyproject.toml',
+  'requirements.txt',
+  'setup.py',
+  'tox.ini',
+  'uv.lock',
+  'pylock.toml',
+]
 style = "bold purple"
 
 [gcloud]
