@@ -248,7 +248,7 @@
       set -euo pipefail;
 
       pkgs=(
-        "fish-shell fish-shell . --all --asset=linux-x86_64 --tag=4.0.9"  # 4.1.x doesn't work with zoxide 0.9.8
+        "fish-shell fish-shell . --all --asset=linux-x86_64"
         "oven-sh bun . --asset=linux-x64.zip"
       );
       for tuple in "${pkgs[@]}"; do
