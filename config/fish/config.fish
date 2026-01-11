@@ -21,14 +21,6 @@ if status is-interactive
     type -q lazygit; and alias lzg lazygit
     type -q eget; and abbr egeti 'eget --to=~/.local/bin'
 
-    type -q hx; and function hx
-        PATH="$HOME/.local/share/nvim/mason/bin:$PATH" command hx $argv
-    end
-
-    function uve --wraps $EDITOR
-        PATH="$HOME/.local/share/nvim/mason/bin:$PATH" uv run $EDITOR $argv
-    end
-
     type -q zoxide; and zoxide init fish | source
     type -q starship; and starship init fish | source
     type -q atuin; and atuin init fish --disable-up-arrow | source
