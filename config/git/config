@@ -6,9 +6,8 @@
 	ignore = "!gi() { curl -L -s https://www.gitignore.io/api/$@ ;}; gi"
 
 [user]
-	name = Karim Abou Zeid
-	# email = 7303830+kabouzeid@users.noreply.github.com
-	email = contact@ka.codes
+	name = Karim Knaebel
+	email = 7303830+kabouzeid@users.noreply.github.com
 
 [pull]
 	ff = only
