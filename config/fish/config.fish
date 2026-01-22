@@ -1,6 +1,6 @@
 # put your local config in ./conf.d/2-.local.fish
 
-if status is-login
+if status is-interactive
     if type -q hx
         set -gx EDITOR hx
     else if type -q nvim
@@ -13,9 +13,7 @@ if status is-login
     set -gx VIRTUAL_ENV_DISABLE_PROMPT 1
 
     ! set -q LANG; and set -gx LANG "en_US.UTF-8"
-end
 
-if status is-interactive
     alias v $EDITOR
     type -q xdg-open; and type -q setsid; and alias open="setsid xdg-open"
     type -q lazygit; and alias lzg lazygit
