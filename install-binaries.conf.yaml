@@ -57,7 +57,6 @@
         "junegunn fzf"
         "atuinsh atuin --matching-regex=atuin-(aarch64|x86_64).*musl.*.tar.gz"
         "jdx mise"
-        "jdx usage"
         "astral-sh uv"
         "chmln sd"
         "eza-community eza"
@@ -162,10 +161,6 @@
     command: >-
       "$HOME"/.local/bin/mise completion fish > ~/.local/share/fish/vendor_completions.d/mise.fish;
     description: mise completions
-
-- link:
-    ~/.local/bin/usage:
-      path: ~/.local/share/packages/usage/usage
 
 - link:
     ~/.local/bin/uv:
