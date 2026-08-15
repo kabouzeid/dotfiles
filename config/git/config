@@ -6,6 +6,9 @@
 	ignore = "!gi() { curl -L -s https://www.gitignore.io/api/$@ ;}; gi"
 	hdiff = -c core.pager=\"hunk pager\" diff
 	hshow = -c core.pager=\"hunk pager\" show
+    dlog = -c diff.external=difft log --ext-diff
+    dshow = -c diff.external=difft show --ext-diff
+    ddiff = -c diff.external=difft diff
 
 [user]
 	name = Karim Knaebel
@@ -16,18 +19,6 @@
 
 [init]
   defaultBranch = main
-
-[diff]
-  tool = difftastic
-
-[difftool]
-  prompt = false
-
-[difftool "difftastic"]
-  cmd = difft "$LOCAL" "$REMOTE"
-
-[pager]
-  difftool = true
 
 [credential "https://github.com"]
 	helper = 
