@@ -67,6 +67,7 @@
         "ast-grep ast-grep"
         "bootandy dust"
         "ouch-org ouch"
+        "duckdb duckdb --matching-regex=duckdb_cli-linux-(amd64|arm64).zip"
       );
       for tuple in "${pkgs[@]}"; do
         set -- $tuple; user=$1; repo=$2; ubi_args=${@:3};
@@ -236,6 +237,10 @@
     ~/.local/share/man/man1:
       glob: true
       path: ~/.local/share/packages/ouch/man/*.1
+
+- link:
+    ~/.local/bin/duckdb:
+      path: ~/.local/share/packages/duckdb/duckdb
 
 - shell:
   -
