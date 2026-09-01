@@ -3,17 +3,6 @@
       create: true
       relink: true
 
-- shell:
-  -
-    command: >-
-      if [ ! -e ~/.tmux/plugins/tpm ]; then
-        git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm;
-      fi;
-    description: Install tpm
-    stdout: true
-    stderr: true
-    quiet: true
-
 - clean:
   - ~/.local/bin
   - ~/.local/share/man/man1
@@ -54,7 +43,6 @@
         "jesseduffield lazygit"
         "starship starship"
         "ajeetdsouza zoxide"
-        "junegunn fzf"
         "atuinsh atuin --matching-regex=atuin-(aarch64|x86_64).*musl.*.tar.gz"
         "jdx mise"
         "astral-sh uv"
@@ -64,7 +52,6 @@
         "Byron dua-cli"
         "casey just"
         "sxyazi yazi --matching=musl"
-        "ast-grep ast-grep"
         "bootandy dust"
         "ouch-org ouch"
         "duckdb duckdb --matching-regex=duckdb_cli-linux-(amd64|arm64).zip"
@@ -140,10 +127,6 @@
       path: ~/.local/share/packages/zoxide/zoxide
 
 - link:
-    ~/.local/bin/fzf:
-      path: ~/.local/share/packages/fzf/fzf
-
-- link:
     ~/.local/bin/atuin:
       path: ~/.local/share/packages/atuin/atuin
 - shell:
@@ -201,17 +184,6 @@
       path: ~/.local/share/packages/yazi/completions/ya.fish
     ~/.local/share/fish/vendor_completions.d/yazi.fish:
       path: ~/.local/share/packages/yazi/completions/yazi.fish
-
-- link:
-    ~/.local/bin/sg:
-      path: ~/.local/share/packages/ast-grep/sg
-    ~/.local/bin/ast-grep:
-      path: ~/.local/share/packages/ast-grep/ast-grep
-- shell:
-  -
-    command: >-
-      "$HOME"/.local/bin/sg completions fish > ~/.local/share/fish/vendor_completions.d/sg.fish
-    description: ast-grep completions
 
 - link:
     ~/.local/bin/dua:
